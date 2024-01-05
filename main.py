@@ -1,1 +1,1 @@
-print("Salom")
+print("Bexruzdan salom")
