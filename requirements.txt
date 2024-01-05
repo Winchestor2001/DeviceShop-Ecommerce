@@ -1,1 +1,9 @@
+asgiref==3.7.2
 Django==5.0.1
+environs==10.0.0
+marshmallow==3.20.1
+packaging==23.2
+python-dotenv==1.0.0
+sqlparse==0.4.4
+typing_extensions==4.9.0
+tzdata==2023.4
