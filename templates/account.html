@@ -12,7 +12,7 @@
         <div class="user__left">
             <button onclick="profileContent_btn(this)" id="1" class="banner__left__btn-active">Personal info</button>
             <button onclick="profileContent_btn(this)" id="2" class="banner__left__btn">All orders</button>
-            <a href="" class="banner__left__btn">Logout</a>
+            <a href="{% url 'logout' %}" class="banner__left__btn">Logout</a>
         </div>
         <div class="user__right-wrapper">
             <div id="content_1" class="user__right card" style="display: block;">

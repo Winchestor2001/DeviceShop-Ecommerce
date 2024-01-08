@@ -10,15 +10,17 @@
 <main>
     <div class="login-wrapper card">
         <h2>Sign in</h2>
-        <form action="" class="class__form">
+        <form method="post" class="class__form">
+            {% csrf_token %}
             <div class="class__form__input-wrapper-100">
                 <label for="username" class="text-gray">Username</label>
-                <input required type="text" name="username" id="username" class="default-input text-default" placeholder="Type username">
+                <input value="{{ username }}" required type="text" name="username" id="username" class="default-input text-default" placeholder="Type username">
             </div>
             <div class="class__form__input-wrapper-100">
                 <label for="password" class="text-gray">Password</label>
-                <input required type="text" name="password" id="password" class="default-input text-default" placeholder="Type your password">
+                <input value="{{ password }}" required type="text" name="password" id="password" class="default-input text-default" placeholder="Type your password">
             </div>
+            <p class="text-danger">{{ error }}</p>
             <button type="submit" class="banner__right__btn text-default-white">Sign in</button>
         </form>
         <p class="text-default login__bottom-text">Dont have an account? <a href="{% url 'register' %}" class="text-default-primary">Sign up</a></p>
