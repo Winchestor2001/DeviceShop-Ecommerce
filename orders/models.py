@@ -1,4 +1,6 @@
 from django.db import models
+from products.models import Product
+from accounts.models import Profile
 
 
 class Order(models.Model):
@@ -12,15 +14,15 @@ class Order(models.Model):
     postal_code = models.IntegerField()
     zip_code = models.IntegerField()
     message = models.TextField()
-    user = models.ForeignKey("", on_delete=models.CASCADE)
+    user = models.ForeignKey(Profile, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.first_name
 
 
 class OrderProduct(models.Model):
-    product = models.ForeignKey("", on_delete=models.CASCADE)
-    user = models.ForeignKey("", on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    user = models.ForeignKey(Profile, on_delete=models.CASCADE)
     order = models.ForeignKey(Order, on_delete=models.CASCADE)
 
     def __str__(self):

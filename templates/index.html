@@ -1,0 +1,420 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+<title>Home page</title>
+{% endblock %}
+
+
+{% block content %}
+<main>
+    <div class="banner card container">
+        <div class="banner__left">
+            <button onclick="banner_btn(this)" id="banner_1" class="banner__left__btn-active">Laptops</button>
+            <button onclick="banner_btn(this)" id="banner_2" class="banner__left__btn">PCs</button>
+            <button onclick="banner_btn(this)" id="banner_3" class="banner__left__btn">Monitors</button>
+            <button onclick="banner_btn(this)" id="banner_4" class="banner__left__btn">Smartphones</button>
+            <button onclick="banner_btn(this)" id="banner_5" class="banner__left__btn">Headphones</button>
+            <button onclick="banner_btn(this)" id="banner_6" class="banner__left__btn">Mouses</button>
+            <button onclick="banner_btn(this)" id="banner_7" class="banner__left__btn">Keyboards</button>
+            <button onclick="banner_btn(this)" id="banner_8" class="banner__left__btn">Microphones</button>
+        </div>
+        <div class="banner__right">
+            <div class="banner__image" style="background-image: url('/media/banner/banner_1.png');"></div>
+            <div class="banner__right-content">
+                <h1 class="banner__right__header">Laptops</h1>
+                <a href="{% url 'shop' %}" id="offers" class="banner__right__btn text-default-white">View products</a>
+            </div>
+        </div>
+    </div>
+    <div class="offers card container" id="categories">
+        <div class="offers__left">
+            <div class="offers__left__text">
+                <h3>Deals and offers</h3>
+                <p class="text-default text-muted">Hygiene equipments</p>
+            </div>
+            <div class="offers__left__countdown">
+                <div class="offers__left__countdown-item" id="days">
+                    <p class="text-700-white">00</p>
+                    <p class="text-micro-white">Days</p>
+                </div>
+                <div class="offers__left__countdown-item" id="hours">
+                    <p class="text-700-white">00</p>
+                    <p class="text-micro-white">Hours</p>
+                </div>
+                <div class="offers__left__countdown-item" id="minutes">
+                    <p class="text-700-white">00</p>
+                    <p class="text-micro-white">Min</p>
+                </div>
+                <div class="offers__left__countdown-item" id="seconds">
+                    <p class="text-700-white">00</p>
+                    <p class="text-micro-white">Sec</p>
+                </div>
+            </div>
+        </div>
+        <div class="offers__right">
+            <a href="{% url 'shop' %}" class="offers__right-item">
+                <div class="image-container">
+                    <img src="/media/products/product_1.png" alt="" class="zoomable-image">
+                    <div class="overlay"></div>
+                    <div class="eye" style='background: url("/media/eye.png") no-repeat center center / cover;'></div>
+                </div>
+                <p class="text-default">Smart watches</p>
+                <div class="offers__right__sale">
+                    <p>-25%</p>
+                </div>
+            </a>
+            <a href="{% url 'shop' %}" class="offers__right-item">
+                <div class="image-container">
+                    <img src="/media/products/product_2.png" alt="" class="zoomable-image">
+                    <div class="overlay"></div>
+                    <div class="eye" style='background: url("/media/eye.png") no-repeat center center / cover;'></div>
+                </div>
+                <p class="text-default">Laptops</p>
+                <div class="offers__right__sale">
+                    <p>-15%</p>
+                </div>
+            </a>
+            <a href="{% url 'shop' %}" class="offers__right-item">
+                <div class="image-container">
+                    <img src="/media/products/product_3.png" alt="" class="zoomable-image">
+                    <div class="overlay"></div>
+                    <div class="eye" style='background: url("/media/eye.png") no-repeat center center / cover;'></div>
+                </div>
+                <p class="text-default">GoPro cameras</p>
+                <div class="offers__right__sale">
+                    <p>-40%</p>
+                </div>
+            </a>
+            <a href="{% url 'shop' %}" class="offers__right-item">
+                <div class="image-container">
+                    <img src="/media/products/product_4.png" alt="" class="zoomable-image">
+                    <div class="overlay"></div>
+                    <div class="eye" style='background: url("/media/eye.png") no-repeat center center / cover;'></div>
+                </div>
+                <p class="text-default">Headphones</p>
+                <div class="offers__right__sale">
+                    <p>-25%</p>
+                </div>
+            </a>
+            <a href="{% url 'shop' %}" class="offers__right-item">
+                <div class="image-container">
+                    <img src="/media/products/product_5.png" alt="" class="zoomable-image">
+                    <div class="overlay"></div>
+                    <div class="eye" style='background: url("/media/eye.png") no-repeat center center / cover;'></div>
+                </div>
+                <p class="text-default">Canon camreras</p>
+                <div class="offers__right__sale">
+                    <p>-25%</p>
+                </div>
+            </a>
+        </div>
+    </div>
+    <div class="categories card container" id="help">
+        <div class="categories__left">
+            <div class="categories__left__image" style="background-image: url('/media/categories_bg.png');"></div>
+            <div class="categories__left-content">
+                <h3>Consumer electronics and gadgets</h3>
+                <a href="" class="banner__right__btn text-default-white">View</a>
+            </div>
+        </div>
+        <div class="categories__right">
+            <a href="{% url 'shop' %}" class="categories__right-item">
+                <div class="categories__right-item-content">
+                    <p class="text-default">Laptops</p>
+                    <p class="text-micro text-muted">From<br>340$</p>
+                </div>
+                <img src="/media/banner/banner_1.png" class="categories__right-item__photo" alt="">
+            </a>
+            <a href="{% url 'shop' %}" class="categories__right-item">
+                <div class="categories__right-item-content">
+                    <p class="text-default">PCs</p>
+                    <p class="text-micro text-muted">From<br>400$</p>
+                </div>
+                <img src="/media/banner/banner_2.png" class="categories__right-item__photo" alt="">
+            </a>
+            <a href="{% url 'shop' %}" class="categories__right-item">
+                <div class="categories__right-item-content">
+                    <p class="text-default">Monitors</p>
+                    <p class="text-micro text-muted">From<br>200$</p>
+                </div>
+                <img src="/media/banner/banner_3.png" class="categories__right-item__photo" alt="">
+            </a>
+            <a href="{% url 'shop' %}" class="categories__right-item">
+                <div class="categories__right-item-content">
+                    <p class="text-default">Smartphones</p>
+                    <p class="text-micro text-muted">From<br>150$</p>
+                </div>
+                <img src="/media/banner/banner_4.png" class="categories__right-item__photo" alt="">
+            </a>
+            <a href="{% url 'shop' %}" class="categories__right-item">
+                <div class="categories__right-item-content">
+                    <p class="text-default">Headphones</p>
+                    <p class="text-micro text-muted">From<br>19$</p>
+                </div>
+                <img src="/media/banner/banner_5.png" class="categories__right-item__photo" alt="">
+            </a>
+            <a href="{% url 'shop' %}" class="categories__right-item">
+                <div class="categories__right-item-content">
+                    <p class="text-default">Mouses</p>
+                    <p class="text-micro text-muted">From<br>10$</p>
+                </div>
+                <img src="/media/banner/banner_6.png" class="categories__right-item__photo" alt="">
+            </a>
+            <a href="{% url 'shop' %}" class="categories__right-item">
+                <div class="categories__right-item-content">
+                    <p class="text-default">Keyboards</p>
+                    <p class="text-micro text-muted">From<br>25$</p>
+                </div>
+                <img src="/media/banner/banner_7.png" class="categories__right-item__photo" alt="">
+            </a>
+            <a href="{% url 'shop' %}" class="categories__right-item">
+                <div class="categories__right-item-content">
+                    <p class="text-default">Microphones</p>
+                    <p class="text-micro text-muted">From<br>20$</p>
+                </div>
+                <img src="/media/banner/banner_8.png" class="categories__right-item__photo" alt="">
+            </a>
+        </div>
+    </div>
+    <div class="message container">
+        <div class="message__photo" style="background-image: url('/media/message_bg.png');"></div>
+        <div class="message__left">
+            <h1 class="header-white">An easy way to send requests to all suppliers</h1>
+            <p class="text-default-white">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt.</p>
+        </div>
+        <div class="message__right">
+            <div class="message__right-content">
+                <h3>Want to ask a question?</h3>
+                <form method="post" class="message__right__form">
+                    <!-- {% csrf_token %} -->
+                    <input type="text" name="question_title" class="default-input text-default" placeholder="Question">
+                    <textarea name="question" cols="30" rows="4" class="default-textarea text-default" placeholder="Write more about the question"></textarea>
+                    <button class="banner__right__btn text-default-white" id="recommended">Ask a question</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="recommended container">
+        <h2>Recommended items</h2>
+        <div class="recommended__cards">
+            <a href="{% url 'shop' %}" class="recommended__card card">
+                <div class="image-container2">
+                    <img src="/media/products/product_1.png" alt="" class="recommended__card__photo">
+                    <div class="overlay"></div>
+                    <div class="eye2" style='background: url("/media/eye.png") no-repeat center center / cover;'></div>
+                </div>
+                <div class="recommended__card-text">
+                    <p class="text-500">$60</p>
+                    <p class="text-default text-muted">Smart Watch</p>
+                </div>
+            </a>
+            <a href="{% url 'shop' %}" class="recommended__card card">
+                <div class="image-container2">
+                    <img src="/media/products/product_2.png" alt="" class="recommended__card__photo">
+                    <div class="overlay"></div>
+                    <div class="eye2" style='background: url("/media/eye.png") no-repeat center center / cover;'></div>
+                </div>
+                <div class="recommended__card-text">
+                    <p class="text-500">$400</p>
+                    <p class="text-default text-muted">Laptop</p>
+                </div>
+            </a>
+            <a href="{% url 'shop' %}" class="recommended__card card">
+                <div class="image-container2">
+                    <img src="/media/products/product_3.png" alt="" class="recommended__card__photo">
+                    <div class="overlay"></div>
+                    <div class="eye2" style='background: url("/media/eye.png") no-repeat center center / cover;'></div>
+                </div>
+                <div class="recommended__card-text">
+                    <p class="text-500">$20</p>
+                    <p class="text-default text-muted">GoPro camera</p>
+                </div>
+            </a>
+            <a href="{% url 'shop' %}" class="recommended__card card">
+                <div class="image-container2">
+                    <img src="/media/products/product_4.png" alt="" class="recommended__card__photo">
+                    <div class="overlay"></div>
+                    <div class="eye2" style='background: url("/media/eye.png") no-repeat center center / cover;'></div>
+                </div>
+                <div class="recommended__card-text">
+                    <p class="text-500">$25</p>
+                    <p class="text-default text-muted">Headphones</p>
+                </div>
+            </a>
+            <a href="{% url 'shop' %}" class="recommended__card card">
+                <div class="image-container2">
+                    <img src="/media/products/product_5.png" alt="" class="recommended__card__photo">
+                    <div class="overlay"></div>
+                    <div class="eye2" style='background: url("/media/eye.png") no-repeat center center / cover;'></div>
+                </div>
+                <div class="recommended__card-text">
+                    <p class="text-500">$150</p>
+                    <p class="text-default text-muted">Smartphone</p>
+                </div>
+            </a>
+            <a href="{% url 'shop' %}" class="recommended__card card">
+                <div class="image-container2">
+                    <img src="/media/banner/banner_2.png" alt="" class="recommended__card__photo">
+                    <div class="overlay"></div>
+                    <div class="eye2" style='background: url("/media/eye.png") no-repeat center center / cover;'></div>
+                </div>
+                <div class="recommended__card-text">
+                    <p class="text-500">$400</p>
+                    <p class="text-default text-muted">PC</p>
+                </div>
+            </a>
+            <a href="{% url 'shop' %}" class="recommended__card card">
+                <div class="image-container2">
+                    <img src="/media/banner/banner_3.png" alt="" class="recommended__card__photo">
+                    <div class="overlay"></div>
+                    <div class="eye2" style='background: url("/media/eye.png") no-repeat center center / cover;'></div>
+                </div>
+                <div class="recommended__card-text">
+                    <p class="text-500">$200</p>
+                    <p class="text-default text-muted">Monitor</p>
+                </div>
+            </a>
+            <a href="{% url 'shop' %}" class="recommended__card card">
+                <div class="image-container2">
+                    <img src="/media/banner/banner_6.png" alt="" class="recommended__card__photo">
+                    <div class="overlay"></div>
+                    <div class="eye2" style='background: url("/media/eye.png") no-repeat center center / cover;'></div>
+                </div>
+                <div class="recommended__card-text">
+                    <p class="text-500">$10</p>
+                    <p class="text-default text-muted">Mouse</p>
+                </div>
+            </a>
+            <a href="{% url 'shop' %}" class="recommended__card card">
+                <div class="image-container2">
+                    <img src="/media/banner/banner_7.png" alt="" class="recommended__card__photo">
+                    <div class="overlay"></div>
+                    <div class="eye2" style='background: url("/media/eye.png") no-repeat center center / cover;'></div>
+                </div>
+                <div class="recommended__card-text">
+                    <p class="text-500">$25</p>
+                    <p class="text-default text-muted">Keyboard</p>
+                </div>
+            </a>
+            <a href="{% url 'shop' %}" class="recommended__card card">
+                <div class="image-container2">
+                    <img src="/media/banner/banner_8.png" alt="" class="recommended__card__photo">
+                    <div class="overlay"></div>
+                    <div class="eye2" style='background: url("/media/eye.png") no-repeat center center / cover;'></div>
+                </div>
+                <div class="recommended__card-text">
+                    <p class="text-500">$20</p>
+                    <p class="text-default text-muted">Microphone</p>
+                </div>
+            </a>
+        </div>
+    </div>
+    <div class="brands-wrapper container">
+        <h2 id="brands">Our brands</h2>
+        <div class="brands">
+            <a href="" class="brand">
+                <img src="/media/logos/asus.png" alt="">
+            </a>
+            <a href="" class="brand">
+                <img src="/media/logos/logitech.png" alt="">
+            </a>
+            <a href="" class="brand">
+                <img src="/media/logos/nvidia.png" alt="">
+            </a>
+            <a href="" class="brand">
+                <img src="/media/logos/iphone.png" alt="">
+            </a>
+            <a href="" class="brand">
+                <img src="/media/logos/samsung.png" alt="">
+            </a>
+        </div>
+    </div>
+</main>
+<script>
+    function open_menu() {
+        document.querySelector('.mobile-menu-wrapper').hidden = false;
+    }
+    document.querySelector('.mobile-menu-wrapper').addEventListener('click', function() {
+        document.querySelector('.mobile-menu-wrapper').hidden = true;
+    })
+</script>
+<script>
+    images = document.querySelectorAll('.image-container')
+    images.forEach(function (i) {
+        i.addEventListener('click', function(event) {
+            event.preventDefault();
+            document.getElementById('zoom-modal').style.display = 'block';
+            let src
+            if (event.target.classList[0] == 'eye') {
+                src = event.target.previousElementSibling.previousElementSibling
+            } else {
+                src = event.target.previousElementSibling
+            }
+            document.getElementById('zoom-modal').children[0].src = src.src
+        });
+    })
+    document.getElementById('zoom-modal').addEventListener('click', function () {
+        document.getElementById('zoom-modal').style.display = 'none';
+    })
+</script>
+<script>
+    images = document.querySelectorAll('.image-container2')
+    images.forEach(function (i) {
+        i.addEventListener('click', function(event) {
+            event.preventDefault();
+            document.getElementById('zoom-modal').style.display = 'block';
+            let src
+            if (event.target.classList[0] == 'eye2') {
+                src = event.target.previousElementSibling.previousElementSibling
+            } else {
+                src = event.target.previousElementSibling
+            }
+            document.getElementById('zoom-modal').children[0].src = src.src
+        });
+    })
+    document.getElementById('zoom-modal').addEventListener('click', function () {
+        document.getElementById('zoom-modal').style.display = 'none';
+    })
+</script>
+<script>
+    let banner_image = document.querySelector('.banner__image')
+    let banner_header = document.querySelector('.banner__right__header')
+    function banner_btn(btn) {
+        let active = document.querySelector('.banner__left__btn-active')
+        active.classList.remove('banner__left__btn-active')
+        active.classList.add('banner__left__btn')
+        btn.classList.remove('banner__left__btn')
+        btn.classList.add('banner__left__btn-active')
+        banner_image.style.backgroundImage = `url('/media/banner/${btn.id}.png')`
+        banner_header.textContent = btn.textContent
+    }
+</script>
+<script>
+    const countDownDate = new Date("January 10, 2024 00:00:00").getTime();
+    const x = setInterval(function() {
+    const now = new Date().getTime();
+    const distance = countDownDate - now;
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    document.getElementById("days").children[0].innerHTML = days;
+    document.getElementById("hours").children[0].innerHTML = hours;
+    document.getElementById("minutes").children[0].innerHTML = minutes;
+    document.getElementById("seconds").children[0].innerHTML = seconds;
+    if (distance < 0) {
+        clearInterval(x);
+        document.getElementById("days").innerHTML = "EXPIRED";
+    }
+}, 1000);
+</script>
+<script>
+    function open_menu() {
+        document.querySelector('.mobile-menu-wrapper').hidden = false;
+    }
+    document.querySelector('.mobile-menu-wrapper').addEventListener('click', function() {
+        document.querySelector('.mobile-menu-wrapper').hidden = true;
+    })
+</script>
+{% endblock %}

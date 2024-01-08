@@ -1,5 +1,6 @@
 from django.db import models
 from orders.models import Order
+from accounts.models import Profile
 
 
 class Product(models.Model):
@@ -16,7 +17,7 @@ class Product(models.Model):
 
 
 class Review(models.Model):
-    user = models.ForeignKey("", on_delete=models.CASCADE)
+    user = models.ForeignKey(Profile, on_delete=models.CASCADE)
     stars = models.IntegerField()
     text = models.TextField()
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
