@@ -9,3 +9,6 @@ def shop_page(request):
 
 def saved_page(request):
     return render(request, 'saved.html')
+
+def home_page(request):
+    return render(request, 'index.html')

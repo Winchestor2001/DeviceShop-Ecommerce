@@ -1,5 +1,4 @@
 from django.db import models
-from orders.models import Order
 from accounts.models import Profile
 
 
@@ -7,7 +6,7 @@ class Product(models.Model):
     name = models.CharField(max_length=50)
     price = models.IntegerField()
     brand = models.CharField(max_length=50)
-    supplier = models.ForeignKey(Order, on_delete=models.CASCADE)
+    supplier = models.ForeignKey(Profile, on_delete=models.CASCADE)
     description = models.TextField()
     state = models.CharField(max_length=50)
     create_at = models.DateField()
