@@ -1,0 +1,150 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+<title>Checkout page</title>
+{% endblock %}
+
+
+{% block content %}
+<main>
+    <div class="checkout container">
+        <div class="checkout__left card">
+            <h2>Contact</h2>
+            <div class="checkout__left__form">
+                <div class="class__form__input-wrapper">
+                    <label for="first_name" class="text-gray">First name</label>
+                    <input required type="text" name="first_name" id="first_name" class="default-input text-default" placeholder="Type here">
+                </div>
+                <div class="class__form__input-wrapper">
+                    <label for="last_name" class="text-gray">Last name</label>
+                    <input required type="text" name="last_name" id="last_name" class="default-input text-default" placeholder="Type here">
+                </div>
+                <div class="class__form__input-wrapper">
+                    <label for="phone" class="text-gray">Phone</label>
+                    <input value="+998" required type="text" name="phone" id="phone" class="default-input text-default" placeholder="Type here">
+                </div>
+                <div class="class__form__input-wrapper">
+                    <label for="email" class="text-gray">Email</label>
+                    <input required type="email" name="email" id="email" class="default-input text-default" placeholder="Type here">
+                </div>
+            </div>
+            <h2>Shipping info</h2>
+            <div class="checkout__left__expresses">
+                <label onclick="select_express(this)" for="express" class="checkout__left__express-active card">
+                    <input id="express" type="radio" checked>
+                    <p class="text-default">Express delivery<br><small class="text-muted">3-4 days via Fedex</small></p>
+                </label>
+                <label onclick="select_express(this)" for="post_office" class="checkout__left__express card">
+                    <input id="free_delivery" type="radio">
+                    <p class="text-default">Free delivery<br><small class="text-muted">20-30 days via Fedex</small></p>
+                </label>
+                <label onclick="select_express(this)" for="self_pickup" class="checkout__left__express card">
+                    <input id="self_pickup" type="radio">
+                    <p class="text-default">Self pick-up<br><small class="text-muted">Come to our shop</small></p>
+                </label>
+            </div>
+            <div class="checkout__left__form2">
+                <div class="class__form__input-wrapper-75">
+                    <label for="address" class="text-gray">Address</label>
+                    <input required type="text" name="address" id="address" class="default-input text-default" placeholder="Type here">
+                </div>
+                <div class="class__form__input-wrapper-25">
+                    <label for="city" class="text-gray">City</label>
+                    <input required type="text" name="city" id="city" class="default-input text-default" placeholder="Type here">
+                </div>
+                <div class="class__form__input-wrapper-33">
+                    <label for="house" class="text-gray">House</label>
+                    <input required type="text" name="house" id="house" class="default-input text-default" placeholder="Type here">
+                </div>
+                <div class="class__form__input-wrapper-33">
+                    <label for="postal_code" class="text-gray">Postal code</label>
+                    <input required type="text" name="postal_code" id="postal_code" class="default-input text-default" placeholder="Type here">
+                </div>
+                <div class="class__form__input-wrapper-33">
+                    <label for="zip" class="text-gray">Zip</label>
+                    <input type="text" name="zip" id="zip" class="default-input text-default" placeholder="Type here">
+                </div>
+            </div>
+            <div class="class__form__checkbox-wrapper">
+                <input type="checkbox" name="remember_address" id="remember_address">
+                <label for="remember_address" class="text-gray">Save this address</label>
+            </div>
+            <div class="class__form__input-wrapper-100">
+                <label for="message" class="text-gray">Message to seller</label>
+                <textarea name="message" id="message" cols="30" rows="2" class="default-input text-default"></textarea>
+            </div>
+            <div class="checkout__left__btns">
+                <div class="cart__left__product__left__content__btns">
+                    <a href="" class="cart__left__product__left__content__btn-red text-default">Cancel</a>
+                    <a href="" class="banner__right__btn text-default-white">Place order</a>
+                </div>
+            </div>
+        </div>
+        <div class="checkout__right">
+            <h2>Summary</h2>
+            <div class="checkout__right__content">
+                <p class="text-gray checkout__right__content-item">Subtotal:<span class="text-default" id="price_subtotal">$243.90</span></p>
+                <p class="text-gray checkout__right__content-item">Discount:<span class="text-default">- $10.00</span></p>
+                <p class="text-gray checkout__right__content-item">Tax:<span class="text-default">+ $15.00</span></p>
+                <p class="text-gray checkout__right__content-item">Shipping:<span class="text-default" id="price_express">+ $10.00</span></p>
+            </div>
+            <hr>
+            <p class="text-gray checkout__right__content-item">Total:<span class="text-default" id="price_total">$357.90</span></p>
+            <div class="cart__right__coupons">
+                <div class="cart__right__coupons__input card">
+                    <input type="text" class="default-input text-default" placeholder="Add coupon" required="">
+                    <button class="cart__left__product__left__content__btn text-default-primary">Apply</button>
+                </div>
+                <div class="cart__right__coupon card">
+                    <p class="text-default">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-ticket-perforated" viewBox="0 0 16 16">
+                            <path d="M4 4.85v.9h1v-.9zm7 0v.9h1v-.9zm-7 1.8v.9h1v-.9H4m7 0v.9h1v-.9h-1m-7 1.8v.9h1v-.9zm7 0v.9h1v-.9zm-7 1.8v.9h1v-.9zm7 0v.9h1v-.9z"/>
+                            <path d="M1.5 3A1.5 1.5 0 0 0 0 4.5V6a.5.5 0 0 0 .5.5 1.5 1.5 0 1 1 0 3 .5.5 0 0 0-.5.5v1.5A1.5 1.5 0 0 0 1.5 13h13a1.5 1.5 0 0 0 1.5-1.5V10a.5.5 0 0 0-.5-.5 1.5 1.5 0 0 1 0-3A.5.5 0 0 0 16 6V4.5A1.5 1.5 0 0 0 14.5 3zM1 4.5a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 .5.5v1.05a2.5 2.5 0 0 0 0 4.9v1.05a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-1.05a2.5 2.5 0 0 0 0-4.9z"/>
+                        </svg>
+                        GRMKSDF
+                    </p>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                        <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z"/>
+                    </svg>
+                </div>
+            </div>
+            <hr>
+            <p class="text-gray">Items in cart</p>
+            <div class="checkout__right__products">
+                <a href="" class="checkout__right__product">
+                    <div class="checkout__right__product__img card">
+                        <img src="/media/products/product_1.png" alt="">
+                    </div>
+                    <p><span class="text-default">1x</span> <span class="text-default-primary">Gaming Headset with Mic Darkblue color</span><br><span class="text-default text-muted">Total: $295.99</span></p>
+                </a>
+                <a href="" class="checkout__right__product">
+                    <div class="checkout__right__product__img card">
+                        <img src="/media/products/product_1.png" alt="">
+                    </div>
+                    <p><span class="text-default">1x</span> <span class="text-default-primary">Gaming Headset with Mic Darkblue color</span><br><span class="text-default text-muted">Total: $295.99</span></p>
+                </a>
+            </div>
+        </div>
+    </div>
+</main>
+<script>
+    function select_express(btn) {
+        let active = document.querySelector('.checkout__left__express-active')
+        active.classList.remove('checkout__left__express-active')
+        active.classList.add('checkout__left__express')
+        active.children[0].checked = false
+        btn.classList.remove('checkout__left__express')
+        btn.classList.add('checkout__left__express-active')
+        btn.children[0].checked = true
+    }
+</script>
+<script>
+    function open_menu() {
+        document.querySelector('.mobile-menu-wrapper').hidden = false;
+    }
+    document.querySelector('.mobile-menu-wrapper').addEventListener('click', function() {
+        document.querySelector('.mobile-menu-wrapper').hidden = true;
+    })
+</script>
+{% endblock %}

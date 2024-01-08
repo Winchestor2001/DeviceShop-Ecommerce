@@ -1,0 +1,313 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+<title>Product page</title>
+{% endblock %}
+
+
+{% block content %}
+<main>
+    <div class="product card container">
+        <div class="product__left">
+            <div class="product__left__main-photo card">
+                <div class="image-container2">
+                    <img id="main_photo" src="/media/products/product_1.png" alt="" class="recommended__card__photo">
+                    <div class="overlay"></div>
+                    <div class="eye2" style='background: url("/media/eye.png") no-repeat center center / cover;'></div>
+                </div>
+            </div>
+            <div class="product__left__bottom-photos">
+                <button onclick="change_photo(this)" class="product__left__bottom-photo bottom-photos-active">
+                    <img src="/media/products/product_1.png" alt="">
+                </button>
+                <button onclick="change_photo(this)" class="product__left__bottom-photo">
+                    <img src="/media/products/product_2.png" alt="">
+                </button>
+                <button onclick="change_photo(this)" class="product__left__bottom-photo">
+                    <img src="/media/products/product_3.png" alt="">
+                </button>
+                <button onclick="change_photo(this)" class="product__left__bottom-photo">
+                    <img src="/media/products/product_4.png" alt="">
+                </button>
+                <button onclick="change_photo(this)" class="product__left__bottom-photo">
+                    <img src="/media/products/product_5.png" alt="">
+                </button>
+                <button onclick="change_photo(this)" class="product__left__bottom-photo">
+                    <img src="/media/banner/banner_1.png" alt="">
+                </button>
+                <button onclick="change_photo(this)" class="product__left__bottom-photo">
+                    <img src="/media/banner/banner_2.png" alt="">
+                </button>
+            </div>
+        </div>
+        <div class="product__middle">
+            <div class="product__middle__top">
+                <p class="product__middle__top-price"><b>Macbook</b></p>
+                <div class="shop__products__right__middle__bottom">
+                    <div class="shop__product__top__left__stars">
+                        <img src="/media/star.png" alt="">
+                        <img src="/media/star.png" alt="">
+                        <img src="/media/star.png" alt="">
+                        <img src="/media/star.png" alt="">
+                        <img src="/media/star2.png" alt="">
+                        <p class="text-default-18">4.5</p>
+                    </div>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="6" height="6" viewBox="0 0 6 6" fill="none">
+                        <circle cx="3" cy="3" r="3" fill="#DEE2E7"></circle>
+                    </svg>
+                    <p class="product__middle__top-orders text-gray">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M3.33317 3.33329H16.6665V13.3333H4.30817L3.33317 14.3083V3.33329ZM3.33317 1.66663C2.4165 1.66663 1.67484 2.41663 1.67484 3.33329L1.6665 18.3333L4.99984 15H16.6665C17.5832 15 18.3332 14.25 18.3332 13.3333V3.33329C18.3332 2.41663 17.5832 1.66663 16.6665 1.66663H3.33317ZM4.99984 9.99996H14.9998V11.6666H4.99984V9.99996ZM4.99984 7.49996H14.9998V9.16663H4.99984V7.49996ZM4.99984 4.99996H14.9998V6.66663H4.99984V4.99996Z" fill="#8B96A5"/>
+                        </svg>
+                        32 reviews
+                    </p>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="6" height="6" viewBox="0 0 6 6" fill="none">
+                        <circle cx="3" cy="3" r="3" fill="#DEE2E7"></circle>
+                    </svg>
+                    <p class="text-gray">154 orders</p>
+                </div>
+            </div>
+            <div class="product__middle__bottom">
+                <div class="product__middle__bottom-price">
+                    <p class="text-default-18 text-muted">Price:</p>
+                    <p class="text-default-18 shop__products__right__middle-price" style="font-size: 20px;"><b>$1999.50</b><span class="text-gray">$2000.00</span></p>
+                </div>
+                <div class="product__middle__bottom-price">
+                    <p class="text-default-18 text-muted">Category:</p>
+                    <p class="text-default-18 text-gray" style="font-size: 18px;">Laptops</p>
+                </div>
+                <div class="product__middle__bottom-price">
+                    <p class="text-default-18 text-muted">Brand:</p>
+                    <p class="text-default-18 text-gray" style="font-size: 18px;">Apple</p>
+                </div>
+                <div class="product__middle__bottom-other">
+                    <p class="text-default-18 text-gray product__middle__bottom-other-text">Other:</p>
+                    <div class="product__middle__bottom-other-item">
+                        <p class="text-default-18 text-muted">Processor:</p>
+                        <p class="text-default-18 text-gray" style="font-size: 18px;">Apple M1 Pro</p>
+                    </div>
+                    <div class="product__middle__bottom-other-item">
+                        <p class="text-default-18 text-muted">Video card:</p>
+                        <p class="text-default-18 text-gray" style="font-size: 18px;">Nvidia Geforce RTX 3060</p>
+                    </div>
+                    <div class="product__middle__bottom-other-item">
+                        <p class="text-default-18 text-muted">Memory:</p>
+                        <p class="text-default-18 text-gray" style="font-size: 18px;">16GB</p>
+                    </div>
+                    <div class="product__middle__bottom-other-item">
+                        <p class="text-default-18 text-muted">Storage:</p>
+                        <p class="text-default-18 text-gray" style="font-size: 18px;">512GB SSD</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="product__right">
+            <div class="product__right__top card">
+                <div class="product__right__top__top">
+                    <img src="/media/banner/banner_1.png" alt="">
+                    <p class="text-default-18">Supplier<br>Guanjoi Trading LLC</p>
+                </div>
+                <div class="product__right__top__middle">
+                    <p class="text-default-18 text-muted">
+                        <img src="/media/rus.png" alt="">
+                        Moscow, Russia
+                    </p>
+                    <p class="text-default-18 text-muted">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M10 0.833374L2.5 4.16671V9.16671C2.5 13.7917 5.7 18.1167 10 19.1667C14.3 18.1167 17.5 13.7917 17.5 9.16671V4.16671L10 0.833374ZM15.8333 9.16671C15.8333 12.9334 13.35 16.4084 10 17.4417C6.65 16.4084 4.16667 12.9334 4.16667 9.16671V5.25004L10 2.65837L15.8333 5.25004V9.16671ZM6.175 9.65837L5 10.8334L8.33333 14.1667L15 7.50004L13.825 6.31671L8.33333 11.8084L6.175 9.65837Z" fill="#8B96A5"/>
+                        </svg>
+                        Verified Seller
+                    </p>
+                </div>
+                <div class="product__right__top__bottom">
+                    <a href="" class="banner__right__btn text-default-white">Add to cart</a>
+                    <a href="" class="banner__right__btn text-default-white">Seller's profile</a>
+                </div>
+            </div>
+            <a href="" class="text-default-primary product__right-save">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <path d="M16.5 2.82495C14.76 2.82495 13.09 3.63495 12 4.91495C10.91 3.63495 9.24 2.82495 7.5 2.82495C4.42 2.82495 2 5.24495 2 8.32495C2 12.105 5.4 15.185 10.55 19.865L12 21.175L13.45 19.855C18.6 15.185 22 12.105 22 8.32495C22 5.24495 19.58 2.82495 16.5 2.82495ZM12.1 18.375L12 18.475L11.9 18.375C7.14 14.065 4 11.215 4 8.32495C4 6.32495 5.5 4.82495 7.5 4.82495C9.04 4.82495 10.54 5.81495 11.07 7.18495H12.94C13.46 5.81495 14.96 4.82495 16.5 4.82495C18.5 4.82495 20 6.32495 20 8.32495C20 11.215 16.86 14.065 12.1 18.375Z" fill="#0D6EFD"/>
+                </svg>
+                Save for later
+            </a>
+        </div>
+    </div>
+    <div class="product__bottom container">
+        <div class="product__bottom__left card">
+            <div class="product__bottom__tabs">
+                <button onclick="change_content(this, 1)" class="product__bottom__tab product__bottom__tab-active">Description</button>
+                <button onclick="change_content(this, 2)" class="product__bottom__tab">Reviews</button>
+                <div class="product__bottom__tabs-indicator"></div>
+            </div>
+            <div class="product__bottom__content-wrapper">
+                <div class="product__bottom__content" id="content_1">
+                    <p class="text-gray-18">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+                </div>
+                <div class="product__bottom__content" id="content_2" hidden>
+                    <div class="product__bottom__reviews">
+                        <div class="product__bottom__review card">
+                            <p class="text-default">Photos:</p>
+                            <div class="product__bottom__review__photos">
+                                <div class="image-container5">
+                                    <img id="main_photo" src="/media/products/product_1.png" alt="" class="recommended__card__photo">
+                                    <div class="overlay"></div>
+                                    <div class="eye3" style='background: url("/media/eye.png") no-repeat center center / cover;'></div>
+                                </div>
+                            </div>
+                            <span class="product__bottom__review-devider"></span>
+                            <div class="product__bottom__review__user">
+                                <img src="/media/products/product_4.png" class="product__bottom__review__logo" alt="">
+                                <div class="product__bottom__review__user-content">
+                                    <p class="text-default">User</p>
+                                    <div class="shop__product__top__left__stars">
+                                        <img src="/media/star.png" alt="">
+                                        <img src="/media/star.png" alt="">
+                                        <img src="/media/star.png" alt="">
+                                        <img src="/media/star.png" alt="">
+                                        <img src="/media/star2.png" alt="">
+                                        <p class="text-default">4.5</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="text-gray">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Repudiandae voluptatem rerum atque suscipit obcaecati qui assumenda magnam dicta aliquid. Voluptatem?</p>
+                        </div>
+                        <div class="product__bottom__review card">
+                            <div class="product__bottom__review__user">
+                                <img src="/media/products/product_4.png" class="product__bottom__review__logo" alt="">
+                                <div class="product__bottom__review__user-content">
+                                    <p class="text-default">User</p>
+                                    <div class="shop__product__top__left__stars">
+                                        <img src="/media/star.png" alt="">
+                                        <img src="/media/star.png" alt="">
+                                        <img src="/media/star.png" alt="">
+                                        <img src="/media/star.png" alt="">
+                                        <img src="/media/star2.png" alt="">
+                                        <p class="text-default">4.5</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="text-gray">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Repudiandae voluptatem rerum atque suscipit obcaecati qui assumenda magnam dicta aliquid. Voluptatem?</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="product__bottom__right card">
+            <p class="text-default2"><b>You may like</b></p>
+            <a href="" class="product__bottom__right__product">
+                <div class="product__bottom__right__product__image card">
+                    <img src="/media/products/product_1.png" alt="">
+                </div>
+                <div class="product__bottom__right__product__text">
+                    <p class="text-default">Smart Watch</p>
+                    <p class="text-default text-muted">$100.00 - $699.50</p>
+                </div>
+            </a>
+            <a href="" class="product__bottom__right__product">
+                <div class="product__bottom__right__product__image card">
+                    <img src="/media/products/product_1.png" alt="">
+                </div>
+                <div class="product__bottom__right__product__text">
+                    <p class="text-default">Smart Watch</p>
+                    <p class="text-default text-muted">$100.00 - $699.50</p>
+                </div>
+            </a>
+            <a href="" class="product__bottom__right__product">
+                <div class="product__bottom__right__product__image card">
+                    <img src="/media/products/product_1.png" alt="">
+                </div>
+                <div class="product__bottom__right__product__text">
+                    <p class="text-default">Smart Watch</p>
+                    <p class="text-default text-muted">$100.00 - $699.50</p>
+                </div>
+            </a>
+            <a href="" class="product__bottom__right__product">
+                <div class="product__bottom__right__product__image card">
+                    <img src="/media/products/product_1.png" alt="">
+                </div>
+                <div class="product__bottom__right__product__text">
+                    <p class="text-default">Smart Watch</p>
+                    <p class="text-default text-muted">$100.00 - $699.50</p>
+                </div>
+            </a>
+            <a href="" class="product__bottom__right__product">
+                <div class="product__bottom__right__product__image card">
+                    <img src="/media/products/product_1.png" alt="">
+                </div>
+                <div class="product__bottom__right__product__text">
+                    <p class="text-default">Smart Watch</p>
+                    <p class="text-default text-muted">$100.00 - $699.50</p>
+                </div>
+            </a>
+        </div>
+    </div>
+</main>
+<script>
+    const indicator = document.querySelector('.product__bottom__tabs-indicator');
+    function change_content(btn, id) {
+        document.querySelector('.product__bottom__tab-active').classList.remove('product__bottom__tab-active')
+        btn.classList.add('product__bottom__tab-active')
+        const tab = btn
+        const offsetLeft = tab.offsetLeft - 8;
+        const width = tab.clientWidth;
+        indicator.style.transform = `translateX(${offsetLeft}px)`;
+        indicator.style.width = `${width}px`;
+
+        document.querySelectorAll('.product__bottom__content').forEach(function (i) {
+            i.hidden = true;
+        })
+        document.querySelector(`#content_${id}`).hidden = false
+    }
+</script>
+<script>
+    images = document.querySelectorAll('.image-container5')
+    images.forEach(function (i) {
+        i.addEventListener('click', function(event) {
+            event.preventDefault();
+            document.getElementById('zoom-modal').style.display = 'block';
+            let src
+            if (event.target.classList[0] == 'eye3') {
+                src = event.target.previousElementSibling.previousElementSibling
+            } else {
+                src = event.target.previousElementSibling
+            }
+            document.getElementById('zoom-modal').children[0].src = src.src
+        });
+    })
+    document.getElementById('zoom-modal').addEventListener('click', function () {
+        document.getElementById('zoom-modal').style.display = 'none';
+    })
+</script>
+<script>
+    document.querySelector('.image-container2').addEventListener('click', function(event) {
+        event.preventDefault();
+        document.getElementById('zoom-modal').style.display = 'block';
+        let src
+        if (event.target.classList[0] == 'eye2') {
+            src = event.target.previousElementSibling.previousElementSibling
+        } else {
+            src = event.target.previousElementSibling
+        }
+        document.getElementById('zoom-modal').children[0].src = src.src
+    });
+    document.getElementById('zoom-modal').addEventListener('click', function () {
+        document.getElementById('zoom-modal').style.display = 'none';
+    })
+</script>
+<script>
+    function change_photo(btn) {
+        document.querySelector('.bottom-photos-active').classList.remove('bottom-photos-active');
+        btn.classList.add('bottom-photos-active');
+        document.querySelector('#main_photo').src = btn.children[0].src
+    }
+</script>
+<script>
+    function open_menu() {
+        document.querySelector('.mobile-menu-wrapper').hidden = false;
+    }
+    document.querySelector('.mobile-menu-wrapper').addEventListener('click', function() {
+        document.querySelector('.mobile-menu-wrapper').hidden = true;
+    })
+</script>
+{% endblock %}

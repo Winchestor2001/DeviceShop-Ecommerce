@@ -1,0 +1,228 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+<title>Cart</title>
+{% endblock %}
+
+
+{% block content %}
+<main>
+    <h2 class="cart__header container">My cart (3)</h2>
+    <div class="cart container">
+        <div class="cart__left card">
+            <div class="cart__left__product">
+                <div class="cart__left__product__left">
+                    <div class="cart__left__product__left__img">
+                        <img src="/media/products/product_2.png" alt="">
+                    </div>
+                    <div class="cart__left__product__left__content">
+                        <p class="text-default-18"><b>Laptop</b></p>
+                        <p class="text-default text-muted">Processor: intel Core i9, Video card: intel UHD Graphics,  Memory: 16GB<br>Seller: HP</p>
+                        <div class="cart__left__product__left__content__btns">
+                            <button class="cart__left__product__left__content__btn-red text-default">Remove</button>
+                            <button class="cart__left__product__left__content__btn text-default-primary">Save for later</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="cart__left__product__right">
+                    <p class="cart__left__product__right-price"><b>$78.99</b></p>
+                    <div class="cart__left__product__right__quantity">
+                        <button onclick="minus_quantity(this)" class="cart__left__product__left__content__btn">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-dash" viewBox="0 0 16 16">
+                                <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8"/>
+                            </svg>
+                        </button>
+                        <input type="number" name="question_title" class="default-input text-default" value=1 required>
+                        <button onclick="plus_quantity(this)" class="cart__left__product__left__content__btn">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
+                                <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="cart__left__product">
+                <div class="cart__left__product__left">
+                    <div class="cart__left__product__left__img">
+                        <img src="/media/products/product_2.png" alt="">
+                    </div>
+                    <div class="cart__left__product__left__content">
+                        <p class="text-default-18"><b>Laptop</b></p>
+                        <p class="text-default text-muted">Processor: intel Core i9, Video card: intel UHD Graphics,  Memory: 16GB<br>Seller: HP</p>
+                        <div class="cart__left__product__left__content__btns">
+                            <button class="cart__left__product__left__content__btn-red text-default">Remove</button>
+                            <button class="cart__left__product__left__content__btn text-default-primary">Save for later</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="cart__left__product__right">
+                    <p class="cart__left__product__right-price"><b>$78.99</b></p>
+                    <div class="cart__left__product__right__quantity">
+                        <button onclick="minus_quantity(this)" class="cart__left__product__left__content__btn">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-dash" viewBox="0 0 16 16">
+                                <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8"/>
+                            </svg>
+                        </button>
+                        <input type="number" name="question_title" class="default-input text-default" value=1 required>
+                        <button onclick="plus_quantity(this)" class="cart__left__product__left__content__btn">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
+                                <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="cart__left__product">
+                <div class="cart__left__product__left">
+                    <div class="cart__left__product__left__img">
+                        <img src="/media/products/product_2.png" alt="">
+                    </div>
+                    <div class="cart__left__product__left__content">
+                        <p class="text-default-18"><b>Laptop</b></p>
+                        <p class="text-default text-muted">Processor: intel Core i9, Video card: intel UHD Graphics,  Memory: 16GB<br>Seller: HP</p>
+                        <div class="cart__left__product__left__content__btns">
+                            <button class="cart__left__product__left__content__btn-red text-default">Remove</button>
+                            <button class="cart__left__product__left__content__btn text-default-primary">Save for later</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="cart__left__product__right">
+                    <p class="cart__left__product__right-price"><b>$78.99</b></p>
+                    <div class="cart__left__product__right__quantity">
+                        <button onclick="minus_quantity(this)" class="cart__left__product__left__content__btn">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-dash" viewBox="0 0 16 16">
+                                <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8"/>
+                            </svg>
+                        </button>
+                        <input type="number" name="question_title" class="default-input text-default" value=1 required>
+                        <button onclick="plus_quantity(this)" class="cart__left__product__left__content__btn">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
+                                <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="cart__left__btns">
+                <a href="{% url 'shop' %}" id="offers" class="banner__right__btn text-default-white">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8"/>
+                      </svg>
+                    Back to shop
+                </a>
+                <button class="cart__left__product__left__content__btn text-default-primary">Remove all</button>
+            </div>
+        </div>
+        <div class="cart__right">
+            <div class="cart__right__coupons card">
+                <p class="text-default"><b>Have a coupon?</b></p>
+                <div class="cart__right__coupons__input card">
+                    <input type="text" class="default-input text-default" placeholder="Add coupon" required="">
+                    <button class="cart__left__product__left__content__btn text-default-primary">Apply</button>
+                </div>
+                <div class="cart__right__coupon card">
+                    <p class="text-default">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-ticket-perforated" viewBox="0 0 16 16">
+                            <path d="M4 4.85v.9h1v-.9zm7 0v.9h1v-.9zm-7 1.8v.9h1v-.9H4m7 0v.9h1v-.9h-1m-7 1.8v.9h1v-.9zm7 0v.9h1v-.9zm-7 1.8v.9h1v-.9zm7 0v.9h1v-.9z"/>
+                            <path d="M1.5 3A1.5 1.5 0 0 0 0 4.5V6a.5.5 0 0 0 .5.5 1.5 1.5 0 1 1 0 3 .5.5 0 0 0-.5.5v1.5A1.5 1.5 0 0 0 1.5 13h13a1.5 1.5 0 0 0 1.5-1.5V10a.5.5 0 0 0-.5-.5 1.5 1.5 0 0 1 0-3A.5.5 0 0 0 16 6V4.5A1.5 1.5 0 0 0 14.5 3zM1 4.5a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 .5.5v1.05a2.5 2.5 0 0 0 0 4.9v1.05a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-1.05a2.5 2.5 0 0 0 0-4.9z"/>
+                        </svg>
+                        GRMKSDF
+                    </p>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                        <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z"/>
+                    </svg>
+                </div>
+            </div>
+            <div class="cart__right__checkout card">
+                <div class="cart__right__checkout__top">
+                    <div class="cart__right__checkout__top-item">
+                        <p class="text-gray-18">Subtotal:</p>
+                        <p class="text-gray-18" id="subtotal">$10.00</p>
+                    </div>
+                    <div class="cart__right__checkout__top-item">
+                        <p class="text-gray-18">Discount:</p>
+                        <p class="text-success" id="discount">- $10.00</p>
+                    </div>
+                    <div class="cart__right__checkout__top-item">
+                        <p class="text-gray-18">Tax:</p>
+                        <p class="text-danger">+ $15.00</p>
+                    </div>
+                </div>
+                <div class="cart__right__checkout__bottom">
+                    <div class="cart__right__checkout__top-item">
+                        <p class="text-default-18"><b>Total:</b></p>
+                        <p class="text-default-20" id="total"><b>$0.00</b></p>
+                    </div>
+                    <a href="{% url 'checkout' %}" class="banner__right__btn text-default-white">Checkout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="cart__bottom container">
+        <div class="cart__bottom-item">
+            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" fill="none">
+                <circle cx="24" cy="24" r="24" fill="#DEE2E7"/>
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M30 20H29V18C29 15.24 26.76 13 24 13C21.24 13 19 15.24 19 18V20H18C16.9 20 16 20.9 16 22V32C16 33.1 16.9 34 18 34H30C31.1 34 32 33.1 32 32V22C32 20.9 31.1 20 30 20ZM24 29C22.9 29 22 28.1 22 27C22 25.9 22.9 25 24 25C25.1 25 26 25.9 26 27C26 28.1 25.1 29 24 29ZM21 20V18C21 16.34 22.34 15 24 15C25.66 15 27 16.34 27 18V20H21Z" fill="#8B96A5"/>
+            </svg>
+            <p class="text-default-18">Secure payment<br><span class="text-muted">Have you ever finally just </span></p>
+        </div>
+        <div class="cart__bottom-item">
+            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" fill="none">
+                <circle cx="24" cy="24" r="24" fill="#DEE2E7"/>
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M32 15H16C14.9 15 14.01 15.9 14.01 17L14 35L18 31H32C33.1 31 34 30.1 34 29V17C34 15.9 33.1 15 32 15ZM19 22H29C29.55 22 30 22.45 30 23C30 23.55 29.55 24 29 24H19C18.45 24 18 23.55 18 23C18 22.45 18.45 22 19 22ZM25 27H19C18.45 27 18 26.55 18 26C18 25.45 18.45 25 19 25H25C25.55 25 26 25.45 26 26C26 26.55 25.55 27 25 27ZM29 21H19C18.45 21 18 20.55 18 20C18 19.45 18.45 19 19 19H29C29.55 19 30 19.45 30 20C30 20.55 29.55 21 29 21Z" fill="#8B96A5"/>
+            </svg>
+            <p class="text-default-18">Customer support<br><span class="text-muted">Have you ever finally just</span></p>
+        </div>
+        <div class="cart__bottom-item">
+            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" fill="none">
+                <circle cx="24" cy="24" r="24" fill="#DEE2E7"/>
+                <path fill-rule="evenodd" clip-rule="evenodd" d="M31.5 20H29V18C29 16.9 28.1 16 27 16H15C13.9 16 13 16.9 13 18V27C13 28.1 13.9 29 15 29C15 30.66 16.34 32 18 32C19.66 32 21 30.66 21 29H27C27 30.66 28.34 32 30 32C31.66 32 33 30.66 33 29H34C34.55 29 35 28.55 35 28V24.67C35 24.24 34.86 23.82 34.6 23.47L32.3 20.4C32.11 20.15 31.81 20 31.5 20ZM18 30C17.45 30 17 29.55 17 29C17 28.45 17.45 28 18 28C18.55 28 19 28.45 19 29C19 29.55 18.55 30 18 30ZM31.5 21.5L33.46 24H29V21.5H31.5ZM30 30C29.45 30 29 29.55 29 29C29 28.45 29.45 28 30 28C30.55 28 31 28.45 31 29C31 29.55 30.55 30 30 30Z" fill="#8B96A5"/>
+            </svg>
+            <p class="text-default-18">Free delivery<br><span class="text-muted">Have you ever finally just</span></p>
+        </div>
+    </div>
+</main>
+<script>
+    change_total()
+    function plus_quantity(btn) {
+        let current_quantity = parseInt(btn.previousElementSibling.value)
+        let current_price = btn.parentElement.previousElementSibling.children[0]
+        let price = parseFloat(current_price.textContent.replace('$', '')) / current_quantity
+        let new_quantity = current_quantity + 1
+        current_price.textContent = `$${(price * new_quantity).toFixed(2)}`
+        btn.previousElementSibling.value = parseInt(btn.previousElementSibling.value) + 1
+        change_total()
+    }
+    function minus_quantity(btn) {
+        if (btn.nextElementSibling.value > 1) {
+            let current_quantity = parseInt(btn.nextElementSibling.value)
+            let current_price = btn.parentElement.previousElementSibling.children[0]
+            let price = parseFloat(current_price.textContent.replace('$', '')) / current_quantity
+            let new_quantity = current_quantity - 1
+            current_price.textContent = `$${(price * new_quantity).toFixed(2)}`
+            btn.nextElementSibling.value = parseInt(btn.nextElementSibling.value) - 1
+            change_total()
+        }
+    }
+    function change_total() {
+        let current_price = document.querySelector('#subtotal')
+        let price = 0.00
+        document.querySelectorAll('.cart__left__product__right-price').forEach(function (i) {
+            price += parseFloat(i.children[0].textContent.replace('$', ''))
+        })
+        current_price.textContent = `$${(price).toFixed(2)}`
+        let total = document.querySelector('#total')
+        let discount = parseFloat(document.querySelector('#discount').textContent.replace('- $', ''))
+        total.textContent = (parseFloat(price) - discount + 15.00).toFixed(2)
+    }
+</script>
+<script>
+    function open_menu() {
+        document.querySelector('.mobile-menu-wrapper').hidden = false;
+    }
+    document.querySelector('.mobile-menu-wrapper').addEventListener('click', function() {
+        document.querySelector('.mobile-menu-wrapper').hidden = true;
+    })
+</script>
+{% endblock %}

@@ -1,0 +1,1102 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+<title>Shop page</title>
+{% endblock %}
+
+
+{% block content %}
+<div id="overlay" style="display: none;"></div>
+<main>
+    <form method="post" class="mobile-header__input-wrapper container">
+        <!-- {% csrf_token %} -->
+        <input type="text" placeholder="Search" name="search" class="header__input text-default">
+        <button type="submit" class="header__btn text-default-white">Search</button>
+    </form>
+    <div class="shop container">
+        <div class="shop__left">
+            <div class="shop__left-items">
+                <button onclick="showOrHideItems(this)" class="shop__left-items__header">
+                    <p class="text-default"><b>Category</b></p>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path d="M12 8.29504L6 14.295L7.41 15.705L12 11.125L16.59 15.705L18 14.295L12 8.29504Z" fill="#8B96A5"/>
+                    </svg>
+                </button>
+                <div class="shop__left-items-wrapper">
+                    <a href="" class="shop__left-item text-gray">Smartphones</a>
+                    <a href="" class="shop__left-item text-gray">Laptops</a>
+                    <a href="" class="shop__left-item text-gray">PCs</a>
+                    <a href="" class="shop__left-item text-gray">Mouses</a>
+                    <a href="" class="shop__left-item text-gray">Headphones</a>
+                </div>
+            </div>
+            <div class="shop__left-items">
+                <button onclick="showOrHideItems(this)" class="shop__left-items__header">
+                    <p class="text-default"><b>Price</b></p>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path d="M12 8.29504L6 14.295L7.41 15.705L12 11.125L16.59 15.705L18 14.295L12 8.29504Z" fill="#8B96A5"/>
+                    </svg>
+                </button>
+                <div class="shop__left-items-wrapper2">
+                    <div class="custom-wrapper">
+                        <div class="price-input-container"> 
+                            <div class="slider-container"> 
+                                <div class="price-slider"> 
+                                </div> 
+                            </div> 
+                        </div> 
+                        <div class="range-input"> 
+                            <input type="range" class="min-range" min="0" max="100" value="0" step="1"> 
+                            <input type="range" class="max-range" min="0" max="100" value="100" step="1"> 
+                        </div> 
+                        <div class="price-input">
+                            <div class="price-input__field">
+                                <label for="min" class="text-default">Min</label>
+                                <input placeholder="Min" type="number" class="min-input default-input text-default" name="min" id="min" value="0"> 
+                            </div>
+                            <div class="price-input__field">
+                                <label for="max" class="text-default">Max</label>
+                                <input placeholder="Max" type="number" class="max-input default-input text-default" name="max" id="max" value="100"> 
+                            </div>
+                        </div>
+                    </div> 
+                    <a href="" class="banner__right__btn text-default-white" style="text-align: center; margin-top: 8px;">Apply</a>
+                </div>
+            </div>
+            <div class="shop__left-items">
+                <button onclick="showOrHideItems(this)" class="shop__left-items__header">
+                    <p class="text-default"><b>Rating</b></p>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path d="M12 8.29504L6 14.295L7.41 15.705L12 11.125L16.59 15.705L18 14.295L12 8.29504Z" fill="#8B96A5"/>
+                    </svg>
+                </button>
+                <div class="shop__left-items-wrapper">
+                    <div onclick="make_active2(this)" class="shop__left-item-checkbox-wrapper text-default">
+                        <input class="star_checbox" type="checkbox" name="">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="93" height="18" viewBox="0 0 93 18" fill="none">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M83.7 14.4663L89.4474 18L87.9222 11.34L93 6.85895L86.3133 6.28105L83.7 0L81.0867 6.28105L74.4 6.85895L79.4778 11.34L77.9526 18L83.7 14.4663Z" fill="#FF9017"/>
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M65.1 14.4663L70.8475 18L69.3223 11.34L74.4001 6.85895L67.7134 6.28105L65.1 0L62.4867 6.28105L55.8 6.85895L60.8778 11.34L59.3526 18L65.1 14.4663Z" fill="#FF9017"/>
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M46.5 14.4663L52.2474 18L50.7221 11.34L55.7999 6.85895L49.1133 6.28105L46.5 0L43.8867 6.28105L37.2 6.85895L42.2778 11.34L40.7526 18L46.5 14.4663Z" fill="#FF9017"/>
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M27.9 14.4663L33.6474 18L32.1222 11.34L37.2 6.85895L30.5133 6.28105L27.9 0L25.2867 6.28105L18.6 6.85895L23.6778 11.34L22.1526 18L27.9 14.4663Z" fill="#FF9017"/>
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M9.3 14.4663L15.0474 18L13.5222 11.34L18.6 6.85895L11.9133 6.28105L9.3 0L6.6867 6.28105L0 6.85895L5.0778 11.34L3.5526 18L9.3 14.4663Z" fill="#FF9017"/>
+                        </svg>
+                    </div>
+                    <div onclick="make_active2(this)" class="shop__left-item-checkbox-wrapper text-default">
+                        <input class="star_checbox" type="checkbox" name="">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="93" height="18" viewBox="0 0 93 18" fill="none">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M83.7 14.4663L89.4474 18L87.9222 11.34L93 6.85895L86.3133 6.28105L83.7 0L81.0867 6.28105L74.4 6.85895L79.4778 11.34L77.9526 18L83.7 14.4663Z" fill="#BDC4CD"/>
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M65.1 14.4663L70.8475 18L69.3223 11.34L74.4001 6.85895L67.7134 6.28105L65.1 0L62.4867 6.28105L55.8 6.85895L60.8778 11.34L59.3526 18L65.1 14.4663Z" fill="#FF9017"/>
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M46.5 14.4663L52.2474 18L50.7221 11.34L55.7999 6.85895L49.1133 6.28105L46.5 0L43.8867 6.28105L37.2 6.85895L42.2778 11.34L40.7526 18L46.5 14.4663Z" fill="#FF9017"/>
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M27.9 14.4663L33.6474 18L32.1222 11.34L37.2 6.85895L30.5133 6.28105L27.9 0L25.2867 6.28105L18.6 6.85895L23.6778 11.34L22.1526 18L27.9 14.4663Z" fill="#FF9017"/>
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M9.3 14.4663L15.0474 18L13.5222 11.34L18.6 6.85895L11.9133 6.28105L9.3 0L6.6867 6.28105L0 6.85895L5.0778 11.34L3.5526 18L9.3 14.4663Z" fill="#FF9017"/>
+                        </svg>
+                    </div>
+                    <div onclick="make_active2(this)" class="shop__left-item-checkbox-wrapper text-default">
+                        <input class="star_checbox" type="checkbox" name="">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="93" height="18" viewBox="0 0 93 18" fill="none">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M83.7 14.4663L89.4474 18L87.9222 11.34L93 6.85895L86.3133 6.28105L83.7 0L81.0867 6.28105L74.4 6.85895L79.4778 11.34L77.9526 18L83.7 14.4663Z" fill="#BDC4CD"/>
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M65.1 14.4663L70.8475 18L69.3223 11.34L74.4001 6.85895L67.7134 6.28105L65.1 0L62.4867 6.28105L55.8 6.85895L60.8778 11.34L59.3526 18L65.1 14.4663Z" fill="#BDC4CD"/>
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M46.5 14.4663L52.2474 18L50.7221 11.34L55.7999 6.85895L49.1133 6.28105L46.5 0L43.8867 6.28105L37.2 6.85895L42.2778 11.34L40.7526 18L46.5 14.4663Z" fill="#FF9017"/>
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M27.9 14.4663L33.6474 18L32.1222 11.34L37.2 6.85895L30.5133 6.28105L27.9 0L25.2867 6.28105L18.6 6.85895L23.6778 11.34L22.1526 18L27.9 14.4663Z" fill="#FF9017"/>
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M9.3 14.4663L15.0474 18L13.5222 11.34L18.6 6.85895L11.9133 6.28105L9.3 0L6.6867 6.28105L0 6.85895L5.0778 11.34L3.5526 18L9.3 14.4663Z" fill="#FF9017"/>
+                        </svg>
+                    </div>
+                    <div onclick="make_active2(this)" class="shop__left-item-checkbox-wrapper text-default">
+                        <input class="star_checbox" type="checkbox" name="">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="93" height="18" viewBox="0 0 93 18" fill="none">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M83.7 14.4663L89.4474 18L87.9222 11.34L93 6.85895L86.3133 6.28105L83.7 0L81.0867 6.28105L74.4 6.85895L79.4778 11.34L77.9526 18L83.7 14.4663Z" fill="#BDC4CD"/>
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M65.1 14.4663L70.8475 18L69.3223 11.34L74.4001 6.85895L67.7134 6.28105L65.1 0L62.4867 6.28105L55.8 6.85895L60.8778 11.34L59.3526 18L65.1 14.4663Z" fill="#BDC4CD"/>
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M46.5 14.4663L52.2474 18L50.7221 11.34L55.7999 6.85895L49.1133 6.28105L46.5 0L43.8867 6.28105L37.2 6.85895L42.2778 11.34L40.7526 18L46.5 14.4663Z" fill="#BDC4CD"/>
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M27.9 14.4663L33.6474 18L32.1222 11.34L37.2 6.85895L30.5133 6.28105L27.9 0L25.2867 6.28105L18.6 6.85895L23.6778 11.34L22.1526 18L27.9 14.4663Z" fill="#FF9017"/>
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M9.3 14.4663L15.0474 18L13.5222 11.34L18.6 6.85895L11.9133 6.28105L9.3 0L6.6867 6.28105L0 6.85895L5.0778 11.34L3.5526 18L9.3 14.4663Z" fill="#FF9017"/>
+                        </svg>
+                    </div>
+                    <div onclick="make_active2(this)" class="shop__left-item-checkbox-wrapper text-default">
+                        <input class="star_checbox" type="checkbox" name="">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="93" height="18" viewBox="0 0 93 18" fill="none">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M83.7 14.4663L89.4474 18L87.9222 11.34L93 6.85895L86.3133 6.28105L83.7 0L81.0867 6.28105L74.4 6.85895L79.4778 11.34L77.9526 18L83.7 14.4663Z" fill="#BDC4CD"/>
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M65.1 14.4663L70.8475 18L69.3223 11.34L74.4001 6.85895L67.7134 6.28105L65.1 0L62.4867 6.28105L55.8 6.85895L60.8778 11.34L59.3526 18L65.1 14.4663Z" fill="#BDC4CD"/>
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M46.5 14.4663L52.2474 18L50.7221 11.34L55.7999 6.85895L49.1133 6.28105L46.5 0L43.8867 6.28105L37.2 6.85895L42.2778 11.34L40.7526 18L46.5 14.4663Z" fill="#BDC4CD"/>
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M27.9 14.4663L33.6474 18L32.1222 11.34L37.2 6.85895L30.5133 6.28105L27.9 0L25.2867 6.28105L18.6 6.85895L23.6778 11.34L22.1526 18L27.9 14.4663Z" fill="#BDC4CD"/>
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M9.3 14.4663L15.0474 18L13.5222 11.34L18.6 6.85895L11.9133 6.28105L9.3 0L6.6867 6.28105L0 6.85895L5.0778 11.34L3.5526 18L9.3 14.4663Z" fill="#FF9017"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+            <div class="shop__left-items">
+                <button onclick="showOrHideItems(this)" class="shop__left-items__header">
+                    <p class="text-default"><b>Brands</b></p>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path d="M12 8.29504L6 14.295L7.41 15.705L12 11.125L16.59 15.705L18 14.295L12 8.29504Z" fill="#8B96A5"/>
+                    </svg>
+                </button>
+                <div class="shop__left-items-wrapper">
+                    <div onclick="make_active(this)" class="shop__left-item-checkbox-wrapper text-default">
+                        <input type="checkbox" name="">
+                        <p>HP</p>
+                    </div>
+                    <div onclick="make_active(this)" class="shop__left-item-checkbox-wrapper text-default">
+                        <input type="checkbox" name="">
+                        <p>Apple</p>
+                    </div>
+                    <div onclick="make_active(this)" class="shop__left-item-checkbox-wrapper text-default">
+                        <input type="checkbox" name="">
+                        <p>Asus</p>
+                    </div>
+                    <div onclick="make_active(this)" class="shop__left-item-checkbox-wrapper text-default">
+                        <input type="checkbox" name="">
+                        <p>Acer</p>
+                    </div>
+                    <div onclick="make_active(this)" class="shop__left-item-checkbox-wrapper text-default">
+                        <input type="checkbox" name="">
+                        <p>Lenovo</p>
+                    </div>
+                </div>
+            </div>
+            <div class="shop__left-items">
+                <button onclick="showOrHideItems(this)" class="shop__left-items__header">
+                    <p class="text-default"><b>Processor</b></p>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path d="M12 8.29504L6 14.295L7.41 15.705L12 11.125L16.59 15.705L18 14.295L12 8.29504Z" fill="#8B96A5"/>
+                    </svg>
+                </button>
+                <div class="shop__left-items-wrapper">
+                    <div onclick="make_active(this)" class="shop__left-item-checkbox-wrapper text-default">
+                        <input type="checkbox" name="">
+                        <p>Intel Core i3</p>
+                    </div>
+                    <div onclick="make_active(this)" class="shop__left-item-checkbox-wrapper text-default">
+                        <input type="checkbox" name="">
+                        <p>Intel Core i5</p>
+                    </div>
+                    <div onclick="make_active(this)" class="shop__left-item-checkbox-wrapper text-default">
+                        <input type="checkbox" name="">
+                        <p>Intel Core i7</p>
+                    </div>
+                    <div onclick="make_active(this)" class="shop__left-item-checkbox-wrapper text-default">
+                        <input type="checkbox" name="">
+                        <p>Intel Core i9</p>
+                    </div>
+                    <div onclick="make_active(this)" class="shop__left-item-checkbox-wrapper text-default">
+                        <input type="checkbox" name="">
+                        <p>Intel Core i11</p>
+                    </div>
+                </div>
+            </div>
+            <div class="shop__left-items">
+                <button onclick="showOrHideItems(this)" class="shop__left-items__header">
+                    <p class="text-default"><b>Video card</b></p>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path d="M12 8.29504L6 14.295L7.41 15.705L12 11.125L16.59 15.705L18 14.295L12 8.29504Z" fill="#8B96A5"/>
+                    </svg>
+                </button>
+                <div class="shop__left-items-wrapper">
+                    <div onclick="make_active(this)" class="shop__left-item-checkbox-wrapper text-default">
+                        <input type="checkbox" name="">
+                        <p>Nvidia RTX 4090</p>
+                    </div>
+                    <div onclick="make_active(this)" class="shop__left-item-checkbox-wrapper text-default">
+                        <input type="checkbox" name="">
+                        <p>Nvidia RTX 4080</p>
+                    </div>
+                    <div onclick="make_active(this)" class="shop__left-item-checkbox-wrapper text-default">
+                        <input type="checkbox" name="">
+                        <p>Nvidia RTX 3090</p>
+                    </div>
+                    <div onclick="make_active(this)" class="shop__left-item-checkbox-wrapper text-default">
+                        <input type="checkbox" name="">
+                        <p>AMD Radeon RX 7900 XTX</p>
+                    </div>
+                    <div onclick="make_active(this)" class="shop__left-item-checkbox-wrapper text-default">
+                        <input type="checkbox" name="">
+                        <p>Nvidia GTX 1070ti</p>
+                    </div>
+                </div>
+            </div>
+            <div class="shop__left-items">
+                <button onclick="showOrHideItems(this)" class="shop__left-items__header">
+                    <p class="text-default"><b>Memory</b></p>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path d="M12 8.29504L6 14.295L7.41 15.705L12 11.125L16.59 15.705L18 14.295L12 8.29504Z" fill="#8B96A5"/>
+                    </svg>
+                </button>
+                <div class="shop__left-items-wrapper">
+                    <div onclick="make_active(this)" class="shop__left-item-checkbox-wrapper text-default">
+                        <input type="checkbox" name="">
+                        <p>128GB</p>
+                    </div>
+                    <div onclick="make_active(this)" class="shop__left-item-checkbox-wrapper text-default">
+                        <input type="checkbox" name="">
+                        <p>64GB</p>
+                    </div>
+                    <div onclick="make_active(this)" class="shop__left-item-checkbox-wrapper text-default">
+                        <input type="checkbox" name="">
+                        <p>32GB</p>
+                    </div>
+                    <div onclick="make_active(this)" class="shop__left-item-checkbox-wrapper text-default">
+                        <input type="checkbox" name="">
+                        <p>16GB</p>
+                    </div>
+                    <div onclick="make_active(this)" class="shop__left-item-checkbox-wrapper text-default">
+                        <input type="checkbox" name="">
+                        <p>8GB</p>
+                    </div>
+                </div>
+            </div>
+            <div class="shop__left-items">
+                <button onclick="showOrHideItems(this)" class="shop__left-items__header">
+                    <p class="text-default"><b>Storage</b></p>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path d="M12 8.29504L6 14.295L7.41 15.705L12 11.125L16.59 15.705L18 14.295L12 8.29504Z" fill="#8B96A5"/>
+                    </svg>
+                </button>
+                <div class="shop__left-items-wrapper">
+                    <div onclick="make_active(this)" class="shop__left-item-checkbox-wrapper text-default">
+                        <input type="checkbox" name="">
+                        <p>4TB HDD</p>
+                    </div>
+                    <div onclick="make_active(this)" class="shop__left-item-checkbox-wrapper text-default">
+                        <input type="checkbox" name="">
+                        <p>1TB HDD</p>
+                    </div>
+                    <div onclick="make_active(this)" class="shop__left-item-checkbox-wrapper text-default">
+                        <input type="checkbox" name="">
+                        <p>512GB SSD</p>
+                    </div>
+                    <div onclick="make_active(this)" class="shop__left-item-checkbox-wrapper text-default">
+                        <input type="checkbox" name="">
+                        <p>256GB SSD</p>
+                    </div>
+                    <div onclick="make_active(this)" class="shop__left-item-checkbox-wrapper text-default">
+                        <input type="checkbox" name="">
+                        <p>128GB SSD</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="shop__right">
+            <div class="shop__right__top">
+                <p class="text-default">12,911 items in <a href="" class="text-default"><b>Mobile accessory</b></a></p>
+                <div class="shop__right__top__right">
+                    <select name="sort" class="shop__right__top__select text-default">
+                        <option value="all" selected>All</option>
+                    </select>
+                    <button id="filter_btn" class="shop__right__top__select text-default" style="display: none;">Filter (3)</button>
+                    <div class="shop__right__top__right__btns">
+                        <button onclick="change_layout(this, 1)" class="shop__right__top__right__btn layout-btn-active">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path d="M11 3H3V11H11V3Z" fill="#1C1C1C"/>
+                                <path d="M11 13H3V21H11V13Z" fill="#1C1C1C"/>
+                                <path d="M21 3H13V11H21V3Z" fill="#1C1C1C"/>
+                                <path d="M21 13H13V21H21V13Z" fill="#1C1C1C"/>
+                            </svg>
+                        </button>
+                        <button onclick="change_layout(this, 2)" class="shop__right__top__right__btn">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path d="M21 8H3V4H21V8ZM21 10H3V14H21V10ZM21 16H3V20H21V16Z" fill="#1C1C1C"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="shop__right__bottom">
+                <a href="" class="shop__right__bottom-item text-default">
+                    Samsung
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <path d="M15.8334 5.34163L14.6584 4.16663L10.0001 8.82496L5.34175 4.16663L4.16675 5.34163L8.82508 9.99996L4.16675 14.6583L5.34175 15.8333L10.0001 11.175L14.6584 15.8333L15.8334 14.6583L11.1751 9.99996L15.8334 5.34163Z" fill="#8B96A5"/>
+                    </svg>
+                </a>
+                <a href="" class="text-default-primary">Clear all filter</a>
+            </div>
+            <div class="shop__products">
+                <a href="{% url 'product' %}" class="shop__product card">
+                    <div class="image-container3">
+                        <img src="/media/products/product_1.png" alt="" class="recommended__card__photo">
+                        <div class="overlay"></div>
+                        <div class="eye2" style='background: url("/media/eye.png") no-repeat center center / cover;'></div>
+                    </div>
+                    <div class="shop__product-content">
+                        <div class="shop__product__top">
+                            <div class="shop__product__top__left">
+                                <p class="text-default-18"><b>$99.50</b><span class="text-gray">$1128.00</span></p>
+                                <div class="shop__product__top__left__stars">
+                                    <img src="/media/star.png" alt="">
+                                    <img src="/media/star.png" alt="">
+                                    <img src="/media/star.png" alt="">
+                                    <img src="/media/star.png" alt="">
+                                    <img src="/media/star2.png" alt="">
+                                    <p class="text-default">4.5</p>
+                                </div>
+                            </div>
+                            <button class="shop__product__top__right">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <path d="M16.5 2.82495C14.76 2.82495 13.09 3.63495 12 4.91495C10.91 3.63495 9.24 2.82495 7.5 2.82495C4.42 2.82495 2 5.24495 2 8.32495C2 12.105 5.4 15.185 10.55 19.865L12 21.175L13.45 19.855C18.6 15.185 22 12.105 22 8.32495C22 5.24495 19.58 2.82495 16.5 2.82495ZM12.1 18.375L12 18.475L11.9 18.375C7.14 14.065 4 11.215 4 8.32495C4 6.32495 5.5 4.82495 7.5 4.82495C9.04 4.82495 10.54 5.81495 11.07 7.18495H12.94C13.46 5.81495 14.96 4.82495 16.5 4.82495C18.5 4.82495 20 6.32495 20 8.32495C20 11.215 16.86 14.065 12.1 18.375Z" fill="#0D6EFD"/>
+                                </svg>
+                            </button>
+                        </div>
+                        <p class="text-gray shop__product__bottom">GoPro HERO6 4K Action Camera - Black</p>
+                    </div>
+                </a>
+                <a href="{% url 'product' %}" class="shop__product card">
+                    <div class="image-container3">
+                        <img src="/media/products/product_1.png" alt="" class="recommended__card__photo">
+                        <div class="overlay"></div>
+                        <div class="eye2" style='background: url("/media/eye.png") no-repeat center center / cover;'></div>
+                    </div>
+                    <div class="shop__product-content">
+                        <div class="shop__product__top">
+                            <div class="shop__product__top__left">
+                                <p class="text-default-18"><b>$99.50</b><span class="text-gray">$1128.00</span></p>
+                                <div class="shop__product__top__left__stars">
+                                    <img src="/media/star.png" alt="">
+                                    <img src="/media/star.png" alt="">
+                                    <img src="/media/star.png" alt="">
+                                    <img src="/media/star.png" alt="">
+                                    <img src="/media/star2.png" alt="">
+                                    <p class="text-default">4.5</p>
+                                </div>
+                            </div>
+                            <button class="shop__product__top__right">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <path d="M16.5 2.82495C14.76 2.82495 13.09 3.63495 12 4.91495C10.91 3.63495 9.24 2.82495 7.5 2.82495C4.42 2.82495 2 5.24495 2 8.32495C2 12.105 5.4 15.185 10.55 19.865L12 21.175L13.45 19.855C18.6 15.185 22 12.105 22 8.32495C22 5.24495 19.58 2.82495 16.5 2.82495ZM12.1 18.375L12 18.475L11.9 18.375C7.14 14.065 4 11.215 4 8.32495C4 6.32495 5.5 4.82495 7.5 4.82495C9.04 4.82495 10.54 5.81495 11.07 7.18495H12.94C13.46 5.81495 14.96 4.82495 16.5 4.82495C18.5 4.82495 20 6.32495 20 8.32495C20 11.215 16.86 14.065 12.1 18.375Z" fill="#0D6EFD"/>
+                                </svg>
+                            </button>
+                        </div>
+                        <p class="text-gray shop__product__bottom">GoPro HERO6 4K Action Camera - Black</p>
+                    </div>
+                </a>
+                <a href="{% url 'product' %}" class="shop__product card">
+                    <div class="image-container3">
+                        <img src="/media/products/product_1.png" alt="" class="recommended__card__photo">
+                        <div class="overlay"></div>
+                        <div class="eye2" style='background: url("/media/eye.png") no-repeat center center / cover;'></div>
+                    </div>
+                    <div class="shop__product-content">
+                        <div class="shop__product__top">
+                            <div class="shop__product__top__left">
+                                <p class="text-default-18"><b>$99.50</b><span class="text-gray">$1128.00</span></p>
+                                <div class="shop__product__top__left__stars">
+                                    <img src="/media/star.png" alt="">
+                                    <img src="/media/star.png" alt="">
+                                    <img src="/media/star.png" alt="">
+                                    <img src="/media/star.png" alt="">
+                                    <img src="/media/star2.png" alt="">
+                                    <p class="text-default">4.5</p>
+                                </div>
+                            </div>
+                            <button class="shop__product__top__right">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <path d="M16.5 2.82495C14.76 2.82495 13.09 3.63495 12 4.91495C10.91 3.63495 9.24 2.82495 7.5 2.82495C4.42 2.82495 2 5.24495 2 8.32495C2 12.105 5.4 15.185 10.55 19.865L12 21.175L13.45 19.855C18.6 15.185 22 12.105 22 8.32495C22 5.24495 19.58 2.82495 16.5 2.82495ZM12.1 18.375L12 18.475L11.9 18.375C7.14 14.065 4 11.215 4 8.32495C4 6.32495 5.5 4.82495 7.5 4.82495C9.04 4.82495 10.54 5.81495 11.07 7.18495H12.94C13.46 5.81495 14.96 4.82495 16.5 4.82495C18.5 4.82495 20 6.32495 20 8.32495C20 11.215 16.86 14.065 12.1 18.375Z" fill="#0D6EFD"/>
+                                </svg>
+                            </button>
+                        </div>
+                        <p class="text-gray shop__product__bottom">GoPro HERO6 4K Action Camera - Black</p>
+                    </div>
+                </a>
+                <a href="{% url 'product' %}" class="shop__product card">
+                    <div class="image-container3">
+                        <img src="/media/products/product_1.png" alt="" class="recommended__card__photo">
+                        <div class="overlay"></div>
+                        <div class="eye2" style='background: url("/media/eye.png") no-repeat center center / cover;'></div>
+                    </div>
+                    <div class="shop__product-content">
+                        <div class="shop__product__top">
+                            <div class="shop__product__top__left">
+                                <p class="text-default-18"><b>$99.50</b><span class="text-gray">$1128.00</span></p>
+                                <div class="shop__product__top__left__stars">
+                                    <img src="/media/star.png" alt="">
+                                    <img src="/media/star.png" alt="">
+                                    <img src="/media/star.png" alt="">
+                                    <img src="/media/star.png" alt="">
+                                    <img src="/media/star2.png" alt="">
+                                    <p class="text-default">4.5</p>
+                                </div>
+                            </div>
+                            <button class="shop__product__top__right">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <path d="M16.5 2.82495C14.76 2.82495 13.09 3.63495 12 4.91495C10.91 3.63495 9.24 2.82495 7.5 2.82495C4.42 2.82495 2 5.24495 2 8.32495C2 12.105 5.4 15.185 10.55 19.865L12 21.175L13.45 19.855C18.6 15.185 22 12.105 22 8.32495C22 5.24495 19.58 2.82495 16.5 2.82495ZM12.1 18.375L12 18.475L11.9 18.375C7.14 14.065 4 11.215 4 8.32495C4 6.32495 5.5 4.82495 7.5 4.82495C9.04 4.82495 10.54 5.81495 11.07 7.18495H12.94C13.46 5.81495 14.96 4.82495 16.5 4.82495C18.5 4.82495 20 6.32495 20 8.32495C20 11.215 16.86 14.065 12.1 18.375Z" fill="#0D6EFD"/>
+                                </svg>
+                            </button>
+                        </div>
+                        <p class="text-gray shop__product__bottom">GoPro HERO6 4K Action Camera - Black</p>
+                    </div>
+                </a>
+                <a href="{% url 'product' %}" class="shop__product card">
+                    <div class="image-container3">
+                        <img src="/media/products/product_1.png" alt="" class="recommended__card__photo">
+                        <div class="overlay"></div>
+                        <div class="eye2" style='background: url("/media/eye.png") no-repeat center center / cover;'></div>
+                    </div>
+                    <div class="shop__product-content">
+                        <div class="shop__product__top">
+                            <div class="shop__product__top__left">
+                                <p class="text-default-18"><b>$99.50</b><span class="text-gray">$1128.00</span></p>
+                                <div class="shop__product__top__left__stars">
+                                    <img src="/media/star.png" alt="">
+                                    <img src="/media/star.png" alt="">
+                                    <img src="/media/star.png" alt="">
+                                    <img src="/media/star.png" alt="">
+                                    <img src="/media/star2.png" alt="">
+                                    <p class="text-default">4.5</p>
+                                </div>
+                            </div>
+                            <button class="shop__product__top__right">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <path d="M16.5 2.82495C14.76 2.82495 13.09 3.63495 12 4.91495C10.91 3.63495 9.24 2.82495 7.5 2.82495C4.42 2.82495 2 5.24495 2 8.32495C2 12.105 5.4 15.185 10.55 19.865L12 21.175L13.45 19.855C18.6 15.185 22 12.105 22 8.32495C22 5.24495 19.58 2.82495 16.5 2.82495ZM12.1 18.375L12 18.475L11.9 18.375C7.14 14.065 4 11.215 4 8.32495C4 6.32495 5.5 4.82495 7.5 4.82495C9.04 4.82495 10.54 5.81495 11.07 7.18495H12.94C13.46 5.81495 14.96 4.82495 16.5 4.82495C18.5 4.82495 20 6.32495 20 8.32495C20 11.215 16.86 14.065 12.1 18.375Z" fill="#0D6EFD"/>
+                                </svg>
+                            </button>
+                        </div>
+                        <p class="text-gray shop__product__bottom">GoPro HERO6 4K Action Camera - Black</p>
+                    </div>
+                </a>
+                <a href="{% url 'product' %}" class="shop__product card">
+                    <div class="image-container3">
+                        <img src="/media/products/product_1.png" alt="" class="recommended__card__photo">
+                        <div class="overlay"></div>
+                        <div class="eye2" style='background: url("/media/eye.png") no-repeat center center / cover;'></div>
+                    </div>
+                    <div class="shop__product-content">
+                        <div class="shop__product__top">
+                            <div class="shop__product__top__left">
+                                <p class="text-default-18"><b>$99.50</b><span class="text-gray">$1128.00</span></p>
+                                <div class="shop__product__top__left__stars">
+                                    <img src="/media/star.png" alt="">
+                                    <img src="/media/star.png" alt="">
+                                    <img src="/media/star.png" alt="">
+                                    <img src="/media/star.png" alt="">
+                                    <img src="/media/star2.png" alt="">
+                                    <p class="text-default">4.5</p>
+                                </div>
+                            </div>
+                            <button class="shop__product__top__right">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <path d="M16.5 2.82495C14.76 2.82495 13.09 3.63495 12 4.91495C10.91 3.63495 9.24 2.82495 7.5 2.82495C4.42 2.82495 2 5.24495 2 8.32495C2 12.105 5.4 15.185 10.55 19.865L12 21.175L13.45 19.855C18.6 15.185 22 12.105 22 8.32495C22 5.24495 19.58 2.82495 16.5 2.82495ZM12.1 18.375L12 18.475L11.9 18.375C7.14 14.065 4 11.215 4 8.32495C4 6.32495 5.5 4.82495 7.5 4.82495C9.04 4.82495 10.54 5.81495 11.07 7.18495H12.94C13.46 5.81495 14.96 4.82495 16.5 4.82495C18.5 4.82495 20 6.32495 20 8.32495C20 11.215 16.86 14.065 12.1 18.375Z" fill="#0D6EFD"/>
+                                </svg>
+                            </button>
+                        </div>
+                        <p class="text-gray shop__product__bottom">GoPro HERO6 4K Action Camera - Black</p>
+                    </div>
+                </a>
+                <a href="{% url 'product' %}" class="shop__product card">
+                    <div class="image-container3">
+                        <img src="/media/products/product_1.png" alt="" class="recommended__card__photo">
+                        <div class="overlay"></div>
+                        <div class="eye2" style='background: url("/media/eye.png") no-repeat center center / cover;'></div>
+                    </div>
+                    <div class="shop__product-content">
+                        <div class="shop__product__top">
+                            <div class="shop__product__top__left">
+                                <p class="text-default-18"><b>$99.50</b><span class="text-gray">$1128.00</span></p>
+                                <div class="shop__product__top__left__stars">
+                                    <img src="/media/star.png" alt="">
+                                    <img src="/media/star.png" alt="">
+                                    <img src="/media/star.png" alt="">
+                                    <img src="/media/star.png" alt="">
+                                    <img src="/media/star2.png" alt="">
+                                    <p class="text-default">4.5</p>
+                                </div>
+                            </div>
+                            <button class="shop__product__top__right">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <path d="M16.5 2.82495C14.76 2.82495 13.09 3.63495 12 4.91495C10.91 3.63495 9.24 2.82495 7.5 2.82495C4.42 2.82495 2 5.24495 2 8.32495C2 12.105 5.4 15.185 10.55 19.865L12 21.175L13.45 19.855C18.6 15.185 22 12.105 22 8.32495C22 5.24495 19.58 2.82495 16.5 2.82495ZM12.1 18.375L12 18.475L11.9 18.375C7.14 14.065 4 11.215 4 8.32495C4 6.32495 5.5 4.82495 7.5 4.82495C9.04 4.82495 10.54 5.81495 11.07 7.18495H12.94C13.46 5.81495 14.96 4.82495 16.5 4.82495C18.5 4.82495 20 6.32495 20 8.32495C20 11.215 16.86 14.065 12.1 18.375Z" fill="#0D6EFD"/>
+                                </svg>
+                            </button>
+                        </div>
+                        <p class="text-gray shop__product__bottom">GoPro HERO6 4K Action Camera - Black</p>
+                    </div>
+                </a>
+                <a href="{% url 'product' %}" class="shop__product card">
+                    <div class="image-container3">
+                        <img src="/media/products/product_1.png" alt="" class="recommended__card__photo">
+                        <div class="overlay"></div>
+                        <div class="eye2" style='background: url("/media/eye.png") no-repeat center center / cover;'></div>
+                    </div>
+                    <div class="shop__product-content">
+                        <div class="shop__product__top">
+                            <div class="shop__product__top__left">
+                                <p class="text-default-18"><b>$99.50</b><span class="text-gray">$1128.00</span></p>
+                                <div class="shop__product__top__left__stars">
+                                    <img src="/media/star.png" alt="">
+                                    <img src="/media/star.png" alt="">
+                                    <img src="/media/star.png" alt="">
+                                    <img src="/media/star.png" alt="">
+                                    <img src="/media/star2.png" alt="">
+                                    <p class="text-default">4.5</p>
+                                </div>
+                            </div>
+                            <button class="shop__product__top__right">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <path d="M16.5 2.82495C14.76 2.82495 13.09 3.63495 12 4.91495C10.91 3.63495 9.24 2.82495 7.5 2.82495C4.42 2.82495 2 5.24495 2 8.32495C2 12.105 5.4 15.185 10.55 19.865L12 21.175L13.45 19.855C18.6 15.185 22 12.105 22 8.32495C22 5.24495 19.58 2.82495 16.5 2.82495ZM12.1 18.375L12 18.475L11.9 18.375C7.14 14.065 4 11.215 4 8.32495C4 6.32495 5.5 4.82495 7.5 4.82495C9.04 4.82495 10.54 5.81495 11.07 7.18495H12.94C13.46 5.81495 14.96 4.82495 16.5 4.82495C18.5 4.82495 20 6.32495 20 8.32495C20 11.215 16.86 14.065 12.1 18.375Z" fill="#0D6EFD"/>
+                                </svg>
+                            </button>
+                        </div>
+                        <p class="text-gray shop__product__bottom">GoPro HERO6 4K Action Camera - Black</p>
+                    </div>
+                </a>
+                <a href="{% url 'product' %}" class="shop__product card">
+                    <div class="image-container3">
+                        <img src="/media/products/product_1.png" alt="" class="recommended__card__photo">
+                        <div class="overlay"></div>
+                        <div class="eye2" style='background: url("/media/eye.png") no-repeat center center / cover;'></div>
+                    </div>
+                    <div class="shop__product-content">
+                        <div class="shop__product__top">
+                            <div class="shop__product__top__left">
+                                <p class="text-default-18"><b>$99.50</b><span class="text-gray">$1128.00</span></p>
+                                <div class="shop__product__top__left__stars">
+                                    <img src="/media/star.png" alt="">
+                                    <img src="/media/star.png" alt="">
+                                    <img src="/media/star.png" alt="">
+                                    <img src="/media/star.png" alt="">
+                                    <img src="/media/star2.png" alt="">
+                                    <p class="text-default">4.5</p>
+                                </div>
+                            </div>
+                            <button class="shop__product__top__right">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <path d="M16.5 2.82495C14.76 2.82495 13.09 3.63495 12 4.91495C10.91 3.63495 9.24 2.82495 7.5 2.82495C4.42 2.82495 2 5.24495 2 8.32495C2 12.105 5.4 15.185 10.55 19.865L12 21.175L13.45 19.855C18.6 15.185 22 12.105 22 8.32495C22 5.24495 19.58 2.82495 16.5 2.82495ZM12.1 18.375L12 18.475L11.9 18.375C7.14 14.065 4 11.215 4 8.32495C4 6.32495 5.5 4.82495 7.5 4.82495C9.04 4.82495 10.54 5.81495 11.07 7.18495H12.94C13.46 5.81495 14.96 4.82495 16.5 4.82495C18.5 4.82495 20 6.32495 20 8.32495C20 11.215 16.86 14.065 12.1 18.375Z" fill="#0D6EFD"/>
+                                </svg>
+                            </button>
+                        </div>
+                        <p class="text-gray shop__product__bottom">GoPro HERO6 4K Action Camera - Black</p>
+                    </div>
+                </a>
+                <a href="{% url 'product' %}" class="shop__product card">
+                    <div class="image-container3">
+                        <img src="/media/products/product_1.png" alt="" class="recommended__card__photo">
+                        <div class="overlay"></div>
+                        <div class="eye2" style='background: url("/media/eye.png") no-repeat center center / cover;'></div>
+                    </div>
+                    <div class="shop__product-content">
+                        <div class="shop__product__top">
+                            <div class="shop__product__top__left">
+                                <p class="text-default-18"><b>$99.50</b><span class="text-gray">$1128.00</span></p>
+                                <div class="shop__product__top__left__stars">
+                                    <img src="/media/star.png" alt="">
+                                    <img src="/media/star.png" alt="">
+                                    <img src="/media/star.png" alt="">
+                                    <img src="/media/star.png" alt="">
+                                    <img src="/media/star2.png" alt="">
+                                    <p class="text-default">4.5</p>
+                                </div>
+                            </div>
+                            <button class="shop__product__top__right">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <path d="M16.5 2.82495C14.76 2.82495 13.09 3.63495 12 4.91495C10.91 3.63495 9.24 2.82495 7.5 2.82495C4.42 2.82495 2 5.24495 2 8.32495C2 12.105 5.4 15.185 10.55 19.865L12 21.175L13.45 19.855C18.6 15.185 22 12.105 22 8.32495C22 5.24495 19.58 2.82495 16.5 2.82495ZM12.1 18.375L12 18.475L11.9 18.375C7.14 14.065 4 11.215 4 8.32495C4 6.32495 5.5 4.82495 7.5 4.82495C9.04 4.82495 10.54 5.81495 11.07 7.18495H12.94C13.46 5.81495 14.96 4.82495 16.5 4.82495C18.5 4.82495 20 6.32495 20 8.32495C20 11.215 16.86 14.065 12.1 18.375Z" fill="#0D6EFD"/>
+                                </svg>
+                            </button>
+                        </div>
+                        <p class="text-gray shop__product__bottom">GoPro HERO6 4K Action Camera - Black</p>
+                    </div>
+                </a>
+                <a href="{% url 'product' %}" class="shop__product card">
+                    <div class="image-container3">
+                        <img src="/media/products/product_1.png" alt="" class="recommended__card__photo">
+                        <div class="overlay"></div>
+                        <div class="eye2" style='background: url("/media/eye.png") no-repeat center center / cover;'></div>
+                    </div>
+                    <div class="shop__product-content">
+                        <div class="shop__product__top">
+                            <div class="shop__product__top__left">
+                                <p class="text-default-18"><b>$99.50</b><span class="text-gray">$1128.00</span></p>
+                                <div class="shop__product__top__left__stars">
+                                    <img src="/media/star.png" alt="">
+                                    <img src="/media/star.png" alt="">
+                                    <img src="/media/star.png" alt="">
+                                    <img src="/media/star.png" alt="">
+                                    <img src="/media/star2.png" alt="">
+                                    <p class="text-default">4.5</p>
+                                </div>
+                            </div>
+                            <button class="shop__product__top__right">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <path d="M16.5 2.82495C14.76 2.82495 13.09 3.63495 12 4.91495C10.91 3.63495 9.24 2.82495 7.5 2.82495C4.42 2.82495 2 5.24495 2 8.32495C2 12.105 5.4 15.185 10.55 19.865L12 21.175L13.45 19.855C18.6 15.185 22 12.105 22 8.32495C22 5.24495 19.58 2.82495 16.5 2.82495ZM12.1 18.375L12 18.475L11.9 18.375C7.14 14.065 4 11.215 4 8.32495C4 6.32495 5.5 4.82495 7.5 4.82495C9.04 4.82495 10.54 5.81495 11.07 7.18495H12.94C13.46 5.81495 14.96 4.82495 16.5 4.82495C18.5 4.82495 20 6.32495 20 8.32495C20 11.215 16.86 14.065 12.1 18.375Z" fill="#0D6EFD"/>
+                                </svg>
+                            </button>
+                        </div>
+                        <p class="text-gray shop__product__bottom">GoPro HERO6 4K Action Camera - Black</p>
+                    </div>
+                </a>
+                <a href="{% url 'product' %}" class="shop__product card">
+                    <div class="image-container3">
+                        <img src="/media/products/product_1.png" alt="" class="recommended__card__photo">
+                        <div class="overlay"></div>
+                        <div class="eye2" style='background: url("/media/eye.png") no-repeat center center / cover;'></div>
+                    </div>
+                    <div class="shop__product-content">
+                        <div class="shop__product__top">
+                            <div class="shop__product__top__left">
+                                <p class="text-default-18"><b>$99.50</b><span class="text-gray">$1128.00</span></p>
+                                <div class="shop__product__top__left__stars">
+                                    <img src="/media/star.png" alt="">
+                                    <img src="/media/star.png" alt="">
+                                    <img src="/media/star.png" alt="">
+                                    <img src="/media/star.png" alt="">
+                                    <img src="/media/star2.png" alt="">
+                                    <p class="text-default">4.5</p>
+                                </div>
+                            </div>
+                            <button class="shop__product__top__right">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <path d="M16.5 2.82495C14.76 2.82495 13.09 3.63495 12 4.91495C10.91 3.63495 9.24 2.82495 7.5 2.82495C4.42 2.82495 2 5.24495 2 8.32495C2 12.105 5.4 15.185 10.55 19.865L12 21.175L13.45 19.855C18.6 15.185 22 12.105 22 8.32495C22 5.24495 19.58 2.82495 16.5 2.82495ZM12.1 18.375L12 18.475L11.9 18.375C7.14 14.065 4 11.215 4 8.32495C4 6.32495 5.5 4.82495 7.5 4.82495C9.04 4.82495 10.54 5.81495 11.07 7.18495H12.94C13.46 5.81495 14.96 4.82495 16.5 4.82495C18.5 4.82495 20 6.32495 20 8.32495C20 11.215 16.86 14.065 12.1 18.375Z" fill="#0D6EFD"/>
+                                </svg>
+                            </button>
+                        </div>
+                        <p class="text-gray shop__product__bottom">GoPro HERO6 4K Action Camera - Black</p>
+                    </div>
+                </a>
+            </div>
+            <div class="shop__products-layout2" style="display: none;">
+                <div class="shop__product-layout2 card">
+                    <div class="image-container4">
+                        <img src="/media/products/product_1.png" alt="" class="recommended__card__photo">
+                        <div class="overlay"></div>
+                        <div class="eye2" style='background: url("/media/eye.png") no-repeat center center / cover;'></div>
+                    </div>
+                    <div class="shop__products__right">
+                        <p class="text-default"><b>Canon Cmera EOS 2000, Black 10x zoom</b></p>
+                        <div class="shop__products__right__middle">
+                            <p class="text-default-18 shop__products__right__middle-price" style="font-size: 20px;"><b>$99.50</b><span class="text-gray">$1128.00</span></p>
+                            <div class="shop__products__right__middle__bottom">
+                                <div class="shop__product__top__left__stars">
+                                    <img src="/media/star.png" alt="">
+                                    <img src="/media/star.png" alt="">
+                                    <img src="/media/star.png" alt="">
+                                    <img src="/media/star.png" alt="">
+                                    <img src="/media/star2.png" alt="">
+                                    <p class="text-default">4.5</p>
+                                </div>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="6" height="6" viewBox="0 0 6 6" fill="none">
+                                    <circle cx="3" cy="3" r="3" fill="#DEE2E7"/>
+                                </svg>
+                                <p class="text-default text-muted">154 orders</p>
+                            </div>
+                        </div>
+                        <div class="shop__products__right__bottom">
+                            <p class="text-default">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
+                            <a href="{% url 'product' %}" class="text-default-primary">View details</a>
+                        </div>
+                    </div>
+                    <button class="shop__product-layout2__save">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path d="M16.5 2.82495C14.76 2.82495 13.09 3.63495 12 4.91495C10.91 3.63495 9.24 2.82495 7.5 2.82495C4.42 2.82495 2 5.24495 2 8.32495C2 12.105 5.4 15.185 10.55 19.865L12 21.175L13.45 19.855C18.6 15.185 22 12.105 22 8.32495C22 5.24495 19.58 2.82495 16.5 2.82495ZM12.1 18.375L12 18.475L11.9 18.375C7.14 14.065 4 11.215 4 8.32495C4 6.32495 5.5 4.82495 7.5 4.82495C9.04 4.82495 10.54 5.81495 11.07 7.18495H12.94C13.46 5.81495 14.96 4.82495 16.5 4.82495C18.5 4.82495 20 6.32495 20 8.32495C20 11.215 16.86 14.065 12.1 18.375Z" fill="#0D6EFD"/>
+                        </svg>
+                    </button>
+                </div>
+                <div class="shop__product-layout2 card">
+                    <div class="image-container4">
+                        <img src="/media/products/product_1.png" alt="" class="recommended__card__photo">
+                        <div class="overlay"></div>
+                        <div class="eye2" style='background: url("/media/eye.png") no-repeat center center / cover;'></div>
+                    </div>
+                    <div class="shop__products__right">
+                        <p class="text-default"><b>Canon Cmera EOS 2000, Black 10x zoom</b></p>
+                        <div class="shop__products__right__middle">
+                            <p class="text-default-18 shop__products__right__middle-price" style="font-size: 20px;"><b>$99.50</b><span class="text-gray">$1128.00</span></p>
+                            <div class="shop__products__right__middle__bottom">
+                                <div class="shop__product__top__left__stars">
+                                    <img src="/media/star.png" alt="">
+                                    <img src="/media/star.png" alt="">
+                                    <img src="/media/star.png" alt="">
+                                    <img src="/media/star.png" alt="">
+                                    <img src="/media/star2.png" alt="">
+                                    <p class="text-default">4.5</p>
+                                </div>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="6" height="6" viewBox="0 0 6 6" fill="none">
+                                    <circle cx="3" cy="3" r="3" fill="#DEE2E7"/>
+                                </svg>
+                                <p class="text-default text-muted">154 orders</p>
+                            </div>
+                        </div>
+                        <div class="shop__products__right__bottom">
+                            <p class="text-default">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
+                            <a href="{% url 'product' %}" class="text-default-primary">View details</a>
+                        </div>
+                    </div>
+                    <button class="shop__product-layout2__save">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path d="M16.5 2.82495C14.76 2.82495 13.09 3.63495 12 4.91495C10.91 3.63495 9.24 2.82495 7.5 2.82495C4.42 2.82495 2 5.24495 2 8.32495C2 12.105 5.4 15.185 10.55 19.865L12 21.175L13.45 19.855C18.6 15.185 22 12.105 22 8.32495C22 5.24495 19.58 2.82495 16.5 2.82495ZM12.1 18.375L12 18.475L11.9 18.375C7.14 14.065 4 11.215 4 8.32495C4 6.32495 5.5 4.82495 7.5 4.82495C9.04 4.82495 10.54 5.81495 11.07 7.18495H12.94C13.46 5.81495 14.96 4.82495 16.5 4.82495C18.5 4.82495 20 6.32495 20 8.32495C20 11.215 16.86 14.065 12.1 18.375Z" fill="#0D6EFD"/>
+                        </svg>
+                    </button>
+                </div>
+                <div class="shop__product-layout2 card">
+                    <div class="image-container4">
+                        <img src="/media/products/product_1.png" alt="" class="recommended__card__photo">
+                        <div class="overlay"></div>
+                        <div class="eye2" style='background: url("/media/eye.png") no-repeat center center / cover;'></div>
+                    </div>
+                    <div class="shop__products__right">
+                        <p class="text-default"><b>Canon Cmera EOS 2000, Black 10x zoom</b></p>
+                        <div class="shop__products__right__middle">
+                            <p class="text-default-18 shop__products__right__middle-price" style="font-size: 20px;"><b>$99.50</b><span class="text-gray">$1128.00</span></p>
+                            <div class="shop__products__right__middle__bottom">
+                                <div class="shop__product__top__left__stars">
+                                    <img src="/media/star.png" alt="">
+                                    <img src="/media/star.png" alt="">
+                                    <img src="/media/star.png" alt="">
+                                    <img src="/media/star.png" alt="">
+                                    <img src="/media/star2.png" alt="">
+                                    <p class="text-default">4.5</p>
+                                </div>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="6" height="6" viewBox="0 0 6 6" fill="none">
+                                    <circle cx="3" cy="3" r="3" fill="#DEE2E7"/>
+                                </svg>
+                                <p class="text-default text-muted">154 orders</p>
+                            </div>
+                        </div>
+                        <div class="shop__products__right__bottom">
+                            <p class="text-default">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
+                            <a href="{% url 'product' %}" class="text-default-primary">View details</a>
+                        </div>
+                    </div>
+                    <button class="shop__product-layout2__save">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path d="M16.5 2.82495C14.76 2.82495 13.09 3.63495 12 4.91495C10.91 3.63495 9.24 2.82495 7.5 2.82495C4.42 2.82495 2 5.24495 2 8.32495C2 12.105 5.4 15.185 10.55 19.865L12 21.175L13.45 19.855C18.6 15.185 22 12.105 22 8.32495C22 5.24495 19.58 2.82495 16.5 2.82495ZM12.1 18.375L12 18.475L11.9 18.375C7.14 14.065 4 11.215 4 8.32495C4 6.32495 5.5 4.82495 7.5 4.82495C9.04 4.82495 10.54 5.81495 11.07 7.18495H12.94C13.46 5.81495 14.96 4.82495 16.5 4.82495C18.5 4.82495 20 6.32495 20 8.32495C20 11.215 16.86 14.065 12.1 18.375Z" fill="#0D6EFD"/>
+                        </svg>
+                    </button>
+                </div>
+                <div class="shop__product-layout2 card">
+                    <div class="image-container4">
+                        <img src="/media/products/product_1.png" alt="" class="recommended__card__photo">
+                        <div class="overlay"></div>
+                        <div class="eye2" style='background: url("/media/eye.png") no-repeat center center / cover;'></div>
+                    </div>
+                    <div class="shop__products__right">
+                        <p class="text-default"><b>Canon Cmera EOS 2000, Black 10x zoom</b></p>
+                        <div class="shop__products__right__middle">
+                            <p class="text-default-18 shop__products__right__middle-price" style="font-size: 20px;"><b>$99.50</b><span class="text-gray">$1128.00</span></p>
+                            <div class="shop__products__right__middle__bottom">
+                                <div class="shop__product__top__left__stars">
+                                    <img src="/media/star.png" alt="">
+                                    <img src="/media/star.png" alt="">
+                                    <img src="/media/star.png" alt="">
+                                    <img src="/media/star.png" alt="">
+                                    <img src="/media/star2.png" alt="">
+                                    <p class="text-default">4.5</p>
+                                </div>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="6" height="6" viewBox="0 0 6 6" fill="none">
+                                    <circle cx="3" cy="3" r="3" fill="#DEE2E7"/>
+                                </svg>
+                                <p class="text-default text-muted">154 orders</p>
+                            </div>
+                        </div>
+                        <div class="shop__products__right__bottom">
+                            <p class="text-default">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
+                            <a href="{% url 'product' %}" class="text-default-primary">View details</a>
+                        </div>
+                    </div>
+                    <button class="shop__product-layout2__save">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path d="M16.5 2.82495C14.76 2.82495 13.09 3.63495 12 4.91495C10.91 3.63495 9.24 2.82495 7.5 2.82495C4.42 2.82495 2 5.24495 2 8.32495C2 12.105 5.4 15.185 10.55 19.865L12 21.175L13.45 19.855C18.6 15.185 22 12.105 22 8.32495C22 5.24495 19.58 2.82495 16.5 2.82495ZM12.1 18.375L12 18.475L11.9 18.375C7.14 14.065 4 11.215 4 8.32495C4 6.32495 5.5 4.82495 7.5 4.82495C9.04 4.82495 10.54 5.81495 11.07 7.18495H12.94C13.46 5.81495 14.96 4.82495 16.5 4.82495C18.5 4.82495 20 6.32495 20 8.32495C20 11.215 16.86 14.065 12.1 18.375Z" fill="#0D6EFD"/>
+                        </svg>
+                    </button>
+                </div>
+                <div class="shop__product-layout2 card">
+                    <div class="image-container4">
+                        <img src="/media/products/product_1.png" alt="" class="recommended__card__photo">
+                        <div class="overlay"></div>
+                        <div class="eye2" style='background: url("/media/eye.png") no-repeat center center / cover;'></div>
+                    </div>
+                    <div class="shop__products__right">
+                        <p class="text-default"><b>Canon Cmera EOS 2000, Black 10x zoom</b></p>
+                        <div class="shop__products__right__middle">
+                            <p class="text-default-18 shop__products__right__middle-price" style="font-size: 20px;"><b>$99.50</b><span class="text-gray">$1128.00</span></p>
+                            <div class="shop__products__right__middle__bottom">
+                                <div class="shop__product__top__left__stars">
+                                    <img src="/media/star.png" alt="">
+                                    <img src="/media/star.png" alt="">
+                                    <img src="/media/star.png" alt="">
+                                    <img src="/media/star.png" alt="">
+                                    <img src="/media/star2.png" alt="">
+                                    <p class="text-default">4.5</p>
+                                </div>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="6" height="6" viewBox="0 0 6 6" fill="none">
+                                    <circle cx="3" cy="3" r="3" fill="#DEE2E7"/>
+                                </svg>
+                                <p class="text-default text-muted">154 orders</p>
+                            </div>
+                        </div>
+                        <div class="shop__products__right__bottom">
+                            <p class="text-default">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
+                            <a href="{% url 'product' %}" class="text-default-primary">View details</a>
+                        </div>
+                    </div>
+                    <button class="shop__product-layout2__save">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path d="M16.5 2.82495C14.76 2.82495 13.09 3.63495 12 4.91495C10.91 3.63495 9.24 2.82495 7.5 2.82495C4.42 2.82495 2 5.24495 2 8.32495C2 12.105 5.4 15.185 10.55 19.865L12 21.175L13.45 19.855C18.6 15.185 22 12.105 22 8.32495C22 5.24495 19.58 2.82495 16.5 2.82495ZM12.1 18.375L12 18.475L11.9 18.375C7.14 14.065 4 11.215 4 8.32495C4 6.32495 5.5 4.82495 7.5 4.82495C9.04 4.82495 10.54 5.81495 11.07 7.18495H12.94C13.46 5.81495 14.96 4.82495 16.5 4.82495C18.5 4.82495 20 6.32495 20 8.32495C20 11.215 16.86 14.065 12.1 18.375Z" fill="#0D6EFD"/>
+                        </svg>
+                    </button>
+                </div>
+                <div class="shop__product-layout2 card">
+                    <div class="image-container4">
+                        <img src="/media/products/product_1.png" alt="" class="recommended__card__photo">
+                        <div class="overlay"></div>
+                        <div class="eye2" style='background: url("/media/eye.png") no-repeat center center / cover;'></div>
+                    </div>
+                    <div class="shop__products__right">
+                        <p class="text-default"><b>Canon Cmera EOS 2000, Black 10x zoom</b></p>
+                        <div class="shop__products__right__middle">
+                            <p class="text-default-18 shop__products__right__middle-price" style="font-size: 20px;"><b>$99.50</b><span class="text-gray">$1128.00</span></p>
+                            <div class="shop__products__right__middle__bottom">
+                                <div class="shop__product__top__left__stars">
+                                    <img src="/media/star.png" alt="">
+                                    <img src="/media/star.png" alt="">
+                                    <img src="/media/star.png" alt="">
+                                    <img src="/media/star.png" alt="">
+                                    <img src="/media/star2.png" alt="">
+                                    <p class="text-default">4.5</p>
+                                </div>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="6" height="6" viewBox="0 0 6 6" fill="none">
+                                    <circle cx="3" cy="3" r="3" fill="#DEE2E7"/>
+                                </svg>
+                                <p class="text-default text-muted">154 orders</p>
+                            </div>
+                        </div>
+                        <div class="shop__products__right__bottom">
+                            <p class="text-default">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
+                            <a href="{% url 'product' %}" class="text-default-primary">View details</a>
+                        </div>
+                    </div>
+                    <button class="shop__product-layout2__save">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path d="M16.5 2.82495C14.76 2.82495 13.09 3.63495 12 4.91495C10.91 3.63495 9.24 2.82495 7.5 2.82495C4.42 2.82495 2 5.24495 2 8.32495C2 12.105 5.4 15.185 10.55 19.865L12 21.175L13.45 19.855C18.6 15.185 22 12.105 22 8.32495C22 5.24495 19.58 2.82495 16.5 2.82495ZM12.1 18.375L12 18.475L11.9 18.375C7.14 14.065 4 11.215 4 8.32495C4 6.32495 5.5 4.82495 7.5 4.82495C9.04 4.82495 10.54 5.81495 11.07 7.18495H12.94C13.46 5.81495 14.96 4.82495 16.5 4.82495C18.5 4.82495 20 6.32495 20 8.32495C20 11.215 16.86 14.065 12.1 18.375Z" fill="#0D6EFD"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <div class="shop__bottom">
+                <button>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M14.6446 5.36644C14.1708 4.87785 13.4055 4.87785 12.9317 5.36644L7.35535 11.1168C6.88155 11.6054 6.88155 12.3946 7.35535 12.8832L12.9317 18.6336C13.4055 19.1221 14.1708 19.1221 14.6446 18.6336C15.1185 18.145 15.1185 17.3557 14.6446 16.8671L9.9309 11.9937L14.6446 7.13289C15.1185 6.6443 15.1063 5.84251 14.6446 5.36644Z" fill="#1C1C1C"/>
+                    </svg>
+                </button>
+                <button onclick="pagination_btn(this)" class="text-default shop__bottom__active-btn">
+                    <p>1</p>
+                </button>
+                <button onclick="pagination_btn(this)" class="text-default">
+                    <p>2</p>
+                </button>
+                <button onclick="pagination_btn(this)" class="text-default">
+                    <p>3</p>
+                </button>
+                <button>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M8.35535 5.36831C7.88155 5.85729 7.88155 6.64716 8.35535 7.13614L13.0691 12.0008L8.35535 16.8654C7.88155 17.3544 7.88155 18.1443 8.35535 18.6333C8.82916 19.1222 9.59453 19.1222 10.0683 18.6333L15.6446 12.8784C16.1185 12.3895 16.1185 11.5996 15.6446 11.1106L10.0683 5.35577C9.60668 4.87934 8.82916 4.87934 8.35535 5.36831Z" fill="#1C1C1C"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+</main>
+<script>
+    const rangevalue = document.querySelector(".slider-container .price-slider"); 
+    const rangeInputvalue = document.querySelectorAll(".range-input input"); 
+    let minVal = parseInt(rangeInputvalue[0].value); 
+    let maxVal = parseInt(rangeInputvalue[1].value); 
+    rangevalue.style.left = `${(minVal / rangeInputvalue[0].max) * 100}%`; 
+    rangevalue.style.right = `${100 - (maxVal / rangeInputvalue[1].max) * 100}%`; 
+    let priceGap = 0; 
+    const priceInputvalue = 
+        document.querySelectorAll(".price-input input"); 
+    for (let i = 0; i < priceInputvalue.length; i++) { 
+        priceInputvalue[i].addEventListener("input", e => { 
+            let minp = parseInt(priceInputvalue[0].value); 
+            let maxp = parseInt(priceInputvalue[1].value); 
+            let diff = maxp - minp 
+
+            if (minp < 0) {
+                priceInputvalue[0].value = 0; 
+                minp = 0; 
+            } 
+
+            if (maxp > Number(document.querySelector('.max-range').max)) {
+                priceInputvalue[1].value = Number(document.querySelector('.max-range').max); 
+                maxp = Number(document.querySelector('.max-range').max); 
+            } 
+
+            if (minp > maxp - priceGap) { 
+                priceInputvalue[0].value = maxp - priceGap; 
+                minp = maxp - priceGap; 
+
+                if (minp < 0) { 
+                    priceInputvalue[0].value = 0; 
+                    minp = 0; 
+                } 
+            } 
+
+            if (diff >= priceGap && maxp <= rangeInputvalue[1].max) { 
+                if (e.target.className === "min-input") { 
+                    rangeInputvalue[0].value = minp; 
+                    let value1 = rangeInputvalue[0].max; 
+                    rangevalue.style.left = `${(minp / value1) * 100}%`; 
+                } 
+                else { 
+                    rangeInputvalue[1].value = maxp; 
+                    let value2 = rangeInputvalue[1].max; 
+                    rangevalue.style.right = 
+                        `${100 - (maxp / value2) * 100}%`; 
+                } 
+            } 
+        }); 
+
+        for (let i = 0; i < rangeInputvalue.length; i++) { 
+            rangeInputvalue[i].addEventListener("input", e => { 
+                let minVal = 
+                    parseInt(rangeInputvalue[0].value); 
+                let maxVal = 
+                    parseInt(rangeInputvalue[1].value); 
+
+                let diff = maxVal - minVal 
+                
+                if (diff < priceGap) { 
+                
+                    if (e.target.className === "min-range") { 
+                        rangeInputvalue[0].value = maxVal - priceGap; 
+                    } 
+                    else { 
+                        rangeInputvalue[1].value = minVal + priceGap; 
+                    } 
+                } 
+                else { 
+                
+                    priceInputvalue[0].value = minVal; 
+                    priceInputvalue[1].value = maxVal; 
+                    rangevalue.style.left = 
+                        `${(minVal / rangeInputvalue[0].max) * 100}%`; 
+                    rangevalue.style.right = 
+                        `${100 - (maxVal / rangeInputvalue[1].max) * 100}%`; 
+                } 
+            }); 
+        } 
+    }
+</script>
+<script>
+    function pagination_btn(btn) {
+        document.querySelector('.shop__bottom__active-btn').classList.remove('shop__bottom__active-btn')
+        btn.classList.add('shop__bottom__active-btn')
+    }
+</script>
+<script>
+    function make_active(btn) {
+        let checbox = btn.children[0]
+        if (event.target != btn.children[0]) {
+            if (checbox.checked) {
+                checbox.checked = false
+                btn.classList.remove('text-primary')
+                btn.classList.add('text-default')
+            } else {
+                checbox.checked = true
+                btn.classList.remove('text-default')
+                btn.classList.add('text-primary')
+            }
+        }
+    }
+    function make_active2(btn) {
+        let checbox = btn.children[0]
+        if (event.target != btn.children[0]) {
+            if (checbox.checked) {
+                checbox.checked = false
+            } else {
+                Array.from(document.querySelectorAll('.star_checbox')).forEach(function (i) {
+                    i.checked = false
+                })
+                checbox.checked = true
+            }
+        }
+    }
+</script>
+<script>
+    function change_layout(btn, layout) {
+        document.querySelectorAll('.shop__right__top__right__btn').forEach(function (i) {
+            i.classList.remove('layout-btn-active')
+        })
+        btn.classList.add('layout-btn-active')
+        if (layout == 1) {
+            document.querySelector('.shop__products-layout2').style.display = 'none'
+            document.querySelector('.shop__products').style.display = 'flex'
+        } else {
+            document.querySelector('.shop__products').style.display = 'none'
+            document.querySelector('.shop__products-layout2').style.display = 'flex'
+        }
+    }
+</script>
+<script>
+    function showOrHideItems(btn) {
+        let items = btn.nextElementSibling
+        if (items.hidden) {
+            items.hidden = false
+            childrens = Array.from(items.children);
+            childrens.forEach(function (i) {
+                i.hidden = false
+            })
+            btn.children[1].style.transform = 'rotate(0deg)'
+            btn.nextElementSibling.style.height = ''
+        } else {
+            items.hidden = true
+            childrens = Array.from(items.children);
+            childrens.forEach(function (i) {
+                i.hidden = true
+            })
+            btn.children[1].style.transform = 'rotate(180deg)'
+            btn.nextElementSibling.style.height = '0px'
+        }
+    }
+</script>
+<script>
+    images = document.querySelectorAll('.image-container3')
+    images.forEach(function (i) {
+        i.addEventListener('click', function(event) {
+            event.preventDefault();
+            document.getElementById('zoom-modal').style.display = 'block';
+            let src
+            if (event.target.classList[0] == 'eye2') {
+                src = event.target.previousElementSibling.previousElementSibling
+            } else {
+                src = event.target.previousElementSibling
+            }
+            document.getElementById('zoom-modal').children[0].src = src.src
+        });
+    })
+    document.getElementById('zoom-modal').addEventListener('click', function () {
+        document.getElementById('zoom-modal').style.display = 'none';
+    })
+</script>
+<script>
+    images = document.querySelectorAll('.image-container4')
+    images.forEach(function (i) {
+        i.addEventListener('click', function(event) {
+            event.preventDefault();
+            document.getElementById('zoom-modal').style.display = 'block';
+            let src
+            if (event.target.classList[0] == 'eye2') {
+                src = event.target.previousElementSibling.previousElementSibling
+            } else {
+                src = event.target.previousElementSibling
+            }
+            document.getElementById('zoom-modal').children[0].src = src.src
+        });
+    })
+    document.getElementById('zoom-modal').addEventListener('click', function () {
+        document.getElementById('zoom-modal').style.display = 'none';
+    })
+</script>
+<script>
+    function open_menu() {
+        document.querySelector('.mobile-menu-wrapper').hidden = false;
+    }
+    document.querySelector('.mobile-menu-wrapper').addEventListener('click', function() {
+        document.querySelector('.mobile-menu-wrapper').hidden = true;
+    })
+</script>
+<script>
+    document.querySelector('#filter_btn').addEventListener('click', function() {
+        document.querySelector('.shop__left').style.display = 'flex'
+        document.querySelector('#overlay').style.display = ''
+    })
+    document.querySelector('#overlay').addEventListener('click', function() {
+        document.querySelector('.shop__left').style.display = 'none'
+        document.querySelector('#overlay').style.display = 'none'
+    })
+</script>
+{% endblock %}

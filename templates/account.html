@@ -1,0 +1,509 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+<title>Account page</title>
+{% endblock %}
+
+
+{% block content %}
+<main>
+    <div class="user container">
+        <div class="user__left">
+            <button onclick="profileContent_btn(this)" id="1" class="banner__left__btn-active">Personal info</button>
+            <button onclick="profileContent_btn(this)" id="2" class="banner__left__btn">All orders</button>
+            <a href="" class="banner__left__btn">Logout</a>
+        </div>
+        <div class="user__right-wrapper">
+            <div id="content_1" class="user__right card" style="display: block;">
+                <h2>Personal info</h2>
+                <div class="user__right__info">
+                    <form action="" method="post" class="user__right__info__form">
+                        <div class="image-container6">
+                            <img src="/media/products/product_1.png" alt="" class="zoomable-image">
+                            <div class="overlay2"></div>
+                            <div class="eye3" style='background: url("/media/eye.png") no-repeat center center / cover;'></div>
+                        </div>
+                        <input id="input_file" type="file" hidden>
+                        <button type="button" id="photo_btn" class="user__right__info__btn">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" class="bi bi-image" viewBox="0 0 16 16">
+                                <path d="M6.002 5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0"/>
+                                <path d="M2.002 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2h-12zm12 1a1 1 0 0 1 1 1v6.5l-3.777-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12V3a1 1 0 0 1 1-1h12"/>
+                            </svg>
+                        </button>
+                    </form>
+                    <div class="user__right__info__text">
+                        <p class="text-default">root</p>
+                        <form action="" class="user__right__info__text__form">
+                            <input type="text" name="email" id="email-input" class="card text-default" hidden>
+                            <p class="text-default" id="email">Email:<span>myusername@gmail.com</span></p>
+                            <svg id="edit" onclick="change_email()" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#0d6efd" class="bi bi-pencil-fill" viewBox="0 0 16 16">
+                                <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
+                            </svg>
+                            <svg style="display: none;" id="save" onclick="change_email()" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#0d6efd" class="bi bi-floppy-fill" viewBox="0 0 16 16">
+                                <path d="M0 1.5A1.5 1.5 0 0 1 1.5 0H3v5.5A1.5 1.5 0 0 0 4.5 7h7A1.5 1.5 0 0 0 13 5.5V0h.086a1.5 1.5 0 0 1 1.06.44l1.415 1.414A1.5 1.5 0 0 1 16 2.914V14.5a1.5 1.5 0 0 1-1.5 1.5H14v-5.5A1.5 1.5 0 0 0 12.5 9h-9A1.5 1.5 0 0 0 2 10.5V16h-.5A1.5 1.5 0 0 1 0 14.5z"/>
+                                <path d="M3 16h10v-5.5a.5.5 0 0 0-.5-.5h-9a.5.5 0 0 0-.5.5zm9-16H4v5.5a.5.5 0 0 0 .5.5h7a.5.5 0 0 0 .5-.5zM9 1h2v4H9z"/>
+                            </svg>
+                            <button id="submit" type="submit" hidden></button>
+                        </form>
+                    </div>
+                </div>
+                <div class="user__adresses">
+                    <div class="user__adress card">
+                        <form class="text-gray">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
+                                <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10m0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6"/>
+                            </svg>
+                            <span style="display: block;">United States, 490 Old Capitol Trail</span>
+                            <input style="display: none; width: 100%;" type="text" name="address" class="text-default card" id="">
+                            <button type="submit" hidden></button>
+                        </form>
+                        <div class="user__adress__links">
+                            <button onclick="change_address(this)" class="text-default-primary">Edit</button>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#9DA1A7" class="bi bi-dot" viewBox="0 0 16 16">
+                                <path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3"/>
+                            </svg>
+                            <a href="" class="text-default-primary">Delete</a>
+                        </div>
+                    </div>
+                    <div class="user__adress card">
+                        <form class="text-gray">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
+                                <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10m0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6"/>
+                            </svg>
+                            <span style="display: block;">United States, 490 Old Capitol Trail</span>
+                            <input style="display: none; width: 100%;" type="text" name="address" class="text-default card" id="">
+                            <button type="submit" hidden></button>
+                        </form>
+                        <div class="user__adress__links">
+                            <button onclick="change_address(this)" class="text-default-primary">Edit</button>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#9DA1A7" class="bi bi-dot" viewBox="0 0 16 16">
+                                <path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3"/>
+                            </svg>
+                            <a href="" class="text-default-primary">Delete</a>
+                        </div>
+                    </div>
+                </div>
+                <h2>My recent orders</h2>
+                <div class="user__orders">
+                    <div class="user__order">
+                        <div class="user__order__top">
+                            <div class="user__order__top__left">
+                                <div class="user__adress__links">
+                                    <p class="user__adress__links__id"><b>Order ID: 8924</b></p>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#9DA1A7" class="bi bi-dot" viewBox="0 0 16 16">
+                                        <path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3"></path>
+                                    </svg>
+                                    <p class="user__adress__links__warning">Pending</p>
+                                </div>
+                                <p class="text-default text-muted">Date: 16 December 2018</p>
+                            </div>
+                            <div class="user__order__top__right">
+                                <button class="cart__left__product__left__content__btn-red text-default">Cancel order</button>
+                            </div>
+                        </div>
+                        <div class="user__order__middle">
+                            <div class="user__order__middle-item">
+                                <p class="text-default text-muted">Contact</p>
+                                <p class="text-default">Mike Johnatan</p>
+                                <p class="text-default">Phone: 371-295-9131</p>
+                                <p class="text-default">Email: info@mywebsite.com</p>
+                            </div>
+                            <div class="user__order__middle-item">
+                                <p class="text-default text-muted">Shipping address</p>
+                                <p class="text-default">United States</p>
+                                <p class="text-default">3601 Old Capitol Trail, Unit A-7, Suite</p>
+                                <p class="text-default">170777, Wilmington, DE 19808</p>
+                            </div>
+                            <div class="user__order__middle-item">
+                                <p class="text-default text-muted">Payment</p>
+                                <p class="text-success">Visa **** 4216</p>
+                                <p class="text-default">Tax: $15</p>
+                                <p class="text-default">Total paid: $456</p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="user__order__bottom">
+                            <a href="" class="user__order__bottom-item">
+                                <div class="user__order__bottom__img card">
+                                    <img src="/media/products/product_1.png" alt="">
+                                </div>
+                                <div class="user__order__bottom-item__text">
+                                    <p>Sofe for living room, New model A123</p>
+                                    <p><b>1x = $1,200.90</b></p>
+                                </div>
+                            </a>
+                            <a href="" class="user__order__bottom-item">
+                                <div class="user__order__bottom__img card">
+                                    <img src="/media/products/product_1.png" alt="">
+                                </div>
+                                <div class="user__order__bottom-item__text">
+                                    <p>Sofe for living room, New model A123</p>
+                                    <p><b>1x = $1,200.90</b></p>
+                                </div>
+                            </a>
+                            <a href="" class="user__order__bottom-item">
+                                <div class="user__order__bottom__img card">
+                                    <img src="/media/products/product_1.png" alt="">
+                                </div>
+                                <div class="user__order__bottom-item__text">
+                                    <p>Sofe for living room, New model A123</p>
+                                    <p><b>1x = $1,200.90</b></p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="user__order">
+                        <div class="user__order__top">
+                            <div class="user__order__top__left">
+                                <div class="user__adress__links">
+                                    <p class="user__adress__links__id"><b>Order ID: 8924</b></p>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#9DA1A7" class="bi bi-dot" viewBox="0 0 16 16">
+                                        <path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3"></path>
+                                    </svg>
+                                    <p class="user__adress__links__success">Shipped</p>
+                                </div>
+                                <p class="text-default text-muted">Date: 16 December 2018</p>
+                            </div>
+                            <div class="user__order__top__right"></div>
+                        </div>
+                        <div class="user__order__middle">
+                            <div class="user__order__middle-item">
+                                <p class="text-default text-muted">Contact</p>
+                                <p class="text-default">Mike Johnatan</p>
+                                <p class="text-default">Phone: 371-295-9131</p>
+                                <p class="text-default">Email: info@mywebsite.com</p>
+                            </div>
+                            <div class="user__order__middle-item">
+                                <p class="text-default text-muted">Shipping address</p>
+                                <p class="text-default">United States</p>
+                                <p class="text-default">3601 Old Capitol Trail, Unit A-7, Suite</p>
+                                <p class="text-default">170777, Wilmington, DE 19808</p>
+                            </div>
+                            <div class="user__order__middle-item">
+                                <p class="text-default text-muted">Payment</p>
+                                <p class="text-success">Visa **** 4216</p>
+                                <p class="text-default">Tax: $15</p>
+                                <p class="text-default">Total paid: $456</p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="user__order__bottom">
+                            <a href="" class="user__order__bottom-item">
+                                <div class="user__order__bottom__img card">
+                                    <img src="/media/products/product_1.png" alt="">
+                                </div>
+                                <div class="user__order__bottom-item__text">
+                                    <p>Sofe for living room, New model A123</p>
+                                    <p><b>1x = $1,200.90</b></p>
+                                </div>
+                            </a>
+                            <a href="" class="user__order__bottom-item">
+                                <div class="user__order__bottom__img card">
+                                    <img src="/media/products/product_1.png" alt="">
+                                </div>
+                                <div class="user__order__bottom-item__text">
+                                    <p>Sofe for living room, New model A123</p>
+                                    <p><b>1x = $1,200.90</b></p>
+                                </div>
+                            </a>
+                            <a href="" class="user__order__bottom-item">
+                                <div class="user__order__bottom__img card">
+                                    <img src="/media/products/product_1.png" alt="">
+                                </div>
+                                <div class="user__order__bottom-item__text">
+                                    <p>Sofe for living room, New model A123</p>
+                                    <p><b>1x = $1,200.90</b></p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="content_2" class="user__right card" style="display: none;">
+                <h2>My orders</h2>
+                <div class="user__orders">
+                    <div class="user__order">
+                        <div class="user__order__top">
+                            <div class="user__order__top__left">
+                                <div class="user__adress__links">
+                                    <p class="user__adress__links__id"><b>Order ID: 8924</b></p>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#9DA1A7" class="bi bi-dot" viewBox="0 0 16 16">
+                                        <path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3"></path>
+                                    </svg>
+                                    <p class="user__adress__links__warning">Pending</p>
+                                </div>
+                                <p class="text-default text-muted">Date: 16 December 2018</p>
+                            </div>
+                            <div class="user__order__top__right">
+                                <button class="cart__left__product__left__content__btn-red text-default">Cancel order</button>
+                            </div>
+                        </div>
+                        <div class="user__order__middle">
+                            <div class="user__order__middle-item">
+                                <p class="text-default text-muted">Contact</p>
+                                <p class="text-default">Mike Johnatan</p>
+                                <p class="text-default">Phone: 371-295-9131</p>
+                                <p class="text-default">Email: info@mywebsite.com</p>
+                            </div>
+                            <div class="user__order__middle-item">
+                                <p class="text-default text-muted">Shipping address</p>
+                                <p class="text-default">United States</p>
+                                <p class="text-default">3601 Old Capitol Trail, Unit A-7, Suite</p>
+                                <p class="text-default">170777, Wilmington, DE 19808</p>
+                            </div>
+                            <div class="user__order__middle-item">
+                                <p class="text-default text-muted">Payment</p>
+                                <p class="text-success">Visa **** 4216</p>
+                                <p class="text-default">Tax: $15</p>
+                                <p class="text-default">Total paid: $456</p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="user__order__bottom">
+                            <a href="" class="user__order__bottom-item">
+                                <div class="user__order__bottom__img card">
+                                    <img src="/media/products/product_1.png" alt="">
+                                </div>
+                                <div class="user__order__bottom-item__text">
+                                    <p>Sofe for living room, New model A123</p>
+                                    <p><b>1x = $1,200.90</b></p>
+                                </div>
+                            </a>
+                            <a href="" class="user__order__bottom-item">
+                                <div class="user__order__bottom__img card">
+                                    <img src="/media/products/product_1.png" alt="">
+                                </div>
+                                <div class="user__order__bottom-item__text">
+                                    <p>Sofe for living room, New model A123</p>
+                                    <p><b>1x = $1,200.90</b></p>
+                                </div>
+                            </a>
+                            <a href="" class="user__order__bottom-item">
+                                <div class="user__order__bottom__img card">
+                                    <img src="/media/products/product_1.png" alt="">
+                                </div>
+                                <div class="user__order__bottom-item__text">
+                                    <p>Sofe for living room, New model A123</p>
+                                    <p><b>1x = $1,200.90</b></p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="user__order">
+                        <div class="user__order__top">
+                            <div class="user__order__top__left">
+                                <div class="user__adress__links">
+                                    <p class="user__adress__links__id"><b>Order ID: 8924</b></p>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#9DA1A7" class="bi bi-dot" viewBox="0 0 16 16">
+                                        <path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3"></path>
+                                    </svg>
+                                    <p class="user__adress__links__success">Shipped</p>
+                                </div>
+                                <p class="text-default text-muted">Date: 16 December 2018</p>
+                            </div>
+                            <div class="user__order__top__right"></div>
+                        </div>
+                        <div class="user__order__middle">
+                            <div class="user__order__middle-item">
+                                <p class="text-default text-muted">Contact</p>
+                                <p class="text-default">Mike Johnatan</p>
+                                <p class="text-default">Phone: 371-295-9131</p>
+                                <p class="text-default">Email: info@mywebsite.com</p>
+                            </div>
+                            <div class="user__order__middle-item">
+                                <p class="text-default text-muted">Shipping address</p>
+                                <p class="text-default">United States</p>
+                                <p class="text-default">3601 Old Capitol Trail, Unit A-7, Suite</p>
+                                <p class="text-default">170777, Wilmington, DE 19808</p>
+                            </div>
+                            <div class="user__order__middle-item">
+                                <p class="text-default text-muted">Payment</p>
+                                <p class="text-success">Visa **** 4216</p>
+                                <p class="text-default">Tax: $15</p>
+                                <p class="text-default">Total paid: $456</p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="user__order__bottom">
+                            <a href="" class="user__order__bottom-item">
+                                <div class="user__order__bottom__img card">
+                                    <img src="/media/products/product_1.png" alt="">
+                                </div>
+                                <div class="user__order__bottom-item__text">
+                                    <p>Sofe for living room, New model A123</p>
+                                    <p><b>1x = $1,200.90</b></p>
+                                </div>
+                            </a>
+                            <a href="" class="user__order__bottom-item">
+                                <div class="user__order__bottom__img card">
+                                    <img src="/media/products/product_1.png" alt="">
+                                </div>
+                                <div class="user__order__bottom-item__text">
+                                    <p>Sofe for living room, New model A123</p>
+                                    <p><b>1x = $1,200.90</b></p>
+                                </div>
+                            </a>
+                            <a href="" class="user__order__bottom-item">
+                                <div class="user__order__bottom__img card">
+                                    <img src="/media/products/product_1.png" alt="">
+                                </div>
+                                <div class="user__order__bottom-item__text">
+                                    <p>Sofe for living room, New model A123</p>
+                                    <p><b>1x = $1,200.90</b></p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="user__order">
+                        <div class="user__order__top">
+                            <div class="user__order__top__left">
+                                <div class="user__adress__links">
+                                    <p class="user__adress__links__id"><b>Order ID: 8924</b></p>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#9DA1A7" class="bi bi-dot" viewBox="0 0 16 16">
+                                        <path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3"></path>
+                                    </svg>
+                                    <p class="user__adress__links__success">Shipped</p>
+                                </div>
+                                <p class="text-default text-muted">Date: 16 December 2018</p>
+                            </div>
+                            <div class="user__order__top__right"></div>
+                        </div>
+                        <div class="user__order__middle">
+                            <div class="user__order__middle-item">
+                                <p class="text-default text-muted">Contact</p>
+                                <p class="text-default">Mike Johnatan</p>
+                                <p class="text-default">Phone: 371-295-9131</p>
+                                <p class="text-default">Email: info@mywebsite.com</p>
+                            </div>
+                            <div class="user__order__middle-item">
+                                <p class="text-default text-muted">Shipping address</p>
+                                <p class="text-default">United States</p>
+                                <p class="text-default">3601 Old Capitol Trail, Unit A-7, Suite</p>
+                                <p class="text-default">170777, Wilmington, DE 19808</p>
+                            </div>
+                            <div class="user__order__middle-item">
+                                <p class="text-default text-muted">Payment</p>
+                                <p class="text-success">Visa **** 4216</p>
+                                <p class="text-default">Tax: $15</p>
+                                <p class="text-default">Total paid: $456</p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="user__order__bottom">
+                            <a href="" class="user__order__bottom-item">
+                                <div class="user__order__bottom__img card">
+                                    <img src="/media/products/product_1.png" alt="">
+                                </div>
+                                <div class="user__order__bottom-item__text">
+                                    <p>Sofe for living room, New model A123</p>
+                                    <p><b>1x = $1,200.90</b></p>
+                                </div>
+                            </a>
+                            <a href="" class="user__order__bottom-item">
+                                <div class="user__order__bottom__img card">
+                                    <img src="/media/products/product_1.png" alt="">
+                                </div>
+                                <div class="user__order__bottom-item__text">
+                                    <p>Sofe for living room, New model A123</p>
+                                    <p><b>1x = $1,200.90</b></p>
+                                </div>
+                            </a>
+                            <a href="" class="user__order__bottom-item">
+                                <div class="user__order__bottom__img card">
+                                    <img src="/media/products/product_1.png" alt="">
+                                </div>
+                                <div class="user__order__bottom-item__text">
+                                    <p>Sofe for living room, New model A123</p>
+                                    <p><b>1x = $1,200.90</b></p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<script>
+    function profileContent_btn(btn) {
+        document.querySelectorAll('.user__right').forEach(function (i) {
+            i.style.display = 'none';
+        })
+        let active = document.querySelector('.banner__left__btn-active')
+        active.classList.remove('banner__left__btn-active')
+        active.classList.add('banner__left__btn')
+        document.querySelector(`#content_${btn.id}`).style.display = 'block'
+        btn.classList.remove('banner__left__btn')
+        btn.classList.add('banner__left__btn-active')
+    }
+</script>
+<script>
+    function change_address(btn) {
+        let address_text = btn.parentElement.previousElementSibling
+        if (address_text.children[1].style.display == 'block') {
+            address_text.children[1].style.display = 'none'
+            address_text.children[2].style.display = 'block'
+            address_text.children[2].value = address_text.children[1].textContent
+            btn.textContent = 'Save'
+        } else {
+            address_text.children[1].style.display = 'block'
+            address_text.children[2].style.display = 'none'
+            address_text.children[3].click()
+        }
+    }
+</script>
+<script>
+    let text = document.querySelector('#email')
+    let email_input = document.querySelector('#email-input')
+    let edit_svg = document.querySelector('#edit')
+    let save_svg = document.querySelector('#save')
+    let submit = document.querySelector('#submit')
+    function change_email() {
+        if (email_input.hidden) {
+            email_input.hidden = false
+            email_input.value = text.children[0].textContent
+            text.style.display = 'none'
+            edit_svg.style.display = 'none'
+            save_svg.style.display = 'block'
+        } else {
+            email_input.hidden = true
+            text.style.display = 'flex'
+            edit_svg.style.display = 'block'
+            save_svg.style.display = 'none'
+            submit.click()
+        }
+    }
+</script>
+<script>
+    let input = document.querySelector('#input_file')
+    let btn = document.querySelector('#photo_btn')
+    btn.addEventListener('click', function () {
+        input.click()
+    })
+</script>
+<script>
+    document.querySelector('.image-container6').addEventListener('click', function(event) {
+        event.preventDefault();
+        document.getElementById('zoom-modal').style.display = 'block';
+        let src
+        if (event.target.classList[0] == 'eye3') {
+            src = event.target.previousElementSibling.previousElementSibling
+        } else {
+            src = event.target.previousElementSibling
+        }
+        document.getElementById('zoom-modal').children[0].src = src.src
+    });
+    document.getElementById('zoom-modal').addEventListener('click', function () {
+        document.getElementById('zoom-modal').style.display = 'none';
+    })
+</script>
+<script>
+    function open_menu() {
+        document.querySelector('.mobile-menu-wrapper').hidden = false;
+    }
+    document.querySelector('.mobile-menu-wrapper').addEventListener('click', function() {
+        document.querySelector('.mobile-menu-wrapper').hidden = true;
+    })
+</script>
+{% endblock %}
