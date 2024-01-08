@@ -1,3 +1,27 @@
 from django.db import models
 
-# Create your models here.
+
+class Order(models.Model):
+    first_name = models.CharField(max_length=50)
+    last_name = models.CharField(max_length=50)
+    email = models.CharField(max_length=100)
+    phone_number = models.CharField(max_length=50)
+    address = models.CharField(max_length=200)
+    city = models.CharField(max_length=100)
+    house = models.CharField(max_length=100)
+    postal_code = models.IntegerField()
+    zip_code = models.IntegerField()
+    message = models.TextField()
+    user = models.ForeignKey("", on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.first_name
+
+
+class OrderProduct(models.Model):
+    product = models.ForeignKey("", on_delete=models.CASCADE)
+    user = models.ForeignKey("", on_delete=models.CASCADE)
+    order = models.ForeignKey(Order, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.user
