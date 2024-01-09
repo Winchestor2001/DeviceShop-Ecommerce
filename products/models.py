@@ -21,8 +21,14 @@ class Review(models.Model):
     text = models.TextField()
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
 
+    def str(self):
+        return f"{self.user}"
+
 
 class ProductSale(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     sale = models.IntegerField()
     date = models.DateField()
+
+    def str(self):
+        return f"{self.product} {self.sale}"
