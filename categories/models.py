@@ -3,6 +3,7 @@ from products.models import Product
 
 
 class MainCategory(models.Model):
+    photo = models.ImageField(upload_to="banner/", default=None)
     name = models.CharField(max_length=50)
     
 class Category(models.Model):
