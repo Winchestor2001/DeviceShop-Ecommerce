@@ -32,3 +32,7 @@ class ProductSale(models.Model):
 
     def str(self):
         return f"{self.product} {self.sale}"
+    
+class ProductPhoto(models.Model):
+    photo = models.ImageField(upload_to='products/')
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
