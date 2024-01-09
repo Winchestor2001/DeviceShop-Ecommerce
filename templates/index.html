@@ -201,6 +201,16 @@
     }
 </script>
 <script>
+    setInterval(function () {
+        let active = document.querySelector('.banner__left__btn-active')
+        if (active.nextElementSibling != null) {
+            active.nextElementSibling.click()
+        } else {
+            document.querySelector('.banner__left__btn').click()
+        }
+    }, 3000)
+</script>
+<script>
     const countDownDate = new Date("{{ closest_date_sale }}").getTime();
     const x = setInterval(function() {
     const now = new Date().getTime();
