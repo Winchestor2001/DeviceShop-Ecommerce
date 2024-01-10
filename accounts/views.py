@@ -2,12 +2,26 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 
+from accounts.models import Profile
+
 
 def account_page(request):
-    if request.user.is_authenticated:
-        return render(request, 'account.html')
-    else:
+    context = {}
+    profile = Profile.objects.get(user=request.user)
+    if not request.user.is_authenticated:
         return redirect('login')
+    if request.method == "POST":
+        email = request.POST.get('email')
+        if email:
+            if not email.endswith("@gmail.com"):
+                email = f"{email}@gmail.com"
+            profile.email = email
+
+        profile.save()
+    context['profile'] = profile
+
+    return render(request, 'account.html', context=context)
+
 
 def login_page(request):
     if not request.user.is_authenticated:
@@ -28,6 +42,7 @@ def login_page(request):
         return render(request, "login.html", context=context)
     else:
         return redirect("home")
+
 
 def register_page(request):
     if not request.user.is_authenticated:
@@ -53,6 +68,9 @@ def register_page(request):
                                     user = User.objects.create_user(
                                         username=username, password=password1, email=email
                                     )
+                                    Profile.objects.create(
+                                        user=user, email=email
+                                    )
                                     login(request, user)
                                     return redirect("home")
                                 else:
@@ -70,6 +88,7 @@ def register_page(request):
         return render(request, "register.html", context=context)
     else:
         return redirect('home')
+
 
 def logout_page(request):
     logout(request)
