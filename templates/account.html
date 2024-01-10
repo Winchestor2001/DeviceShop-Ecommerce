@@ -18,14 +18,18 @@
             <div id="content_1" class="user__right card" style="display: block;">
                 <h2>Personal info</h2>
                 <div class="user__right__info">
-                    <form action="" method="post" class="user__right__info__form">
+                    <form id="avatar_form" action="" method="post" class="user__right__info__form" enctype="multipart/form-data">
                         {% csrf_token %}
                         <div class="image-container6">
+                            {% if profile.photo %}
+                            <img src="/media/{{ profile.photo }}" alt="" class="zoomable-image">
+                            {% else %}
                             <img src="/media/products/product_1.png" alt="" class="zoomable-image">
+                            {% endif %}
                             <div class="overlay2"></div>
                             <div class="eye3" style='background: url("/media/eye.png") no-repeat center center / cover;'></div>
                         </div>
-                        <input id="input_file" type="file" hidden>
+                        <input onchange="clickInput()" id="input_file" type="file" name="photo" hidden>
                         <button type="button" id="photo_btn" class="user__right__info__btn">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" class="bi bi-image" viewBox="0 0 16 16">
                                 <path d="M6.002 5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0"/>
@@ -478,11 +482,15 @@
     }
 </script>
 <script>
-    let input = document.querySelector('#input_file')
-    let btn = document.querySelector('#photo_btn')
+    let input = document.querySelector('#input_file');
+    let btn = document.querySelector('#photo_btn');
+    let avatar_form = document.querySelector('#avatar_form');
     btn.addEventListener('click', function () {
         input.click()
     })
+    function clickInput() {
+        avatar_form.submit();
+    }
 </script>
 <script>
     document.querySelector('.image-container6').addEventListener('click', function(event) {
