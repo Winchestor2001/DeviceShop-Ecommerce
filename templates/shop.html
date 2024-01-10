@@ -24,11 +24,9 @@
                     </svg>
                 </button>
                 <div class="shop__left-items-wrapper">
-                    <a href="" class="shop__left-item text-gray">Smartphones</a>
-                    <a href="" class="shop__left-item text-gray">Laptops</a>
-                    <a href="" class="shop__left-item text-gray">PCs</a>
-                    <a href="" class="shop__left-item text-gray">Mouses</a>
-                    <a href="" class="shop__left-item text-gray">Headphones</a>
+                    {% for i in main_categories %}
+                    <a href="{% url 'shop' %}" class="shop__left-item text-gray">{{ i.name }}</a>
+                    {% endfor %}
                 </div>
             </div>
             <div class="shop__left-items">
@@ -299,6 +297,7 @@
                         </button>
                     </div>
                 </div>
+                <a href="{% url 'addproductpage' %}" class="banner__right__btn text-default-white" style="text-align: center;">Add product</a>
             </div>
             <div class="shop__right__bottom">
                 <a href="" class="shop__right__bottom-item text-default">
@@ -310,23 +309,22 @@
                 <a href="" class="text-default-primary">Clear all filter</a>
             </div>
             <div class="shop__products">
+                {% for i in products %}
                 <a href="{% url 'product' %}" class="shop__product card">
                     <div class="image-container3">
-                        <img src="/media/products/product_1.png" alt="" class="recommended__card__photo">
+                        <img src="/media/{{ i.1 }}" alt="" class="recommended__card__photo">
                         <div class="overlay"></div>
                         <div class="eye2" style='background: url("/media/eye.png") no-repeat center center / cover;'></div>
                     </div>
                     <div class="shop__product-content">
                         <div class="shop__product__top">
                             <div class="shop__product__top__left">
-                                <p class="text-default-18"><b>$99.50</b><span class="text-gray">$1128.00</span></p>
+                                <p class="text-default-18"><b>${{ i.0.price }}</b><span class="text-gray"></span></p>
                                 <div class="shop__product__top__left__stars">
+                                    {% for n in i.2.1 %}
                                     <img src="/media/star.png" alt="">
-                                    <img src="/media/star.png" alt="">
-                                    <img src="/media/star.png" alt="">
-                                    <img src="/media/star.png" alt="">
-                                    <img src="/media/star2.png" alt="">
-                                    <p class="text-default">4.5</p>
+                                    {% endfor %}
+                                    <p class="text-default">{{ i.2.0 }}</p>
                                 </div>
                             </div>
                             <button class="shop__product__top__right">
@@ -335,346 +333,38 @@
                                 </svg>
                             </button>
                         </div>
-                        <p class="text-gray shop__product__bottom">GoPro HERO6 4K Action Camera - Black</p>
+                        <p class="text-gray shop__product__bottom">{{ i.0.name }}</p>
                     </div>
                 </a>
-                <a href="{% url 'product' %}" class="shop__product card">
-                    <div class="image-container3">
-                        <img src="/media/products/product_1.png" alt="" class="recommended__card__photo">
-                        <div class="overlay"></div>
-                        <div class="eye2" style='background: url("/media/eye.png") no-repeat center center / cover;'></div>
-                    </div>
-                    <div class="shop__product-content">
-                        <div class="shop__product__top">
-                            <div class="shop__product__top__left">
-                                <p class="text-default-18"><b>$99.50</b><span class="text-gray">$1128.00</span></p>
-                                <div class="shop__product__top__left__stars">
-                                    <img src="/media/star.png" alt="">
-                                    <img src="/media/star.png" alt="">
-                                    <img src="/media/star.png" alt="">
-                                    <img src="/media/star.png" alt="">
-                                    <img src="/media/star2.png" alt="">
-                                    <p class="text-default">4.5</p>
-                                </div>
-                            </div>
-                            <button class="shop__product__top__right">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                    <path d="M16.5 2.82495C14.76 2.82495 13.09 3.63495 12 4.91495C10.91 3.63495 9.24 2.82495 7.5 2.82495C4.42 2.82495 2 5.24495 2 8.32495C2 12.105 5.4 15.185 10.55 19.865L12 21.175L13.45 19.855C18.6 15.185 22 12.105 22 8.32495C22 5.24495 19.58 2.82495 16.5 2.82495ZM12.1 18.375L12 18.475L11.9 18.375C7.14 14.065 4 11.215 4 8.32495C4 6.32495 5.5 4.82495 7.5 4.82495C9.04 4.82495 10.54 5.81495 11.07 7.18495H12.94C13.46 5.81495 14.96 4.82495 16.5 4.82495C18.5 4.82495 20 6.32495 20 8.32495C20 11.215 16.86 14.065 12.1 18.375Z" fill="#0D6EFD"/>
-                                </svg>
-                            </button>
-                        </div>
-                        <p class="text-gray shop__product__bottom">GoPro HERO6 4K Action Camera - Black</p>
-                    </div>
-                </a>
-                <a href="{% url 'product' %}" class="shop__product card">
-                    <div class="image-container3">
-                        <img src="/media/products/product_1.png" alt="" class="recommended__card__photo">
-                        <div class="overlay"></div>
-                        <div class="eye2" style='background: url("/media/eye.png") no-repeat center center / cover;'></div>
-                    </div>
-                    <div class="shop__product-content">
-                        <div class="shop__product__top">
-                            <div class="shop__product__top__left">
-                                <p class="text-default-18"><b>$99.50</b><span class="text-gray">$1128.00</span></p>
-                                <div class="shop__product__top__left__stars">
-                                    <img src="/media/star.png" alt="">
-                                    <img src="/media/star.png" alt="">
-                                    <img src="/media/star.png" alt="">
-                                    <img src="/media/star.png" alt="">
-                                    <img src="/media/star2.png" alt="">
-                                    <p class="text-default">4.5</p>
-                                </div>
-                            </div>
-                            <button class="shop__product__top__right">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                    <path d="M16.5 2.82495C14.76 2.82495 13.09 3.63495 12 4.91495C10.91 3.63495 9.24 2.82495 7.5 2.82495C4.42 2.82495 2 5.24495 2 8.32495C2 12.105 5.4 15.185 10.55 19.865L12 21.175L13.45 19.855C18.6 15.185 22 12.105 22 8.32495C22 5.24495 19.58 2.82495 16.5 2.82495ZM12.1 18.375L12 18.475L11.9 18.375C7.14 14.065 4 11.215 4 8.32495C4 6.32495 5.5 4.82495 7.5 4.82495C9.04 4.82495 10.54 5.81495 11.07 7.18495H12.94C13.46 5.81495 14.96 4.82495 16.5 4.82495C18.5 4.82495 20 6.32495 20 8.32495C20 11.215 16.86 14.065 12.1 18.375Z" fill="#0D6EFD"/>
-                                </svg>
-                            </button>
-                        </div>
-                        <p class="text-gray shop__product__bottom">GoPro HERO6 4K Action Camera - Black</p>
-                    </div>
-                </a>
-                <a href="{% url 'product' %}" class="shop__product card">
-                    <div class="image-container3">
-                        <img src="/media/products/product_1.png" alt="" class="recommended__card__photo">
-                        <div class="overlay"></div>
-                        <div class="eye2" style='background: url("/media/eye.png") no-repeat center center / cover;'></div>
-                    </div>
-                    <div class="shop__product-content">
-                        <div class="shop__product__top">
-                            <div class="shop__product__top__left">
-                                <p class="text-default-18"><b>$99.50</b><span class="text-gray">$1128.00</span></p>
-                                <div class="shop__product__top__left__stars">
-                                    <img src="/media/star.png" alt="">
-                                    <img src="/media/star.png" alt="">
-                                    <img src="/media/star.png" alt="">
-                                    <img src="/media/star.png" alt="">
-                                    <img src="/media/star2.png" alt="">
-                                    <p class="text-default">4.5</p>
-                                </div>
-                            </div>
-                            <button class="shop__product__top__right">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                    <path d="M16.5 2.82495C14.76 2.82495 13.09 3.63495 12 4.91495C10.91 3.63495 9.24 2.82495 7.5 2.82495C4.42 2.82495 2 5.24495 2 8.32495C2 12.105 5.4 15.185 10.55 19.865L12 21.175L13.45 19.855C18.6 15.185 22 12.105 22 8.32495C22 5.24495 19.58 2.82495 16.5 2.82495ZM12.1 18.375L12 18.475L11.9 18.375C7.14 14.065 4 11.215 4 8.32495C4 6.32495 5.5 4.82495 7.5 4.82495C9.04 4.82495 10.54 5.81495 11.07 7.18495H12.94C13.46 5.81495 14.96 4.82495 16.5 4.82495C18.5 4.82495 20 6.32495 20 8.32495C20 11.215 16.86 14.065 12.1 18.375Z" fill="#0D6EFD"/>
-                                </svg>
-                            </button>
-                        </div>
-                        <p class="text-gray shop__product__bottom">GoPro HERO6 4K Action Camera - Black</p>
-                    </div>
-                </a>
-                <a href="{% url 'product' %}" class="shop__product card">
-                    <div class="image-container3">
-                        <img src="/media/products/product_1.png" alt="" class="recommended__card__photo">
-                        <div class="overlay"></div>
-                        <div class="eye2" style='background: url("/media/eye.png") no-repeat center center / cover;'></div>
-                    </div>
-                    <div class="shop__product-content">
-                        <div class="shop__product__top">
-                            <div class="shop__product__top__left">
-                                <p class="text-default-18"><b>$99.50</b><span class="text-gray">$1128.00</span></p>
-                                <div class="shop__product__top__left__stars">
-                                    <img src="/media/star.png" alt="">
-                                    <img src="/media/star.png" alt="">
-                                    <img src="/media/star.png" alt="">
-                                    <img src="/media/star.png" alt="">
-                                    <img src="/media/star2.png" alt="">
-                                    <p class="text-default">4.5</p>
-                                </div>
-                            </div>
-                            <button class="shop__product__top__right">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                    <path d="M16.5 2.82495C14.76 2.82495 13.09 3.63495 12 4.91495C10.91 3.63495 9.24 2.82495 7.5 2.82495C4.42 2.82495 2 5.24495 2 8.32495C2 12.105 5.4 15.185 10.55 19.865L12 21.175L13.45 19.855C18.6 15.185 22 12.105 22 8.32495C22 5.24495 19.58 2.82495 16.5 2.82495ZM12.1 18.375L12 18.475L11.9 18.375C7.14 14.065 4 11.215 4 8.32495C4 6.32495 5.5 4.82495 7.5 4.82495C9.04 4.82495 10.54 5.81495 11.07 7.18495H12.94C13.46 5.81495 14.96 4.82495 16.5 4.82495C18.5 4.82495 20 6.32495 20 8.32495C20 11.215 16.86 14.065 12.1 18.375Z" fill="#0D6EFD"/>
-                                </svg>
-                            </button>
-                        </div>
-                        <p class="text-gray shop__product__bottom">GoPro HERO6 4K Action Camera - Black</p>
-                    </div>
-                </a>
-                <a href="{% url 'product' %}" class="shop__product card">
-                    <div class="image-container3">
-                        <img src="/media/products/product_1.png" alt="" class="recommended__card__photo">
-                        <div class="overlay"></div>
-                        <div class="eye2" style='background: url("/media/eye.png") no-repeat center center / cover;'></div>
-                    </div>
-                    <div class="shop__product-content">
-                        <div class="shop__product__top">
-                            <div class="shop__product__top__left">
-                                <p class="text-default-18"><b>$99.50</b><span class="text-gray">$1128.00</span></p>
-                                <div class="shop__product__top__left__stars">
-                                    <img src="/media/star.png" alt="">
-                                    <img src="/media/star.png" alt="">
-                                    <img src="/media/star.png" alt="">
-                                    <img src="/media/star.png" alt="">
-                                    <img src="/media/star2.png" alt="">
-                                    <p class="text-default">4.5</p>
-                                </div>
-                            </div>
-                            <button class="shop__product__top__right">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                    <path d="M16.5 2.82495C14.76 2.82495 13.09 3.63495 12 4.91495C10.91 3.63495 9.24 2.82495 7.5 2.82495C4.42 2.82495 2 5.24495 2 8.32495C2 12.105 5.4 15.185 10.55 19.865L12 21.175L13.45 19.855C18.6 15.185 22 12.105 22 8.32495C22 5.24495 19.58 2.82495 16.5 2.82495ZM12.1 18.375L12 18.475L11.9 18.375C7.14 14.065 4 11.215 4 8.32495C4 6.32495 5.5 4.82495 7.5 4.82495C9.04 4.82495 10.54 5.81495 11.07 7.18495H12.94C13.46 5.81495 14.96 4.82495 16.5 4.82495C18.5 4.82495 20 6.32495 20 8.32495C20 11.215 16.86 14.065 12.1 18.375Z" fill="#0D6EFD"/>
-                                </svg>
-                            </button>
-                        </div>
-                        <p class="text-gray shop__product__bottom">GoPro HERO6 4K Action Camera - Black</p>
-                    </div>
-                </a>
-                <a href="{% url 'product' %}" class="shop__product card">
-                    <div class="image-container3">
-                        <img src="/media/products/product_1.png" alt="" class="recommended__card__photo">
-                        <div class="overlay"></div>
-                        <div class="eye2" style='background: url("/media/eye.png") no-repeat center center / cover;'></div>
-                    </div>
-                    <div class="shop__product-content">
-                        <div class="shop__product__top">
-                            <div class="shop__product__top__left">
-                                <p class="text-default-18"><b>$99.50</b><span class="text-gray">$1128.00</span></p>
-                                <div class="shop__product__top__left__stars">
-                                    <img src="/media/star.png" alt="">
-                                    <img src="/media/star.png" alt="">
-                                    <img src="/media/star.png" alt="">
-                                    <img src="/media/star.png" alt="">
-                                    <img src="/media/star2.png" alt="">
-                                    <p class="text-default">4.5</p>
-                                </div>
-                            </div>
-                            <button class="shop__product__top__right">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                    <path d="M16.5 2.82495C14.76 2.82495 13.09 3.63495 12 4.91495C10.91 3.63495 9.24 2.82495 7.5 2.82495C4.42 2.82495 2 5.24495 2 8.32495C2 12.105 5.4 15.185 10.55 19.865L12 21.175L13.45 19.855C18.6 15.185 22 12.105 22 8.32495C22 5.24495 19.58 2.82495 16.5 2.82495ZM12.1 18.375L12 18.475L11.9 18.375C7.14 14.065 4 11.215 4 8.32495C4 6.32495 5.5 4.82495 7.5 4.82495C9.04 4.82495 10.54 5.81495 11.07 7.18495H12.94C13.46 5.81495 14.96 4.82495 16.5 4.82495C18.5 4.82495 20 6.32495 20 8.32495C20 11.215 16.86 14.065 12.1 18.375Z" fill="#0D6EFD"/>
-                                </svg>
-                            </button>
-                        </div>
-                        <p class="text-gray shop__product__bottom">GoPro HERO6 4K Action Camera - Black</p>
-                    </div>
-                </a>
-                <a href="{% url 'product' %}" class="shop__product card">
-                    <div class="image-container3">
-                        <img src="/media/products/product_1.png" alt="" class="recommended__card__photo">
-                        <div class="overlay"></div>
-                        <div class="eye2" style='background: url("/media/eye.png") no-repeat center center / cover;'></div>
-                    </div>
-                    <div class="shop__product-content">
-                        <div class="shop__product__top">
-                            <div class="shop__product__top__left">
-                                <p class="text-default-18"><b>$99.50</b><span class="text-gray">$1128.00</span></p>
-                                <div class="shop__product__top__left__stars">
-                                    <img src="/media/star.png" alt="">
-                                    <img src="/media/star.png" alt="">
-                                    <img src="/media/star.png" alt="">
-                                    <img src="/media/star.png" alt="">
-                                    <img src="/media/star2.png" alt="">
-                                    <p class="text-default">4.5</p>
-                                </div>
-                            </div>
-                            <button class="shop__product__top__right">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                    <path d="M16.5 2.82495C14.76 2.82495 13.09 3.63495 12 4.91495C10.91 3.63495 9.24 2.82495 7.5 2.82495C4.42 2.82495 2 5.24495 2 8.32495C2 12.105 5.4 15.185 10.55 19.865L12 21.175L13.45 19.855C18.6 15.185 22 12.105 22 8.32495C22 5.24495 19.58 2.82495 16.5 2.82495ZM12.1 18.375L12 18.475L11.9 18.375C7.14 14.065 4 11.215 4 8.32495C4 6.32495 5.5 4.82495 7.5 4.82495C9.04 4.82495 10.54 5.81495 11.07 7.18495H12.94C13.46 5.81495 14.96 4.82495 16.5 4.82495C18.5 4.82495 20 6.32495 20 8.32495C20 11.215 16.86 14.065 12.1 18.375Z" fill="#0D6EFD"/>
-                                </svg>
-                            </button>
-                        </div>
-                        <p class="text-gray shop__product__bottom">GoPro HERO6 4K Action Camera - Black</p>
-                    </div>
-                </a>
-                <a href="{% url 'product' %}" class="shop__product card">
-                    <div class="image-container3">
-                        <img src="/media/products/product_1.png" alt="" class="recommended__card__photo">
-                        <div class="overlay"></div>
-                        <div class="eye2" style='background: url("/media/eye.png") no-repeat center center / cover;'></div>
-                    </div>
-                    <div class="shop__product-content">
-                        <div class="shop__product__top">
-                            <div class="shop__product__top__left">
-                                <p class="text-default-18"><b>$99.50</b><span class="text-gray">$1128.00</span></p>
-                                <div class="shop__product__top__left__stars">
-                                    <img src="/media/star.png" alt="">
-                                    <img src="/media/star.png" alt="">
-                                    <img src="/media/star.png" alt="">
-                                    <img src="/media/star.png" alt="">
-                                    <img src="/media/star2.png" alt="">
-                                    <p class="text-default">4.5</p>
-                                </div>
-                            </div>
-                            <button class="shop__product__top__right">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                    <path d="M16.5 2.82495C14.76 2.82495 13.09 3.63495 12 4.91495C10.91 3.63495 9.24 2.82495 7.5 2.82495C4.42 2.82495 2 5.24495 2 8.32495C2 12.105 5.4 15.185 10.55 19.865L12 21.175L13.45 19.855C18.6 15.185 22 12.105 22 8.32495C22 5.24495 19.58 2.82495 16.5 2.82495ZM12.1 18.375L12 18.475L11.9 18.375C7.14 14.065 4 11.215 4 8.32495C4 6.32495 5.5 4.82495 7.5 4.82495C9.04 4.82495 10.54 5.81495 11.07 7.18495H12.94C13.46 5.81495 14.96 4.82495 16.5 4.82495C18.5 4.82495 20 6.32495 20 8.32495C20 11.215 16.86 14.065 12.1 18.375Z" fill="#0D6EFD"/>
-                                </svg>
-                            </button>
-                        </div>
-                        <p class="text-gray shop__product__bottom">GoPro HERO6 4K Action Camera - Black</p>
-                    </div>
-                </a>
-                <a href="{% url 'product' %}" class="shop__product card">
-                    <div class="image-container3">
-                        <img src="/media/products/product_1.png" alt="" class="recommended__card__photo">
-                        <div class="overlay"></div>
-                        <div class="eye2" style='background: url("/media/eye.png") no-repeat center center / cover;'></div>
-                    </div>
-                    <div class="shop__product-content">
-                        <div class="shop__product__top">
-                            <div class="shop__product__top__left">
-                                <p class="text-default-18"><b>$99.50</b><span class="text-gray">$1128.00</span></p>
-                                <div class="shop__product__top__left__stars">
-                                    <img src="/media/star.png" alt="">
-                                    <img src="/media/star.png" alt="">
-                                    <img src="/media/star.png" alt="">
-                                    <img src="/media/star.png" alt="">
-                                    <img src="/media/star2.png" alt="">
-                                    <p class="text-default">4.5</p>
-                                </div>
-                            </div>
-                            <button class="shop__product__top__right">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                    <path d="M16.5 2.82495C14.76 2.82495 13.09 3.63495 12 4.91495C10.91 3.63495 9.24 2.82495 7.5 2.82495C4.42 2.82495 2 5.24495 2 8.32495C2 12.105 5.4 15.185 10.55 19.865L12 21.175L13.45 19.855C18.6 15.185 22 12.105 22 8.32495C22 5.24495 19.58 2.82495 16.5 2.82495ZM12.1 18.375L12 18.475L11.9 18.375C7.14 14.065 4 11.215 4 8.32495C4 6.32495 5.5 4.82495 7.5 4.82495C9.04 4.82495 10.54 5.81495 11.07 7.18495H12.94C13.46 5.81495 14.96 4.82495 16.5 4.82495C18.5 4.82495 20 6.32495 20 8.32495C20 11.215 16.86 14.065 12.1 18.375Z" fill="#0D6EFD"/>
-                                </svg>
-                            </button>
-                        </div>
-                        <p class="text-gray shop__product__bottom">GoPro HERO6 4K Action Camera - Black</p>
-                    </div>
-                </a>
-                <a href="{% url 'product' %}" class="shop__product card">
-                    <div class="image-container3">
-                        <img src="/media/products/product_1.png" alt="" class="recommended__card__photo">
-                        <div class="overlay"></div>
-                        <div class="eye2" style='background: url("/media/eye.png") no-repeat center center / cover;'></div>
-                    </div>
-                    <div class="shop__product-content">
-                        <div class="shop__product__top">
-                            <div class="shop__product__top__left">
-                                <p class="text-default-18"><b>$99.50</b><span class="text-gray">$1128.00</span></p>
-                                <div class="shop__product__top__left__stars">
-                                    <img src="/media/star.png" alt="">
-                                    <img src="/media/star.png" alt="">
-                                    <img src="/media/star.png" alt="">
-                                    <img src="/media/star.png" alt="">
-                                    <img src="/media/star2.png" alt="">
-                                    <p class="text-default">4.5</p>
-                                </div>
-                            </div>
-                            <button class="shop__product__top__right">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                    <path d="M16.5 2.82495C14.76 2.82495 13.09 3.63495 12 4.91495C10.91 3.63495 9.24 2.82495 7.5 2.82495C4.42 2.82495 2 5.24495 2 8.32495C2 12.105 5.4 15.185 10.55 19.865L12 21.175L13.45 19.855C18.6 15.185 22 12.105 22 8.32495C22 5.24495 19.58 2.82495 16.5 2.82495ZM12.1 18.375L12 18.475L11.9 18.375C7.14 14.065 4 11.215 4 8.32495C4 6.32495 5.5 4.82495 7.5 4.82495C9.04 4.82495 10.54 5.81495 11.07 7.18495H12.94C13.46 5.81495 14.96 4.82495 16.5 4.82495C18.5 4.82495 20 6.32495 20 8.32495C20 11.215 16.86 14.065 12.1 18.375Z" fill="#0D6EFD"/>
-                                </svg>
-                            </button>
-                        </div>
-                        <p class="text-gray shop__product__bottom">GoPro HERO6 4K Action Camera - Black</p>
-                    </div>
-                </a>
-                <a href="{% url 'product' %}" class="shop__product card">
-                    <div class="image-container3">
-                        <img src="/media/products/product_1.png" alt="" class="recommended__card__photo">
-                        <div class="overlay"></div>
-                        <div class="eye2" style='background: url("/media/eye.png") no-repeat center center / cover;'></div>
-                    </div>
-                    <div class="shop__product-content">
-                        <div class="shop__product__top">
-                            <div class="shop__product__top__left">
-                                <p class="text-default-18"><b>$99.50</b><span class="text-gray">$1128.00</span></p>
-                                <div class="shop__product__top__left__stars">
-                                    <img src="/media/star.png" alt="">
-                                    <img src="/media/star.png" alt="">
-                                    <img src="/media/star.png" alt="">
-                                    <img src="/media/star.png" alt="">
-                                    <img src="/media/star2.png" alt="">
-                                    <p class="text-default">4.5</p>
-                                </div>
-                            </div>
-                            <button class="shop__product__top__right">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                    <path d="M16.5 2.82495C14.76 2.82495 13.09 3.63495 12 4.91495C10.91 3.63495 9.24 2.82495 7.5 2.82495C4.42 2.82495 2 5.24495 2 8.32495C2 12.105 5.4 15.185 10.55 19.865L12 21.175L13.45 19.855C18.6 15.185 22 12.105 22 8.32495C22 5.24495 19.58 2.82495 16.5 2.82495ZM12.1 18.375L12 18.475L11.9 18.375C7.14 14.065 4 11.215 4 8.32495C4 6.32495 5.5 4.82495 7.5 4.82495C9.04 4.82495 10.54 5.81495 11.07 7.18495H12.94C13.46 5.81495 14.96 4.82495 16.5 4.82495C18.5 4.82495 20 6.32495 20 8.32495C20 11.215 16.86 14.065 12.1 18.375Z" fill="#0D6EFD"/>
-                                </svg>
-                            </button>
-                        </div>
-                        <p class="text-gray shop__product__bottom">GoPro HERO6 4K Action Camera - Black</p>
-                    </div>
-                </a>
+                {% endfor %}
             </div>
             <div class="shop__products-layout2" style="display: none;">
+                {% for i in products %}
                 <div class="shop__product-layout2 card">
                     <div class="image-container4">
-                        <img src="/media/products/product_1.png" alt="" class="recommended__card__photo">
+                        <img src="/media/{{ i.1 }}" alt="" class="recommended__card__photo">
                         <div class="overlay"></div>
                         <div class="eye2" style='background: url("/media/eye.png") no-repeat center center / cover;'></div>
                     </div>
                     <div class="shop__products__right">
-                        <p class="text-default"><b>Canon Cmera EOS 2000, Black 10x zoom</b></p>
+                        <p class="text-default"><b>{{ i.0.name }}</b></p>
                         <div class="shop__products__right__middle">
-                            <p class="text-default-18 shop__products__right__middle-price" style="font-size: 20px;"><b>$99.50</b><span class="text-gray">$1128.00</span></p>
+                            <p class="text-default-18 shop__products__right__middle-price" style="font-size: 20px;"><b>${{ i.0.price }}</b><span class="text-gray"></span></p>
                             <div class="shop__products__right__middle__bottom">
                                 <div class="shop__product__top__left__stars">
+                                    {% for n in i.2.1 %}
                                     <img src="/media/star.png" alt="">
-                                    <img src="/media/star.png" alt="">
-                                    <img src="/media/star.png" alt="">
-                                    <img src="/media/star.png" alt="">
-                                    <img src="/media/star2.png" alt="">
-                                    <p class="text-default">4.5</p>
+                                    {% endfor %}
+                                    <p class="text-default">{{ i.2.0 }}</p>
                                 </div>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="6" height="6" viewBox="0 0 6 6" fill="none">
                                     <circle cx="3" cy="3" r="3" fill="#DEE2E7"/>
                                 </svg>
-                                <p class="text-default text-muted">154 orders</p>
+                                <p class="text-default text-muted">{{ i.3 }} orders</p>
                             </div>
                         </div>
                         <div class="shop__products__right__bottom">
-                            <p class="text-default">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
+                            <p class="text-default">{{ i.0.description }}</p>
                             <a href="{% url 'product' %}" class="text-default-primary">View details</a>
                         </div>
                     </div>
@@ -684,186 +374,7 @@
                         </svg>
                     </button>
                 </div>
-                <div class="shop__product-layout2 card">
-                    <div class="image-container4">
-                        <img src="/media/products/product_1.png" alt="" class="recommended__card__photo">
-                        <div class="overlay"></div>
-                        <div class="eye2" style='background: url("/media/eye.png") no-repeat center center / cover;'></div>
-                    </div>
-                    <div class="shop__products__right">
-                        <p class="text-default"><b>Canon Cmera EOS 2000, Black 10x zoom</b></p>
-                        <div class="shop__products__right__middle">
-                            <p class="text-default-18 shop__products__right__middle-price" style="font-size: 20px;"><b>$99.50</b><span class="text-gray">$1128.00</span></p>
-                            <div class="shop__products__right__middle__bottom">
-                                <div class="shop__product__top__left__stars">
-                                    <img src="/media/star.png" alt="">
-                                    <img src="/media/star.png" alt="">
-                                    <img src="/media/star.png" alt="">
-                                    <img src="/media/star.png" alt="">
-                                    <img src="/media/star2.png" alt="">
-                                    <p class="text-default">4.5</p>
-                                </div>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="6" height="6" viewBox="0 0 6 6" fill="none">
-                                    <circle cx="3" cy="3" r="3" fill="#DEE2E7"/>
-                                </svg>
-                                <p class="text-default text-muted">154 orders</p>
-                            </div>
-                        </div>
-                        <div class="shop__products__right__bottom">
-                            <p class="text-default">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
-                            <a href="{% url 'product' %}" class="text-default-primary">View details</a>
-                        </div>
-                    </div>
-                    <button class="shop__product-layout2__save">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                            <path d="M16.5 2.82495C14.76 2.82495 13.09 3.63495 12 4.91495C10.91 3.63495 9.24 2.82495 7.5 2.82495C4.42 2.82495 2 5.24495 2 8.32495C2 12.105 5.4 15.185 10.55 19.865L12 21.175L13.45 19.855C18.6 15.185 22 12.105 22 8.32495C22 5.24495 19.58 2.82495 16.5 2.82495ZM12.1 18.375L12 18.475L11.9 18.375C7.14 14.065 4 11.215 4 8.32495C4 6.32495 5.5 4.82495 7.5 4.82495C9.04 4.82495 10.54 5.81495 11.07 7.18495H12.94C13.46 5.81495 14.96 4.82495 16.5 4.82495C18.5 4.82495 20 6.32495 20 8.32495C20 11.215 16.86 14.065 12.1 18.375Z" fill="#0D6EFD"/>
-                        </svg>
-                    </button>
-                </div>
-                <div class="shop__product-layout2 card">
-                    <div class="image-container4">
-                        <img src="/media/products/product_1.png" alt="" class="recommended__card__photo">
-                        <div class="overlay"></div>
-                        <div class="eye2" style='background: url("/media/eye.png") no-repeat center center / cover;'></div>
-                    </div>
-                    <div class="shop__products__right">
-                        <p class="text-default"><b>Canon Cmera EOS 2000, Black 10x zoom</b></p>
-                        <div class="shop__products__right__middle">
-                            <p class="text-default-18 shop__products__right__middle-price" style="font-size: 20px;"><b>$99.50</b><span class="text-gray">$1128.00</span></p>
-                            <div class="shop__products__right__middle__bottom">
-                                <div class="shop__product__top__left__stars">
-                                    <img src="/media/star.png" alt="">
-                                    <img src="/media/star.png" alt="">
-                                    <img src="/media/star.png" alt="">
-                                    <img src="/media/star.png" alt="">
-                                    <img src="/media/star2.png" alt="">
-                                    <p class="text-default">4.5</p>
-                                </div>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="6" height="6" viewBox="0 0 6 6" fill="none">
-                                    <circle cx="3" cy="3" r="3" fill="#DEE2E7"/>
-                                </svg>
-                                <p class="text-default text-muted">154 orders</p>
-                            </div>
-                        </div>
-                        <div class="shop__products__right__bottom">
-                            <p class="text-default">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
-                            <a href="{% url 'product' %}" class="text-default-primary">View details</a>
-                        </div>
-                    </div>
-                    <button class="shop__product-layout2__save">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                            <path d="M16.5 2.82495C14.76 2.82495 13.09 3.63495 12 4.91495C10.91 3.63495 9.24 2.82495 7.5 2.82495C4.42 2.82495 2 5.24495 2 8.32495C2 12.105 5.4 15.185 10.55 19.865L12 21.175L13.45 19.855C18.6 15.185 22 12.105 22 8.32495C22 5.24495 19.58 2.82495 16.5 2.82495ZM12.1 18.375L12 18.475L11.9 18.375C7.14 14.065 4 11.215 4 8.32495C4 6.32495 5.5 4.82495 7.5 4.82495C9.04 4.82495 10.54 5.81495 11.07 7.18495H12.94C13.46 5.81495 14.96 4.82495 16.5 4.82495C18.5 4.82495 20 6.32495 20 8.32495C20 11.215 16.86 14.065 12.1 18.375Z" fill="#0D6EFD"/>
-                        </svg>
-                    </button>
-                </div>
-                <div class="shop__product-layout2 card">
-                    <div class="image-container4">
-                        <img src="/media/products/product_1.png" alt="" class="recommended__card__photo">
-                        <div class="overlay"></div>
-                        <div class="eye2" style='background: url("/media/eye.png") no-repeat center center / cover;'></div>
-                    </div>
-                    <div class="shop__products__right">
-                        <p class="text-default"><b>Canon Cmera EOS 2000, Black 10x zoom</b></p>
-                        <div class="shop__products__right__middle">
-                            <p class="text-default-18 shop__products__right__middle-price" style="font-size: 20px;"><b>$99.50</b><span class="text-gray">$1128.00</span></p>
-                            <div class="shop__products__right__middle__bottom">
-                                <div class="shop__product__top__left__stars">
-                                    <img src="/media/star.png" alt="">
-                                    <img src="/media/star.png" alt="">
-                                    <img src="/media/star.png" alt="">
-                                    <img src="/media/star.png" alt="">
-                                    <img src="/media/star2.png" alt="">
-                                    <p class="text-default">4.5</p>
-                                </div>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="6" height="6" viewBox="0 0 6 6" fill="none">
-                                    <circle cx="3" cy="3" r="3" fill="#DEE2E7"/>
-                                </svg>
-                                <p class="text-default text-muted">154 orders</p>
-                            </div>
-                        </div>
-                        <div class="shop__products__right__bottom">
-                            <p class="text-default">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
-                            <a href="{% url 'product' %}" class="text-default-primary">View details</a>
-                        </div>
-                    </div>
-                    <button class="shop__product-layout2__save">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                            <path d="M16.5 2.82495C14.76 2.82495 13.09 3.63495 12 4.91495C10.91 3.63495 9.24 2.82495 7.5 2.82495C4.42 2.82495 2 5.24495 2 8.32495C2 12.105 5.4 15.185 10.55 19.865L12 21.175L13.45 19.855C18.6 15.185 22 12.105 22 8.32495C22 5.24495 19.58 2.82495 16.5 2.82495ZM12.1 18.375L12 18.475L11.9 18.375C7.14 14.065 4 11.215 4 8.32495C4 6.32495 5.5 4.82495 7.5 4.82495C9.04 4.82495 10.54 5.81495 11.07 7.18495H12.94C13.46 5.81495 14.96 4.82495 16.5 4.82495C18.5 4.82495 20 6.32495 20 8.32495C20 11.215 16.86 14.065 12.1 18.375Z" fill="#0D6EFD"/>
-                        </svg>
-                    </button>
-                </div>
-                <div class="shop__product-layout2 card">
-                    <div class="image-container4">
-                        <img src="/media/products/product_1.png" alt="" class="recommended__card__photo">
-                        <div class="overlay"></div>
-                        <div class="eye2" style='background: url("/media/eye.png") no-repeat center center / cover;'></div>
-                    </div>
-                    <div class="shop__products__right">
-                        <p class="text-default"><b>Canon Cmera EOS 2000, Black 10x zoom</b></p>
-                        <div class="shop__products__right__middle">
-                            <p class="text-default-18 shop__products__right__middle-price" style="font-size: 20px;"><b>$99.50</b><span class="text-gray">$1128.00</span></p>
-                            <div class="shop__products__right__middle__bottom">
-                                <div class="shop__product__top__left__stars">
-                                    <img src="/media/star.png" alt="">
-                                    <img src="/media/star.png" alt="">
-                                    <img src="/media/star.png" alt="">
-                                    <img src="/media/star.png" alt="">
-                                    <img src="/media/star2.png" alt="">
-                                    <p class="text-default">4.5</p>
-                                </div>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="6" height="6" viewBox="0 0 6 6" fill="none">
-                                    <circle cx="3" cy="3" r="3" fill="#DEE2E7"/>
-                                </svg>
-                                <p class="text-default text-muted">154 orders</p>
-                            </div>
-                        </div>
-                        <div class="shop__products__right__bottom">
-                            <p class="text-default">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
-                            <a href="{% url 'product' %}" class="text-default-primary">View details</a>
-                        </div>
-                    </div>
-                    <button class="shop__product-layout2__save">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                            <path d="M16.5 2.82495C14.76 2.82495 13.09 3.63495 12 4.91495C10.91 3.63495 9.24 2.82495 7.5 2.82495C4.42 2.82495 2 5.24495 2 8.32495C2 12.105 5.4 15.185 10.55 19.865L12 21.175L13.45 19.855C18.6 15.185 22 12.105 22 8.32495C22 5.24495 19.58 2.82495 16.5 2.82495ZM12.1 18.375L12 18.475L11.9 18.375C7.14 14.065 4 11.215 4 8.32495C4 6.32495 5.5 4.82495 7.5 4.82495C9.04 4.82495 10.54 5.81495 11.07 7.18495H12.94C13.46 5.81495 14.96 4.82495 16.5 4.82495C18.5 4.82495 20 6.32495 20 8.32495C20 11.215 16.86 14.065 12.1 18.375Z" fill="#0D6EFD"/>
-                        </svg>
-                    </button>
-                </div>
-                <div class="shop__product-layout2 card">
-                    <div class="image-container4">
-                        <img src="/media/products/product_1.png" alt="" class="recommended__card__photo">
-                        <div class="overlay"></div>
-                        <div class="eye2" style='background: url("/media/eye.png") no-repeat center center / cover;'></div>
-                    </div>
-                    <div class="shop__products__right">
-                        <p class="text-default"><b>Canon Cmera EOS 2000, Black 10x zoom</b></p>
-                        <div class="shop__products__right__middle">
-                            <p class="text-default-18 shop__products__right__middle-price" style="font-size: 20px;"><b>$99.50</b><span class="text-gray">$1128.00</span></p>
-                            <div class="shop__products__right__middle__bottom">
-                                <div class="shop__product__top__left__stars">
-                                    <img src="/media/star.png" alt="">
-                                    <img src="/media/star.png" alt="">
-                                    <img src="/media/star.png" alt="">
-                                    <img src="/media/star.png" alt="">
-                                    <img src="/media/star2.png" alt="">
-                                    <p class="text-default">4.5</p>
-                                </div>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="6" height="6" viewBox="0 0 6 6" fill="none">
-                                    <circle cx="3" cy="3" r="3" fill="#DEE2E7"/>
-                                </svg>
-                                <p class="text-default text-muted">154 orders</p>
-                            </div>
-                        </div>
-                        <div class="shop__products__right__bottom">
-                            <p class="text-default">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</p>
-                            <a href="{% url 'product' %}" class="text-default-primary">View details</a>
-                        </div>
-                    </div>
-                    <button class="shop__product-layout2__save">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                            <path d="M16.5 2.82495C14.76 2.82495 13.09 3.63495 12 4.91495C10.91 3.63495 9.24 2.82495 7.5 2.82495C4.42 2.82495 2 5.24495 2 8.32495C2 12.105 5.4 15.185 10.55 19.865L12 21.175L13.45 19.855C18.6 15.185 22 12.105 22 8.32495C22 5.24495 19.58 2.82495 16.5 2.82495ZM12.1 18.375L12 18.475L11.9 18.375C7.14 14.065 4 11.215 4 8.32495C4 6.32495 5.5 4.82495 7.5 4.82495C9.04 4.82495 10.54 5.81495 11.07 7.18495H12.94C13.46 5.81495 14.96 4.82495 16.5 4.82495C18.5 4.82495 20 6.32495 20 8.32495C20 11.215 16.86 14.065 12.1 18.375Z" fill="#0D6EFD"/>
-                        </svg>
-                    </button>
-                </div>
+                {% endfor %}
             </div>
             <div class="shop__bottom">
                 <button>
