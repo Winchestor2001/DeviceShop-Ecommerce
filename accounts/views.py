@@ -69,7 +69,7 @@ def register_page(request):
                                         username=username, password=password1, email=email
                                     )
                                     Profile.objects.create(
-                                        user=user, email=email
+                                        user=user
                                     )
                                     login(request, user)
                                     return redirect("home")
