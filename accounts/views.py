@@ -1,3 +1,4 @@
+from django.core.files.storage import default_storage
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
@@ -7,11 +8,20 @@ from accounts.models import Profile
 
 def account_page(request):
     context = {}
-    profile = Profile.objects.get(user=request.user)
     if not request.user.is_authenticated:
         return redirect('login')
+    profile = Profile.objects.get(user=request.user)
     if request.method == "POST":
         email = request.POST.get('email')
+        if request.FILES:
+            file_obj = request.FILES['photo']
+            filename = f"profile/{request.user}_{file_obj}"
+            with default_storage.open(filename, 'wb+') as d:
+                for chunk in file_obj.chunks():
+                    d.write(chunk)
+                profile.photo = filename
+            profile.save()
+            return redirect('account')
         if email:
             if not email.endswith("@gmail.com"):
                 email = f"{email}@gmail.com"
