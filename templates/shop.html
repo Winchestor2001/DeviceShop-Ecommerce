@@ -24,8 +24,9 @@
                     </svg>
                 </button>
                 <div class="shop__left-items-wrapper">
+                    <a href="{% url 'shop' %}" class="shop__left-item text-{% if current_category == None %}default-primary{% else %}gray{% endif %}">All</a>
                     {% for i in main_categories %}
-                    <a href="{% url 'shop' %}" class="shop__left-item text-gray">{{ i.name }}</a>
+                    <a href="{% url 'category_shop' i.slug %}" class="shop__left-item text-{% if current_category == i %}default-primary{% else %}gray{% endif %}">{{ i.name }}</a>
                     {% endfor %}
                 </div>
             </div>
@@ -45,8 +46,8 @@
                             </div> 
                         </div> 
                         <div class="range-input"> 
-                            <input type="range" class="min-range" min="0" max="100" value="0" step="1"> 
-                            <input type="range" class="max-range" min="0" max="100" value="100" step="1"> 
+                            <input type="range" class="min-range" min="0" max="{{ max_price }}" value="0" step="1"> 
+                            <input type="range" class="max-range" min="0" max="{{ max_price }}" value="{{ max_price }}" step="1"> 
                         </div> 
                         <div class="price-input">
                             <div class="price-input__field">
@@ -55,7 +56,7 @@
                             </div>
                             <div class="price-input__field">
                                 <label for="max" class="text-default">Max</label>
-                                <input placeholder="Max" type="number" class="max-input default-input text-default" name="max" id="max" value="100"> 
+                                <input placeholder="Max" type="number" class="max-input default-input text-default" name="max" id="max" value="{{ max_price }}"> 
                             </div>
                         </div>
                     </div> 
@@ -130,152 +131,36 @@
                     </svg>
                 </button>
                 <div class="shop__left-items-wrapper">
+                    {% for i in brands %}
                     <div onclick="make_active(this)" class="shop__left-item-checkbox-wrapper text-default">
                         <input type="checkbox" name="">
-                        <p>HP</p>
+                        <p>{{ i }}</p>
                     </div>
-                    <div onclick="make_active(this)" class="shop__left-item-checkbox-wrapper text-default">
-                        <input type="checkbox" name="">
-                        <p>Apple</p>
-                    </div>
-                    <div onclick="make_active(this)" class="shop__left-item-checkbox-wrapper text-default">
-                        <input type="checkbox" name="">
-                        <p>Asus</p>
-                    </div>
-                    <div onclick="make_active(this)" class="shop__left-item-checkbox-wrapper text-default">
-                        <input type="checkbox" name="">
-                        <p>Acer</p>
-                    </div>
-                    <div onclick="make_active(this)" class="shop__left-item-checkbox-wrapper text-default">
-                        <input type="checkbox" name="">
-                        <p>Lenovo</p>
-                    </div>
+                    {% endfor %}
                 </div>
             </div>
+            {% for i in categories %}
             <div class="shop__left-items">
                 <button onclick="showOrHideItems(this)" class="shop__left-items__header">
-                    <p class="text-default"><b>Processor</b></p>
+                    <p class="text-default"><b>{{ i.name }}</b></p>
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                         <path d="M12 8.29504L6 14.295L7.41 15.705L12 11.125L16.59 15.705L18 14.295L12 8.29504Z" fill="#8B96A5"/>
                     </svg>
                 </button>
                 <div class="shop__left-items-wrapper">
+                    {% for c in i.productcategory_set.all %}
                     <div onclick="make_active(this)" class="shop__left-item-checkbox-wrapper text-default">
                         <input type="checkbox" name="">
-                        <p>Intel Core i3</p>
+                        <p>{{ c.name }}</p>
                     </div>
-                    <div onclick="make_active(this)" class="shop__left-item-checkbox-wrapper text-default">
-                        <input type="checkbox" name="">
-                        <p>Intel Core i5</p>
-                    </div>
-                    <div onclick="make_active(this)" class="shop__left-item-checkbox-wrapper text-default">
-                        <input type="checkbox" name="">
-                        <p>Intel Core i7</p>
-                    </div>
-                    <div onclick="make_active(this)" class="shop__left-item-checkbox-wrapper text-default">
-                        <input type="checkbox" name="">
-                        <p>Intel Core i9</p>
-                    </div>
-                    <div onclick="make_active(this)" class="shop__left-item-checkbox-wrapper text-default">
-                        <input type="checkbox" name="">
-                        <p>Intel Core i11</p>
-                    </div>
+                    {% endfor %}
                 </div>
             </div>
-            <div class="shop__left-items">
-                <button onclick="showOrHideItems(this)" class="shop__left-items__header">
-                    <p class="text-default"><b>Video card</b></p>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                        <path d="M12 8.29504L6 14.295L7.41 15.705L12 11.125L16.59 15.705L18 14.295L12 8.29504Z" fill="#8B96A5"/>
-                    </svg>
-                </button>
-                <div class="shop__left-items-wrapper">
-                    <div onclick="make_active(this)" class="shop__left-item-checkbox-wrapper text-default">
-                        <input type="checkbox" name="">
-                        <p>Nvidia RTX 4090</p>
-                    </div>
-                    <div onclick="make_active(this)" class="shop__left-item-checkbox-wrapper text-default">
-                        <input type="checkbox" name="">
-                        <p>Nvidia RTX 4080</p>
-                    </div>
-                    <div onclick="make_active(this)" class="shop__left-item-checkbox-wrapper text-default">
-                        <input type="checkbox" name="">
-                        <p>Nvidia RTX 3090</p>
-                    </div>
-                    <div onclick="make_active(this)" class="shop__left-item-checkbox-wrapper text-default">
-                        <input type="checkbox" name="">
-                        <p>AMD Radeon RX 7900 XTX</p>
-                    </div>
-                    <div onclick="make_active(this)" class="shop__left-item-checkbox-wrapper text-default">
-                        <input type="checkbox" name="">
-                        <p>Nvidia GTX 1070ti</p>
-                    </div>
-                </div>
-            </div>
-            <div class="shop__left-items">
-                <button onclick="showOrHideItems(this)" class="shop__left-items__header">
-                    <p class="text-default"><b>Memory</b></p>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                        <path d="M12 8.29504L6 14.295L7.41 15.705L12 11.125L16.59 15.705L18 14.295L12 8.29504Z" fill="#8B96A5"/>
-                    </svg>
-                </button>
-                <div class="shop__left-items-wrapper">
-                    <div onclick="make_active(this)" class="shop__left-item-checkbox-wrapper text-default">
-                        <input type="checkbox" name="">
-                        <p>128GB</p>
-                    </div>
-                    <div onclick="make_active(this)" class="shop__left-item-checkbox-wrapper text-default">
-                        <input type="checkbox" name="">
-                        <p>64GB</p>
-                    </div>
-                    <div onclick="make_active(this)" class="shop__left-item-checkbox-wrapper text-default">
-                        <input type="checkbox" name="">
-                        <p>32GB</p>
-                    </div>
-                    <div onclick="make_active(this)" class="shop__left-item-checkbox-wrapper text-default">
-                        <input type="checkbox" name="">
-                        <p>16GB</p>
-                    </div>
-                    <div onclick="make_active(this)" class="shop__left-item-checkbox-wrapper text-default">
-                        <input type="checkbox" name="">
-                        <p>8GB</p>
-                    </div>
-                </div>
-            </div>
-            <div class="shop__left-items">
-                <button onclick="showOrHideItems(this)" class="shop__left-items__header">
-                    <p class="text-default"><b>Storage</b></p>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                        <path d="M12 8.29504L6 14.295L7.41 15.705L12 11.125L16.59 15.705L18 14.295L12 8.29504Z" fill="#8B96A5"/>
-                    </svg>
-                </button>
-                <div class="shop__left-items-wrapper">
-                    <div onclick="make_active(this)" class="shop__left-item-checkbox-wrapper text-default">
-                        <input type="checkbox" name="">
-                        <p>4TB HDD</p>
-                    </div>
-                    <div onclick="make_active(this)" class="shop__left-item-checkbox-wrapper text-default">
-                        <input type="checkbox" name="">
-                        <p>1TB HDD</p>
-                    </div>
-                    <div onclick="make_active(this)" class="shop__left-item-checkbox-wrapper text-default">
-                        <input type="checkbox" name="">
-                        <p>512GB SSD</p>
-                    </div>
-                    <div onclick="make_active(this)" class="shop__left-item-checkbox-wrapper text-default">
-                        <input type="checkbox" name="">
-                        <p>256GB SSD</p>
-                    </div>
-                    <div onclick="make_active(this)" class="shop__left-item-checkbox-wrapper text-default">
-                        <input type="checkbox" name="">
-                        <p>128GB SSD</p>
-                    </div>
-                </div>
-            </div>
+            {% endfor %}
         </div>
         <div class="shop__right">
             <div class="shop__right__top">
-                <p class="text-default">12,911 items in <a href="" class="text-default"><b>Mobile accessory</b></a></p>
+                <p class="text-default">{{ products|length }} items in <a href="#" class="text-default"><b>{% if current_category == None %}All{% else %}{{ current_category.name }}{% endif %}</b></a></p>
                 <div class="shop__right__top__right">
                     <select name="sort" class="shop__right__top__select text-default">
                         <option value="all" selected>All</option>
@@ -300,12 +185,14 @@
                 <a href="{% url 'addproductpage' %}" class="banner__right__btn text-default-white" style="text-align: center;">Add product</a>
             </div>
             <div class="shop__right__bottom">
-                <a href="" class="shop__right__bottom-item text-default">
-                    Samsung
+                {% if current_category != None %}
+                <a href="{% url 'shop' %}" class="shop__right__bottom-item text-default">
+                    {{ current_category.name }}
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
                         <path d="M15.8334 5.34163L14.6584 4.16663L10.0001 8.82496L5.34175 4.16663L4.16675 5.34163L8.82508 9.99996L4.16675 14.6583L5.34175 15.8333L10.0001 11.175L14.6584 15.8333L15.8334 14.6583L11.1751 9.99996L15.8334 5.34163Z" fill="#8B96A5"/>
                     </svg>
                 </a>
+                {% endif %}
                 <a href="" class="text-default-primary">Clear all filter</a>
             </div>
             <div class="shop__products">
@@ -327,7 +214,7 @@
                                     <p class="text-default">{{ i.2.0 }}</p>
                                 </div>
                             </div>
-                            <button class="shop__product__top__right">
+                            <button onclick="save_product(`{% url 'save_product' i.0.id %}`)" class="shop__product__top__right{% if i.4 %}-active{% endif %}">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                                     <path d="M16.5 2.82495C14.76 2.82495 13.09 3.63495 12 4.91495C10.91 3.63495 9.24 2.82495 7.5 2.82495C4.42 2.82495 2 5.24495 2 8.32495C2 12.105 5.4 15.185 10.55 19.865L12 21.175L13.45 19.855C18.6 15.185 22 12.105 22 8.32495C22 5.24495 19.58 2.82495 16.5 2.82495ZM12.1 18.375L12 18.475L11.9 18.375C7.14 14.065 4 11.215 4 8.32495C4 6.32495 5.5 4.82495 7.5 4.82495C9.04 4.82495 10.54 5.81495 11.07 7.18495H12.94C13.46 5.81495 14.96 4.82495 16.5 4.82495C18.5 4.82495 20 6.32495 20 8.32495C20 11.215 16.86 14.065 12.1 18.375Z" fill="#0D6EFD"/>
                                 </svg>
@@ -368,7 +255,7 @@
                             <a href="{% url 'product' %}" class="text-default-primary">View details</a>
                         </div>
                     </div>
-                    <button class="shop__product-layout2__save">
+                    <button onclick="save_product(`{% url 'save_product' i.0.id %}`)" class="shop__product-layout2__save{% if i.4 %}-active{% endif %}">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                             <path d="M16.5 2.82495C14.76 2.82495 13.09 3.63495 12 4.91495C10.91 3.63495 9.24 2.82495 7.5 2.82495C4.42 2.82495 2 5.24495 2 8.32495C2 12.105 5.4 15.185 10.55 19.865L12 21.175L13.45 19.855C18.6 15.185 22 12.105 22 8.32495C22 5.24495 19.58 2.82495 16.5 2.82495ZM12.1 18.375L12 18.475L11.9 18.375C7.14 14.065 4 11.215 4 8.32495C4 6.32495 5.5 4.82495 7.5 4.82495C9.04 4.82495 10.54 5.81495 11.07 7.18495H12.94C13.46 5.81495 14.96 4.82495 16.5 4.82495C18.5 4.82495 20 6.32495 20 8.32495C20 11.215 16.86 14.065 12.1 18.375Z" fill="#0D6EFD"/>
                         </svg>
@@ -400,6 +287,12 @@
         </div>
     </div>
 </main>
+<script>
+    function save_product(src) {
+        event.preventDefault();
+        window.location.href = src
+    }
+</script>
 <script>
     const rangevalue = document.querySelector(".slider-container .price-slider"); 
     const rangeInputvalue = document.querySelectorAll(".range-input input"); 
