@@ -4,12 +4,12 @@ from accounts.models import Profile
 
 class Product(models.Model):
     name = models.CharField(max_length=50)
-    price = models.IntegerField()
+    price = models.FloatField()
     brand = models.CharField(max_length=50)
     supplier = models.ForeignKey(Profile, on_delete=models.CASCADE)
     description = models.TextField()
     state = models.CharField(max_length=50)
-    create_at = models.DateField()
+    create_at = models.DateField(auto_now_add=True)
 
     def __str__(self):
         return f"{self.brand} {self.name}"
@@ -36,3 +36,10 @@ class ProductSale(models.Model):
 class ProductPhoto(models.Model):
     photo = models.ImageField(upload_to='products/')
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.photo.url
+
+class SavedProduct(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    user = models.ForeignKey(Profile, on_delete=models.CASCADE)

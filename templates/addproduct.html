@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+<title>Add product page</title>
+{% endblock %}
+
+
+{% block content %}
+<main>
+    <div class="login-wrapper card">
+        <form action="" method="post" class="class__form__input-wrapper-100" style="margin-bottom: 20px;">
+            {% csrf_token %}
+            <label for="main_category" class="text-gray">Main category</label>
+            <select name="main_category" id="main_category" class="default-input text-default">
+                {% for i in main_categories %}
+                <option value="{{ i.name }}" {% if i == main_category %}selected{% endif %}>{{ i.name }}</option>
+                {% endfor %}
+            </select>
+            <button id="main_category_submit" type="submit" hidden></button>
+        </form>
+        <hr style="margin-bottom: 20px;">
+        <h2>Add product</h2>
+        <form action="{% url 'addproduct' %}" method="post" class="class__form" enctype="multipart/form-data">
+            {% csrf_token %}
+            <select name="hidden_main_category" id="hidden_main_category" hidden>
+                {% for i in main_categories %}
+                <option value="{{ i.name }}" {% if i == main_category %}selected{% endif %}>{{ i.name }}</option>
+                {% endfor %}
+            </select>
+            <div class="class__form__input-wrapper-100">
+                <label for="name" class="text-gray">Name</label>
+                <input value="{{ name }}" required type="text" name="name" id="name" class="default-input text-default" placeholder="Type name">
+            </div>
+            <div class="class__form__input-wrapper-100">
+                <label for="price" class="text-gray">Price (In USD, only numbers)</label>
+                <input value="{{ price }}" required type="number" name="price" id="price" class="default-input text-default" placeholder="Type price">
+            </div>
+            <div class="class__form__input-wrapper-100">
+                <label for="brand" class="text-gray">Brand</label>
+                <input value="{{ brand }}" required type="text" name="brand" id="brand" class="default-input text-default" placeholder="Type brand">
+            </div>
+            <div class="class__form__input-wrapper-100">
+                <label for="description" class="text-gray">Description</label>
+                <textarea required name="description" id="description" cols="30" rows="4" class="default-input text-default" placeholder="Type description">{{ description }}</textarea>
+            </div>
+            <div class="class__form__input-wrapper-100">
+                <label for="state" class="text-gray">State</label>
+                <select name="state" id="state" class="default-input text-default">
+                    <option value="new" selected>New</option>
+                    <option value="used">Used</option>
+                    <option value="old">Old</option>
+                </select>
+            </div>
+            <div class="class__form__input-wrapper-100">
+                <label for="images" class="text-gray">Images</label>
+                <input value="{{ images }}" required type="file" multiple name="images" id="images" class="default-input text-default" placeholder="Type images">
+            </div>
+            {% for i in categories %}
+            <div class="class__form__input-wrapper-100">
+                <label for="{{ i.name }}" class="text-gray">{{ i.name }}</label>
+                <input type="text" name="{{ i.name }}" id="{{ i.name }}" class="default-input text-default" placeholder="Type {{ i.name }}">
+            </div>
+            {% endfor %}
+            <p class="text-danger">{{ error }}</p>
+            <button type="submit" class="banner__right__btn text-default-white">Add product</button>
+        </form>
+    </div>
+</main>
+<script>
+    let submit = document.querySelector('#main_category_submit')
+    document.querySelector('#main_category').addEventListener('change', function () {
+        submit.click()
+    })
+</script>
+<script>
+    function open_menu() {
+        document.querySelector('.mobile-menu-wrapper').hidden = false;
+    }
+    document.querySelector('.mobile-menu-wrapper').addEventListener('click', function() {
+        document.querySelector('.mobile-menu-wrapper').hidden = true;
+    })
+</script>
+{% endblock %}
