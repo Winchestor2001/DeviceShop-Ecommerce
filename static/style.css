@@ -1212,7 +1212,7 @@ footer {
 .shop__left-items-wrapper {
   box-sizing: border-box;
   overflow-y: auto;
-  height: 180px;
+  max-height: 180px;
   display: flex;
   flex-direction: column;
   transition: all 0.3s ease-in-out;
@@ -2847,6 +2847,9 @@ input[type="range"]::-webkit-slider-thumb {
 @media (max-width: 800px) {
   .container {
     width: 95%;
+  }
+  .shop__right__top {
+    flex-direction: column;
   }
   .offers__left__countdown-item {
     width: 40px;

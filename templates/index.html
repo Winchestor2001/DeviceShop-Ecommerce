@@ -18,7 +18,7 @@
         <div class="banner__right">
             <div class="banner__image" style="background-image: url('media/{{ main_categories.0.photo }}');"></div>
             <div class="banner__right-content">
-                <h1 class="banner__right__header">Laptops</h1>
+                <h1 class="banner__right__header">{{ main_categories.0.name }}</h1>
                 <a href="{% url 'shop' %}" id="offers" class="banner__right__btn text-default-white">View products</a>
             </div>
         </div>
@@ -113,8 +113,8 @@
                     <div class="eye2" style='background: url("/media/eye.png") no-repeat center center / cover;'></div>
                 </div>
                 <div class="recommended__card-text">
-                    <p class="text-500">${{ i.0.product.price }}</p>
-                    <p class="text-default text-muted">{{ i.0.product.name }}</p>
+                    <p class="text-500">${{ i.0.price }}</p>
+                    <p class="text-default text-muted">{{ i.0.name }}</p>
                 </div>
             </a>
             {% endfor %}
