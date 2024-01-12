@@ -13,6 +13,7 @@ def account_page(request):
     profile = Profile.objects.get(user=request.user)
     if request.method == "POST":
         email = request.POST.get('email')
+        phone_number = request.POST.get('phone_number')
         if request.FILES:
             file_obj = request.FILES['photo']
             filename = f"profile/{request.user}_{file_obj}"
@@ -25,9 +26,11 @@ def account_page(request):
         if email:
             if not email.endswith("@gmail.com"):
                 email = f"{email}@gmail.com"
-            profile.email = email
-
-        profile.save()
+            profile.user.email = email
+        if phone_number:
+            profile.phone_number = phone_number
+    profile.save()
+    profile.user.save()
     context['profile'] = profile
 
     return render(request, 'account.html', context=context)
