@@ -162,9 +162,14 @@
             <div class="shop__right__top">
                 <p class="text-default">{{ products|length }} items in <a href="#" class="text-default"><b>{% if current_category == None %}All{% else %}{{ current_category.name }}{% endif %}</b></a></p>
                 <div class="shop__right__top__right">
-                    <select name="sort" class="shop__right__top__select text-default">
-                        <option value="all" selected>All</option>
-                    </select>
+                    <form action="" method="get">
+                        <select name="sort" id="sort_by" class="shop__right__top__select text-default">
+                            <option value="all" selected>All</option>
+                            <option value="date_new">Date added: From new to old</option>
+                            <option value="date_old">Date added: From old to new</option>
+                        </select>
+                        <button type="submit" hidden></button>
+                    </form>
                     <button id="filter_btn" class="shop__right__top__select text-default" style="display: none;">Filter (3)</button>
                     <div class="shop__right__top__right__btns">
                         <button onclick="change_layout(this, 1)" class="shop__right__top__right__btn layout-btn-active">
@@ -503,6 +508,12 @@
     document.querySelector('#overlay').addEventListener('click', function() {
         document.querySelector('.shop__left').style.display = 'none'
         document.querySelector('#overlay').style.display = 'none'
+    })
+</script>
+<script>
+    let select = document.querySelector('#sort_by')
+    select.addEventListener('change', function () {
+        select.nextElementSibling.click()
     })
 </script>
 {% endblock %}

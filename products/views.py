@@ -18,6 +18,14 @@ def shop_page(request, category=None):
         main_category = MainCategory.objects.get(slug=category)
         products_list = Product.objects.filter(productcategory__category__category=main_category).distinct()
         brands = Product.objects.filter(productcategory__category__category=main_category).values_list('brand', flat=True).distinct()
+
+    sort_by = request.GET.get('sort')
+    if sort_by != None:
+        if sort_by == 'date_new':
+            products_list = products_list.order_by('create_at')
+        elif sort_by == 'date_old':
+            products_list = products_list.order_by('-create_at')
+
     products = []
     for i in products_list:
         photo = ProductPhoto.objects.filter(product=i)[0].photo
