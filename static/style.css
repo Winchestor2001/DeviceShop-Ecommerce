@@ -2332,6 +2332,11 @@ input[type="range"]::-webkit-slider-thumb {
   object-fit: cover;
 }
 
+.user__right__info__flex {
+    display: flex;
+    flex-direction: column;
+}
+
 .user__right__info__btn {
   width: 30px;
   height: 30px;
@@ -2527,6 +2532,7 @@ input[type="range"]::-webkit-slider-thumb {
   display: flex;
   gap: 10px;
   align-items: center;
+  margin-bottom: 5px;
 }
 
 .user__right__info__text__form svg {
@@ -2534,6 +2540,10 @@ input[type="range"]::-webkit-slider-thumb {
 }
 
 #email-input {
+  outline: none;
+}
+
+#phone-input {
   outline: none;
 }
 
