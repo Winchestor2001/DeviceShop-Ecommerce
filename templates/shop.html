@@ -164,9 +164,9 @@
                 <div class="shop__right__top__right">
                     <form action="" method="get">
                         <select name="sort" id="sort_by" class="shop__right__top__select text-default">
-                            <option value="all" selected>All</option>
-                            <option value="date_new">Date added: From new to old</option>
-                            <option value="date_old">Date added: From old to new</option>
+                            <option value="all" {% if sort_by == None %}selected{% endif %}>All</option>
+                            <option value="date_new" {% if sort_by == 'date_new' %}selected{% endif %}>Date added: From new to old</option>
+                            <option value="date_old" {% if sort_by == 'date_old' %}selected{% endif %}>Date added: From old to new</option>
                         </select>
                         <button type="submit" hidden></button>
                     </form>

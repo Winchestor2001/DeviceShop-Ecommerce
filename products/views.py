@@ -1,6 +1,5 @@
 from django.shortcuts import render, redirect
-from categories.models import MainCategory, ProductCategory, Category
-from products.models import ProductSale, ProductPhoto, Product, Review, SavedProduct
+from products.models import ProductSale, ProductPhoto, Product, Review, SavedProduct, MainCategory, ProductCategory, Category
 from accounts.models import Profile
 from orders.models import OrderProduct
 from datetime import datetime
@@ -16,8 +15,8 @@ def shop_page(request, category=None):
         brands = Product.objects.values_list('brand', flat=True).distinct()
     else:
         main_category = MainCategory.objects.get(slug=category)
-        products_list = Product.objects.filter(productcategory__category__category=main_category).distinct()
-        brands = Product.objects.filter(productcategory__category__category=main_category).values_list('brand', flat=True).distinct()
+        products_list = Product.objects.filter(main_category=main_category).distinct()
+        brands = Product.objects.filter(main_category=main_category).values_list('brand', flat=True).distinct()
 
     sort_by = request.GET.get('sort')
     if sort_by != None:
@@ -57,7 +56,7 @@ def shop_page(request, category=None):
         if category == None:
             max_price = Product.objects.order_by('price').last().price
         else:
-            max_price = Product.objects.filter(productcategory__category__category=main_category).order_by('price').last().price
+            max_price = Product.objects.filter(main_category=main_category).order_by('price').last().price
     else:
         max_price = 0
 
@@ -68,7 +67,8 @@ def shop_page(request, category=None):
         'current_category': main_category,
         'categories': categories,
         'max_price': max_price,
-        'brands': brands
+        'brands': brands,
+        'sort_by': sort_by
     }
     return render(request, 'shop.html', context=context)
 
@@ -80,8 +80,16 @@ def saved_page(request, category=None):
         brands = SavedProduct.objects.filter(user=profile).values_list('product__brand', flat=True).distinct()
     else:
         main_category = MainCategory.objects.get(slug=category)
-        products_list = SavedProduct.objects.filter(product__productcategory__category__category=main_category, user=profile).distinct()
-        brands = SavedProduct.objects.filter(product__productcategory__category__category=main_category, user=profile).values_list('product__brand', flat=True).distinct()
+        products_list = SavedProduct.objects.filter(product__main_category=main_category, user=profile).distinct()
+        brands = SavedProduct.objects.filter(product__main_category=main_category, user=profile).values_list('product__brand', flat=True).distinct()
+
+    sort_by = request.GET.get('sort')
+    if sort_by != None:
+        if sort_by == 'date_new':
+            products_list = products_list.order_by('product__create_at')
+        elif sort_by == 'date_old':
+            products_list = products_list.order_by('-product__create_at')
+
     products = []
     for i in products_list:
         photo = ProductPhoto.objects.filter(product=i.product)[0].photo
@@ -113,7 +121,7 @@ def saved_page(request, category=None):
         if category == None:
             max_price = SavedProduct.objects.order_by('product__price').last().product.price
         else:
-            max_price = SavedProduct.objects.filter(product__productcategory__category__category=main_category).order_by('product__price').last().product.price
+            max_price = SavedProduct.objects.filter(product__main_category=main_category).order_by('product__price').last().product.price
     else:
         max_price = 0
 
@@ -123,7 +131,8 @@ def saved_page(request, category=None):
         'current_category': main_category,
         'categories': categories,
         'max_price': max_price,
-        'brands': brands
+        'brands': brands,
+        'sort_by': sort_by
     }
     return render(request, 'saved.html', context=context)
 
@@ -158,11 +167,11 @@ def add_product(request):
         supplier = Profile.objects.get(user=request.user)
         description = request.POST.get('description')
         state = request.POST.get('state')
-        product = Product.objects.create(name=name, price=price, brand=brand, supplier=supplier, description=description, state=state)
-        for photo in request.FILES.getlist('images'):
-            ProductPhoto.objects.create(photo=photo, product=product)
         main_category = request.POST.get('hidden_main_category')
         main_category = MainCategory.objects.get(name=main_category)
+        product = Product.objects.create(name=name, price=price, brand=brand, supplier=supplier, description=description, state=state, main_category=main_category)
+        for photo in request.FILES.getlist('images'):
+            ProductPhoto.objects.create(photo=photo, product=product)
         categories = Category.objects.filter(category=main_category)
         for i in categories:
             category_name = request.POST.get(f'{i}')
@@ -170,8 +179,15 @@ def add_product(request):
     return redirect('addproductpage')
 
 def home_page(request):
-    main_categories = MainCategory.objects.all()
-
+    main_categories_obj = MainCategory.objects.all()
+    main_categories = []
+    for i in main_categories_obj:
+        price = 0
+        if Product.objects.filter(main_category=i).exists():
+            price = Product.objects.filter(main_category=i).order_by('price')[0].price
+        print(price)
+        main_categories.append([i, price])
+    
     products_on_sale = ProductSale.objects.all()[:5]
     products_on_sale_list = []
     for i in products_on_sale:

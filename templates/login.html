@@ -18,7 +18,12 @@
             </div>
             <div class="class__form__input-wrapper-100">
                 <label for="password" class="text-gray">Password</label>
-                <input value="{{ password }}" required type="text" name="password" id="password" class="default-input text-default" placeholder="Type your password">
+                <div class="class__form__input-wrapper-input">
+                    <input value="{{ password }}" required type="password" name="password" id="password" class="default-input text-default" placeholder="Type your password">
+                    <button type="button" onclick="view_password(this)" class="class__form__input-eye">
+                        <img src="/media/eye.svg" alt="" class="class__form__input-eye">
+                    </button>
+                </div>
             </div>
             <p class="text-danger">{{ error }}</p>
             <button type="submit" class="banner__right__btn text-default-white">Sign in</button>
@@ -26,6 +31,19 @@
         <p class="text-default login__bottom-text">Dont have an account? <a href="{% url 'register' %}" class="text-default-primary">Sign up</a></p>
     </div>
 </main>
+<script>
+    function view_password(btn) {
+        let img = btn.children[0]
+        let input = btn.previousElementSibling
+        if (img.src.split('/media/')[1] == 'eye.svg') {
+            img.src = '/media/eye-slash.svg'
+            input.type = 'text'
+        } else {
+            img.src = '/media/eye.svg'
+            input.type = 'password'
+        }
+    }
+</script>
 <script>
     function open_menu() {
         document.querySelector('.mobile-menu-wrapper').hidden = false;
