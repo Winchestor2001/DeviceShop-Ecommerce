@@ -12,38 +12,22 @@
         <div class="product__left">
             <div class="product__left__main-photo card">
                 <div class="image-container2">
-                    <img id="main_photo" src="/media/products/product_1.png" alt="" class="recommended__card__photo">
+                    <img id="main_photo" src="{{ photo.0 }}" alt="" class="recommended__card__photo">
                     <div class="overlay"></div>
                     <div class="eye2" style='background: url("/media/eye.png") no-repeat center center / cover;'></div>
                 </div>
             </div>
             <div class="product__left__bottom-photos">
+                {% for p in photo %}
                 <button onclick="change_photo(this)" class="product__left__bottom-photo bottom-photos-active">
-                    <img src="/media/products/product_1.png" alt="">
+                    <img src="{{ p }}" alt="">
                 </button>
-                <button onclick="change_photo(this)" class="product__left__bottom-photo">
-                    <img src="/media/products/product_2.png" alt="">
-                </button>
-                <button onclick="change_photo(this)" class="product__left__bottom-photo">
-                    <img src="/media/products/product_3.png" alt="">
-                </button>
-                <button onclick="change_photo(this)" class="product__left__bottom-photo">
-                    <img src="/media/products/product_4.png" alt="">
-                </button>
-                <button onclick="change_photo(this)" class="product__left__bottom-photo">
-                    <img src="/media/products/product_5.png" alt="">
-                </button>
-                <button onclick="change_photo(this)" class="product__left__bottom-photo">
-                    <img src="/media/banner/banner_1.png" alt="">
-                </button>
-                <button onclick="change_photo(this)" class="product__left__bottom-photo">
-                    <img src="/media/banner/banner_2.png" alt="">
-                </button>
+                {% endfor %}
             </div>
         </div>
         <div class="product__middle">
             <div class="product__middle__top">
-                <p class="product__middle__top-price"><b>Macbook</b></p>
+                <p class="product__middle__top-price"><b>{{ product.name }}</b></p>
                 <div class="shop__products__right__middle__bottom">
                     <div class="shop__product__top__left__stars">
                         <img src="/media/star.png" alt="">
@@ -71,15 +55,23 @@
             <div class="product__middle__bottom">
                 <div class="product__middle__bottom-price">
                     <p class="text-default-18 text-muted">Price:</p>
-                    <p class="text-default-18 shop__products__right__middle-price" style="font-size: 20px;"><b>$1999.50</b><span class="text-gray">$2000.00</span></p>
+                    <p class="text-default-18 shop__products__right__middle-price" style="font-size: 20px;"><b>${{ product.price }}</b><span class="text-gray">$2000.00</span></p>
                 </div>
                 <div class="product__middle__bottom-price">
                     <p class="text-default-18 text-muted">Category:</p>
-                    <p class="text-default-18 text-gray" style="font-size: 18px;">Laptops</p>
+                    <p class="text-default-18 text-gray" style="font-size: 18px;">{{ category }}</p>
                 </div>
                 <div class="product__middle__bottom-price">
                     <p class="text-default-18 text-muted">Brand:</p>
-                    <p class="text-default-18 text-gray" style="font-size: 18px;">Apple</p>
+                    <p class="text-default-18 text-gray" style="font-size: 18px;">{{ product.brand }}</p>
+                </div>
+                <div class="product__middle__bottom-price">
+                    <p class="text-default-18 text-muted">State:</p>
+                    <p class="text-default-18 text-gray" style="font-size: 18px;">{{ product.state }}</p>
+                </div>
+                <div class="product__middle__bottom-price">
+                    <p class="text-default-18 text-muted">Created:</p>
+                    <p class="text-default-18 text-gray" style="font-size: 18px;">{{ product.create_at }}</p>
                 </div>
                 <div class="product__middle__bottom-other">
                     <p class="text-default-18 text-gray product__middle__bottom-other-text">Other:</p>
@@ -105,8 +97,8 @@
         <div class="product__right">
             <div class="product__right__top card">
                 <div class="product__right__top__top">
-                    <img src="/media/banner/banner_1.png" alt="">
-                    <p class="text-default-18">Supplier<br>Guanjoi Trading LLC</p>
+                    <img src="/media/{{ product.supplier.photo }}" alt="">
+                    <p class="text-default-18">Supplier<br>{{ product.supplier.user.username }}</p>
                 </div>
                 <div class="product__right__top__middle">
                     <p class="text-default-18 text-muted">
@@ -142,18 +134,20 @@
             </div>
             <div class="product__bottom__content-wrapper">
                 <div class="product__bottom__content" id="content_1">
-                    <p class="text-gray-18">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+                    <p class="text-gray-18">{{ markdown_to_html | safe }}</p>
                 </div>
                 <div class="product__bottom__content" id="content_2" hidden>
                     <div class="product__bottom__reviews">
                         <div class="product__bottom__review card">
                             <p class="text-default">Photos:</p>
                             <div class="product__bottom__review__photos">
+                                {% for p in photo %}
                                 <div class="image-container5">
-                                    <img id="main_photo" src="/media/products/product_1.png" alt="" class="recommended__card__photo">
+                                    <img id="main_photo" src="{{ p }}" alt="" class="recommended__card__photo">
                                     <div class="overlay"></div>
                                     <div class="eye3" style='background: url("/media/eye.png") no-repeat center center / cover;'></div>
                                 </div>
+                                {% endfor %}
                             </div>
                             <span class="product__bottom__review-devider"></span>
                             <div class="product__bottom__review__user">

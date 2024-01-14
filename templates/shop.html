@@ -310,7 +310,7 @@
             </div>
             <div class="shop__products">
                 {% for i in products %}
-                <a href="{% url 'product' %}" class="shop__product card">
+                <a href="{% url 'product' i.0.slug %}" class="shop__product card">
                     <div class="image-container3">
                         <img src="/media/{{ i.1 }}" alt="" class="recommended__card__photo">
                         <div class="overlay"></div>
@@ -365,7 +365,7 @@
                         </div>
                         <div class="shop__products__right__bottom">
                             <p class="text-default">{{ i.0.description }}</p>
-                            <a href="{% url 'product' %}" class="text-default-primary">View details</a>
+                            <a href="{% url 'product' i.0.slug %}" class="text-default-primary">View details</a>
                         </div>
                     </div>
                     <button class="shop__product-layout2__save">

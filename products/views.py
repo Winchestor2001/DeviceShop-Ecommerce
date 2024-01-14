@@ -4,10 +4,26 @@ from products.models import ProductSale, ProductPhoto, Product, Review
 from accounts.models import Profile
 from orders.models import OrderProduct
 from datetime import datetime
+from django.utils.text import slugify
+import markdown
 
 
-def product_page(request):
-    return render(request, 'product.html')
+def product_page(request, slug):
+    context = {}
+    product = Product.objects.get(slug=slug)
+    category = ProductCategory.objects.get(product=product)
+    photo = ProductPhoto.objects.filter(product=product)
+    all_photo = []
+    for i in photo:
+        all_photo.append(i)
+    product_category = category.category.category
+    markdown_to_html = markdown.markdown(product.description)
+    context['markdown_to_html'] = markdown_to_html
+    context['product'] = product
+    context['photo'] = all_photo
+    context['category'] = product_category
+    return render(request, 'product.html', context=context)
+
 
 def shop_page(request, category=None):
     if category == None:
@@ -67,7 +83,7 @@ def add_product(request):
         supplier = Profile.objects.get(user=request.user)
         description = request.POST.get('description')
         state = request.POST.get('state')
-        product = Product.objects.create(name=name, price=price, brand=brand, supplier=supplier, description=description, state=state)
+        product = Product.objects.create(slug=slugify(name), name=name, price=price, brand=brand, supplier=supplier, description=description, state=state)
         for photo in request.FILES.getlist('images'):
             ProductPhoto.objects.create(photo=photo, product=product)
         main_category = request.POST.get('hidden_main_category')
