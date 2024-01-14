@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 
 
 class Profile(models.Model):
+    slug = models.SlugField(blank=True, null=True)
     photo = models.ImageField('profile/', blank=True, null=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     full_name = models.CharField(max_length=50, blank=True, null=True)

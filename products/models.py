@@ -17,6 +17,7 @@ class MainCategory(models.Model):
 
 
 class Product(models.Model):
+    slug = models.SlugField(blank=True, null=True)
     name = models.CharField(max_length=50)
     price = models.FloatField()
     brand = models.CharField(max_length=50)
