@@ -1,6 +1,8 @@
 asgiref==3.7.2
 Django==5.0.1
+django-cleanup==8.0.0
 environs==10.0.0
+Markdown==3.5.2
 marshmallow==3.20.1
 packaging==23.2
 python-dotenv==1.0.0
