@@ -7,19 +7,20 @@
 
 
 {% block content %}
+{% load static %}
 <main>
     <div class="banner card container">
         <div class="banner__left">
-            <button id="{{ main_categories.0.photo }}" onclick="banner_btn(this)" class="banner__left__btn-active">{{ main_categories.0.name }}</button>
+            <button id="{{ main_categories.0.0.photo }}" onclick="banner_btn(this, '{{ main_categories.0.0.slug }}')" class="banner__left__btn-active">{{ main_categories.0.0.name }}</button>
             {% for i in main_categories|slice:"1:" %}
-            <button id="{{ i.photo }}" onclick="banner_btn(this)" class="banner__left__btn">{{ i.name }}</button>
+            <button id="{{ i.0.photo }}" onclick="banner_btn(this, '{{ i.0.slug }}')" class="banner__left__btn">{{ i.0.name }}</button>
             {% endfor %}
         </div>
         <div class="banner__right">
-            <div class="banner__image" style="background-image: url('media/{{ main_categories.0.photo }}');"></div>
+            <div class="banner__image" style="background-image: url('media/{{ main_categories.0.0.photo }}');"></div>
             <div class="banner__right-content">
-                <h1 class="banner__right__header">{{ main_categories.0.name }}</h1>
-                <a href="{% url 'shop' %}" id="offers" class="banner__right__btn text-default-white">View products</a>
+                <h1 class="banner__right__header">{{ main_categories.0.0.name }}</h1>
+                <a href="{% url 'category_shop' main_categories.0.0.slug %}" id="view_products" class="banner__right__btn text-default-white">View products</a>
             </div>
         </div>
     </div>
@@ -76,10 +77,10 @@
             {% for i in main_categories %}
             <a href="{% url 'shop' %}" class="categories__right-item">
                 <div class="categories__right-item-content">
-                    <p class="text-default">{{ i.name }}</p>
-                    <p class="text-micro text-muted">From<br>340$</p>
+                    <p class="text-default">{{ i.0.name }}</p>
+                    <p class="text-micro text-muted">From<br>{{ i.1 }}$</p>
                 </div>
-                <img src="/media/{{ i.photo }}" class="categories__right-item__photo" alt="">
+                <img src="/media/{{ i.0.photo }}" class="categories__right-item__photo" alt="">
             </a>
             {% endfor %}
         </div>
@@ -187,19 +188,7 @@
         document.getElementById('zoom-modal').style.display = 'none';
     })
 </script>
-<script>
-    let banner_image = document.querySelector('.banner__image')
-    let banner_header = document.querySelector('.banner__right__header')
-    function banner_btn(btn) {
-        let active = document.querySelector('.banner__left__btn-active')
-        active.classList.remove('banner__left__btn-active')
-        active.classList.add('banner__left__btn')
-        btn.classList.remove('banner__left__btn')
-        btn.classList.add('banner__left__btn-active')
-        banner_image.style.backgroundImage = 'url(media/' + btn.id + ')';
-        banner_header.textContent = btn.textContent
-    }
-</script>
+<script src="{% static 'script.js' %}"></script>
 <script>
     setInterval(function () {
         let active = document.querySelector('.banner__left__btn-active')

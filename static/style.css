@@ -1099,6 +1099,7 @@ footer {
 
 .shop__right__top__select {
   width: 100%;
+  height: 100%;
   outline: none;
   cursor: pointer;
   text-align: center;
@@ -2827,6 +2828,31 @@ input[type="range"]::-webkit-slider-thumb {
   position: fixed;
   top: 0;
   z-index: 9998;
+}
+
+.class__form__input-wrapper-input {
+  position: relative;
+  width: 100%;
+}
+
+.class__form__input-wrapper-input input {
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.class__form__input-eye {
+  width: 20px;
+  cursor: pointer;
+  height: 20px;
+  background: none;
+  border: none;
+  position: absolute;
+  right: 5px;
+}
+
+.class__form__input-eye img {
+  width: 100%;
+  height: 100%;
 }
 
 
