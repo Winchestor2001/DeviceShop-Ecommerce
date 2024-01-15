@@ -138,103 +138,58 @@
                 </div>
                 <div class="product__bottom__content" id="content_2" hidden>
                     <div class="product__bottom__reviews">
+                        {% for review in reviews %}
                         <div class="product__bottom__review card">
+                            {% if review.images %}
                             <p class="text-default">Photos:</p>
                             <div class="product__bottom__review__photos">
-                                {% for p in photo %}
+                                {% for p in review.images %}
                                 <div class="image-container5">
-                                    <img id="main_photo" src="{{ p }}" alt="" class="recommended__card__photo">
+                                    <img id="main_photo" src="{{ p.image.url }}" alt="" class="recommended__card__photo">
                                     <div class="overlay"></div>
                                     <div class="eye3" style='background: url("/media/eye.png") no-repeat center center / cover;'></div>
                                 </div>
                                 {% endfor %}
                             </div>
                             <span class="product__bottom__review-devider"></span>
+                            {% endif %}
                             <div class="product__bottom__review__user">
-                                <img src="/media/products/product_4.png" class="product__bottom__review__logo" alt="">
+                                <img src="/media/{{ review.review.user.photo }}" class="product__bottom__review__logo" alt="">
                                 <div class="product__bottom__review__user-content">
-                                    <p class="text-default">User</p>
+                                    <p class="text-default">{{ review.review.user }}</p>
                                     <div class="shop__product__top__left__stars">
                                         <img src="/media/star.png" alt="">
                                         <img src="/media/star.png" alt="">
                                         <img src="/media/star.png" alt="">
                                         <img src="/media/star.png" alt="">
                                         <img src="/media/star2.png" alt="">
-                                        <p class="text-default">4.5</p>
+                                        <p class="text-default">{{ review.review.stars }}</p>
                                     </div>
                                 </div>
                             </div>
-                            <p class="text-gray">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Repudiandae voluptatem rerum atque suscipit obcaecati qui assumenda magnam dicta aliquid. Voluptatem?</p>
+                            <p class="text-gray">{{ review.review.text }}</p>
                         </div>
-                        <div class="product__bottom__review card">
-                            <div class="product__bottom__review__user">
-                                <img src="/media/products/product_4.png" class="product__bottom__review__logo" alt="">
-                                <div class="product__bottom__review__user-content">
-                                    <p class="text-default">User</p>
-                                    <div class="shop__product__top__left__stars">
-                                        <img src="/media/star.png" alt="">
-                                        <img src="/media/star.png" alt="">
-                                        <img src="/media/star.png" alt="">
-                                        <img src="/media/star.png" alt="">
-                                        <img src="/media/star2.png" alt="">
-                                        <p class="text-default">4.5</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <p class="text-gray">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Repudiandae voluptatem rerum atque suscipit obcaecati qui assumenda magnam dicta aliquid. Voluptatem?</p>
-                        </div>
+                        {% endfor %}
                     </div>
                 </div>
             </div>
         </div>
+        {% if not product in you_may_like_products %}
         <div class="product__bottom__right card">
             <p class="text-default2"><b>You may like</b></p>
+            {% for item in you_may_like_products %}
             <a href="" class="product__bottom__right__product">
                 <div class="product__bottom__right__product__image card">
                     <img src="/media/products/product_1.png" alt="">
                 </div>
                 <div class="product__bottom__right__product__text">
-                    <p class="text-default">Smart Watch</p>
-                    <p class="text-default text-muted">$100.00 - $699.50</p>
+                    <p class="text-default">{{ item.name }}</p>
+                    <p class="text-default text-muted">${{ item.price }}</p>
                 </div>
             </a>
-            <a href="" class="product__bottom__right__product">
-                <div class="product__bottom__right__product__image card">
-                    <img src="/media/products/product_1.png" alt="">
-                </div>
-                <div class="product__bottom__right__product__text">
-                    <p class="text-default">Smart Watch</p>
-                    <p class="text-default text-muted">$100.00 - $699.50</p>
-                </div>
-            </a>
-            <a href="" class="product__bottom__right__product">
-                <div class="product__bottom__right__product__image card">
-                    <img src="/media/products/product_1.png" alt="">
-                </div>
-                <div class="product__bottom__right__product__text">
-                    <p class="text-default">Smart Watch</p>
-                    <p class="text-default text-muted">$100.00 - $699.50</p>
-                </div>
-            </a>
-            <a href="" class="product__bottom__right__product">
-                <div class="product__bottom__right__product__image card">
-                    <img src="/media/products/product_1.png" alt="">
-                </div>
-                <div class="product__bottom__right__product__text">
-                    <p class="text-default">Smart Watch</p>
-                    <p class="text-default text-muted">$100.00 - $699.50</p>
-                </div>
-            </a>
-            <a href="" class="product__bottom__right__product">
-                <div class="product__bottom__right__product__image card">
-                    <img src="/media/products/product_1.png" alt="">
-                </div>
-                <div class="product__bottom__right__product__text">
-                    <p class="text-default">Smart Watch</p>
-                    <p class="text-default text-muted">$100.00 - $699.50</p>
-                </div>
-            </a>
+            {% endfor %}
         </div>
+        {% endif %}
     </div>
 </main>
 <script>

@@ -1,16 +1,23 @@
 from django.shortcuts import render, redirect
-from products.models import ProductSale, ProductPhoto, Product, Review, SavedProduct, MainCategory, ProductCategory, Category
+from products.models import ProductSale, ProductPhoto, Product, Review, SavedProduct, MainCategory, ProductCategory, \
+    Category
 from accounts.models import Profile
 from orders.models import OrderProduct
 from datetime import datetime
 from django.utils.text import slugify
 import markdown
 
+from products.utils import filter_product_reviews
+
 
 def product_page(request, slug):
     context = {}
     product = Product.objects.get(slug=slug)
     photo = ProductPhoto.objects.filter(product=product)
+    reviews = Review.objects.filter(product=product).order_by('-create_at')
+    review_result = filter_product_reviews(reviews)
+    you_may_like_products = Product.objects.filter(main_category=product.main_category)[:10]
+
     all_photo = []
     for i in photo:
         all_photo.append(i)
@@ -18,6 +25,8 @@ def product_page(request, slug):
     context['markdown_to_html'] = markdown_to_html
     context['product'] = product
     context['photo'] = all_photo
+    context['reviews'] = review_result
+    context['you_may_like_products'] = you_may_like_products
     return render(request, 'product.html', context=context)
 
 

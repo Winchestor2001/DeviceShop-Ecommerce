@@ -36,9 +36,18 @@ class Review(models.Model):
     stars = models.IntegerField()
     text = models.TextField()
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    create_at = models.DateTimeField(auto_now_add=True, blank=True, null=True)
 
     def str(self):
         return f"{self.user}"
+
+
+class ReviewImage(models.Model):
+    review = models.ForeignKey(Review, on_delete=models.CASCADE)
+    image = models.ImageField(upload_to='reviews/')
+
+    def str(self):
+        return f"{self.review}"
 
 
 class ProductSale(models.Model):
@@ -48,7 +57,7 @@ class ProductSale(models.Model):
 
     def str(self):
         return f"{self.product} {self.sale}"
-    
+
 
 class ProductPhoto(models.Model):
     photo = models.ImageField(upload_to='products/')
@@ -62,13 +71,14 @@ class SavedProduct(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     user = models.ForeignKey(Profile, on_delete=models.CASCADE)
 
-    
+
 class Category(models.Model):
     name = models.CharField(max_length=50)
     category = models.ForeignKey(MainCategory, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name
+
 
 class ProductCategory(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
