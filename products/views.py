@@ -1,6 +1,5 @@
 from django.shortcuts import render, redirect
-from products.models import ProductSale, ProductPhoto, Product, Review, SavedProduct, MainCategory, ProductCategory, \
-    Category
+from products.models import ProductSale, ProductPhoto, Product, Review, SavedProduct, MainCategory, ProductCategory, Category, ReviewImage
 from accounts.models import Profile
 from orders.models import OrderProduct
 from datetime import datetime
@@ -11,12 +10,21 @@ from products.utils import filter_product_reviews
 
 
 def product_page(request, slug):
-    context = {}
+    profile = Profile.objects.get(user=request.user)
     product = Product.objects.get(slug=slug)
+    if request.method == 'POST':
+        review = Review.objects.create(user=profile, stars=int(request.POST.get('stars')), text=request.POST.get('text'), product=product)
+        for photo in request.FILES.getlist('images'):
+            ReviewImage.objects.create(image=photo, review=review)
+    context = {}
     photo = ProductPhoto.objects.filter(product=product)
     reviews = Review.objects.filter(product=product).order_by('-create_at')
     review_result = filter_product_reviews(reviews)
     you_may_like_products = Product.objects.filter(main_category=product.main_category)[:10]
+    categories = ProductCategory.objects.filter(product=product)
+    saved = False
+    if SavedProduct.objects.filter(product=product).exists():
+        saved = True
 
     all_photo = []
     for i in photo:
@@ -27,6 +35,8 @@ def product_page(request, slug):
     context['photo'] = all_photo
     context['reviews'] = review_result
     context['you_may_like_products'] = you_may_like_products
+    context['categories'] = categories
+    context['saved'] = saved
     return render(request, 'product.html', context=context)
 
 
@@ -209,7 +219,6 @@ def home_page(request):
         price = 0
         if Product.objects.filter(main_category=i).exists():
             price = Product.objects.filter(main_category=i).order_by('price')[0].price
-        print(price)
         main_categories.append([i, price])
     
     products_on_sale = ProductSale.objects.all()[:5]
