@@ -112,7 +112,7 @@
                     <p class="text-default-18">Supplier<br>{{ product.supplier.user.username }}</p>
                 </div>
                 <div class="product__right__top__bottom">
-                    <a href="" class="banner__right__btn text-default-white">Add to cart</a>
+                    <a href="{% url 'add_to_cart' product.slug %}" class="banner__right__btn text-default-white">Add to cart</a>
                     <a href="" class="banner__right__btn text-default-white">Seller's profile</a>
                 </div>
             </div>

@@ -11,4 +11,5 @@ urlpatterns = [
     path('add_product/', add_product_page, name='addproductpage'),
     path('addproduct/', add_product, name='addproduct'),
     path('', home_page, name='home'),
+    path('add_to_cart/<slug:slug>', add_to_cart, name='add_to_cart'),
 ]

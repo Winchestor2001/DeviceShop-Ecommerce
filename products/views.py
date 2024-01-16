@@ -10,16 +10,18 @@ from products.utils import filter_product_reviews
 
 
 def product_page(request, slug):
+    context = {}
     profile = Profile.objects.get(user=request.user)
     product = Product.objects.get(slug=slug)
     if request.method == 'POST':
         review = Review.objects.create(user=profile, stars=int(request.POST.get('stars')), text=request.POST.get('text'), product=product)
         for photo in request.FILES.getlist('images'):
             ReviewImage.objects.create(image=photo, review=review)
-    context = {}
     photo = ProductPhoto.objects.filter(product=product)
     reviews = Review.objects.filter(product=product).order_by('-create_at')
+
     review_result = filter_product_reviews(reviews)
+
     you_may_like_products = Product.objects.filter(main_category=product.main_category)[:10]
     categories = ProductCategory.objects.filter(product=product)
     saved = False
@@ -38,6 +40,13 @@ def product_page(request, slug):
     context['categories'] = categories
     context['saved'] = saved
     return render(request, 'product.html', context=context)
+
+
+def add_to_cart(request, slug):
+    profile = Profile.objects.get(user=request.user)
+    product = Product.objects.get(slug=slug)
+    OrderProduct.objects.create(product=product, user=profile)
+    return redirect('cart')
 
 
 def shop_page(request, category=None):
@@ -92,7 +101,6 @@ def shop_page(request, category=None):
     else:
         max_price = 0
 
-
     context = {
         'products': products,
         'main_categories': main_categories,
@@ -103,6 +111,7 @@ def shop_page(request, category=None):
         'sort_by': sort_by
     }
     return render(request, 'shop.html', context=context)
+
 
 def saved_page(request, category=None):
     main_category = None
@@ -168,6 +177,7 @@ def saved_page(request, category=None):
     }
     return render(request, 'saved.html', context=context)
 
+
 def save_product(request, id):
     product = Product.objects.get(id=id)
     profile = Profile.objects.get(user=request.user)
@@ -177,6 +187,7 @@ def save_product(request, id):
     else:
         SavedProduct.objects.create(product=product, user=profile)
     return redirect(request.META.get('HTTP_REFERER', '/'))
+
 
 def add_product_page(request):
     main_categories = MainCategory.objects.all()
