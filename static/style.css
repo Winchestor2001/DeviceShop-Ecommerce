@@ -2855,6 +2855,56 @@ input[type="range"]::-webkit-slider-thumb {
   height: 100%;
 }
 
+#write_review {
+  width: fit-content;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.write__wrapper {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  padding: 20px;
+  height: fit-content;
+  width: 50%;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.write__wrapper form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.write__wrapper form textarea {
+  box-sizing: border-box;
+}
+
+.write__wrapper__stars {
+  display: flex;
+  gap: 2px;
+}
+
+.write__wrapper__stars button {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.write__wrapper__stars button img {
+  width: 30px;
+  height: 30px;
+}
+
 
 @media (max-width: 1600px) {
   .container {
