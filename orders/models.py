@@ -27,3 +27,13 @@ class OrderProduct(models.Model):
 
     def __str__(self):
         return f"{self.user}"
+
+
+class CartProduct(models.Model):
+    profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    quantity = models.IntegerField(default=1)
+
+    def __str__(self):
+        return f"{self.product} - {self.profile}"
+

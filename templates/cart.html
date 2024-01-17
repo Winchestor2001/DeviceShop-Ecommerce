@@ -21,7 +21,8 @@
                         <p class="text-default-18"><b>{{ o.product.name }}</b></p>
                         <p class="text-default text-muted">Brand: {{ o.product.brand }}</p>
                         <p class="text-default text-muted">State: {{ o.product.state }}</p>
-                        <p class="text-default text-muted">Processor: intel Core i9, Video card: intel UHD Graphics,  Memory: 16GB
+                        <p class="text-default text-muted">Category: {% for c in category %} {{ c.category }} {% endfor %}</p>
+                        <p class="text-default text-muted">Other: {% for c in category %} {{ c.name }} {% endfor %}
                             <br>Seller: {{ o.product.supplier }}</p>
                         <div class="cart__left__product__left__content__btns">
                             <button class="cart__left__product__left__content__btn-red text-default">Remove</button>
@@ -34,13 +35,13 @@
                 <div class="cart__left__product__right">
                     <p class="cart__left__product__right-price"><b>${{ o.product.price }}</b></p>
                     <div class="cart__left__product__right__quantity">
-                        <button onclick="minus_quantity(this)" class="cart__left__product__left__content__btn">
+                        <button data-product_id="{{ o.product.id }}" onclick="minus_quantity(this)" class="cart__left__product__left__content__btn">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-dash" viewBox="0 0 16 16">
                                 <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8"/>
                             </svg>
                         </button>
                         <input type="number" name="question_title" class="default-input text-default" value=1 required>
-                        <button onclick="plus_quantity(this)" class="cart__left__product__left__content__btn">
+                        <button data-product_id="{{ o.product.id }}" onclick="plus_quantity(this)" class="cart__left__product__left__content__btn">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
                                 <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
                             </svg>
@@ -128,6 +129,7 @@
         </div>
     </div>
 </main>
+
 <script>
     function save_product(src) {
         event.preventDefault();
@@ -135,6 +137,8 @@
     }
 </script>
 <script>
+
+
     change_total()
     function plus_quantity(btn) {
         let current_quantity = parseInt(btn.previousElementSibling.value)
@@ -144,6 +148,7 @@
         current_price.textContent = `$${(price * new_quantity).toFixed(2)}`
         btn.previousElementSibling.value = parseInt(btn.previousElementSibling.value) + 1
         change_total()
+        console.log(btn.dataset.product_id)
     }
     function minus_quantity(btn) {
         if (btn.nextElementSibling.value > 1) {

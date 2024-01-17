@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from products.models import ProductSale, ProductPhoto, Product, Review, SavedProduct, MainCategory, ProductCategory, Category, ReviewImage
 from accounts.models import Profile
-from orders.models import OrderProduct
+from orders.models import OrderProduct, CartProduct
 from datetime import datetime
 from django.utils.text import slugify
 import markdown
@@ -45,7 +45,7 @@ def product_page(request, slug):
 def add_to_cart(request, slug):
     profile = Profile.objects.get(user=request.user)
     product = Product.objects.get(slug=slug)
-    OrderProduct.objects.create(product=product, user=profile)
+    CartProduct.objects.create(product=product, profile=profile)
     return redirect('cart')
 
 
