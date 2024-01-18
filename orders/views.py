@@ -2,7 +2,7 @@ from django.shortcuts import render
 from .models import CartProduct
 from accounts.models import Profile
 from products.models import ProductPhoto, ProductCategory
-from django.http import HttpResponse
+from django.http import JsonResponse
 
 
 def cart_page(request):
@@ -26,10 +26,12 @@ def cart_page(request):
 
 
 def update_quantity(request):
-    quantity_id = request.GET.get('quantity_id')
-    action = request.POST.get('action')
-    print(quantity_id)
-    return
+    quantity_id = request.GET.get('product_id')
+    action = request.GET.get('action')
+    response_data = {'id': quantity_id, 'Action': action}
+    print(request.body)
+    print(request.GET)
+    return JsonResponse(response_data)
 
 
 def checkout_page(request):

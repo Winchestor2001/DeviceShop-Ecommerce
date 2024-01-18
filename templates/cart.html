@@ -133,52 +133,63 @@
 <script>
     function save_product(src) {
         event.preventDefault();
-        window.location.href = src
+        window.location.href = src;
     }
-</script>
-<script>
 
+    function updateQuantity(product_id, action) {
+        let xhr = new XMLHttpRequest();
+        xhr.open("GET", "/ajax/update_quantity/", true);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhr.send(product_id, action);
+    }
 
     change_total()
     function plus_quantity(btn) {
-        let current_quantity = parseInt(btn.previousElementSibling.value)
-        let current_price = btn.parentElement.previousElementSibling.children[0]
-        let price = parseFloat(current_price.textContent.replace('$', '')) / current_quantity
-        let new_quantity = current_quantity + 1
-        current_price.textContent = `$${(price * new_quantity).toFixed(2)}`
-        btn.previousElementSibling.value = parseInt(btn.previousElementSibling.value) + 1
-        change_total()
-        console.log(btn.dataset.product_id)
+        let current_quantity = parseInt(btn.previousElementSibling.value);
+        let current_price = btn.parentElement.previousElementSibling.children[0];
+        let price = parseFloat(current_price.textContent.replace('$', '')) / current_quantity;
+        let new_quantity = current_quantity + 1;
+        current_price.textContent = `$${(price * new_quantity).toFixed(2)}`;
+        btn.previousElementSibling.value = parseInt(btn.previousElementSibling.value) + 1;
+        change_total();
+        let quantity = btn.dataset.product_id;
+        const plus = "plus";
+        updateQuantity(quantity, plus)
     }
+
     function minus_quantity(btn) {
         if (btn.nextElementSibling.value > 1) {
-            let current_quantity = parseInt(btn.nextElementSibling.value)
-            let current_price = btn.parentElement.previousElementSibling.children[0]
-            let price = parseFloat(current_price.textContent.replace('$', '')) / current_quantity
-            let new_quantity = current_quantity - 1
-            current_price.textContent = `$${(price * new_quantity).toFixed(2)}`
-            btn.nextElementSibling.value = parseInt(btn.nextElementSibling.value) - 1
-            change_total()
+            let current_quantity = parseInt(btn.nextElementSibling.value);
+            let current_price = btn.parentElement.previousElementSibling.children[0];
+            let price = parseFloat(current_price.textContent.replace('$', '')) / current_quantity;
+            let new_quantity = current_quantity - 1;
+            current_price.textContent = `$${(price * new_quantity).toFixed(2)}`;
+            btn.nextElementSibling.value = parseInt(btn.nextElementSibling.value) - 1;
+            change_total();
+            let quantity = btn.dataset.product_id;
+            const minus = "minus";
+            updateQuantity(quantity, minus)
         }
     }
+
     function change_total() {
-        let current_price = document.querySelector('#subtotal')
-        let price = 0.00
+        let current_price = document.querySelector('#subtotal');
+        let price = 0.00;
         document.querySelectorAll('.cart__left__product__right-price').forEach(function (i) {
-            price += parseFloat(i.children[0].textContent.replace('$', ''))
-        })
-        current_price.textContent = `$${(price).toFixed(2)}`
-        let total = document.querySelector('#total')
-        let discount = parseFloat(document.querySelector('#discount').textContent.replace('- $', ''))
-        total.textContent = (parseFloat(price) - discount + 15.00).toFixed(2)
+            price += parseFloat(i.children[0].textContent.replace('$', ''));
+        });
+        current_price.textContent = `$${(price).toFixed(2)}`;
+        let total = document.querySelector('#total');
+        let discount = parseFloat(document.querySelector('#discount').textContent.replace('- $', ''));
+        total.textContent = (parseFloat(price) - discount + 15.00).toFixed(2);
     }
-</script>
-<script>
+
     function open_menu() {
         document.querySelector('.mobile-menu-wrapper').hidden = false;
     }
+
     document.querySelector('.mobile-menu-wrapper').addEventListener('click', function() {
         document.querySelector('.mobile-menu-wrapper').hidden = true;
-    })
+    });
 </script>
 {% endblock %}
