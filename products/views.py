@@ -18,7 +18,15 @@ def product_page(request, slug):
         for photo in request.FILES.getlist('images'):
             ReviewImage.objects.create(image=photo, review=review)
     photo = ProductPhoto.objects.filter(product=product)
+
     reviews = Review.objects.filter(product=product).order_by('-create_at')
+
+    
+    stars = 0
+    for i in reviews:
+        stars += int(i.stars)
+    stars = stars / len(reviews)
+    stars = [round(stars, 1), range(5)]
 
     review_result = filter_product_reviews(reviews)
 
@@ -31,6 +39,7 @@ def product_page(request, slug):
     all_photo = []
     for i in photo:
         all_photo.append(i)
+    
     markdown_to_html = markdown.markdown(product.description)
     context['markdown_to_html'] = markdown_to_html
     context['product'] = product
@@ -39,6 +48,7 @@ def product_page(request, slug):
     context['you_may_like_products'] = you_may_like_products
     context['categories'] = categories
     context['saved'] = saved
+    context['stars'] = stars
     return render(request, 'product.html', context=context)
 
 
