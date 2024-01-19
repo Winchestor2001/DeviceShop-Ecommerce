@@ -64,17 +64,18 @@
                 <p class="text-default"><b>Have a coupon?</b></p>
                 <div class="cart__right__coupons__input card">
                     <input type="text" class="default-input text-default" placeholder="Add coupon" required="">
-                    <button class="cart__left__product__left__content__btn text-default-primary">Apply</button>
+                    <button id="coupon_btn" class="cart__left__product__left__content__btn text-default-primary">Apply</button>
                 </div>
-                <div class="cart__right__coupon card">
+                <p class="text-danger" id="coupon_danger"></p>
+                <div class="cart__right__coupon card" style="display: none;">
                     <p class="text-default">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-ticket-perforated" viewBox="0 0 16 16">
                             <path d="M4 4.85v.9h1v-.9zm7 0v.9h1v-.9zm-7 1.8v.9h1v-.9H4m7 0v.9h1v-.9h-1m-7 1.8v.9h1v-.9zm7 0v.9h1v-.9zm-7 1.8v.9h1v-.9zm7 0v.9h1v-.9z"/>
                             <path d="M1.5 3A1.5 1.5 0 0 0 0 4.5V6a.5.5 0 0 0 .5.5 1.5 1.5 0 1 1 0 3 .5.5 0 0 0-.5.5v1.5A1.5 1.5 0 0 0 1.5 13h13a1.5 1.5 0 0 0 1.5-1.5V10a.5.5 0 0 0-.5-.5 1.5 1.5 0 0 1 0-3A.5.5 0 0 0 16 6V4.5A1.5 1.5 0 0 0 14.5 3zM1 4.5a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 .5.5v1.05a2.5 2.5 0 0 0 0 4.9v1.05a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-1.05a2.5 2.5 0 0 0 0-4.9z"/>
                         </svg>
-                        GRMKSDF
+                        <span></span>
                     </p>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                    <svg onclick="hideCoupon(this)" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
                         <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z"/>
                     </svg>
                 </div>
@@ -87,7 +88,7 @@
                     </div>
                     <div class="cart__right__checkout__top-item">
                         <p class="text-gray-18">Discount:</p>
-                        <p class="text-success" id="discount">- $10.00</p>
+                        <p class="text-success" id="discount">- $0.00</p>
                     </div>
                     <div class="cart__right__checkout__top-item">
                         <p class="text-gray-18">Tax:</p>
@@ -128,6 +129,7 @@
         </div>
     </div>
 </main>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script>
     function save_product(src) {
         event.preventDefault();
@@ -166,6 +168,49 @@
         let total = document.querySelector('#total')
         let discount = parseFloat(document.querySelector('#discount').textContent.replace('- $', ''))
         total.textContent = (parseFloat(price) - discount + 15.00).toFixed(2)
+    }
+</script>
+<script>
+    let btn = document.querySelector('#coupon_btn')
+    let input = btn.previousElementSibling
+    btn.addEventListener('click', function () {
+        if (input.value != "") {
+            var postData = {
+                coupon: `${input.value}`,
+            };
+            $.ajax({
+                url: "{% url 'check_coupon' %}",
+                type: "GET",
+                data: postData,
+                success: function (data) {
+                    if (data != "None") {
+                        data = data.split('code": "')[1].split(', "price": ')
+                        code = data[0].slice(0, -1);
+                        price = (parseFloat(data[1].slice(0, -3))).toFixed(2)
+                        let coupon = document.querySelector('.cart__right__coupon')
+                        coupon.style.display = 'flex'
+                        coupon.children[0].children[1].textContent = code
+                        document.querySelector('#discount').textContent = `- $${price}`
+                        change_total()
+                    } else {
+                        let danger = document.querySelector('#coupon_danger')
+                        danger.textContent = 'Coupon not found'
+                        setTimeout(function() {
+                            danger.textContent = ''
+                        }, 3000)
+                    }
+                },
+                error: function (xhr, status, error) {
+                    console.error("Ошибка при выполнении AJAX-запроса: " + status + " " + error);
+                }
+            });
+        }
+    })
+    function hideCoupon(btn) {
+        btn.parentElement.style.display = "none";
+        btn.previousElementSibling.children[1].textContent = ""
+        document.querySelector('#discount').textContent = `- $0.00`
+        change_total()
     }
 </script>
 <script>

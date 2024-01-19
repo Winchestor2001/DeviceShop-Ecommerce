@@ -1,7 +1,9 @@
-from django.shortcuts import render
-from .models import OrderProduct
+from django.shortcuts import render, redirect
+from .models import OrderProduct, Coupon
 from accounts.models import Profile
 from products.models import ProductPhoto
+from django.http import JsonResponse, HttpResponse
+from django.core.serializers import serialize
 
 
 def cart_page(request):
@@ -20,3 +22,12 @@ def cart_page(request):
 
 def checkout_page(request):
     return render(request, 'checkout.html')
+
+def check_coupon(request):
+    if request.method == 'GET':
+        coupon = Coupon.objects.filter(code=request.GET.get('coupon'))
+        if coupon.exists():
+            data = serialize('json', coupon)
+            return JsonResponse(data, safe=False)
+        else:
+            return HttpResponse(None)
