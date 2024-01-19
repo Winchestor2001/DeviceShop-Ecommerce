@@ -106,3 +106,11 @@ def register_page(request):
 def logout_page(request):
     logout(request)
     return redirect('login')
+
+
+def forgot_password_page(request):
+    return render(request, 'forgot_password.html')
+
+
+def change_password_page(request):
+    return render(request, 'change_password.html')
