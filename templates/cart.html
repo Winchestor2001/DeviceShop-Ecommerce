@@ -11,22 +11,28 @@
     <h2 class="cart__header container">My cart (3)</h2>
     <div class="cart container">
         <div class="cart__left card">
+            {% for p, o in orders %}
             <div class="cart__left__product">
                 <div class="cart__left__product__left">
                     <div class="cart__left__product__left__img">
-                        <img src="/media/products/product_2.png" alt="">
+                        <img src="{{ p }}" alt="">
                     </div>
                     <div class="cart__left__product__left__content">
-                        <p class="text-default-18"><b>Laptop</b></p>
-                        <p class="text-default text-muted">Processor: intel Core i9, Video card: intel UHD Graphics,  Memory: 16GB<br>Seller: HP</p>
+                        <p class="text-default-18"><b>{{ o.product.name }}</b></p>
+                        <p class="text-default text-muted">Brand: {{ o.product.brand }}</p>
+                        <p class="text-default text-muted">State: {{ o.product.state }}</p>
+                        <p class="text-default text-muted">Processor: intel Core i9, Video card: intel UHD Graphics,  Memory: 16GB
+                            <br>Seller: {{ o.product.supplier }}</p>
                         <div class="cart__left__product__left__content__btns">
                             <button class="cart__left__product__left__content__btn-red text-default">Remove</button>
-                            <button class="cart__left__product__left__content__btn text-default-primary">Save for later</button>
+                            <button onclick="save_product(`{% url 'save_product' o.product.id %}`)" class="cart__left__product__left__content__btn text-default-primary">
+                                Save for later
+                            </button>
                         </div>
                     </div>
                 </div>
                 <div class="cart__left__product__right">
-                    <p class="cart__left__product__right-price"><b>$78.99</b></p>
+                    <p class="cart__left__product__right-price"><b>${{ o.product.price }}</b></p>
                     <div class="cart__left__product__right__quantity">
                         <button onclick="minus_quantity(this)" class="cart__left__product__left__content__btn">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-dash" viewBox="0 0 16 16">
@@ -42,68 +48,7 @@
                     </div>
                 </div>
             </div>
-            <div class="cart__left__product">
-                <div class="cart__left__product__left">
-                    <div class="cart__left__product__left__img">
-                        <img src="/media/products/product_2.png" alt="">
-                    </div>
-                    <div class="cart__left__product__left__content">
-                        <p class="text-default-18"><b>Laptop</b></p>
-                        <p class="text-default text-muted">Processor: intel Core i9, Video card: intel UHD Graphics,  Memory: 16GB<br>Seller: HP</p>
-                        <div class="cart__left__product__left__content__btns">
-                            <button class="cart__left__product__left__content__btn-red text-default">Remove</button>
-                            <button class="cart__left__product__left__content__btn text-default-primary">Save for later</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="cart__left__product__right">
-                    <p class="cart__left__product__right-price"><b>$78.99</b></p>
-                    <div class="cart__left__product__right__quantity">
-                        <button onclick="minus_quantity(this)" class="cart__left__product__left__content__btn">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-dash" viewBox="0 0 16 16">
-                                <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8"/>
-                            </svg>
-                        </button>
-                        <input type="number" name="question_title" class="default-input text-default" value=1 required>
-                        <button onclick="plus_quantity(this)" class="cart__left__product__left__content__btn">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
-                                <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
-                            </svg>
-                        </button>
-                    </div>
-                </div>
-            </div>
-            <div class="cart__left__product">
-                <div class="cart__left__product__left">
-                    <div class="cart__left__product__left__img">
-                        <img src="/media/products/product_2.png" alt="">
-                    </div>
-                    <div class="cart__left__product__left__content">
-                        <p class="text-default-18"><b>Laptop</b></p>
-                        <p class="text-default text-muted">Processor: intel Core i9, Video card: intel UHD Graphics,  Memory: 16GB<br>Seller: HP</p>
-                        <div class="cart__left__product__left__content__btns">
-                            <button class="cart__left__product__left__content__btn-red text-default">Remove</button>
-                            <button class="cart__left__product__left__content__btn text-default-primary">Save for later</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="cart__left__product__right">
-                    <p class="cart__left__product__right-price"><b>$78.99</b></p>
-                    <div class="cart__left__product__right__quantity">
-                        <button onclick="minus_quantity(this)" class="cart__left__product__left__content__btn">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-dash" viewBox="0 0 16 16">
-                                <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8"/>
-                            </svg>
-                        </button>
-                        <input type="number" name="question_title" class="default-input text-default" value=1 required>
-                        <button onclick="plus_quantity(this)" class="cart__left__product__left__content__btn">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
-                                <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
-                            </svg>
-                        </button>
-                    </div>
-                </div>
-            </div>
+            {% endfor %}
             <div class="cart__left__btns">
                 <a href="{% url 'shop' %}" id="offers" class="banner__right__btn text-default-white">
                     <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
@@ -183,6 +128,12 @@
         </div>
     </div>
 </main>
+<script>
+    function save_product(src) {
+        event.preventDefault();
+        window.location.href = src
+    }
+</script>
 <script>
     change_total()
     function plus_quantity(btn) {
