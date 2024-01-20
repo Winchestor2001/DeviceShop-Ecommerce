@@ -8,10 +8,11 @@
 
 {% block content %}
 <main>
-    <h2 class="cart__header container">My cart (3)</h2>
+    <h2 class="cart__header container">My cart ({{ len_cart }})</h2>
     <div class="cart container">
+        {% if len_cart != 0 %}
         <div class="cart__left card">
-            {% for p, o in orders %}
+            {% for p, o, c in orders %}
             <div class="cart__left__product">
                 <div class="cart__left__product__left">
                     <div class="cart__left__product__left__img">
@@ -21,11 +22,11 @@
                         <p class="text-default-18"><b>{{ o.product.name }}</b></p>
                         <p class="text-default text-muted">Brand: {{ o.product.brand }}</p>
                         <p class="text-default text-muted">State: {{ o.product.state }}</p>
-                        <p class="text-default text-muted">Category: {% for c in category %} {{ c.category }} {% endfor %}</p>
-                        <p class="text-default text-muted">Other: {% for c in category %} {{ c.name }} {% endfor %}
+                        <p class="text-default text-muted">Category: {{ c.category }}</p>
+                        <p class="text-default text-muted">Other: {{ c.name }}
                             <br>Seller: {{ o.product.supplier }}</p>
                         <div class="cart__left__product__left__content__btns">
-                            <button class="cart__left__product__left__content__btn-red text-default">Remove</button>
+                            <a href="{% url 'delete_cart' o.id %}" class="cart__left__product__left__content__btn-red text-default">Remove</a>
                             <button onclick="save_product(`{% url 'save_product' o.product.id %}`)" class="cart__left__product__left__content__btn text-default-primary">
                                 Save for later
                             </button>
@@ -40,7 +41,7 @@
                                 <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8"/>
                             </svg>
                         </button>
-                        <input type="number" name="question_title" class="default-input text-default" value=1 required>
+                        <input type="number" name="question_title" class="default-input text-default" value="{{ o.quantity }}" required disabled>
                         <button data-product_id="{{ o.product.id }}" onclick="plus_quantity(this)" class="cart__left__product__left__content__btn">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
                                 <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
@@ -57,9 +58,15 @@
                       </svg>
                     Back to shop
                 </a>
-                <button class="cart__left__product__left__content__btn text-default-primary">Remove all</button>
+                <a href="{% url 'delete_all_cart' %}" class="cart__left__product__left__content__btn text-default-primary">Remove all</a>
             </div>
         </div>
+        {% else %}
+        <div class="container empty_text_in_cart">
+            <h1>Cart is empty!</h1>
+            <a href="{% url 'shop' %}">Add product</a>
+        </div>
+        {% endif %}
         <div class="cart__right">
             <div class="cart__right__coupons card">
                 <p class="text-default"><b>Have a coupon?</b></p>
@@ -137,10 +144,12 @@
     }
 
     function updateQuantity(product_id, action) {
-        let xhr = new XMLHttpRequest();
-        xhr.open("GET", "/ajax/update_quantity/", true);
-        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-        xhr.send(product_id, action);
+    let xhr = new XMLHttpRequest();
+    let url = `/ajax/update_quantity/?product_id=${product_id}&action=${action}`;
+
+    xhr.open("GET", url, true);
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xhr.send();
     }
 
     change_total()

@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import CartProduct
 from accounts.models import Profile
 from products.models import ProductPhoto, ProductCategory
@@ -18,19 +18,33 @@ def cart_page(request):
             all_photo.append(p)
         for c in categories:
             category.append(c)
-    final_order = zip(all_photo, orders_in_cart)
+    final_order = zip(all_photo, orders_in_cart, category)
+    context['len_cart'] = len(orders_in_cart)
     context['orders'] = final_order
-    context['category'] = category
 
     return render(request, 'cart.html', context=context)
 
 
+def delete_cart(request, cart_id):
+    CartProduct.objects.get(profile__user=request.user, id=cart_id).delete()
+    return redirect("cart")
+
+
+def delete_all_cart(request):
+    CartProduct.objects.filter(profile__user=request.user).delete()
+    return redirect("cart")
+
+
 def update_quantity(request):
-    quantity_id = request.GET.get('product_id')
+    product_id = request.GET.get('product_id')
     action = request.GET.get('action')
-    response_data = {'id': quantity_id, 'Action': action}
-    print(request.body)
-    print(request.GET)
+    response_data = {'id': product_id, 'Action': action}
+    cart_product = CartProduct.objects.get(profile__user=request.user, product__id=product_id)
+    if action == 'plus':
+        cart_product.quantity += 1
+    if action == 'minus':
+        cart_product.quantity -= 1
+    cart_product.save()
     return JsonResponse(response_data)
 
 

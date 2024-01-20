@@ -44,8 +44,13 @@ def product_page(request, slug):
 
 def add_to_cart(request, slug):
     profile = Profile.objects.get(user=request.user)
+    cart = CartProduct.objects.filter(profile=profile, product__slug=slug)
     product = Product.objects.get(slug=slug)
-    CartProduct.objects.create(product=product, profile=profile)
+    if not cart:
+        CartProduct.objects.create(product=product, profile=profile)
+    else:
+        cart[0].quantity += 1
+        cart[0].save()
     return redirect('cart')
 
 

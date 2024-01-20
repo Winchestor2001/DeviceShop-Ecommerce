@@ -1,19 +1,22 @@
 from django.core.files.storage import default_storage
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
+from django.contrib.auth.hashers import make_password
 from django.contrib.auth import authenticate, login, logout
 
 from accounts.models import Profile
 
 
 def account_page(request):
+    profile = Profile.objects.get(user=request.user)
+    user = User.objects.get(profile=profile)
     context = {}
     if not request.user.is_authenticated:
         return redirect('login')
-    profile = Profile.objects.get(user=request.user)
     if request.method == "POST":
         email = request.POST.get('email')
         phone_number = request.POST.get('phone_number')
+        password = request.POST.get('password')
         if request.FILES:
             file_obj = request.FILES['photo']
             filename = f"profile/{request.user}_{file_obj}"
@@ -28,9 +31,17 @@ def account_page(request):
                 email = f"{email}@gmail.com"
             profile.user.email = email
         if phone_number:
-            profile.phone_number = phone_number
+            if len(phone_number) == 13 and phone_number.startswith('+998'):
+                profile.phone_number = phone_number
+            else:
+                context['error'] = 'Please enter phone number with +998!'
+        if password:
+            if len(password) >= 8:
+                user.password = make_password(password)
+            else:
+                context['error'] = 'Password must be at least 8 characters!'
     profile.save()
-    profile.user.save()
+    user.save()
     context['profile'] = profile
 
     return render(request, 'account.html', context=context)
