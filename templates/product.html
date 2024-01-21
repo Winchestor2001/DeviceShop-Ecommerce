@@ -51,12 +51,14 @@
                 <p class="product__middle__top-price"><b>{{ product.name }}</b></p>
                 <div class="shop__products__right__middle__bottom">
                     <div class="shop__product__top__left__stars">
+                        {% for s in stars.1 %}
+                        {% if s < stars.0 %}
                         <img src="/media/star.png" alt="">
-                        <img src="/media/star.png" alt="">
-                        <img src="/media/star.png" alt="">
-                        <img src="/media/star.png" alt="">
+                        {% else %}
                         <img src="/media/star2.png" alt="">
-                        <p class="text-default-18">4.5</p>
+                        {% endif %}
+                        {% endfor %}
+                        <p class="text-default-18">{{ stars.0 }}</p>
                     </div>
                     <svg xmlns="http://www.w3.org/2000/svg" width="6" height="6" viewBox="0 0 6 6" fill="none">
                         <circle cx="3" cy="3" r="3" fill="#DEE2E7"></circle>
@@ -65,7 +67,7 @@
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
                             <path d="M3.33317 3.33329H16.6665V13.3333H4.30817L3.33317 14.3083V3.33329ZM3.33317 1.66663C2.4165 1.66663 1.67484 2.41663 1.67484 3.33329L1.6665 18.3333L4.99984 15H16.6665C17.5832 15 18.3332 14.25 18.3332 13.3333V3.33329C18.3332 2.41663 17.5832 1.66663 16.6665 1.66663H3.33317ZM4.99984 9.99996H14.9998V11.6666H4.99984V9.99996ZM4.99984 7.49996H14.9998V9.16663H4.99984V7.49996ZM4.99984 4.99996H14.9998V6.66663H4.99984V4.99996Z" fill="#8B96A5"/>
                         </svg>
-                        32 reviews
+                        {{ reviews|length }} reviews
                     </p>
                     <svg xmlns="http://www.w3.org/2000/svg" width="6" height="6" viewBox="0 0 6 6" fill="none">
                         <circle cx="3" cy="3" r="3" fill="#DEE2E7"></circle>
@@ -162,11 +164,13 @@
                                 <div class="product__bottom__review__user-content">
                                     <p class="text-default">{{ review.review.user }}</p>
                                     <div class="shop__product__top__left__stars">
+                                        {% for s in stars.1 %}
+                                        {% if s < review.review.stars %}
                                         <img src="/media/star.png" alt="">
-                                        <img src="/media/star.png" alt="">
-                                        <img src="/media/star.png" alt="">
-                                        <img src="/media/star.png" alt="">
+                                        {% else %}
                                         <img src="/media/star2.png" alt="">
+                                        {% endif %}
+                                        {% endfor %}
                                         <p class="text-default">{{ review.review.stars }}</p>
                                     </div>
                                 </div>
