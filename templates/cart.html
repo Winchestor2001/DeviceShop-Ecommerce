@@ -8,10 +8,11 @@
 
 {% block content %}
 <main>
-    <h2 class="cart__header container">My cart (3)</h2>
+    <h2 class="cart__header container">My cart ({{ len_cart }})</h2>
     <div class="cart container">
+        {% if len_cart != 0 %}
         <div class="cart__left card">
-            {% for p, o in orders %}
+            {% for p, o, c in orders %}
             <div class="cart__left__product">
                 <div class="cart__left__product__left">
                     <div class="cart__left__product__left__img">
@@ -21,10 +22,11 @@
                         <p class="text-default-18"><b>{{ o.product.name }}</b></p>
                         <p class="text-default text-muted">Brand: {{ o.product.brand }}</p>
                         <p class="text-default text-muted">State: {{ o.product.state }}</p>
-                        <p class="text-default text-muted">Processor: intel Core i9, Video card: intel UHD Graphics,  Memory: 16GB
+                        <p class="text-default text-muted">Category: {{ c.category }}</p>
+                        <p class="text-default text-muted">Other: {{ c.name }}
                             <br>Seller: {{ o.product.supplier }}</p>
                         <div class="cart__left__product__left__content__btns">
-                            <button class="cart__left__product__left__content__btn-red text-default">Remove</button>
+                            <a href="{% url 'delete_cart' o.id %}" class="cart__left__product__left__content__btn-red text-default">Remove</a>
                             <button onclick="save_product(`{% url 'save_product' o.product.id %}`)" class="cart__left__product__left__content__btn text-default-primary">
                                 Save for later
                             </button>
@@ -34,13 +36,13 @@
                 <div class="cart__left__product__right">
                     <p class="cart__left__product__right-price"><b>${{ o.product.price }}</b></p>
                     <div class="cart__left__product__right__quantity">
-                        <button onclick="minus_quantity(this)" class="cart__left__product__left__content__btn">
+                        <button data-product_id="{{ o.product.id }}" onclick="minus_quantity(this)" class="cart__left__product__left__content__btn">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-dash" viewBox="0 0 16 16">
                                 <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8"/>
                             </svg>
                         </button>
-                        <input type="number" name="question_title" class="default-input text-default" value=1 required>
-                        <button onclick="plus_quantity(this)" class="cart__left__product__left__content__btn">
+                        <input type="number" name="question_title" class="default-input text-default" value="{{ o.quantity }}" required disabled>
+                        <button data-product_id="{{ o.product.id }}" onclick="plus_quantity(this)" class="cart__left__product__left__content__btn">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
                                 <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
                             </svg>
@@ -56,9 +58,15 @@
                       </svg>
                     Back to shop
                 </a>
-                <button class="cart__left__product__left__content__btn text-default-primary">Remove all</button>
+                <a href="{% url 'delete_all_cart' %}" class="cart__left__product__left__content__btn text-default-primary">Remove all</a>
             </div>
         </div>
+        {% else %}
+        <div class="container empty_text_in_cart">
+            <h1>Cart is empty!</h1>
+            <a href="{% url 'shop' %}">Add product</a>
+        </div>
+        {% endif %}
         <div class="cart__right">
             <div class="cart__right__coupons card">
                 <p class="text-default"><b>Have a coupon?</b></p>
@@ -129,45 +137,62 @@
         </div>
     </div>
 </main>
+
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script>
     function save_product(src) {
         event.preventDefault();
-        window.location.href = src
+        window.location.href = src;
     }
-</script>
-<script>
+
+    function updateQuantity(product_id, action) {
+    let xhr = new XMLHttpRequest();
+    let url = `/ajax/update_quantity/?product_id=${product_id}&action=${action}`;
+
+    xhr.open("GET", url, true);
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xhr.send();
+    }
+
     change_total()
     function plus_quantity(btn) {
-        let current_quantity = parseInt(btn.previousElementSibling.value)
-        let current_price = btn.parentElement.previousElementSibling.children[0]
-        let price = parseFloat(current_price.textContent.replace('$', '')) / current_quantity
-        let new_quantity = current_quantity + 1
-        current_price.textContent = `$${(price * new_quantity).toFixed(2)}`
-        btn.previousElementSibling.value = parseInt(btn.previousElementSibling.value) + 1
-        change_total()
+        let current_quantity = parseInt(btn.previousElementSibling.value);
+        let current_price = btn.parentElement.previousElementSibling.children[0];
+        let price = parseFloat(current_price.textContent.replace('$', '')) / current_quantity;
+        let new_quantity = current_quantity + 1;
+        current_price.textContent = `$${(price * new_quantity).toFixed(2)}`;
+        btn.previousElementSibling.value = parseInt(btn.previousElementSibling.value) + 1;
+        change_total();
+        let quantity = btn.dataset.product_id;
+        const plus = "plus";
+        updateQuantity(quantity, plus)
     }
+
     function minus_quantity(btn) {
         if (btn.nextElementSibling.value > 1) {
-            let current_quantity = parseInt(btn.nextElementSibling.value)
-            let current_price = btn.parentElement.previousElementSibling.children[0]
-            let price = parseFloat(current_price.textContent.replace('$', '')) / current_quantity
-            let new_quantity = current_quantity - 1
-            current_price.textContent = `$${(price * new_quantity).toFixed(2)}`
-            btn.nextElementSibling.value = parseInt(btn.nextElementSibling.value) - 1
-            change_total()
+            let current_quantity = parseInt(btn.nextElementSibling.value);
+            let current_price = btn.parentElement.previousElementSibling.children[0];
+            let price = parseFloat(current_price.textContent.replace('$', '')) / current_quantity;
+            let new_quantity = current_quantity - 1;
+            current_price.textContent = `$${(price * new_quantity).toFixed(2)}`;
+            btn.nextElementSibling.value = parseInt(btn.nextElementSibling.value) - 1;
+            change_total();
+            let quantity = btn.dataset.product_id;
+            const minus = "minus";
+            updateQuantity(quantity, minus)
         }
     }
+
     function change_total() {
-        let current_price = document.querySelector('#subtotal')
-        let price = 0.00
+        let current_price = document.querySelector('#subtotal');
+        let price = 0.00;
         document.querySelectorAll('.cart__left__product__right-price').forEach(function (i) {
-            price += parseFloat(i.children[0].textContent.replace('$', ''))
-        })
-        current_price.textContent = `$${(price).toFixed(2)}`
-        let total = document.querySelector('#total')
-        let discount = parseFloat(document.querySelector('#discount').textContent.replace('- $', ''))
-        total.textContent = (parseFloat(price) - discount + 15.00).toFixed(2)
+            price += parseFloat(i.children[0].textContent.replace('$', ''));
+        });
+        current_price.textContent = `$${(price).toFixed(2)}`;
+        let total = document.querySelector('#total');
+        let discount = parseFloat(document.querySelector('#discount').textContent.replace('- $', ''));
+        total.textContent = (parseFloat(price) - discount + 15.00).toFixed(2);
     }
 </script>
 <script>
@@ -217,8 +242,9 @@
     function open_menu() {
         document.querySelector('.mobile-menu-wrapper').hidden = false;
     }
+
     document.querySelector('.mobile-menu-wrapper').addEventListener('click', function() {
         document.querySelector('.mobile-menu-wrapper').hidden = true;
-    })
+    });
 </script>
 {% endblock %}

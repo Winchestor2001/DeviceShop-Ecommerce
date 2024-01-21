@@ -2067,6 +2067,15 @@ input[type="range"]::-webkit-slider-thumb {
   gap: 20px;
 }
 
+.empty_text_in_cart {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 25px;
+    margin-bottom: 70px;
+}
+
 .cart__left {
   width: 75%;
   display: flex;
