@@ -21,13 +21,7 @@ def product_page(request, slug):
 
     reviews = Review.objects.filter(product=product).order_by('-create_at')
 
-    stars = [0, range(5)]
-    if reviews:
-        stars = 0
-        for i in reviews:
-            stars += int(i.stars)
-        stars = stars / len(reviews)
-        stars = [round(stars, 1), range(5)]
+    for_range = range(5)
 
     review_result = filter_product_reviews(reviews)
 
@@ -49,7 +43,7 @@ def product_page(request, slug):
     context['you_may_like_products'] = you_may_like_products
     context['categories'] = categories
     context['saved'] = saved
-    context['stars'] = stars
+    context['range'] = for_range
     return render(request, 'product.html', context=context)
 
 
@@ -86,10 +80,28 @@ def shop_page(request, category=None):
     min = 0
     max = max_price
 
+    active_filters = []
+    showing_active_filters = []
     if request.method == 'POST':
+        star = 0
+        print(request.POST)
+        if request.POST.get('star5'):
+            star = 5
+        elif request.POST.get('star4'):
+            star = 4
+        elif request.POST.get('star3'):
+            star = 3
+        elif request.POST.get('star2'):
+            star = 2
+        elif request.POST.get('star1'):
+            star = 1
         min = float(request.POST.get('min'))
         max = float(request.POST.get('max'))
         products_list = products_list.filter(price__gte=min, price__lte=max)
+        if star:
+            active_filters.append(f'star{star}')
+            showing_active_filters.append(f'{star} ★')
+            products_list = products_list.filter(stars__gte=star, stars__lt=star+1)
 
     sort_by = request.GET.get('sort')
     if sort_by != None:
@@ -113,7 +125,7 @@ def shop_page(request, category=None):
             rating = 0
             for s in rating_list:
                 rating += s.stars
-            rating = rating / len(rating_list)
+            rating = round(rating / len(rating_list), 1)
             products.append([i, photo, rating, len(orders), saved])
         else:
             products.append([i, photo, "0 Reviews", len(orders), saved])
@@ -135,7 +147,9 @@ def shop_page(request, category=None):
         'max': max,
         'brands': brands,
         'sort_by': sort_by,
-        'range': range(1, 6)
+        'range': range(1, 6),
+        'active_filters': active_filters,
+        'showing_active_filters': showing_active_filters
     }
     return render(request, 'shop.html', context=context)
 

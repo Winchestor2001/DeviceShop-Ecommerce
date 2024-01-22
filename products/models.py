@@ -26,6 +26,7 @@ class Product(models.Model):
     state = models.CharField(max_length=50)
     create_at = models.DateTimeField(auto_now_add=True)
     main_category = models.ForeignKey(MainCategory, on_delete=models.CASCADE)
+    stars = models.FloatField(default=0)
 
     def __str__(self):
         return f"{self.brand} {self.name}"
@@ -37,6 +38,19 @@ class Review(models.Model):
     text = models.TextField()
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     create_at = models.DateTimeField(auto_now_add=True, blank=True, null=True)
+
+    def save(self, *args, **kwargs):
+        product = self.product
+        reviews = Review.objects.filter(product=product)
+        stars = 0
+        for i in reviews:
+            stars += i.stars
+        stars += self.stars
+        length = len(reviews) + 1
+        stars = round(stars / length, 1)
+        product.stars = stars
+        product.save()
+        super(Review, self).save(*args, **kwargs)
 
     def str(self):
         return f"{self.user}"
