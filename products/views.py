@@ -74,6 +74,22 @@ def shop_page(request, category=None):
         products_list = Product.objects.filter(main_category=main_category).distinct()
         brands = Product.objects.filter(main_category=main_category).values_list('brand', flat=True).distinct()
 
+    if products_list.exists():
+        if category == None:
+            max_price = Product.objects.order_by('price').last().price
+        else:
+            max_price = Product.objects.filter(main_category=main_category).order_by('price').last().price
+    else:
+        max_price = 0
+
+    min = 0
+    max = max_price
+
+    if request.method == 'POST':
+        min = float(request.POST.get('min'))
+        max = float(request.POST.get('max'))
+        products_list = products_list.filter(price__gte=min, price__lte=max)
+
     sort_by = request.GET.get('sort')
     if sort_by != None:
         if sort_by == 'date_new':
@@ -97,9 +113,9 @@ def shop_page(request, category=None):
             for s in rating_list:
                 rating += s.stars
             rating = rating / len(rating_list)
-            products.append([i, photo, [rating, range(round(rating))], len(orders), saved])
+            products.append([i, photo, rating, len(orders), saved])
         else:
-            products.append([i, photo, ["0 Reviews", range(round(0))], len(orders), saved])
+            products.append([i, photo, "0 Reviews", len(orders), saved])
 
     main_categories = MainCategory.objects.all()
 
@@ -108,22 +124,17 @@ def shop_page(request, category=None):
     else:
         categories = Category.objects.filter(category=main_category)
 
-    if products_list.exists():
-        if category == None:
-            max_price = Product.objects.order_by('price').last().price
-        else:
-            max_price = Product.objects.filter(main_category=main_category).order_by('price').last().price
-    else:
-        max_price = 0
-
     context = {
         'products': products,
         'main_categories': main_categories,
         'current_category': main_category,
         'categories': categories,
         'max_price': max_price,
+        'min': min,
+        'max': max,
         'brands': brands,
-        'sort_by': sort_by
+        'sort_by': sort_by,
+        'range': range(1, 6)
     }
     return render(request, 'shop.html', context=context)
 

@@ -15,9 +15,12 @@
         <button type="submit" class="header__btn text-default-white">Search</button>
     </form>
     <div class="shop container">
-        <div class="shop__left">
+        <form method="post" class="shop__left">
+            {% csrf_token %}
+            <input type="text" id="hidden_search" name="hidden_search" hidden>
+            <button id="btn_submit" hidden type="submit"></button>
             <div class="shop__left-items">
-                <button onclick="showOrHideItems(this)" class="shop__left-items__header">
+                <button type="button" onclick="showOrHideItems(this)" class="shop__left-items__header">
                     <p class="text-default"><b>Category</b></p>
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                         <path d="M12 8.29504L6 14.295L7.41 15.705L12 11.125L16.59 15.705L18 14.295L12 8.29504Z" fill="#8B96A5"/>
@@ -31,7 +34,7 @@
                 </div>
             </div>
             <div class="shop__left-items">
-                <button onclick="showOrHideItems(this)" class="shop__left-items__header">
+                <button type="button" onclick="showOrHideItems(this)" class="shop__left-items__header">
                     <p class="text-default"><b>Price</b></p>
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                         <path d="M12 8.29504L6 14.295L7.41 15.705L12 11.125L16.59 15.705L18 14.295L12 8.29504Z" fill="#8B96A5"/>
@@ -46,25 +49,25 @@
                             </div> 
                         </div> 
                         <div class="range-input"> 
-                            <input type="range" class="min-range" min="0" max="{{ max_price }}" value="0" step="1"> 
-                            <input type="range" class="max-range" min="0" max="{{ max_price }}" value="{{ max_price }}" step="1"> 
+                            <input type="range" class="min-range" min="0" max="{{ max_price }}" value="{{ min }}" step="1"> 
+                            <input type="range" class="max-range" min="0" max="{{ max_price }}" value="{{ max }}" step="1"> 
                         </div> 
                         <div class="price-input">
                             <div class="price-input__field">
                                 <label for="min" class="text-default">Min</label>
-                                <input placeholder="Min" type="number" class="min-input default-input text-default" name="min" id="min" value="0"> 
+                                <input placeholder="Min" type="number" class="min-input default-input text-default" name="min" id="min" value="{{ min }}"> 
                             </div>
                             <div class="price-input__field">
                                 <label for="max" class="text-default">Max</label>
-                                <input placeholder="Max" type="number" class="max-input default-input text-default" name="max" id="max" value="{{ max_price }}"> 
+                                <input placeholder="Max" type="number" class="max-input default-input text-default" name="max" id="max" value="{{ max }}"> 
                             </div>
                         </div>
                     </div> 
-                    <a href="" class="banner__right__btn text-default-white" style="text-align: center; margin-top: 8px;">Apply</a>
+                    <button type="submit" class="banner__right__btn text-default-white" style="text-align: center; margin-top: 8px;">Apply</button>
                 </div>
             </div>
             <div class="shop__left-items">
-                <button onclick="showOrHideItems(this)" class="shop__left-items__header">
+                <button type="button" onclick="showOrHideItems(this)" class="shop__left-items__header">
                     <p class="text-default"><b>Rating</b></p>
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                         <path d="M12 8.29504L6 14.295L7.41 15.705L12 11.125L16.59 15.705L18 14.295L12 8.29504Z" fill="#8B96A5"/>
@@ -72,7 +75,7 @@
                 </button>
                 <div class="shop__left-items-wrapper">
                     <div onclick="make_active2(this)" class="shop__left-item-checkbox-wrapper text-default">
-                        <input class="star_checbox" type="checkbox" name="">
+                        <input class="star_checbox" type="checkbox" name="star5">
                         <svg xmlns="http://www.w3.org/2000/svg" width="93" height="18" viewBox="0 0 93 18" fill="none">
                             <path fill-rule="evenodd" clip-rule="evenodd" d="M83.7 14.4663L89.4474 18L87.9222 11.34L93 6.85895L86.3133 6.28105L83.7 0L81.0867 6.28105L74.4 6.85895L79.4778 11.34L77.9526 18L83.7 14.4663Z" fill="#FF9017"/>
                             <path fill-rule="evenodd" clip-rule="evenodd" d="M65.1 14.4663L70.8475 18L69.3223 11.34L74.4001 6.85895L67.7134 6.28105L65.1 0L62.4867 6.28105L55.8 6.85895L60.8778 11.34L59.3526 18L65.1 14.4663Z" fill="#FF9017"/>
@@ -82,7 +85,7 @@
                         </svg>
                     </div>
                     <div onclick="make_active2(this)" class="shop__left-item-checkbox-wrapper text-default">
-                        <input class="star_checbox" type="checkbox" name="">
+                        <input class="star_checbox" type="checkbox" name="star4">
                         <svg xmlns="http://www.w3.org/2000/svg" width="93" height="18" viewBox="0 0 93 18" fill="none">
                             <path fill-rule="evenodd" clip-rule="evenodd" d="M83.7 14.4663L89.4474 18L87.9222 11.34L93 6.85895L86.3133 6.28105L83.7 0L81.0867 6.28105L74.4 6.85895L79.4778 11.34L77.9526 18L83.7 14.4663Z" fill="#BDC4CD"/>
                             <path fill-rule="evenodd" clip-rule="evenodd" d="M65.1 14.4663L70.8475 18L69.3223 11.34L74.4001 6.85895L67.7134 6.28105L65.1 0L62.4867 6.28105L55.8 6.85895L60.8778 11.34L59.3526 18L65.1 14.4663Z" fill="#FF9017"/>
@@ -92,7 +95,7 @@
                         </svg>
                     </div>
                     <div onclick="make_active2(this)" class="shop__left-item-checkbox-wrapper text-default">
-                        <input class="star_checbox" type="checkbox" name="">
+                        <input class="star_checbox" type="checkbox" name="star3">
                         <svg xmlns="http://www.w3.org/2000/svg" width="93" height="18" viewBox="0 0 93 18" fill="none">
                             <path fill-rule="evenodd" clip-rule="evenodd" d="M83.7 14.4663L89.4474 18L87.9222 11.34L93 6.85895L86.3133 6.28105L83.7 0L81.0867 6.28105L74.4 6.85895L79.4778 11.34L77.9526 18L83.7 14.4663Z" fill="#BDC4CD"/>
                             <path fill-rule="evenodd" clip-rule="evenodd" d="M65.1 14.4663L70.8475 18L69.3223 11.34L74.4001 6.85895L67.7134 6.28105L65.1 0L62.4867 6.28105L55.8 6.85895L60.8778 11.34L59.3526 18L65.1 14.4663Z" fill="#BDC4CD"/>
@@ -102,7 +105,7 @@
                         </svg>
                     </div>
                     <div onclick="make_active2(this)" class="shop__left-item-checkbox-wrapper text-default">
-                        <input class="star_checbox" type="checkbox" name="">
+                        <input class="star_checbox" type="checkbox" name="star2">
                         <svg xmlns="http://www.w3.org/2000/svg" width="93" height="18" viewBox="0 0 93 18" fill="none">
                             <path fill-rule="evenodd" clip-rule="evenodd" d="M83.7 14.4663L89.4474 18L87.9222 11.34L93 6.85895L86.3133 6.28105L83.7 0L81.0867 6.28105L74.4 6.85895L79.4778 11.34L77.9526 18L83.7 14.4663Z" fill="#BDC4CD"/>
                             <path fill-rule="evenodd" clip-rule="evenodd" d="M65.1 14.4663L70.8475 18L69.3223 11.34L74.4001 6.85895L67.7134 6.28105L65.1 0L62.4867 6.28105L55.8 6.85895L60.8778 11.34L59.3526 18L65.1 14.4663Z" fill="#BDC4CD"/>
@@ -112,7 +115,7 @@
                         </svg>
                     </div>
                     <div onclick="make_active2(this)" class="shop__left-item-checkbox-wrapper text-default">
-                        <input class="star_checbox" type="checkbox" name="">
+                        <input class="star_checbox" type="checkbox" name="star1">
                         <svg xmlns="http://www.w3.org/2000/svg" width="93" height="18" viewBox="0 0 93 18" fill="none">
                             <path fill-rule="evenodd" clip-rule="evenodd" d="M83.7 14.4663L89.4474 18L87.9222 11.34L93 6.85895L86.3133 6.28105L83.7 0L81.0867 6.28105L74.4 6.85895L79.4778 11.34L77.9526 18L83.7 14.4663Z" fill="#BDC4CD"/>
                             <path fill-rule="evenodd" clip-rule="evenodd" d="M65.1 14.4663L70.8475 18L69.3223 11.34L74.4001 6.85895L67.7134 6.28105L65.1 0L62.4867 6.28105L55.8 6.85895L60.8778 11.34L59.3526 18L65.1 14.4663Z" fill="#BDC4CD"/>
@@ -124,7 +127,7 @@
                 </div>
             </div>
             <div class="shop__left-items">
-                <button onclick="showOrHideItems(this)" class="shop__left-items__header">
+                <button type="button" onclick="showOrHideItems(this)" class="shop__left-items__header">
                     <p class="text-default"><b>Brands</b></p>
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                         <path d="M12 8.29504L6 14.295L7.41 15.705L12 11.125L16.59 15.705L18 14.295L12 8.29504Z" fill="#8B96A5"/>
@@ -133,7 +136,7 @@
                 <div class="shop__left-items-wrapper">
                     {% for i in brands %}
                     <div onclick="make_active(this)" class="shop__left-item-checkbox-wrapper text-default">
-                        <input type="checkbox" name="">
+                        <input type="checkbox" name="brand_{{ i }}">
                         <p>{{ i }}</p>
                     </div>
                     {% endfor %}
@@ -141,7 +144,7 @@
             </div>
             {% for i in categories %}
             <div class="shop__left-items">
-                <button onclick="showOrHideItems(this)" class="shop__left-items__header">
+                <button type="button" onclick="showOrHideItems(this)" class="shop__left-items__header">
                     <p class="text-default"><b>{{ i.name }}</b></p>
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                         <path d="M12 8.29504L6 14.295L7.41 15.705L12 11.125L16.59 15.705L18 14.295L12 8.29504Z" fill="#8B96A5"/>
@@ -150,14 +153,14 @@
                 <div class="shop__left-items-wrapper">
                     {% for c in i.productcategory_set.all %}
                     <div onclick="make_active(this)" class="shop__left-item-checkbox-wrapper text-default">
-                        <input type="checkbox" name="">
+                        <input type="checkbox" name="{{ i.name }}_{{ c.name }}">
                         <p>{{ c.name }}</p>
                     </div>
                     {% endfor %}
                 </div>
             </div>
             {% endfor %}
-        </div>
+        </form>
         <div class="shop__right">
             <div class="shop__right__top">
                 <p class="text-default">{{ products|length }} items in <a href="#" class="text-default"><b>{% if current_category == None %}All{% else %}{{ current_category.name }}{% endif %}</b></a></p>
@@ -213,10 +216,14 @@
                             <div class="shop__product__top__left">
                                 <p class="text-default-18"><b>${{ i.0.price }}</b><span class="text-gray"></span></p>
                                 <div class="shop__product__top__left__stars">
-                                    {% for n in i.2.1 %}
+                                    {% for n in range %}
+                                    {% if n < i.2 %}
                                     <img src="/media/star.png" alt="">
+                                    {% else %}
+                                    <img src="/media/star2.png" alt="">
+                                    {% endif %}
                                     {% endfor %}
-                                    <p class="text-default">{{ i.2.0 }}</p>
+                                    <p class="text-default">{{ i.2 }}</p>
                                 </div>
                             </div>
                             {% if request.user.is_authenticated %}
@@ -389,6 +396,7 @@
     }
 </script>
 <script>
+    let submit = document.querySelector('#btn_submit')
     function make_active(btn) {
         let checbox = btn.children[0]
         if (event.target != btn.children[0]) {
@@ -402,19 +410,23 @@
                 btn.classList.add('text-primary')
             }
         }
+        submit.click()
     }
     function make_active2(btn) {
         let checbox = btn.children[0]
+        Array.from(document.querySelectorAll('.star_checbox')).forEach(function (i) {
+            i.checked = false
+        })
         if (event.target != btn.children[0]) {
             if (checbox.checked) {
                 checbox.checked = false
             } else {
-                Array.from(document.querySelectorAll('.star_checbox')).forEach(function (i) {
-                    i.checked = false
-                })
                 checbox.checked = true
             }
+        } else {
+            btn.children[0].checked = true
         }
+        submit.click()
     }
 </script>
 <script>
@@ -514,6 +526,14 @@
     let select = document.querySelector('#sort_by')
     select.addEventListener('change', function () {
         select.nextElementSibling.click()
+    })
+</script>
+<script>
+    let header_input = document.querySelector('#search')
+    let hidden_input = document.querySelector('#hidden_search')
+    console.log(hidden_input)
+    header_input.addEventListener('input', () => {
+        hidden_input.value = header_input.value
     })
 </script>
 {% endblock %}
