@@ -8,11 +8,11 @@ from accounts.models import Profile
 
 
 def account_page(request):
-    profile = Profile.objects.get(user=request.user)
-    user = User.objects.get(profile=profile)
     context = {}
     if not request.user.is_authenticated:
         return redirect('login')
+    profile = Profile.objects.get(user=request.user)
+    user = User.objects.get(profile=profile)
     if request.method == "POST":
         email = request.POST.get('email')
         phone_number = request.POST.get('phone_number')
@@ -45,6 +45,13 @@ def account_page(request):
     context['profile'] = profile
 
     return render(request, 'account.html', context=context)
+
+
+# def individual_profiles(request):
+#     user = User.objects.get()
+#     context = {'username': username}
+#
+#     return render(request, 'header.html', context=context)
 
 
 def login_page(request):
