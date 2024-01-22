@@ -21,12 +21,13 @@ def product_page(request, slug):
 
     reviews = Review.objects.filter(product=product).order_by('-create_at')
 
-    
-    stars = 0
-    for i in reviews:
-        stars += int(i.stars)
-    stars = stars / len(reviews)
-    stars = [round(stars, 1), range(5)]
+    stars = [0, range(5)]
+    if reviews:
+        stars = 0
+        for i in reviews:
+            stars += int(i.stars)
+        stars = stars / len(reviews)
+        stars = [round(stars, 1), range(5)]
 
     review_result = filter_product_reviews(reviews)
 
