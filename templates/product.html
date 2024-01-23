@@ -115,7 +115,7 @@
                 </div>
                 <div class="product__right__top__bottom">
                     <a href="{% url 'add_to_cart' product.slug %}" class="banner__right__btn text-default-white">Add to cart</a>
-                    <a href="" class="banner__right__btn text-default-white">Seller's profile</a>
+                    <a href="{% url 'account' product.supplier.user.username %}" class="banner__right__btn text-default-white">Seller's profile</a>
                 </div>
             </div>
             {% if request.user.is_authenticated %}
