@@ -21,7 +21,7 @@ def product_page(request, slug):
 
     reviews = Review.objects.filter(product=product).order_by('-create_at')
 
-    for_range = range(5)
+    for_range = range(1, 6)
 
     review_result = filter_product_reviews(reviews)
 
@@ -84,7 +84,6 @@ def shop_page(request, category=None):
     showing_active_filters = []
     if request.method == 'POST':
         star = 0
-        print(request.POST)
         if request.POST.get('star5'):
             star = 5
         elif request.POST.get('star4'):
@@ -101,7 +100,10 @@ def shop_page(request, category=None):
         if star:
             active_filters.append(f'star{star}')
             showing_active_filters.append(f'{star} ★')
-            products_list = products_list.filter(stars__gte=star, stars__lt=star+1)
+            if star > 1:
+                products_list = products_list.filter(stars__gte=star, stars__lt=star+1)
+            else:
+                products_list = products_list.filter(stars__gte=star-1, stars__lt=star+1)
 
     sort_by = request.GET.get('sort')
     if sort_by != None:
@@ -128,7 +130,7 @@ def shop_page(request, category=None):
             rating = round(rating / len(rating_list), 1)
             products.append([i, photo, rating, len(orders), saved])
         else:
-            products.append([i, photo, "0 Reviews", len(orders), saved])
+            products.append([i, photo, 0.0, len(orders), saved])
 
     main_categories = MainCategory.objects.all()
 

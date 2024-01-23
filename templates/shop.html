@@ -225,7 +225,7 @@
                                 <p class="text-default-18"><b>${{ i.0.price }}</b><span class="text-gray"></span></p>
                                 <div class="shop__product__top__left__stars">
                                     {% for n in range %}
-                                    {% if n < i.2 %}
+                                    {% if n <= i.2 %}
                                     <img src="/media/star.png" alt="">
                                     {% else %}
                                     <img src="/media/star2.png" alt="">
@@ -410,29 +410,29 @@
         if (event.target != btn.children[0]) {
             if (checbox.checked) {
                 checbox.checked = false
-                btn.classList.remove('text-primary')
-                btn.classList.add('text-default')
             } else {
                 checbox.checked = true
-                btn.classList.remove('text-default')
-                btn.classList.add('text-primary')
             }
         }
         submit.click()
     }
     function make_active2(btn) {
-        let checbox = btn.children[0]
-        Array.from(document.querySelectorAll('.star_checbox')).forEach(function (i) {
-            i.checked = false
-        })
         if (event.target != btn.children[0]) {
-            if (checbox.checked) {
-                checbox.checked = false
+            if (btn.children[0].checked == true) {
+                btn.children[0].checked = false
             } else {
-                checbox.checked = true
+                Array.from(document.querySelectorAll('.star_checbox')).forEach(function (i) {
+                    i.checked = false
+                })
+                btn.children[0].checked = true
             }
         } else {
-            btn.children[0].checked = true
+            if (btn.children[0].checked == true) {
+                Array.from(document.querySelectorAll('.star_checbox')).forEach(function (i) {
+                    i.checked = false
+                })
+                btn.children[0].checked = true
+            }
         }
         submit.click()
     }
