@@ -52,7 +52,7 @@
                 <div class="shop__products__right__middle__bottom">
                     <div class="shop__product__top__left__stars">
                         {% for s in range %}
-                        {% if s < product.stars %}
+                        {% if s <= product.stars %}
                         <img src="/media/star.png" alt="">
                         {% else %}
                         <img src="/media/star2.png" alt="">
