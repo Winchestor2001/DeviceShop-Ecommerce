@@ -51,14 +51,14 @@
                 <p class="product__middle__top-price"><b>{{ product.name }}</b></p>
                 <div class="shop__products__right__middle__bottom">
                     <div class="shop__product__top__left__stars">
-                        {% for s in stars.1 %}
-                        {% if s < stars.0 %}
+                        {% for s in range %}
+                        {% if s < product.stars %}
                         <img src="/media/star.png" alt="">
                         {% else %}
                         <img src="/media/star2.png" alt="">
                         {% endif %}
                         {% endfor %}
-                        <p class="text-default-18">{{ stars.0 }}</p>
+                        <p class="text-default-18">{{ product.stars }}</p>
                     </div>
                     <svg xmlns="http://www.w3.org/2000/svg" width="6" height="6" viewBox="0 0 6 6" fill="none">
                         <circle cx="3" cy="3" r="3" fill="#DEE2E7"></circle>
@@ -164,7 +164,7 @@
                                 <div class="product__bottom__review__user-content">
                                     <p class="text-default">{{ review.review.user }}</p>
                                     <div class="shop__product__top__left__stars">
-                                        {% for s in stars.1 %}
+                                        {% for s in range %}
                                         {% if s < review.review.stars %}
                                         <img src="/media/star.png" alt="">
                                         {% else %}
