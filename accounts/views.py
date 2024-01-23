@@ -7,19 +7,19 @@ from django.contrib.auth import authenticate, login, logout
 from accounts.models import Profile
 
 
-def account_page(request):
+def account_page(request, username):
     context = {}
     if not request.user.is_authenticated:
         return redirect('login')
-    profile = Profile.objects.get(user=request.user)
-    user = User.objects.get(profile=profile)
+    profile = Profile.objects.get(user__username=username)
+    user_data = User.objects.get(profile=profile)
     if request.method == "POST":
         email = request.POST.get('email')
         phone_number = request.POST.get('phone_number')
         password = request.POST.get('password')
         if request.FILES:
             file_obj = request.FILES['photo']
-            filename = f"profile/{request.user}_{file_obj}"
+            filename = f"profile/{username}_{file_obj}"
             with default_storage.open(filename, 'wb+') as d:
                 for chunk in file_obj.chunks():
                     d.write(chunk)
@@ -37,21 +37,20 @@ def account_page(request):
                 context['error'] = 'Please enter phone number with +998!'
         if password:
             if len(password) >= 8:
-                user.password = make_password(password)
+                user_data.password = make_password(password)
             else:
                 context['error'] = 'Password must be at least 8 characters!'
     profile.save()
-    user.save()
+    user_data.save()
     context['profile'] = profile
 
     return render(request, 'account.html', context=context)
 
 
-# def individual_profiles(request):
-#     user = User.objects.get()
-#     context = {'username': username}
-#
-#     return render(request, 'header.html', context=context)
+def individual_profiles(request):
+    user = User.objects.get(profile__user=request.user)
+    context = {'user': user}
+    return redirect(request, 'header.html', context=context)
 
 
 def login_page(request):
