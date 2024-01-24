@@ -80,10 +80,24 @@ def shop_page(request, category=None):
     min = 0
     max = max_price
 
+    main_categories = MainCategory.objects.all()
+
+    if main_category == None:
+        categories = Category.objects.all()
+    else:
+        categories = Category.objects.filter(category=main_category)
+
+    sort_by = request.GET.get('sort')
+    if sort_by != None:
+        if sort_by == 'date_new':
+            products_list = products_list.order_by('create_at')
+        elif sort_by == 'date_old':
+            products_list = products_list.order_by('-create_at')
 
     active_stars = []
     showing_active_filters = []
     active_brands = []
+    active_categories = []
     if request.method == 'POST':
         star = 0
         if request.POST.get('star5'):
@@ -106,19 +120,25 @@ def shop_page(request, category=None):
                 products_list = products_list.filter(stars__gte=star, stars__lt=star+1)
             else:
                 products_list = products_list.filter(stars__gte=star-1, stars__lt=star+1)
+
         for i in brands:
             if request.POST.get(f'brand_{i}'):
                 active_brands.append(i)
         if active_brands:
             products_list = products_list.filter(brand__in=active_brands)
 
-
-    sort_by = request.GET.get('sort')
-    if sort_by != None:
-        if sort_by == 'date_new':
-            products_list = products_list.order_by('create_at')
-        elif sort_by == 'date_old':
-            products_list = products_list.order_by('-create_at')
+        categories_for_filter = []
+        product_categories_for_filter = []
+        for i in categories:
+            product_categories = ProductCategory.objects.filter(category=i)
+            for c in product_categories:
+                if request.POST.get(f'{i}_{c.name}'):
+                    active_categories.append(f'{i}_{c.name}')
+                    categories_for_filter.append(i)
+                    product_categories_for_filter.append(c.name)
+        if categories_for_filter:
+            products_list = products_list.filter(productcategory__category__in=categories_for_filter, productcategory__name__in=product_categories_for_filter).distinct()
+        
 
     products = []
     for i in products_list:
@@ -140,13 +160,6 @@ def shop_page(request, category=None):
         else:
             products.append([i, photo, 0.0, len(orders), saved])
 
-    main_categories = MainCategory.objects.all()
-
-    if main_category == None:
-        categories = Category.objects.all()
-    else:
-        categories = Category.objects.filter(category=main_category)
-
     context = {
         'products': products,
         'main_categories': main_categories,
@@ -160,7 +173,9 @@ def shop_page(request, category=None):
         'range': range(1, 6),
         'active_stars': active_stars,
         'active_brands': active_brands,
-        'showing_active_filters': showing_active_filters
+        'active_categories': active_categories,
+        'showing_active_filters': showing_active_filters,
+        'scroll': request.POST.get('scroll', 0)
     }
     return render(request, 'shop.html', context=context)
 

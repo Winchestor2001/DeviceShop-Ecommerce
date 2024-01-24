@@ -17,6 +17,7 @@
     <div class="shop container">
         <form method="post" class="shop__left">
             {% csrf_token %}
+            <input type="number" value="{{ scroll }}" name="scroll" id="scroll_input" hidden>
             <input type="text" id="hidden_search" name="hidden_search" hidden>
             <button id="btn_submit" hidden type="submit"></button>
             <div class="shop__left-items">
@@ -135,7 +136,7 @@
                 </button>
                 <div class="shop__left-items-wrapper">
                     {% for i in brands %}
-                    <div onclick="make_active(this)" class="shop__left-item-checkbox-wrapper text-default">
+                    <div onclick="make_active(this)" class="shop__left-item-checkbox-wrapper {% if i in active_brands %}text-default-primary{% else %}text-default{% endif %}">
                         <input {% if i in active_brands %}checked{% endif %} type="checkbox" name="brand_{{ i }}">
                         <p>{{ i }}</p>
                     </div>
@@ -152,8 +153,8 @@
                 </button>
                 <div class="shop__left-items-wrapper">
                     {% for c in i.productcategory_set.all %}
-                    <div onclick="make_active(this)" class="shop__left-item-checkbox-wrapper text-default">
-                        <input type="checkbox" name="{{ i.name }}_{{ c.name }}">
+                    <div onclick="make_active(this)" class="shop__left-item-checkbox-wrapper {% if c.name_with_category in active_categories %}text-default-primary{% else %}text-default{% endif %}">
+                        <input {% if c.name_with_category in active_categories %}checked{% endif %} type="checkbox" name="{{ i.name }}_{{ c.name }}">
                         <p>{{ c.name }}</p>
                     </div>
                     {% endfor %}
@@ -543,5 +544,17 @@
     header_input.addEventListener('input', () => {
         hidden_input.value = header_input.value
     })
+</script>
+{% endblock %}
+
+
+{% block script %}
+<script>
+    let input = document.querySelector('#scroll_input')
+    window.scrollBy(0, parseInt(input.value))
+    window.addEventListener('scroll', function () {
+        var scrollTop = window.scrollY || document.documentElement.scrollTop;
+        input.value = scrollTop
+      });
 </script>
 {% endblock %}
