@@ -17,6 +17,7 @@
     <div class="shop container">
         <form method="post" class="shop__left">
             {% csrf_token %}
+            <input type="number" hidden value="{{ request.session.layout }}" name="layout" id="layout">
             <input type="number" value="{{ scroll }}" name="scroll" id="scroll_input" hidden>
             <input type="text" id="hidden_search" name="hidden_search" hidden>
             <button id="btn_submit" hidden type="submit"></button>
@@ -203,14 +204,14 @@
                 </a>
                 {% endif %}
                 {% for i in showing_active_filters %}
-                <a href="{% url 'shop' %}" class="shop__right__bottom-item text-default">
-                    {{ i }}
+                <button onclick="remove_filter(this)" style="cursor: pointer;" class="shop__right__bottom-item text-default">
+                    <span>{{ i }}</span>
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
                         <path d="M15.8334 5.34163L14.6584 4.16663L10.0001 8.82496L5.34175 4.16663L4.16675 5.34163L8.82508 9.99996L4.16675 14.6583L5.34175 15.8333L10.0001 11.175L14.6584 15.8333L15.8334 14.6583L11.1751 9.99996L15.8334 5.34163Z" fill="#8B96A5"/>
                     </svg>
-                </a>
+                </button>
                 {% endfor %}
-                <a href="" class="text-default-primary">Clear all filter</a>
+                <a href="{% url 'shop' %}" class="text-default-primary">Clear all filter</a>
             </div>
             <div class="shop__products">
                 {% for i in products %}
@@ -262,10 +263,14 @@
                             <p class="text-default-18 shop__products__right__middle-price" style="font-size: 20px;"><b>${{ i.0.price }}</b><span class="text-gray"></span></p>
                             <div class="shop__products__right__middle__bottom">
                                 <div class="shop__product__top__left__stars">
-                                    {% for n in i.2.1 %}
+                                    {% for n in range %}
+                                    {% if n <= i.2 %}
                                     <img src="/media/star.png" alt="">
+                                    {% else %}
+                                    <img src="/media/star2.png" alt="">
+                                    {% endif %}
                                     {% endfor %}
-                                    <p class="text-default">{{ i.2.0 }}</p>
+                                    <p class="text-default">{{ i.2 }}</p>
                                 </div>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="6" height="6" viewBox="0 0 6 6" fill="none">
                                     <circle cx="3" cy="3" r="3" fill="#DEE2E7"/>
@@ -439,11 +444,13 @@
     }
 </script>
 <script>
+    let layouot_input = document.querySelector('#layout')
     function change_layout(btn, layout) {
         document.querySelectorAll('.shop__right__top__right__btn').forEach(function (i) {
             i.classList.remove('layout-btn-active')
         })
         btn.classList.add('layout-btn-active')
+        layouot_input.value = layout
         if (layout == 1) {
             document.querySelector('.shop__products-layout2').style.display = 'none'
             document.querySelector('.shop__products').style.display = 'flex'
@@ -540,10 +547,28 @@
 <script>
     let header_input = document.querySelector('#search')
     let hidden_input = document.querySelector('#hidden_search')
-    console.log(hidden_input)
     header_input.addEventListener('input', () => {
         hidden_input.value = header_input.value
     })
+</script>
+<script>
+    function remove_filter(btn) {
+        let checkbox
+        let text = btn.children[0].textContent.split(': ')
+        if (text[0] != "Star") {
+            if (text[0] == 'Brand') {
+                text[0] = text[0].toLowerCase()
+            }
+            checkbox = document.querySelector(`input[name="${text[0]}_${text[1]}"]`)
+        } else {
+            checkbox = document.querySelector(`input[name="${text[0].toLowerCase()}${text[1]}"]`)
+        }
+        checkbox.click()
+    }
+</script>
+<script>
+    let layout_input = parseInt(document.querySelector('#layout').value) - 1
+    document.querySelector('.shop__right__top__right__btns').children[layout_input].click()
 </script>
 {% endblock %}
 
