@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth import authenticate, login, logout
-
+from .utils import send_gmail
 from accounts.models import Profile
 
 
@@ -126,6 +126,8 @@ def logout_page(request):
 
 
 def forgot_password_page(request):
+    if request.method == 'POST':
+        send_gmail(request.POST.get('email'))
     return render(request, 'forgot_password.html')
 
 
