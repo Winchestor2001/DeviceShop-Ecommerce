@@ -80,8 +80,10 @@ def shop_page(request, category=None):
     min = 0
     max = max_price
 
-    active_filters = []
+
+    active_stars = []
     showing_active_filters = []
+    active_brands = []
     if request.method == 'POST':
         star = 0
         if request.POST.get('star5'):
@@ -98,12 +100,18 @@ def shop_page(request, category=None):
         max = float(request.POST.get('max'))
         products_list = products_list.filter(price__gte=min, price__lte=max)
         if star:
-            active_filters.append(f'star{star}')
+            active_stars.append(f'star{star}')
             showing_active_filters.append(f'{star} ★')
             if star > 1:
                 products_list = products_list.filter(stars__gte=star, stars__lt=star+1)
             else:
                 products_list = products_list.filter(stars__gte=star-1, stars__lt=star+1)
+        for i in brands:
+            if request.POST.get(f'brand_{i}'):
+                active_brands.append(i)
+        if active_brands:
+            products_list = products_list.filter(brand__in=active_brands)
+
 
     sort_by = request.GET.get('sort')
     if sort_by != None:
@@ -150,7 +158,8 @@ def shop_page(request, category=None):
         'brands': brands,
         'sort_by': sort_by,
         'range': range(1, 6),
-        'active_filters': active_filters,
+        'active_stars': active_stars,
+        'active_brands': active_brands,
         'showing_active_filters': showing_active_filters
     }
     return render(request, 'shop.html', context=context)
