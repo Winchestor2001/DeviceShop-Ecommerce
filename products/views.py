@@ -115,7 +115,7 @@ def shop_page(request, category=None):
         products_list = products_list.filter(price__gte=min, price__lte=max)
         if star:
             active_stars.append(f'star{star}')
-            showing_active_filters.append(f'{star} ★')
+            showing_active_filters.append(f'Star: {star}')
             if star > 1:
                 products_list = products_list.filter(stars__gte=star, stars__lt=star+1)
             else:
@@ -124,6 +124,7 @@ def shop_page(request, category=None):
         for i in brands:
             if request.POST.get(f'brand_{i}'):
                 active_brands.append(i)
+                showing_active_filters.append(f'Brand: {i}')
         if active_brands:
             products_list = products_list.filter(brand__in=active_brands)
 
@@ -134,11 +135,14 @@ def shop_page(request, category=None):
             for c in product_categories:
                 if request.POST.get(f'{i}_{c.name}'):
                     active_categories.append(f'{i}_{c.name}')
+                    showing_active_filters.append(f'{i}: {c.name}')
                     categories_for_filter.append(i)
                     product_categories_for_filter.append(c.name)
         if categories_for_filter:
             products_list = products_list.filter(productcategory__category__in=categories_for_filter, productcategory__name__in=product_categories_for_filter).distinct()
         
+        layout = request.POST.get('layout')
+        request.session['layout'] = int(layout)
 
     products = []
     for i in products_list:
