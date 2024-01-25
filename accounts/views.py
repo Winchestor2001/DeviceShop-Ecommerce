@@ -4,8 +4,9 @@ from django.contrib.auth.models import User
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth import authenticate, login, logout
 
-from accounts.models import Profile
-from products.models import ProductPhoto, ProductCategory, Product, SavedProduct, Review
+from products.models import ProductPhoto, Product, SavedProduct, Review
+from .utils import send_gmail
+from accounts.models import Profile, ResetPassword
 
 
 def account_page(request, username):
@@ -155,8 +156,28 @@ def logout_page(request):
 
 
 def forgot_password_page(request):
-    return render(request, 'forgot_password.html')
+    context = {}
+    if request.method == 'POST':
+        error = send_gmail(request.POST.get('email'))
+        if error:
+            context['error'] = error
+    return render(request, 'forgot_password.html', context=context)
 
 
-def change_password_page(request):
-    return render(request, 'change_password.html')
+def change_password_page(request, id):
+    context = {}
+    if request.method == 'POST':
+        if ResetPassword.objects.filter(url=id).exists():
+            password1 = request.POST.get('password')
+            password2 = request.POST.get('repeat_password')
+            if len(password1) >= 8:
+                if password1 == password2:
+                    user = ResetPassword.objects.get(url=id).user
+                    user.set_password(password1)
+                    user.save()
+                    return redirect('login')
+                else:
+                    context['error'] = "Passwords don't match"
+            else:
+                context['error'] = "Password must be at least 8 characters"
+    return render(request, 'change_password.html', context=context)
