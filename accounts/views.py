@@ -3,8 +3,11 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth import authenticate, login, logout
-from .utils import send_gmail
+
+from accounts.models import Profile
+from products.models import ProductPhoto, ProductCategory, Product, SavedProduct, Review
 from accounts.models import Profile, ResetPassword
+from .utils import send_gmail
 
 
 def account_page(request, username):
@@ -51,6 +54,34 @@ def individual_profiles(request):
     user = User.objects.get(profile__user=request.user)
     context = {'user': user}
     return redirect(request, 'header.html', context=context)
+
+
+def seller_profile_page(request, username):
+    context = {}
+    profile = Profile.objects.get(user__username=username)
+    product = Product.objects.filter(supplier=profile)
+    user_products = []
+    for i in product:
+        product_photo = ProductPhoto.objects.filter(product=i)[0].photo
+
+        saved = False
+        if SavedProduct.objects.filter(product=i).exists():
+            saved = True
+
+        rating_list = Review.objects.filter(product=i)
+        if rating_list:
+            rating = 0
+            for s in rating_list:
+                rating += s.stars
+            rating = round(rating / len(rating_list), 1)
+            user_products.append([i, product_photo, rating, saved])
+        else:
+            user_products.append([i, product_photo, 0.0, saved])
+    context['user_products'] = user_products
+    context['profile'] = profile
+    context['range'] = range(1, 6)
+
+    return render(request, 'seller_profile.html', context=context)
 
 
 def login_page(request):
