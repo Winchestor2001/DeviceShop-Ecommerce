@@ -1690,7 +1690,6 @@ input[type="range"]::-webkit-slider-thumb {
   font-size: 24px;
   max-height: 58px;
   overflow: hidden;
-  width: 90%;
 }
 
 .product__middle__top-orders {
@@ -2934,6 +2933,13 @@ input[type="range"]::-webkit-slider-thumb {
   height: 30px;
 }
 
+.product__middle__bottom-price {
+  align-items: center;
+}
+
+.product__middle__bottom-price, .product__middle__top-price-wrapper svg {
+  cursor: pointer;
+}
 
 @media (max-width: 1600px) {
   .container {
