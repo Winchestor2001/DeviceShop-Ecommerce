@@ -327,3 +327,21 @@ def home_page(request):
         'products': products
     }
     return render(request, 'index.html', context=context)
+
+
+def change_product_data(request, product_id):
+    if request.method == "POST":
+        name = request.POST.get('name')
+        price = request.POST.get('price')
+        brand = request.POST.get('brand')
+        product = Product.objects.get(id=product_id)
+        product.name = name
+        product.price = price
+        product.brand = brand
+        product.save()
+    return redirect('product', product.slug)
+
+
+def delete_product(request, product_id):
+    Product.objects.get(id=product_id).delete()
+    return redirect('shop')

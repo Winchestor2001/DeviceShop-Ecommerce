@@ -46,9 +46,24 @@
                 {% endfor %}
             </div>
         </div>
-        <div class="product__middle">
+        <form action="{% url 'change_product_data' product.id %}" method="post" class="product__middle">
+            {% csrf_token %}
+            <button type="submit" hidden id="submit"></button>
             <div class="product__middle__top">
-                <p class="product__middle__top-price"><b>{{ product.name }}</b></p>
+                <div class="product__middle__top-price-wrapper" style="display: flex; width: 90%; align-items: center;">
+                    <span></span>
+                    <p class="product__middle__top-price"><b>{{ product.name }}</b></p>
+                    {% if request.user == product.supplier.user %}
+                    <input value="{{ product.name }}" type="text" name="name" id="price_input" class="card text-default" hidden>
+                    <svg style="margin-left: 10px;" id="edit_email" onclick="change_data(this)" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#0d6efd" class="bi bi-pencil-fill" viewBox="0 0 16 16">
+                        <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
+                    </svg>
+                    <svg style="display: none; margin-left: 10px;" id="save_email" onclick="change_data(this)" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#0d6efd" class="bi bi-floppy-fill" viewBox="0 0 16 16">
+                        <path d="M0 1.5A1.5 1.5 0 0 1 1.5 0H3v5.5A1.5 1.5 0 0 0 4.5 7h7A1.5 1.5 0 0 0 13 5.5V0h.086a1.5 1.5 0 0 1 1.06.44l1.415 1.414A1.5 1.5 0 0 1 16 2.914V14.5a1.5 1.5 0 0 1-1.5 1.5H14v-5.5A1.5 1.5 0 0 0 12.5 9h-9A1.5 1.5 0 0 0 2 10.5V16h-.5A1.5 1.5 0 0 1 0 14.5z"/>
+                        <path d="M3 16h10v-5.5a.5.5 0 0 0-.5-.5h-9a.5.5 0 0 0-.5.5zm9-16H4v5.5a.5.5 0 0 0 .5.5h7a.5.5 0 0 0 .5-.5zM9 1h2v4H9z"/>
+                    </svg>
+                    {% endif %}
+                </div>
                 <div class="shop__products__right__middle__bottom">
                     <div class="shop__product__top__left__stars">
                         {% for s in range %}
@@ -77,8 +92,18 @@
             </div>
             <div class="product__middle__bottom">
                 <div class="product__middle__bottom-price">
-                    <p class="text-default-18 text-muted">Price:</p>
-                    <p class="text-default-18 shop__products__right__middle-price" style="font-size: 20px;"><b>${{ product.price }}</b><span class="text-gray">$2000.00</span></p>
+                    <p class="text-default-18 text-muted" id="price">Price:</p>
+                    <p class="text-default-18 shop__products__right__middle-price" style="font-size: 20px;"><b>${{ product.price }}</b></p>
+                    {% if request.user == product.supplier.user %}
+                    <input value="{{ product.price }}" type="number" name="price" id="price_input" class="card text-default" hidden>
+                    <svg style="margin-left: 10px;" id="edit_email" onclick="change_data(this)" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#0d6efd" class="bi bi-pencil-fill" viewBox="0 0 16 16">
+                        <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
+                    </svg>
+                    <svg style="display: none; margin-left: 10px;" id="save_email" onclick="change_data(this)" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#0d6efd" class="bi bi-floppy-fill" viewBox="0 0 16 16">
+                        <path d="M0 1.5A1.5 1.5 0 0 1 1.5 0H3v5.5A1.5 1.5 0 0 0 4.5 7h7A1.5 1.5 0 0 0 13 5.5V0h.086a1.5 1.5 0 0 1 1.06.44l1.415 1.414A1.5 1.5 0 0 1 16 2.914V14.5a1.5 1.5 0 0 1-1.5 1.5H14v-5.5A1.5 1.5 0 0 0 12.5 9h-9A1.5 1.5 0 0 0 2 10.5V16h-.5A1.5 1.5 0 0 1 0 14.5z"/>
+                        <path d="M3 16h10v-5.5a.5.5 0 0 0-.5-.5h-9a.5.5 0 0 0-.5.5zm9-16H4v5.5a.5.5 0 0 0 .5.5h7a.5.5 0 0 0 .5-.5zM9 1h2v4H9z"/>
+                    </svg>
+                    {% endif %}
                 </div>
                 <div class="product__middle__bottom-price">
                     <p class="text-default-18 text-muted">Category:</p>
@@ -86,7 +111,17 @@
                 </div>
                 <div class="product__middle__bottom-price">
                     <p class="text-default-18 text-muted">Brand:</p>
-                    <p class="text-default-18 text-gray" style="font-size: 18px;">{{ product.brand }}</p>
+                    <p class="text-default-18 text-gray" style="font-size: 18px;"><b>{{ product.brand }}</b></p>
+                    {% if request.user == product.supplier.user %}
+                    <input value="{{ product.brand }}" type="text" name="brand" class="card text-default" hidden>
+                    <svg style="margin-left: 10px;" id="edit_email" onclick="change_data(this)" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#0d6efd" class="bi bi-pencil-fill" viewBox="0 0 16 16">
+                        <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
+                    </svg>
+                    <svg style="display: none; margin-left: 10px;" id="save_email" onclick="change_data(this)" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#0d6efd" class="bi bi-floppy-fill" viewBox="0 0 16 16">
+                        <path d="M0 1.5A1.5 1.5 0 0 1 1.5 0H3v5.5A1.5 1.5 0 0 0 4.5 7h7A1.5 1.5 0 0 0 13 5.5V0h.086a1.5 1.5 0 0 1 1.06.44l1.415 1.414A1.5 1.5 0 0 1 16 2.914V14.5a1.5 1.5 0 0 1-1.5 1.5H14v-5.5A1.5 1.5 0 0 0 12.5 9h-9A1.5 1.5 0 0 0 2 10.5V16h-.5A1.5 1.5 0 0 1 0 14.5z"/>
+                        <path d="M3 16h10v-5.5a.5.5 0 0 0-.5-.5h-9a.5.5 0 0 0-.5.5zm9-16H4v5.5a.5.5 0 0 0 .5.5h7a.5.5 0 0 0 .5-.5zM9 1h2v4H9z"/>
+                    </svg>
+                    {% endif %}
                 </div>
                 <div class="product__middle__bottom-price">
                     <p class="text-default-18 text-muted">State:</p>
@@ -106,7 +141,7 @@
                     {% endfor %}
                 </div>
             </div>
-        </div>
+        </form>
         <div class="product__right">
             <div class="product__right__top card">
                 <div class="product__right__top__top">
@@ -116,6 +151,9 @@
                 <div class="product__right__top__bottom">
                     <a href="{% url 'add_to_cart' product.slug %}" class="banner__right__btn text-default-white">Add to cart</a>
                     <a href="{% url 'seller_profile' product.supplier.user.username %}" class="banner__right__btn text-default-white">Seller's profile</a>
+                    {% if request.user == product.supplier.user %}
+                    <a href="{% url 'delete_product' product.id %}" class="banner__right__btn text-default-white">Delete product</a>
+                    {% endif %}
                 </div>
             </div>
             {% if request.user.is_authenticated %}
@@ -296,6 +334,33 @@
             } else {
                 break
             }
+        }
+    }
+</script>
+<script>
+    let submit = document.querySelector('#submit')
+    function change_data(btn) {
+        let wrapper = btn.parentElement
+        let input = wrapper.children[2]
+        let text = wrapper.children[1]
+        let edit_svg = wrapper.children[3]
+        let save_svg = wrapper.children[4]
+        if (input.hidden) {
+            input.hidden = false
+            if (text.children[0].textContent[0] != "$") {
+                input.value = text.children[0].textContent
+            } else {
+                input.value = text.children[0].textContent.slice(1)
+            }
+            text.style.display = 'none'
+            edit_svg.style.display = 'none'
+            save_svg.style.display = 'block'
+        } else {
+            input.hidden = true
+            text.style.display = 'flex'
+            edit_svg.style.display = 'block'
+            save_svg.style.display = 'none'
+            submit.click()
         }
     }
 </script>
