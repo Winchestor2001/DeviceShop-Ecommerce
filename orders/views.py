@@ -19,6 +19,8 @@ def cart_page(request):
             all_photo.append(p)
         for c in categories:
             category.append(c)
+        else:
+            category.append('')
     final_order = zip(all_photo, orders_in_cart, category)
     context['len_cart'] = len(orders_in_cart)
     context['orders'] = final_order
