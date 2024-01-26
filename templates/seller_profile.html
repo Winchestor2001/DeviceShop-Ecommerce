@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+<title>Profile page</title>
+{% endblock %}
+
+
+{% block content %}
+<div id="content_1" class="user__right card" style="display: block;">
+    <div class="supplier_user_info">
+        <form class="user__right__info__form" enctype="multipart/form-data">
+            <div class="image-container6">
+                {% if profile.photo %}
+                <img src="/media/{{ profile.photo }}" alt="" class="zoomable-image">
+                {% else %}
+                <img src="/media/products/product_1.png" alt="" class="zoomable-image">
+                {% endif %}
+                <div class="overlay2"></div>
+                <div class="eye3" style='background: url("/media/eye.png") no-repeat center center / cover;'></div>
+            </div>
+        </form>
+        <h1 class="supplier_name">{{ profile.user.username }}</h1>
+    </div>
+    <br>
+    <center>
+        <h1 style="margin-top: 20px; font-size: 40px;">User uploads</h1>
+    </center>
+    <br><br>
+    <div class="shop__products">
+        {% for i in user_products %}
+        <a href="{% url 'product' i.0.slug %}" class="shop__product card">
+            <div class="image-container3">
+                <img src="/media/{{ i.1 }}" alt="" class="recommended__card__photo">
+                <div class="overlay"></div>
+                <div class="eye2" style='background: url("/media/eye.png") no-repeat center center / cover;'></div>
+            </div>
+            <div class="shop__product-content">
+                <div class="shop__product__top">
+                    <div class="shop__product__top__left">
+                        <p class="text-default-18"><b>${{ i.0.price }}</b><span class="text-gray"></span></p>
+                        <div class="shop__product__top__left__stars">
+                            {% for n in range %}
+                            {% if n <= i.2 %}
+                            <img src="/media/star.png" alt="">
+                            {% else %}
+                            <img src="/media/star2.png" alt="">
+                            {% endif %}
+                            {% endfor %}
+                            <p class="text-default">{{ i.2 }}</p>
+                        </div>
+                    </div>
+                </div>
+                <p class="text-gray shop__product__bottom">{{ i.0.name }}</p>
+            </div>
+        </a>
+        {% endfor %}
+    </div>
+</div>
+<script>
+    document.querySelector('.image-container6').addEventListener('click', function(event) {
+        event.preventDefault();
+        document.getElementById('zoom-modal').style.display = 'block';
+        let src
+        if (event.target.classList[0] == 'eye3') {
+            src = event.target.previousElementSibling.previousElementSibling
+        } else {
+            src = event.target.previousElementSibling
+        }
+        document.getElementById('zoom-modal').children[0].src = src.src
+    });
+    document.getElementById('zoom-modal').addEventListener('click', function () {
+        document.getElementById('zoom-modal').style.display = 'none';
+    })
+
+
+
+
+</script>
+{% endblock %}
