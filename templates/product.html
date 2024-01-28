@@ -8,7 +8,7 @@
 
 {% block content %}
 <div id="overlay" style="display: none;"></div>
-<div class="write__wrapper card" style="display: none;">
+<div class="write__wrapper card" id="write_review_content" style="display: none;">
     <h1>Write review</h1>
     <form action="" method="post" enctype="multipart/form-data">
         {% csrf_token %}
@@ -23,6 +23,15 @@
         </div>
         <input type="file" multiple name="images" id="images" class="default-input text-default" placeholder="Your images">
         <button type="submit" class="banner__right__btn text-default-white">Add review</button>
+    </form>
+</div>
+<div class="write__wrapper card" id="add_discount_content" style="display: none;">
+    <h1>Add discount</h1>
+    <form action="{% url 'add_discount' product.id %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input required name="discount" type="number" class="default-input text-default" placeholder="% of sale">
+        <input type="date" multiple name="date" class="default-input text-default" placeholder="Date of ending sale">
+        <button type="submit" class="banner__right__btn text-default-white">Add discount</button>
     </form>
 </div>
 <main>
@@ -153,6 +162,7 @@
                     <a href="{% url 'seller_profile' product.supplier.user.username %}" class="banner__right__btn text-default-white">Seller's profile</a>
                     {% if request.user == product.supplier.user %}
                     <a href="{% url 'delete_product' product.id %}" class="banner__right__btn text-default-white">Delete product</a>
+                    <button id="add_discount" class="banner__right__btn text-default-white">Add discount</button>
                     {% endif %}
                 </div>
             </div>
@@ -241,7 +251,20 @@
 <script>
     let btn = document.querySelector('#write_review')
     let overlay = document.querySelector('#overlay')
-    let content = document.querySelector('.write__wrapper')
+    let content = document.querySelector('#write_review_content')
+    btn.addEventListener('click', function () {
+        overlay.style.display = 'flex'
+        content.style.display = 'flex'
+    })
+    overlay.addEventListener('click', function () {
+        overlay.style.display = 'none'
+        content.style.display = 'none'
+    })
+</script>
+<script>
+    btn = document.querySelector('#add_discount')
+    overlay = document.querySelector('#overlay')
+    content = document.querySelector('#add_discount_content')
     btn.addEventListener('click', function () {
         overlay.style.display = 'flex'
         content.style.display = 'flex'

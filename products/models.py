@@ -65,7 +65,7 @@ class ReviewImage(models.Model):
 
 
 class ProductSale(models.Model):
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, unique=True)
     sale = models.IntegerField()
     date = models.DateField()
 

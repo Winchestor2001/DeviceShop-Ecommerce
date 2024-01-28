@@ -154,15 +154,22 @@ def shop_page(request, category=None):
         if SavedProduct.objects.filter(product=i).exists():
             saved = True
 
+        sale = None
+        if ProductSale.objects.filter(product=i).exists():
+            sale = ProductSale.objects.get(product=i).sale
+            sale = sale / 100
+            sale = sale * i.price
+            sale = i.price - sale
+
         rating_list = Review.objects.filter(product=i)
         if rating_list:
             rating = 0
             for s in rating_list:
                 rating += s.stars
             rating = round(rating / len(rating_list), 1)
-            products.append([i, photo, rating, len(orders), saved])
+            products.append([i, photo, rating, len(orders), saved, sale])
         else:
-            products.append([i, photo, 0.0, len(orders), saved])
+            products.append([i, photo, 0.0, len(orders), saved, sale])
 
     context = {
         'products': products,
@@ -312,7 +319,7 @@ def home_page(request):
     current_datetime = datetime.now()
     closest_date_sale = "January 1, 2025 00:00:00"
     if len(products_on_sale) > 0:
-        closest_date_sale = min(products_on_sale, key=lambda x: abs(current_datetime - x.date))
+        closest_date_sale = min(products_on_sale, key=lambda x: abs(current_datetime - datetime.combine(x.date, datetime.min.time()))).date
     
     products_list = Product.objects.all()[:8]
     products = []
@@ -345,3 +352,11 @@ def change_product_data(request, product_id):
 def delete_product(request, product_id):
     Product.objects.get(id=product_id).delete()
     return redirect('shop')
+
+
+def add_discount(request, product_id):
+    product = Product.objects.get(id=product_id)
+    sale = request.POST.get('discount')
+    date = request.POST.get('date')
+    ProductSale.objects.create(product=product, sale=sale, date=date)
+    return redirect('product', product.slug)
