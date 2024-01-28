@@ -224,7 +224,11 @@
                     <div class="shop__product-content">
                         <div class="shop__product__top">
                             <div class="shop__product__top__left">
-                                <p class="text-default-18"><b>${{ i.0.price }}</b><span class="text-gray"></span></p>
+                                {% if i.5 %}
+                                <p class="text-default-18"><b>${{ i.5 }}</b><span class="text-gray">${{ i.0.price }}</span></p>
+                                {% else %}
+                                <p class="text-default-18"><b>${{ i.0.price }}</b></p>
+                                {% endif %}
                                 <div class="shop__product__top__left__stars">
                                     {% for n in range %}
                                     {% if n <= i.2 %}

@@ -57,9 +57,9 @@
                     <div class="overlay"></div>
                     <div class="eye" style='background: url("/media/eye.png") no-repeat center center / cover;'></div>
                 </div>
-                <p class="text-default">{{ i.0.name }}</p>
+                <p class="text-default">{{ i.0.product.name }}</p>
                 <div class="offers__right__sale">
-                    <p>-{{ i.sale }}%</p>
+                    <p>-{{ i.0.sale }}%</p>
                 </div>
             </a>
             {% endfor %}
