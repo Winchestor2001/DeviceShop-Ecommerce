@@ -60,6 +60,9 @@ def add_to_cart(request, slug):
 
 
 def shop_page(request, category=None):
+    if not request.session.get('layout'):
+        request.session['layout'] = 1
+
     main_category = None
     if category == None:
         products_list = Product.objects.all()
@@ -359,4 +362,11 @@ def add_discount(request, product_id):
     sale = request.POST.get('discount')
     date = request.POST.get('date')
     ProductSale.objects.create(product=product, sale=sale, date=date)
+    return redirect('product', product.slug)
+
+
+def add_product_photos(request, product_id):
+    product = Product.objects.get(id=product_id)
+    for photo in request.FILES.getlist('product_photos'):
+        ProductPhoto.objects.create(photo=photo, product=product)
     return redirect('product', product.slug)
