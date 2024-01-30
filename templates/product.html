@@ -53,6 +53,7 @@
                     <img src="{{ p }}" alt="">
                 </button>
                 {% endfor %}
+                {% if request.user == product.supplier.user %}
                 <form action="{% url 'add_product_photos' product.id %}" method="post" enctype="multipart/form-data">
                     {% csrf_token %}
                     <button id="add_product_btn" style="width: 56px; height: 56px;" type="button" class="shop__product__top__right-active">
@@ -64,6 +65,7 @@
                     <button type="submit" hidden></button>
                     <input type="file" name="product_photos" hidden multiple>
                 </form>
+                {% endif %}
             </div>
         </div>
         <form action="{% url 'change_product_data' product.id %}" method="post" class="product__middle">
@@ -273,16 +275,16 @@
     })
 </script>
 <script>
-    btn = document.querySelector('#add_discount')
-    overlay = document.querySelector('#overlay')
-    content = document.querySelector('#add_discount_content')
-    btn.addEventListener('click', function () {
-        overlay.style.display = 'flex'
-        content.style.display = 'flex'
+    let discount_btn = document.querySelector('#add_discount')
+    let discount_overlay = document.querySelector('#overlay')
+    let discount_content = document.querySelector('#add_discount_content')
+    discount_btn.addEventListener('click', function () {
+        discount_overlay.style.display = 'flex'
+        discount_content.style.display = 'flex'
     })
-    overlay.addEventListener('click', function () {
-        overlay.style.display = 'none'
-        content.style.display = 'none'
+    discount_overlay.addEventListener('click', function () {
+        discount_overlay.style.display = 'none'
+        discount_content.style.display = 'none'
     })
 </script>
 <script>
