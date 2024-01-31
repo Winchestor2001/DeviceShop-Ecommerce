@@ -21,9 +21,10 @@ def cart_page(request):
             category.append(c)
         else:
             category.append('')
-    final_order = zip(all_photo, orders_in_cart, category)
+    final_order = zip(all_photo, orders_in_cart)
     context['len_cart'] = len(orders_in_cart)
     context['orders'] = final_order
+    context['category'] = category
 
     return render(request, 'cart.html', context=context)
 
