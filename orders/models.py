@@ -28,6 +28,7 @@ class OrderProduct(models.Model):
     def __str__(self):
         return f"{self.user}"
 
+
 class Coupon(models.Model):
     code = models.CharField(max_length=75)
     price = models.FloatField()
