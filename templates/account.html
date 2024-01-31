@@ -7,16 +7,17 @@
 
 
 {% block content %}
+{% load i18n %}
 <main>
     <div class="user container">
         <div class="user__left">
-            <button onclick="profileContent_btn(this)" id="1" class="banner__left__btn-active">Personal info</button>
-            <button onclick="profileContent_btn(this)" id="2" class="banner__left__btn">All orders</button>
-            <a href="{% url 'logout' %}" class="banner__left__btn">Logout</a>
+            <button onclick="profileContent_btn(this)" id="1" class="banner__left__btn-active">{% trans 'Our brands' %}</button>
+            <button onclick="profileContent_btn(this)" id="2" class="banner__left__btn">{% trans 'All orders' %}</button>
+            <a href="{% url 'logout' %}" class="banner__left__btn">{% trans 'Logout' %}</a>
         </div>
         <div class="user__right-wrapper">
             <div id="content_1" class="user__right card" style="display: block;">
-                <h2>Personal info</h2>
+                <h2>{% trans 'Personal info' %}</h2>
                 <div class="user__right__info">
                     <form id="avatar_form" action="" method="post" class="user__right__info__form" enctype="multipart/form-data">
                         {% csrf_token %}
@@ -43,7 +44,7 @@
                             {% csrf_token %}
                             <div class="user__right__info__text__form">
                                 <input type="text" name="email" id="email_input" class="card text-default" hidden>
-                                <p class="text-default" id="email">Email:<span>{{ profile.user.email }}</span></p>
+                                <p class="text-default" id="email">{% trans 'Email' %}:<span>{{ profile.user.email }}</span></p>
                                 <svg id="edit_email" onclick="change_email()" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#0d6efd" class="bi bi-pencil-fill" viewBox="0 0 16 16">
                                     <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
                                 </svg>
@@ -56,7 +57,7 @@
 
                             <div class="user__right__info__text__form">
                                 <input type="text" name="phone_number" id="phone_input" class="card text-default" hidden>
-                                <p class="text-default" id="phone">Phone Number:<span>{{ profile.phone_number }}</span></p>
+                                <p class="text-default" id="phone">{% trans 'Phone Number' %}:<span>{{ profile.phone_number }}</span></p>
                                 <svg id="edit_phone" onclick="change_phone()" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#0d6efd" class="bi bi-pencil-fill" viewBox="0 0 16 16">
                                     <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
                                 </svg>
@@ -69,7 +70,7 @@
 
                             <div class="user__right__info__text__form">
                                 <input type="password" name="password" id="password_input" class="card text-default" hidden>
-                                <p class="text-default" id="password">Password:<span>********</span></p>
+                                <p class="text-default" id="password">{% trans 'Password' %}:<span>********</span></p>
                                 <svg id="edit_password" onclick="change_password()" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#0d6efd" class="bi bi-pencil-fill" viewBox="0 0 16 16">
                                     <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
                                 </svg>
@@ -83,107 +84,42 @@
                         </form>
                     </div>
                 </div>
-                <h2>My recent orders</h2>
+                <h2>{% trans 'My recent orders' %}</h2>
                 <div class="user__orders">
                     <div class="user__order">
                         <div class="user__order__top">
                             <div class="user__order__top__left">
                                 <div class="user__adress__links">
-                                    <p class="user__adress__links__id"><b>Order ID: 8924</b></p>
+                                    <p class="user__adress__links__id"><b>{% trans 'Order ID' %}: 8924</b></p>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#9DA1A7" class="bi bi-dot" viewBox="0 0 16 16">
                                         <path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3"></path>
                                     </svg>
                                     <p class="user__adress__links__warning">Pending</p>
                                 </div>
-                                <p class="text-default text-muted">Date: 16 December 2018</p>
+                                <p class="text-default text-muted">{% trans 'Date' %}: 16 December 2018</p>
                             </div>
                             <div class="user__order__top__right">
-                                <button class="cart__left__product__left__content__btn-red text-default">Cancel order</button>
+                                <button class="cart__left__product__left__content__btn-red text-default">{% trans 'Cancel order' %}</button>
                             </div>
                         </div>
                         <div class="user__order__middle">
                             <div class="user__order__middle-item">
-                                <p class="text-default text-muted">Contact</p>
+                                <p class="text-default text-muted">{% trans 'Contact' %}</p>
                                 <p class="text-default">Mike Johnatan</p>
-                                <p class="text-default">Phone: 371-295-9131</p>
-                                <p class="text-default">Email: info@mywebsite.com</p>
+                                <p class="text-default">{% trans 'Phone' %}: 371-295-9131</p>
+                                <p class="text-default">{% trans 'Email' %}: info@mywebsite.com</p>
                             </div>
                             <div class="user__order__middle-item">
-                                <p class="text-default text-muted">Shipping address</p>
+                                <p class="text-default text-muted">{% trans 'Shipping address' %}</p>
                                 <p class="text-default">United States</p>
                                 <p class="text-default">3601 Old Capitol Trail, Unit A-7, Suite</p>
                                 <p class="text-default">170777, Wilmington, DE 19808</p>
                             </div>
                             <div class="user__order__middle-item">
-                                <p class="text-default text-muted">Payment</p>
-                                <p class="text-success">Visa **** 4216</p>
-                                <p class="text-default">Tax: $15</p>
-                                <p class="text-default">Total paid: $456</p>
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="user__order__bottom">
-                            <a href="" class="user__order__bottom-item">
-                                <div class="user__order__bottom__img card">
-                                    <img src="/media/products/product_1.png" alt="">
-                                </div>
-                                <div class="user__order__bottom-item__text">
-                                    <p>Sofe for living room, New model A123</p>
-                                    <p><b>1x = $1,200.90</b></p>
-                                </div>
-                            </a>
-                            <a href="" class="user__order__bottom-item">
-                                <div class="user__order__bottom__img card">
-                                    <img src="/media/products/product_1.png" alt="">
-                                </div>
-                                <div class="user__order__bottom-item__text">
-                                    <p>Sofe for living room, New model A123</p>
-                                    <p><b>1x = $1,200.90</b></p>
-                                </div>
-                            </a>
-                            <a href="" class="user__order__bottom-item">
-                                <div class="user__order__bottom__img card">
-                                    <img src="/media/products/product_1.png" alt="">
-                                </div>
-                                <div class="user__order__bottom-item__text">
-                                    <p>Sofe for living room, New model A123</p>
-                                    <p><b>1x = $1,200.90</b></p>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="user__order">
-                        <div class="user__order__top">
-                            <div class="user__order__top__left">
-                                <div class="user__adress__links">
-                                    <p class="user__adress__links__id"><b>Order ID: 8924</b></p>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#9DA1A7" class="bi bi-dot" viewBox="0 0 16 16">
-                                        <path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3"></path>
-                                    </svg>
-                                    <p class="user__adress__links__success">Shipped</p>
-                                </div>
-                                <p class="text-default text-muted">Date: 16 December 2018</p>
-                            </div>
-                            <div class="user__order__top__right"></div>
-                        </div>
-                        <div class="user__order__middle">
-                            <div class="user__order__middle-item">
-                                <p class="text-default text-muted">Contact</p>
-                                <p class="text-default">Mike Johnatan</p>
-                                <p class="text-default">Phone: 371-295-9131</p>
-                                <p class="text-default">Email: info@mywebsite.com</p>
-                            </div>
-                            <div class="user__order__middle-item">
-                                <p class="text-default text-muted">Shipping address</p>
-                                <p class="text-default">United States</p>
-                                <p class="text-default">3601 Old Capitol Trail, Unit A-7, Suite</p>
-                                <p class="text-default">170777, Wilmington, DE 19808</p>
-                            </div>
-                            <div class="user__order__middle-item">
-                                <p class="text-default text-muted">Payment</p>
-                                <p class="text-success">Visa **** 4216</p>
-                                <p class="text-default">Tax: $15</p>
-                                <p class="text-default">Total paid: $456</p>
+                                <p class="text-default text-muted">{% trans 'Payment' %}</p>
+                                <p class="text-success">{% trans 'Visa' %} **** 4216</p>
+                                <p class="text-default">{% trans 'Tax' %}: $15</p>
+                                <p class="text-default">{% trans 'Total paid' %}: $456</p>
                             </div>
                         </div>
                         <hr>
@@ -220,172 +156,42 @@
                 </div>
             </div>
             <div id="content_2" class="user__right card" style="display: none;">
-                <h2>My orders</h2>
+                <h2>{% trans 'My orders' %}</h2>
                 <div class="user__orders">
                     <div class="user__order">
                         <div class="user__order__top">
                             <div class="user__order__top__left">
                                 <div class="user__adress__links">
-                                    <p class="user__adress__links__id"><b>Order ID: 8924</b></p>
+                                    <p class="user__adress__links__id"><b>{% trans 'Order ID' %}: 8924</b></p>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#9DA1A7" class="bi bi-dot" viewBox="0 0 16 16">
                                         <path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3"></path>
                                     </svg>
                                     <p class="user__adress__links__warning">Pending</p>
                                 </div>
-                                <p class="text-default text-muted">Date: 16 December 2018</p>
+                                <p class="text-default text-muted">{% trans 'Date' %}: 16 December 2018</p>
                             </div>
                             <div class="user__order__top__right">
-                                <button class="cart__left__product__left__content__btn-red text-default">Cancel order</button>
+                                <button class="cart__left__product__left__content__btn-red text-default">{% trans 'Cancel order' %}</button>
                             </div>
                         </div>
                         <div class="user__order__middle">
                             <div class="user__order__middle-item">
-                                <p class="text-default text-muted">Contact</p>
+                                <p class="text-default text-muted">{% trans 'Contact' %}</p>
                                 <p class="text-default">Mike Johnatan</p>
-                                <p class="text-default">Phone: 371-295-9131</p>
-                                <p class="text-default">Email: info@mywebsite.com</p>
+                                <p class="text-default">{% trans 'Phone' %}: 371-295-9131</p>
+                                <p class="text-default">{% trans 'Email' %}: info@mywebsite.com</p>
                             </div>
                             <div class="user__order__middle-item">
-                                <p class="text-default text-muted">Shipping address</p>
+                                <p class="text-default text-muted">{% trans 'Shipping address' %}</p>
                                 <p class="text-default">United States</p>
                                 <p class="text-default">3601 Old Capitol Trail, Unit A-7, Suite</p>
                                 <p class="text-default">170777, Wilmington, DE 19808</p>
                             </div>
                             <div class="user__order__middle-item">
-                                <p class="text-default text-muted">Payment</p>
-                                <p class="text-success">Visa **** 4216</p>
-                                <p class="text-default">Tax: $15</p>
-                                <p class="text-default">Total paid: $456</p>
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="user__order__bottom">
-                            <a href="" class="user__order__bottom-item">
-                                <div class="user__order__bottom__img card">
-                                    <img src="/media/products/product_1.png" alt="">
-                                </div>
-                                <div class="user__order__bottom-item__text">
-                                    <p>Sofe for living room, New model A123</p>
-                                    <p><b>1x = $1,200.90</b></p>
-                                </div>
-                            </a>
-                            <a href="" class="user__order__bottom-item">
-                                <div class="user__order__bottom__img card">
-                                    <img src="/media/products/product_1.png" alt="">
-                                </div>
-                                <div class="user__order__bottom-item__text">
-                                    <p>Sofe for living room, New model A123</p>
-                                    <p><b>1x = $1,200.90</b></p>
-                                </div>
-                            </a>
-                            <a href="" class="user__order__bottom-item">
-                                <div class="user__order__bottom__img card">
-                                    <img src="/media/products/product_1.png" alt="">
-                                </div>
-                                <div class="user__order__bottom-item__text">
-                                    <p>Sofe for living room, New model A123</p>
-                                    <p><b>1x = $1,200.90</b></p>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="user__order">
-                        <div class="user__order__top">
-                            <div class="user__order__top__left">
-                                <div class="user__adress__links">
-                                    <p class="user__adress__links__id"><b>Order ID: 8924</b></p>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#9DA1A7" class="bi bi-dot" viewBox="0 0 16 16">
-                                        <path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3"></path>
-                                    </svg>
-                                    <p class="user__adress__links__success">Shipped</p>
-                                </div>
-                                <p class="text-default text-muted">Date: 16 December 2018</p>
-                            </div>
-                            <div class="user__order__top__right"></div>
-                        </div>
-                        <div class="user__order__middle">
-                            <div class="user__order__middle-item">
-                                <p class="text-default text-muted">Contact</p>
-                                <p class="text-default">Mike Johnatan</p>
-                                <p class="text-default">Phone: 371-295-9131</p>
-                                <p class="text-default">Email: info@mywebsite.com</p>
-                            </div>
-                            <div class="user__order__middle-item">
-                                <p class="text-default text-muted">Shipping address</p>
-                                <p class="text-default">United States</p>
-                                <p class="text-default">3601 Old Capitol Trail, Unit A-7, Suite</p>
-                                <p class="text-default">170777, Wilmington, DE 19808</p>
-                            </div>
-                            <div class="user__order__middle-item">
-                                <p class="text-default text-muted">Payment</p>
-                                <p class="text-success">Visa **** 4216</p>
-                                <p class="text-default">Tax: $15</p>
-                                <p class="text-default">Total paid: $456</p>
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="user__order__bottom">
-                            <a href="" class="user__order__bottom-item">
-                                <div class="user__order__bottom__img card">
-                                    <img src="/media/products/product_1.png" alt="">
-                                </div>
-                                <div class="user__order__bottom-item__text">
-                                    <p>Sofe for living room, New model A123</p>
-                                    <p><b>1x = $1,200.90</b></p>
-                                </div>
-                            </a>
-                            <a href="" class="user__order__bottom-item">
-                                <div class="user__order__bottom__img card">
-                                    <img src="/media/products/product_1.png" alt="">
-                                </div>
-                                <div class="user__order__bottom-item__text">
-                                    <p>Sofe for living room, New model A123</p>
-                                    <p><b>1x = $1,200.90</b></p>
-                                </div>
-                            </a>
-                            <a href="" class="user__order__bottom-item">
-                                <div class="user__order__bottom__img card">
-                                    <img src="/media/products/product_1.png" alt="">
-                                </div>
-                                <div class="user__order__bottom-item__text">
-                                    <p>Sofe for living room, New model A123</p>
-                                    <p><b>1x = $1,200.90</b></p>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="user__order">
-                        <div class="user__order__top">
-                            <div class="user__order__top__left">
-                                <div class="user__adress__links">
-                                    <p class="user__adress__links__id"><b>Order ID: 8924</b></p>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#9DA1A7" class="bi bi-dot" viewBox="0 0 16 16">
-                                        <path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3"></path>
-                                    </svg>
-                                    <p class="user__adress__links__success">Shipped</p>
-                                </div>
-                                <p class="text-default text-muted">Date: 16 December 2018</p>
-                            </div>
-                            <div class="user__order__top__right"></div>
-                        </div>
-                        <div class="user__order__middle">
-                            <div class="user__order__middle-item">
-                                <p class="text-default text-muted">Contact</p>
-                                <p class="text-default">Mike Johnatan</p>
-                                <p class="text-default">Phone: 371-295-9131</p>
-                                <p class="text-default">Email: info@mywebsite.com</p>
-                            </div>
-                            <div class="user__order__middle-item">
-                                <p class="text-default text-muted">Shipping address</p>
-                                <p class="text-default">United States</p>
-                                <p class="text-default">3601 Old Capitol Trail, Unit A-7, Suite</p>
-                                <p class="text-default">170777, Wilmington, DE 19808</p>
-                            </div>
-                            <div class="user__order__middle-item">
-                                <p class="text-default text-muted">Payment</p>
-                                <p class="text-success">Visa **** 4216</p>
-                                <p class="text-default">Tax: $15</p>
-                                <p class="text-default">Total paid: $456</p>
+                                <p class="text-default text-muted">{% trans 'Payment' %}</p>
+                                <p class="text-success">{% trans 'Visa' %} **** 4216</p>
+                                <p class="text-default">{% trans 'Tax' %}: $15</p>
+                                <p class="text-default">{% trans 'Total paid' %}: $456</p>
                             </div>
                         </div>
                         <hr>

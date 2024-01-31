@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-01-31 19:30+0500\n"
+"POT-Creation-Date: 2024-01-31 20:38+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,7 +20,7 @@ msgstr ""
 "%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n"
 "%100>=11 && n%100<=14)? 2 : 3);\n"
 
-#: .\core\settings.py:121
+#: .\core\settings.py:121 .\templates\includes\header.html:37
 msgid "English"
 msgstr ""
 
@@ -1245,3 +1245,636 @@ msgstr ""
 #: .\env\Lib\site-packages\django\views\templates\default_urlconf.html:248
 msgid "Connect, get help, or contribute"
 msgstr ""
+
+#: .\templates\account.html:14 .\templates\index.html:126
+msgid "Our brands"
+msgstr "Наши бренды"
+
+#: .\templates\account.html:15
+msgid "Все заказы"
+msgstr ""
+
+#: .\templates\account.html:16
+msgid "Выйти"
+msgstr ""
+
+#: .\templates\account.html:20
+msgid "Personal info"
+msgstr "Личная информация"
+
+#: .\templates\account.html:47 .\templates\account.html:110
+#: .\templates\account.html:182 .\templates\checkout.html:34
+#: .\templates\forgot_password.html:16 .\templates\includes\footer.html:9
+#: .\templates\register.html:21
+msgid "Email"
+msgstr "Эл. почта"
+
+#: .\templates\account.html:60
+msgid "Phone Number"
+msgstr "Номер телефона"
+
+#: .\templates\account.html:73 .\templates\login.html:21
+msgid "Password"
+msgstr "Пароль"
+
+#: .\templates\account.html:87
+msgid "My recent orders"
+msgstr "Мои недавние заказы"
+
+#: .\templates\account.html:93 .\templates\account.html:165
+msgid "Order ID"
+msgstr "ID заказа"
+
+#: .\templates\account.html:99 .\templates\account.html:171
+msgid "Date"
+msgstr "Дата"
+
+#: .\templates\account.html:102 .\templates\account.html:174
+msgid "Cancel order"
+msgstr "Отменить заказ"
+
+#: .\templates\account.html:107 .\templates\account.html:179
+#: .\templates\checkout.html:16
+msgid "Contact"
+msgstr "Контакт"
+
+#: .\templates\account.html:109 .\templates\account.html:181
+#: .\templates\checkout.html:29
+msgid "Phone"
+msgstr "Телефон"
+
+#: .\templates\account.html:113 .\templates\account.html:185
+msgid "Shipping address"
+msgstr "Аддрес доставки"
+
+#: .\templates\account.html:119 .\templates\account.html:191
+#: .\templates\checkout.html:57
+msgid "Payment"
+msgstr "Способ оплаты"
+
+#: .\templates\account.html:120 .\templates\account.html:192
+msgid "Visa"
+msgstr "Виза"
+
+#: .\templates\account.html:121 .\templates\account.html:193
+msgid "Tax"
+msgstr "Комиссия"
+
+#: .\templates\account.html:122 .\templates\account.html:194
+msgid "Total paid"
+msgstr "Итого"
+
+#: .\templates\account.html:159
+msgid "My orders"
+msgstr "Мои заказы"
+
+#: .\templates\addproduct.html:15
+msgid "Main category"
+msgstr "Главная категория"
+
+#: .\templates\addproduct.html:24 .\templates\addproduct.html:67
+#: .\templates\cart.html:113 .\templates\saved.html:196
+#: .\templates\shop.html:196
+msgid "Add product"
+msgstr "Добавить продукт"
+
+#: .\templates\addproduct.html:33
+msgid "Name"
+msgstr "Имя"
+
+#: .\templates\addproduct.html:34
+msgid "Type name"
+msgstr "Напишите имя"
+
+#: .\templates\addproduct.html:37
+msgid "Price (In USD, only numbers)"
+msgstr "Цена"
+
+#: .\templates\addproduct.html:38
+msgid "Type price"
+msgstr "Напишите цену"
+
+#: .\templates\addproduct.html:41 .\templates\cart.html:24
+#: .\templates\product.html:136
+msgid "Brand"
+msgstr "Бренд"
+
+#: .\templates\addproduct.html:42
+msgid "Type brand"
+msgstr "Напшите бренд"
+
+#: .\templates\addproduct.html:45 .\templates\product.html:199
+msgid "Description"
+msgstr "Описание"
+
+#: .\templates\addproduct.html:46
+msgid "Type description"
+msgstr "Напишите описание"
+
+#: .\templates\addproduct.html:49 .\templates\cart.html:25
+#: .\templates\product.html:150
+msgid "State"
+msgstr "Состояние"
+
+#: .\templates\addproduct.html:51
+msgid "New"
+msgstr "Новое"
+
+#: .\templates\addproduct.html:52
+msgid "Used"
+msgstr "Использованное"
+
+#: .\templates\addproduct.html:53
+msgid "Old"
+msgstr "Старое"
+
+#: .\templates\addproduct.html:57
+msgid "Images"
+msgstr "Фотографии"
+
+#: .\templates\cart.html:12 .\templates\includes\header.html:43
+#: .\templates\includes\header.html:85 .\templates\includes\header.html:144
+msgid "My cart"
+msgstr "Моя корзина"
+
+#: .\templates\cart.html:26 .\templates\product.html:132
+#: .\templates\saved.html:27 .\templates\shop.html:27
+msgid "Category"
+msgstr "Категория"
+
+#: .\templates\cart.html:27 .\templates\product.html:158
+msgid "Other"
+msgstr "Другое"
+
+#: .\templates\cart.html:28
+msgid "Seller"
+msgstr "Продавец"
+
+#: .\templates\cart.html:30
+msgid "Remove"
+msgstr "Удалить"
+
+#: .\templates\cart.html:32 .\templates\product.html:191
+msgid "Save for later"
+msgstr "Сохранить"
+
+#: .\templates\cart.html:60
+msgid "Back to shop"
+msgstr "Обратно в магазин"
+
+#: .\templates\cart.html:62
+msgid "Remove all"
+msgstr "Удалить все"
+
+#: .\templates\cart.html:67
+msgid "Have a coupon?"
+msgstr "Есть купон?"
+
+#: .\templates\cart.html:69
+msgid "Add coupon"
+msgstr "Добавить купон"
+
+#: .\templates\cart.html:70
+msgid "Apply"
+msgstr "Применить"
+
+#: .\templates\cart.html:89 .\templates\checkout.html:78
+msgid "Общая цена"
+msgstr ""
+
+#: .\templates\cart.html:93 .\templates\checkout.html:84
+msgid "Discount"
+msgstr "Скидка"
+
+#: .\templates\cart.html:97 .\templates\checkout.html:86
+msgid "Shipping"
+msgstr "Доставка"
+
+#: .\templates\cart.html:103 .\templates\checkout.html:91
+#: .\templates\checkout.html:102
+msgid "Total"
+msgstr "Итого"
+
+#: .\templates\cart.html:106
+msgid "Checkout"
+msgstr "Оформление заказа"
+
+#: .\templates\cart.html:112
+msgid "Cart is empty!"
+msgstr "В корзине пусто"
+
+#: .\templates\cart.html:123
+msgid "Secure payment"
+msgstr "Безопасная оплата"
+
+#: .\templates\cart.html:123
+#, python-format
+msgid "Pay your order with 100%% security"
+msgstr "Оплатите свой заказ со 100%% безопасностью."
+
+#: .\templates\cart.html:130
+msgid "Customer support"
+msgstr "Служба поддержки"
+
+#: .\templates\cart.html:130
+msgid "We can help you any time"
+msgstr "Мы можем помочь вам в любое время"
+
+#: .\templates\cart.html:137
+msgid "Free delivery"
+msgstr "Бесплатная доставка"
+
+#: .\templates\cart.html:137
+msgid "Absolutely free shipping and delivery"
+msgstr "Абсолютно бесплатная доставка и доставка."
+
+#: .\templates\change_password.html:13 .\templates\change_password.html:35
+#: .\templates\forgot_password.html:12
+msgid "Reset password"
+msgstr "Восстановить Пароль"
+
+#: .\templates\change_password.html:17
+msgid "Create new password"
+msgstr "Создайте новый пароль"
+
+#: .\templates\change_password.html:19 .\templates\register.html:25
+#: .\templates\register.html:27
+msgid "Create password"
+msgstr "Создайте пароль"
+
+#: .\templates\change_password.html:26 .\templates\change_password.html:28
+#: .\templates\register.html:34 .\templates\register.html:36
+msgid "Repeat password"
+msgstr "Повторите ваш пароль"
+
+#: .\templates\checkout.html:19
+msgid "First name"
+msgstr "Имя"
+
+#: .\templates\checkout.html:21 .\templates\checkout.html:26
+#: .\templates\checkout.html:36
+msgid "Type here"
+msgstr "Напишите здесь"
+
+#: .\templates\checkout.html:24
+msgid "Last name"
+msgstr "Фамилия"
+
+#: .\templates\checkout.html:39
+msgid "Receipt"
+msgstr "Аддрес"
+
+#: .\templates\checkout.html:42
+msgid "City"
+msgstr "Город"
+
+#: .\templates\checkout.html:44
+msgid "Select your city"
+msgstr "Выберите ваш город"
+
+#: .\templates\checkout.html:51
+msgid "Pick-up point"
+msgstr "Место выдачи"
+
+#: .\templates\checkout.html:53
+msgid "Select pick up"
+msgstr "Выберите место выдачи"
+
+#: .\templates\checkout.html:61
+msgid "Click"
+msgstr "Click"
+
+#: .\templates\checkout.html:65
+msgid "Payme"
+msgstr "Payme"
+
+#: .\templates\checkout.html:70
+msgid "Cancel"
+msgstr "Отменить"
+
+#: .\templates\checkout.html:71
+msgid "Place order"
+msgstr "Оформить заказ"
+
+#: .\templates\checkout.html:76
+msgid "Summary"
+msgstr "Чек"
+
+#: .\templates\checkout.html:81
+msgid "Cupon"
+msgstr "Купон"
+
+#: .\templates\checkout.html:94
+msgid "Items in cart"
+msgstr "Предметы в корзине"
+
+#: .\templates\forgot_password.html:17 .\templates\register.html:22
+msgid "Type email"
+msgstr "Напишите вашу эл. почту"
+
+#: .\templates\forgot_password.html:20
+msgid "Send code"
+msgstr "Отправить код"
+
+#: .\templates\includes\footer.html:4
+msgid "Subscribe on our newsletter"
+msgstr "Подпишитесь на нашу рассылку"
+
+#: .\templates\includes\footer.html:5
+msgid ""
+"Get daily news on upcoming offers from many suppliers all over the world"
+msgstr "Получайте ежедневные новости о предстоящих предложениях от многих поставщиков со всего мира."
+
+#: .\templates\includes\footer.html:16
+msgid "Subscribe"
+msgstr "Подписаться"
+
+#: .\templates\includes\footer.html:24
+msgid "Best information about the company gies here but now lorem ipsum is"
+msgstr "Лучшая информация о компании находится здесь, но сейчас lorem ipsum"
+
+#: .\templates\includes\footer.html:55
+msgid "For users"
+msgstr "Для пользователей"
+
+#: .\templates\includes\footer.html:56 .\templates\includes\header.html:110
+msgid "Login"
+msgstr "Войти"
+
+#: .\templates\includes\footer.html:57 .\templates\includes\header.html:117
+msgid "Register"
+msgstr "Зарегестрироваться"
+
+#: .\templates\includes\footer.html:58
+msgid "My Account"
+msgstr "Мой аккаунт"
+
+#: .\templates\includes\footer.html:59
+msgid "My Orders"
+msgstr "Мои заказы"
+
+#: .\templates\includes\footer.html:62 .\templates\includes\footer.html:64
+#: .\templates\includes\header.html:22 .\templates\includes\header.html:66
+msgid "Shop"
+msgstr "Магазин"
+
+#: .\templates\includes\footer.html:63 .\templates\includes\header.html:16
+msgid "Home"
+msgstr "Главная"
+
+#: .\templates\includes\footer.html:65
+msgid "Categories"
+msgstr "Категории"
+
+#: .\templates\includes\footer.html:66
+msgid "Cart"
+msgstr "Корзина"
+
+#: .\templates\includes\header.html:6
+msgid "Sign in | Register"
+msgstr "Войти | Зарегестрироваться"
+
+#: .\templates\includes\header.html:28 .\templates\includes\header.html:79
+msgid "Saved"
+msgstr Сохраненное"
+
+#: .\templates\includes\header.html:57 .\templates\includes\header.html:58
+#: .\templates\saved.html:16 .\templates\shop.html:16
+msgid "Search"
+msgstr "Поиск"
+
+#: .\templates\includes\header.html:73 .\templates\includes\header.html:138
+msgid "Profile"
+msgstr "Профиль"
+
+#: .\templates\index.html:24
+msgid "View products"
+msgstr "Посмотреть на продукты"
+
+#: .\templates\index.html:31
+msgid "Deals and offers"
+msgstr "Сделки и скидки"
+
+#: .\templates\index.html:32
+msgid "Products on sale"
+msgstr "Продукты со скидкой"
+
+#: .\templates\index.html:37
+msgid "Days"
+msgstr "Дней"
+
+#: .\templates\index.html:41 .\templates\index.html:45
+msgid "Hours"
+msgstr "Часов"
+
+#: .\templates\index.html:49
+msgid "Seconds"
+msgstr "Секунд"
+
+#: .\templates\index.html:73
+msgid "Consumer electronics and gadgets"
+msgstr "Бытовая электроника и гаджеты"
+
+#: .\templates\index.html:74
+msgid "View"
+msgstr "Посмотреть"
+
+#: .\templates\index.html:82
+msgid "From"
+msgstr "Начиная с"
+
+#: .\templates\index.html:92
+msgid "An easy way to ask question"
+msgstr "Простой способ задать вопрос"
+
+#: .\templates\index.html:93
+msgid "Ask your question here, we will send answer on your gmail"
+msgstr "Задайте свой вопрос здесь, мы отправим ответ на вашу почту"
+
+#: .\templates\index.html:97
+msgid "Want to ask a question?"
+msgstr "Хотите задать вопрос?"
+
+#: .\templates\index.html:100
+msgid "Question"
+msgstr "Вопрос"
+
+#: .\templates\index.html:101
+msgid "Write more about the question"
+msgstr "Напишите подробнее о вопросе"
+
+#: .\templates\index.html:102
+msgid "Ask a question"
+msgstr "Задайте вопрос"
+
+#: .\templates\index.html:108
+msgid "Recommended items"
+msgstr "Рекомендуемые товары"
+
+#: .\templates\login.html:13 .\templates\login.html:31
+#: .\templates\register.html:49
+msgid "Sign in"
+msgstr "Войти"
+
+#: .\templates\login.html:17 .\templates\register.html:17
+msgid "Username"
+msgstr "Имя пользователя"
+
+#: .\templates\login.html:18 .\templates\register.html:18
+msgid "Type username"
+msgstr "Введите ваше имя пользователя"
+
+#: .\templates\login.html:23
+msgid "Type your password"
+msgstr "Введите свой пароль"
+
+#: .\templates\login.html:28
+msgid "Forgot password?"
+msgstr "Забыли пароль?"
+
+#: .\templates\login.html:28
+msgid "Reset"
+msgstr "Сбросить"
+
+#: .\templates\login.html:33
+msgid "Dont have an account?"
+msgstr "У вас нет аккаунта?"
+
+#: .\templates\login.html:33 .\templates\register.html:13
+#: .\templates\register.html:43
+msgid "Sign up"
+msgstr "Зарегестрироваться"
+
+#: .\templates\product.html:13 .\templates\product.html:209
+msgid "Write review"
+msgstr "Написать отзыв"
+
+#: .\templates\product.html:16
+msgid "Write your review"
+msgstr "Напишите свой отзыв"
+
+#: .\templates\product.html:25
+msgid "Your images"
+msgstr "Ваши изображения"
+
+#: .\templates\product.html:26
+msgid "Add review"
+msgstr "Добавить отзыв"
+
+#: .\templates\product.html:30 .\templates\product.html:35
+#: .\templates\product.html:180
+msgid "Add discount"
+msgstr "Добавить скидку"
+
+#: .\templates\product.html:33
+#, python-format
+msgid "%% of sale"
+msgstr "% от скидки"
+
+#: .\templates\product.html:34
+msgid "Date of ending sale"
+msgstr "Дата окончания скидки"
+
+#: .\templates\product.html:108
+msgid "reviews"
+msgstr "отзывов"
+
+#: .\templates\product.html:113 .\templates\saved.html:283
+#: .\templates\shop.html:283
+msgid "orders"
+msgstr "заказов"
+
+#: .\templates\product.html:118 .\templates\saved.html:41
+#: .\templates\shop.html:41
+msgid "Price"
+msgstr "Цена"
+
+#: .\templates\product.html:154
+msgid "Created"
+msgstr "Создан в"
+
+#: .\templates\product.html:172
+msgid "Supplier"
+msgstr "Продавец"
+
+#: .\templates\product.html:176
+msgid "Add to cart"
+msgstr "Добавить в корзину"
+
+#: .\templates\product.html:177
+msgid "Seller's profile"
+msgstr "Профиль продавца"
+
+#: .\templates\product.html:179
+msgid "Delete product"
+msgstr "Удалить продукт"
+
+#: .\templates\product.html:200
+msgid "Reviews"
+msgstr "Отзывы"
+
+#: .\templates\product.html:213
+msgid "Photos"
+msgstr "Фотографии"
+
+#: .\templates\product.html:250
+msgid "You may like"
+msgstr "Вам так-же могут понравиться"
+
+#: .\templates\register.html:46
+msgid "I agree with Terms and Conditions"
+msgstr "Я соглашяюсь с политикой концедициальности"
+
+#: .\templates\register.html:49
+msgid "Alreade have account?"
+msgstr "Уже есть аккаунт?"
+
+#: .\templates\saved.html:33 .\templates\saved.html:169
+#: .\templates\saved.html:173 .\templates\shop.html:33
+#: .\templates\shop.html:169 .\templates\shop.html:173
+msgid "All"
+msgstr "Все"
+
+#: .\templates\saved.html:60 .\templates\shop.html:60
+msgid "Min"
+msgstr "Минимальная цена"
+
+#: .\templates\saved.html:64 .\templates\shop.html:64
+msgid "Max"
+msgstr "Максимальная цена"
+
+#: .\templates\saved.html:74 .\templates\shop.html:74
+msgid "Rating"
+msgstr "Рейтинг"
+
+#: .\templates\saved.html:134 .\templates\shop.html:134
+msgid "Brands"
+msgstr "Бренды"
+
+#: .\templates\saved.html:169 .\templates\shop.html:169
+msgid "items in"
+msgstr "продуктов в"
+
+#: .\templates\saved.html:174 .\templates\shop.html:174
+msgid "Date added: From new to old"
+msgstr "По дате: С новых до старых"
+
+#: .\templates\saved.html:175 .\templates\shop.html:175
+msgid "Date added: From old to new"
+msgstr "По дате: Со старых до новых"
+
+#: .\templates\saved.html:179 .\templates\shop.html:179
+msgid "Filter"
+msgstr "Фильтр"
+
+#: .\templates\saved.html:215 .\templates\shop.html:215
+msgid "Clear all filter"
+msgstr "Очистить все фильтры"
+
+#: .\templates\saved.html:288 .\templates\shop.html:288
+msgid "View details"
+msgstr "Посмотреть больше"
+
+#: .\templates\seller_profile.html:27
+msgid "User uploads"
+msgstr "Продукты этого пользователя"

@@ -7,12 +7,13 @@
 
 
 {% block content %}
+{% load i18n %}
 <div id="overlay" style="display: none;"></div>
 <main>
     <form method="post" class="mobile-header__input-wrapper container">
         <!-- {% csrf_token %} -->
         <input type="text" placeholder="Search" name="search" class="header__input text-default">
-        <button type="submit" class="header__btn text-default-white">Search</button>
+        <button type="submit" class="header__btn text-default-white">{% trans 'Search' %}</button>
     </form>
     <div class="shop container">
         <form method="post" class="shop__left">
@@ -23,13 +24,13 @@
             <button id="btn_submit" hidden type="submit"></button>
             <div class="shop__left-items">
                 <button type="button" onclick="showOrHideItems(this)" class="shop__left-items__header">
-                    <p class="text-default"><b>Category</b></p>
+                    <p class="text-default"><b>{% trans 'Category' %}</b></p>
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                         <path d="M12 8.29504L6 14.295L7.41 15.705L12 11.125L16.59 15.705L18 14.295L12 8.29504Z" fill="#8B96A5"/>
                     </svg>
                 </button>
                 <div class="shop__left-items-wrapper">
-                    <a href="{% url 'shop' %}" class="shop__left-item text-{% if current_category == None %}default-primary{% else %}gray{% endif %}">All</a>
+                    <a href="{% url 'shop' %}" class="shop__left-item text-{% if current_category == None %}default-primary{% else %}gray{% endif %}">{% trans 'All' %}</a>
                     {% for i in main_categories %}
                     <a href="{% url 'category_shop' i.slug %}" class="shop__left-item text-{% if current_category == i %}default-primary{% else %}gray{% endif %}">{{ i.name }}</a>
                     {% endfor %}
@@ -37,7 +38,7 @@
             </div>
             <div class="shop__left-items">
                 <button type="button" onclick="showOrHideItems(this)" class="shop__left-items__header">
-                    <p class="text-default"><b>Price</b></p>
+                    <p class="text-default"><b>{% trans 'Price' %}</b></p>
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                         <path d="M12 8.29504L6 14.295L7.41 15.705L12 11.125L16.59 15.705L18 14.295L12 8.29504Z" fill="#8B96A5"/>
                     </svg>
@@ -56,11 +57,11 @@
                         </div> 
                         <div class="price-input">
                             <div class="price-input__field">
-                                <label for="min" class="text-default">Min</label>
+                                <label for="min" class="text-default">{% trans 'Min' %}</label>
                                 <input placeholder="Min" type="number" class="min-input default-input text-default" name="min" id="min" value="{{ min }}"> 
                             </div>
                             <div class="price-input__field">
-                                <label for="max" class="text-default">Max</label>
+                                <label for="max" class="text-default">{% trans 'Max' %}</label>
                                 <input placeholder="Max" type="number" class="max-input default-input text-default" name="max" id="max" value="{{ max }}"> 
                             </div>
                         </div>
@@ -70,7 +71,7 @@
             </div>
             <div class="shop__left-items">
                 <button type="button" onclick="showOrHideItems(this)" class="shop__left-items__header">
-                    <p class="text-default"><b>Rating</b></p>
+                    <p class="text-default"><b>{% trans 'Rating' %}</b></p>
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                         <path d="M12 8.29504L6 14.295L7.41 15.705L12 11.125L16.59 15.705L18 14.295L12 8.29504Z" fill="#8B96A5"/>
                     </svg>
@@ -130,7 +131,7 @@
             </div>
             <div class="shop__left-items">
                 <button type="button" onclick="showOrHideItems(this)" class="shop__left-items__header">
-                    <p class="text-default"><b>Brands</b></p>
+                    <p class="text-default"><b>{% trans 'Brands' %}</b></p>
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                         <path d="M12 8.29504L6 14.295L7.41 15.705L12 11.125L16.59 15.705L18 14.295L12 8.29504Z" fill="#8B96A5"/>
                     </svg>
@@ -165,17 +166,17 @@
         </form>
         <div class="shop__right">
             <div class="shop__right__top">
-                <p class="text-default">{{ products|length }} items in <a href="#" class="text-default"><b>{% if current_category == None %}All{% else %}{{ current_category.name }}{% endif %}</b></a></p>
+                <p class="text-default">{{ products|length }} {% trans 'items in' %} <a href="#" class="text-default"><b>{% if current_category == None %}{% trans 'All' %}{% else %}{{ current_category.name }}{% endif %}</b></a></p>
                 <div class="shop__right__top__right">
                     <form action="" method="get">
                         <select name="sort" id="sort_by" class="shop__right__top__select text-default">
-                            <option value="all" {% if sort_by == None %}selected{% endif %}>All</option>
-                            <option value="date_new" {% if sort_by == 'date_new' %}selected{% endif %}>Date added: From new to old</option>
-                            <option value="date_old" {% if sort_by == 'date_old' %}selected{% endif %}>Date added: From old to new</option>
+                            <option value="all" {% if sort_by == None %}selected{% endif %}>{% trans 'All' %}</option>
+                            <option value="date_new" {% if sort_by == 'date_new' %}selected{% endif %}>{% trans 'Date added: From new to old' %}</option>
+                            <option value="date_old" {% if sort_by == 'date_old' %}selected{% endif %}>{% trans 'Date added: From old to new' %}</option>
                         </select>
                         <button type="submit" hidden></button>
                     </form>
-                    <button id="filter_btn" class="shop__right__top__select text-default" style="display: none;">Filter (3)</button>
+                    <button id="filter_btn" class="shop__right__top__select text-default" style="display: none;">{% trans 'Filter' %} (3)</button>
                     <div class="shop__right__top__right__btns">
                         <button onclick="change_layout(this, 1)" class="shop__right__top__right__btn layout-btn-active">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -192,7 +193,7 @@
                         </button>
                     </div>
                 </div>
-                <a href="{% url 'addproductpage' %}" class="banner__right__btn text-default-white" style="text-align: center;">Add product</a>
+                <a href="{% url 'addproductpage' %}" class="banner__right__btn text-default-white" style="text-align: center;">{% trans 'Add product' %}</a>
             </div>
             <div class="shop__right__bottom">
                 {% if current_category != None %}
@@ -211,7 +212,7 @@
                     </svg>
                 </button>
                 {% endfor %}
-                <a href="{% url 'shop' %}" class="text-default-primary">Clear all filter</a>
+                <a href="{% url 'shop' %}" class="text-default-primary">{% trans 'Clear all filter' %}</a>
             </div>
             <div class="shop__products">
                 {% for i in products %}
@@ -279,12 +280,12 @@
                                 <svg xmlns="http://www.w3.org/2000/svg" width="6" height="6" viewBox="0 0 6 6" fill="none">
                                     <circle cx="3" cy="3" r="3" fill="#DEE2E7"/>
                                 </svg>
-                                <p class="text-default text-muted">{{ i.3 }} orders</p>
+                                <p class="text-default text-muted">{{ i.3 }} {% trans 'orders' %}</p>
                             </div>
                         </div>
                         <div class="shop__products__right__bottom">
                             <p class="text-default">{{ i.0.description }}</p>
-                            <a href="{% url 'product' i.0.slug %}" class="text-default-primary">View details</a>
+                            <a href="{% url 'product' i.0.slug %}" class="text-default-primary">{% trans 'View details' %}</a>
                         </div>
                     </div>
                     <button onclick="save_product(`{% url 'save_product' i.0.id %}`)" class="shop__product-layout2__save{% if i.4 %}-active{% endif %}">

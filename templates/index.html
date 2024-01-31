@@ -8,6 +8,7 @@
 
 {% block content %}
 {% load static %}
+{% load i18n %}
 <main>
     <div class="banner card container">
         <div class="banner__left">
@@ -20,32 +21,32 @@
             <div class="banner__image" style="background-image: url('media/{{ main_categories.0.0.photo }}');"></div>
             <div class="banner__right-content">
                 <h1 class="banner__right__header">{{ main_categories.0.0.name }}</h1>
-                <a href="{% url 'category_shop' main_categories.0.0.slug %}" id="view_products" class="banner__right__btn text-default-white">View products</a>
+                <a href="{% url 'category_shop' main_categories.0.0.slug %}" id="view_products" class="banner__right__btn text-default-white">{% trans 'View products' %}</a>
             </div>
         </div>
     </div>
     <div class="offers card container" id="categories">
         <div class="offers__left">
             <div class="offers__left__text">
-                <h3>Deals and offers</h3>
-                <p class="text-default text-muted">Hygiene equipments</p>
+                <h3>{% trans 'Deals and offers' %}</h3>
+                <p class="text-default text-muted">{% trans 'Products on sale' %}</p>
             </div>
             <div class="offers__left__countdown">
                 <div class="offers__left__countdown-item" id="days">
                     <p class="text-700-white">00</p>
-                    <p class="text-micro-white">Days</p>
+                    <p class="text-micro-white">{% trans 'Days' %}</p>
                 </div>
                 <div class="offers__left__countdown-item" id="hours">
                     <p class="text-700-white">00</p>
-                    <p class="text-micro-white">Hours</p>
+                    <p class="text-micro-white">{% trans 'Hours' %}</p>
                 </div>
                 <div class="offers__left__countdown-item" id="minutes">
                     <p class="text-700-white">00</p>
-                    <p class="text-micro-white">Min</p>
+                    <p class="text-micro-white">{% trans 'Hours' %}</p>
                 </div>
                 <div class="offers__left__countdown-item" id="seconds">
                     <p class="text-700-white">00</p>
-                    <p class="text-micro-white">Sec</p>
+                    <p class="text-micro-white">{% trans 'Seconds' %}</p>
                 </div>
             </div>
         </div>
@@ -69,8 +70,8 @@
         <div class="categories__left">
             <div class="categories__left__image" style="background-image: url('/media/categories_bg.png');"></div>
             <div class="categories__left-content">
-                <h3>Consumer electronics and gadgets</h3>
-                <a href="" class="banner__right__btn text-default-white">View</a>
+                <h3>{% trans 'Consumer electronics and gadgets' %}</h3>
+                <a href="" class="banner__right__btn text-default-white">{% trans 'View' %}</a>
             </div>
         </div>
         <div class="categories__right">
@@ -78,7 +79,7 @@
             <a href="{% url 'shop' %}" class="categories__right-item">
                 <div class="categories__right-item-content">
                     <p class="text-default">{{ i.0.name }}</p>
-                    <p class="text-micro text-muted">From<br>{{ i.1 }}$</p>
+                    <p class="text-micro text-muted">{% trans 'From' %}<br>{{ i.1 }}$</p>
                 </div>
                 <img src="/media/{{ i.0.photo }}" class="categories__right-item__photo" alt="">
             </a>
@@ -88,23 +89,23 @@
     <div class="message container">
         <div class="message__photo" style="background-image: url('/media/message_bg.png');"></div>
         <div class="message__left">
-            <h1 class="header-white">An easy way to send requests to all suppliers</h1>
-            <p class="text-default-white">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt.</p>
+            <h1 class="header-white">{% trans 'An easy way to ask question' %}</h1>
+            <p class="text-default-white">{% trans 'Ask your question here, we will send answer on your gmail' %}</p>
         </div>
         <div class="message__right">
             <div class="message__right-content">
-                <h3>Want to ask a question?</h3>
+                <h3>{% trans 'Want to ask a question?' %}</h3>
                 <form method="post" class="message__right__form">
                     <!-- {% csrf_token %} -->
-                    <input type="text" name="question_title" class="default-input text-default" placeholder="Question">
-                    <textarea name="question" cols="30" rows="4" class="default-textarea text-default" placeholder="Write more about the question"></textarea>
-                    <button class="banner__right__btn text-default-white" id="recommended">Ask a question</button>
+                    <input type="text" name="question_title" class="default-input text-default" placeholder="{% trans 'Question' %}">
+                    <textarea name="question" cols="30" rows="4" class="default-textarea text-default" placeholder="{% trans 'Write more about the question' %}"></textarea>
+                    <button class="banner__right__btn text-default-white" id="recommended">{% trans 'Ask a question' %}</button>
                 </form>
             </div>
         </div>
     </div>
     <div class="recommended container">
-        <h2>Recommended items</h2>
+        <h2>{% trans 'Recommended items' %}</h2>
         <div class="recommended__cards">
             {% for i in products %}
             <a href="{% url 'shop' %}" class="recommended__card card">
@@ -122,7 +123,7 @@
         </div>
     </div>
     <div class="brands-wrapper container">
-        <h2 id="brands">Our brands</h2>
+        <h2 id="brands">{% trans 'Our brands' %}</h2>
         <div class="brands">
             <a href="" class="brand">
                 <img src="/media/logos/asus.png" alt="">
