@@ -52,10 +52,12 @@ def add_to_cart(request, slug):
     cart = CartProduct.objects.filter(profile=profile, product__slug=slug)
     product = Product.objects.get(slug=slug)
     if not cart:
-        CartProduct.objects.create(product=product, profile=profile)
+        CartProduct.objects.create(product=product, profile=profile, total_price=product.price)
     else:
-        cart[0].quantity += 1
-        cart[0].save()
+        cart_product = cart[0]
+        cart_product.quantity += 1
+        cart_product.total_price = cart_product.quantity * cart_product.product.price
+        cart_product.save()
     return redirect('cart')
 
 

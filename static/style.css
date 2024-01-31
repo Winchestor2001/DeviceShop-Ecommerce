@@ -2285,6 +2285,8 @@ input[type="range"]::-webkit-slider-thumb {
   display: flex;
   gap: 50px;
   margin-top: 30px;
+  justify-content: space-around;
+  align-items: center;
 }
 
 .cart__bottom-item {
@@ -2324,6 +2326,7 @@ input[type="range"]::-webkit-slider-thumb {
   gap: 16px;
   align-items: center;
   padding-bottom: 16px;
+  margin-bottom: 30px;
   border-bottom: 1px solid var(--gray-300, #dee2e7);
 }
 
@@ -2627,6 +2630,8 @@ input[type="range"]::-webkit-slider-thumb {
   row-gap: 16px;
   flex-wrap: wrap;
   margin-bottom: 16px;
+  padding-bottom: 25px;
+  border-bottom: 1px solid var(--gray-300, #dee2e7);
 }
 
 .class__form__checkbox-wrapper {
@@ -2650,6 +2655,10 @@ input[type="range"]::-webkit-slider-thumb {
   display: flex;
   gap: 12px;
   justify-content: space-between;
+}
+
+.checkout_payment_text {
+    margin-top: 24px;
 }
 
 .checkout__left__express {
