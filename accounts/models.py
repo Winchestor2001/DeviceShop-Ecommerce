@@ -11,3 +11,8 @@ class Profile(models.Model):
 
     def __str__(self):
         return self.user.username
+
+
+class ResetPassword(models.Model):
+    url = models.TextField()
+    user = models.ForeignKey(User, on_delete=models.CASCADE)

@@ -6,7 +6,6 @@
   font-family: "Inter", sans-serif;
   font-style: normal;
   line-height: normal;
-  scroll-behavior: smooth;
 }
 
 body {
@@ -1691,7 +1690,6 @@ input[type="range"]::-webkit-slider-thumb {
   font-size: 24px;
   max-height: 58px;
   overflow: hidden;
-  width: 90%;
 }
 
 .product__middle__top-orders {
@@ -2067,6 +2065,15 @@ input[type="range"]::-webkit-slider-thumb {
   gap: 20px;
 }
 
+.empty_text_in_cart {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 25px;
+    margin-bottom: 70px;
+}
+
 .cart__left {
   width: 75%;
   display: flex;
@@ -2278,6 +2285,8 @@ input[type="range"]::-webkit-slider-thumb {
   display: flex;
   gap: 50px;
   margin-top: 30px;
+  justify-content: space-around;
+  align-items: center;
 }
 
 .cart__bottom-item {
@@ -2317,7 +2326,29 @@ input[type="range"]::-webkit-slider-thumb {
   gap: 16px;
   align-items: center;
   padding-bottom: 16px;
+  margin-bottom: 30px;
   border-bottom: 1px solid var(--gray-300, #dee2e7);
+}
+
+.supplier_user_info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 16px;
+  align-items: center;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--gray-300, #dee2e7);
+}
+
+.supplier_user_info form img {
+  border-radius: 50%;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.supplier_name {
+    font-size: 50px;
 }
 
 .user__right__info__form {
@@ -2599,6 +2630,8 @@ input[type="range"]::-webkit-slider-thumb {
   row-gap: 16px;
   flex-wrap: wrap;
   margin-bottom: 16px;
+  padding-bottom: 25px;
+  border-bottom: 1px solid var(--gray-300, #dee2e7);
 }
 
 .class__form__checkbox-wrapper {
@@ -2622,6 +2655,10 @@ input[type="range"]::-webkit-slider-thumb {
   display: flex;
   gap: 12px;
   justify-content: space-between;
+}
+
+.checkout_payment_text {
+    margin-top: 24px;
 }
 
 .checkout__left__express {
@@ -2905,6 +2942,13 @@ input[type="range"]::-webkit-slider-thumb {
   height: 30px;
 }
 
+.product__middle__bottom-price {
+  align-items: center;
+}
+
+.product__middle__bottom-price, .product__middle__top-price-wrapper svg {
+  cursor: pointer;
+}
 
 @media (max-width: 1600px) {
   .container {

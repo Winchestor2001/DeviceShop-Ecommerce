@@ -1,39 +1,88 @@
 from django.core.files.storage import default_storage
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
+from django.contrib.auth.hashers import make_password
 from django.contrib.auth import authenticate, login, logout
 
-from accounts.models import Profile
+from orders.models import Order
+from products.models import ProductPhoto, Product, SavedProduct, Review
+from accounts.models import Profile, ResetPassword
+from .utils import send_gmail
 
 
-def account_page(request):
+def account_page(request, username):
     context = {}
     if not request.user.is_authenticated:
         return redirect('login')
-    profile = Profile.objects.get(user=request.user)
+    profile = Profile.objects.get(user__username=username)
+    order = Order.objects.filter(user=profile)
+    user_data = User.objects.get(profile=profile)
     if request.method == "POST":
         email = request.POST.get('email')
         phone_number = request.POST.get('phone_number')
+        password = request.POST.get('password')
         if request.FILES:
             file_obj = request.FILES['photo']
-            filename = f"profile/{request.user}_{file_obj}"
+            filename = f"profile/{username}_{file_obj}"
             with default_storage.open(filename, 'wb+') as d:
                 for chunk in file_obj.chunks():
                     d.write(chunk)
                 profile.photo = filename
             profile.save()
-            return redirect('account')
+            return redirect('account', username=username)
         if email:
             if not email.endswith("@gmail.com"):
                 email = f"{email}@gmail.com"
             profile.user.email = email
         if phone_number:
-            profile.phone_number = phone_number
+            if len(phone_number) == 13 and phone_number.startswith('+998'):
+                profile.phone_number = phone_number
+            else:
+                context['error'] = 'Please enter phone number with +998!'
+        if password:
+            if len(password) >= 8:
+                user_data.password = make_password(password)
+            else:
+                context['error'] = 'Password must be at least 8 characters!'
     profile.save()
-    profile.user.save()
+    user_data.save()
     context['profile'] = profile
 
     return render(request, 'account.html', context=context)
+
+
+def individual_profiles(request):
+    user = User.objects.get(profile__user=request.user)
+    context = {'user': user}
+    return render(request, 'header.html', context=context)
+
+
+def seller_profile_page(request, username):
+    context = {}
+    profile = Profile.objects.get(user__username=username)
+    product = Product.objects.filter(supplier=profile)
+    user_products = []
+    for i in product:
+        product_photo = ProductPhoto.objects.filter(product=i)[0].photo
+
+        saved = False
+        if SavedProduct.objects.filter(product=i).exists():
+            saved = True
+
+        rating_list = Review.objects.filter(product=i)
+        if rating_list:
+            rating = 0
+            for s in rating_list:
+                rating += s.stars
+            rating = round(rating / len(rating_list), 1)
+            user_products.append([i, product_photo, rating, saved])
+        else:
+            user_products.append([i, product_photo, 0.0, saved])
+    context['user_products'] = user_products
+    context['profile'] = profile
+    context['range'] = range(1, 6)
+
+    return render(request, 'seller_profile.html', context=context)
 
 
 def login_page(request):
@@ -106,3 +155,31 @@ def register_page(request):
 def logout_page(request):
     logout(request)
     return redirect('login')
+
+
+def forgot_password_page(request):
+    context = {}
+    if request.method == 'POST':
+        error = send_gmail(request.POST.get('email'))
+        if error:
+            context['error'] = error
+    return render(request, 'forgot_password.html', context=context)
+
+
+def change_password_page(request, id):
+    context = {}
+    if request.method == 'POST':
+        if ResetPassword.objects.filter(url=id).exists():
+            password1 = request.POST.get('password')
+            password2 = request.POST.get('repeat_password')
+            if len(password1) >= 8:
+                if password1 == password2:
+                    user = ResetPassword.objects.get(url=id).user
+                    user.set_password(password1)
+                    user.save()
+                    return redirect('login')
+                else:
+                    context['error'] = "Passwords don't match"
+            else:
+                context['error'] = "Password must be at least 8 characters"
+    return render(request, 'change_password.html', context=context)
