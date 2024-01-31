@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Coupon, CartProduct, City, PickUp, Order
+from .models import Coupon, CartProduct, City, PickUp, Order, OrderProduct
 from accounts.models import Profile
 from products.models import ProductPhoto, ProductCategory, Product
 from django.http import JsonResponse, HttpResponse
@@ -86,8 +86,18 @@ def checkout_page(request):
         email = request.POST.get('email')
         city = request.POST.get('city')
         pick_up = request.POST.get('pick_up')
-        Order.objects.create(first_name=first_name, last_name=last_name, email=email, phone_number=phone,
+
+        order = Order.objects.create(first_name=first_name, last_name=last_name, email=email, phone_number=phone,
                              city='tashkent', pick_up='pick up N1', total_price=total, user=profile)
+
+        for item in orders:
+            OrderProduct.objects.create(
+                product=item.product,
+                user=profile,
+                order=order,
+                quantity=item.quantity
+            )
+
         orders.delete()
         return redirect('account', username=profile.user.username)
 

@@ -372,3 +372,4 @@ def add_product_photos(request, product_id):
     for photo in request.FILES.getlist('product_photos'):
         ProductPhoto.objects.create(photo=photo, product=product)
     return redirect('product', product.slug)
+
