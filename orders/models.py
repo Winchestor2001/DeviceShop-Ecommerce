@@ -24,6 +24,7 @@ class OrderProduct(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     user = models.ForeignKey(Profile, on_delete=models.CASCADE)
     order = models.ForeignKey(Order, on_delete=models.CASCADE, blank=True, null=True)
+    quantity = models.IntegerField(default=1)
 
     def __str__(self):
         return f"{self.user}"

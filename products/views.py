@@ -339,8 +339,6 @@ def home_page(request):
         'products': products
     }
     return render(request, 'index.html', context=context)
-<<<<<<< HEAD
-=======
 
 
 def change_product_data(request, product_id):
@@ -374,4 +372,4 @@ def add_product_photos(request, product_id):
     for photo in request.FILES.getlist('product_photos'):
         ProductPhoto.objects.create(photo=photo, product=product)
     return redirect('product', product.slug)
->>>>>>> 0a0ef52b9501ed101e86d00b37311d6ff6493ed7
+
