@@ -8,13 +8,13 @@ class Order(models.Model):
     last_name = models.CharField(max_length=50)
     email = models.CharField(max_length=100)
     phone_number = models.CharField(max_length=50)
-    address = models.CharField(max_length=200)
     city = models.CharField(max_length=100)
-    house = models.CharField(max_length=100)
-    postal_code = models.IntegerField()
-    zip_code = models.IntegerField()
-    message = models.TextField()
+    pick_up = models.CharField(max_length=200)
+    payment = models.CharField(max_length=50, blank=True, null=True)
+    total_price = models.IntegerField()
     user = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    create_at = models.DateTimeField(auto_now_add=True, blank=True, null=True)
+    # orders = models.ForeignKey(OrderProduct, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.first_name
@@ -33,12 +33,27 @@ class CartProduct(models.Model):
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     quantity = models.IntegerField(default=1)
+    total_price = models.FloatField(default=0)
 
     def __str__(self):
         return f"{self.product} - {self.profile}"
 
-      
+
 class Coupon(models.Model):
     code = models.CharField(max_length=75)
     price = models.FloatField()
 
+
+class City(models.Model):
+    city = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.city
+
+
+class PickUp(models.Model):
+    city = models.ForeignKey(City, on_delete=models.CASCADE)
+    name = models.CharField(max_length=200)
+
+    def __str__(self):
+        return f"{self.name}"

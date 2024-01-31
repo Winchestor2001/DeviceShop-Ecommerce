@@ -12,7 +12,7 @@
     <div class="cart container">
         {% if len_cart != 0 %}
         <div class="cart__left card">
-            {% for photo, order, category in orders %}
+            {% for photo, order in orders %}
             <div class="cart__left__product">
                 <div class="cart__left__product__left">
                     <div class="cart__left__product__left__img">
@@ -23,8 +23,8 @@
                         <p class="text-default text-muted">Brand: {{ order.product.brand }}</p>
                         <p class="text-default text-muted">State: {{ order.product.state }}</p>
                         <p class="text-default text-muted">Category: {{ order.product.main_category.name }}</p>
-                        {% if category %}<p class="text-default text-muted">Other: {{ category.category }} </p>{% endif %}
-                            <br>Seller: {{ order.product.supplier }}</p>
+                        {% if category %}<p class="text-default text-muted">Other: {% for c in category %}{{ c.name }}<br>{% endfor %}</p>{% endif %}
+                        <p><br>Seller: {{ order.product.supplier }}</p>
                         <div class="cart__left__product__left__content__btns">
                             <a href="{% url 'delete_cart' order.id %}" class="cart__left__product__left__content__btn-red text-default">Remove</a>
                             <button onclick="save_product(`{% url 'save_product' order.product.id %}`)" class="cart__left__product__left__content__btn text-default-primary">
@@ -34,7 +34,7 @@
                     </div>
                 </div>
                 <div class="cart__left__product__right">
-                    <p class="cart__left__product__right-price"><b>${{ order.product.price }}</b></p>
+                    <p class="cart__left__product__right-price"><b>${{ order.total_price }}</b></p>
                     <div class="cart__left__product__right__quantity">
                         <button data-product_id="{{ order.product.id }}" onclick="minus_quantity(this)" class="cart__left__product__left__content__btn">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-dash" viewBox="0 0 16 16">
@@ -61,12 +61,6 @@
                 <a href="{% url 'delete_all_cart' %}" class="cart__left__product__left__content__btn text-default-primary">Remove all</a>
             </div>
         </div>
-        {% else %}
-        <div class="container empty_text_in_cart">
-            <h1>Cart is empty!</h1>
-            <a href="{% url 'shop' %}">Add product</a>
-        </div>
-        {% endif %}
         <div class="cart__right">
             <div class="cart__right__coupons card">
                 <p class="text-default"><b>Have a coupon?</b></p>
@@ -92,14 +86,14 @@
                 <div class="cart__right__checkout__top">
                     <div class="cart__right__checkout__top-item">
                         <p class="text-gray-18">Subtotal:</p>
-                        <p class="text-gray-18" id="subtotal">$10.00</p>
+                        <p class="text-gray-18" id="subtotal">$</p>
                     </div>
                     <div class="cart__right__checkout__top-item">
                         <p class="text-gray-18">Discount:</p>
                         <p class="text-success" id="discount">- $0.00</p>
                     </div>
                     <div class="cart__right__checkout__top-item">
-                        <p class="text-gray-18">Tax:</p>
+                        <p class="text-gray-18">Shipping:</p>
                         <p class="text-danger">+ $15.00</p>
                     </div>
                 </div>
@@ -112,6 +106,12 @@
                 </div>
             </div>
         </div>
+        {% else %}
+        <div class="container empty_text_in_cart">
+            <h1>Cart is empty!</h1>
+            <a href="{% url 'shop' %}">Add product</a>
+        </div>
+        {% endif %}
     </div>
     <div class="cart__bottom container">
         <div class="cart__bottom-item">

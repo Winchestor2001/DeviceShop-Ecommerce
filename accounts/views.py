@@ -4,7 +4,8 @@ from django.contrib.auth.models import User
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth import authenticate, login, logout
 
-from products.models import ProductPhoto, ProductCategory, Product, SavedProduct, Review
+from orders.models import Order
+from products.models import ProductPhoto, Product, SavedProduct, Review
 from accounts.models import Profile, ResetPassword
 from .utils import send_gmail
 
@@ -14,6 +15,7 @@ def account_page(request, username):
     if not request.user.is_authenticated:
         return redirect('login')
     profile = Profile.objects.get(user__username=username)
+    order = Order.objects.filter(user=profile)
     user_data = User.objects.get(profile=profile)
     if request.method == "POST":
         email = request.POST.get('email')
@@ -27,7 +29,7 @@ def account_page(request, username):
                     d.write(chunk)
                 profile.photo = filename
             profile.save()
-            return redirect('account')
+            return redirect('account', username=username)
         if email:
             if not email.endswith("@gmail.com"):
                 email = f"{email}@gmail.com"
@@ -52,7 +54,7 @@ def account_page(request, username):
 def individual_profiles(request):
     user = User.objects.get(profile__user=request.user)
     context = {'user': user}
-    return redirect(request, 'header.html', context=context)
+    return render(request, 'header.html', context=context)
 
 
 def seller_profile_page(request, username):
