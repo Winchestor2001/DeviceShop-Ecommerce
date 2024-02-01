@@ -1439,8 +1439,8 @@ msgid "Apply"
 msgstr "Применить"
 
 #: .\templates\cart.html:89 .\templates\checkout.html:78
-msgid "Общая цена"
-msgstr ""
+msgid "Subtotal"
+msgstr "Общая цена"
 
 #: .\templates\cart.html:93 .\templates\checkout.html:84
 msgid "Discount"
@@ -1636,7 +1636,7 @@ msgstr "Войти | Зарегестрироваться"
 
 #: .\templates\includes\header.html:28 .\templates\includes\header.html:79
 msgid "Saved"
-msgstr Сохраненное"
+msgstr "Сохраненное"
 
 #: .\templates\includes\header.html:57 .\templates\includes\header.html:58
 #: .\templates\saved.html:16 .\templates\shop.html:16
@@ -1768,8 +1768,8 @@ msgstr "Добавить скидку"
 
 #: .\templates\product.html:33
 #, python-format
-msgid "%% of sale"
-msgstr "% от скидки"
+msgid "Percent of sale"
+msgstr "Процент от скидки"
 
 #: .\templates\product.html:34
 msgid "Date of ending sale"
@@ -1837,11 +1837,11 @@ msgstr "Все"
 
 #: .\templates\saved.html:60 .\templates\shop.html:60
 msgid "Min"
-msgstr "Минимальная цена"
+msgstr "Мин. цена"
 
 #: .\templates\saved.html:64 .\templates\shop.html:64
 msgid "Max"
-msgstr "Максимальная цена"
+msgstr "Макс. цена"
 
 #: .\templates\saved.html:74 .\templates\shop.html:74
 msgid "Rating"
