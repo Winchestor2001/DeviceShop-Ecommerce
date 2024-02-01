@@ -1,18 +1,19 @@
+{% load i18n %}
 <footer>
     <div class="newsletter">
-        <h2>Subscribe on our newsletter</h2>
-        <p class="text-gray">Get daily news on upcoming offers from many suppliers all over the world</p>
+        <h2>{% trans 'Subscribe on our newsletter' %}</h2>
+        <p class="text-gray">{% trans 'Get daily news on upcoming offers from many suppliers all over the world' %}</p>
         <form method="post" class="newsletter__form">
             <!-- {% csrf_token %} -->
             <div class="newsletter__form__input-wrapper">
-                <input required type="email" placeholder="Email" name="email" class="newsletter__form__input text-default">
+                <input required type="email" placeholder="{% trans 'Email' %}" name="email" class="newsletter__form__input text-default">
                 <div class="email__logo">
                     <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-envelope" viewBox="0 0 16 16">
                         <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1zm13 2.383-4.708 2.825L15 11.105zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741M1 11.105l4.708-2.897L1 5.383z"/>
                       </svg>
                 </div>
             </div>
-            <button class="banner__right__btn text-default-white">Subscribe</button>
+            <button class="banner__right__btn text-default-white">{% trans 'Subscribe' %}</button>
         </form>
     </div>
     <div class="footer container">
@@ -20,7 +21,7 @@
             <a href="" class="footer__left__logo">
                 <img src="/media/logo.png" alt="">
             </a>
-            <p class="text-default">Best information about the company gies here but now lorem ipsum is</p>
+            <p class="text-default">{% trans 'Best information about the company gies here but now lorem ipsum is' %}</p>
             <div class="footer__left__socials">
                 <a href="" class="footer__left__social">
                     <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
@@ -51,38 +52,24 @@
         </div>
         <div class="footer__right">
             <div class="footer__right-item">
-                <p class="text-default">For users</p>
-                <a href="" class="text-default text-muted">Login</a>
-                <a href="" class="text-default text-muted">Register</a>
-                <a href="" class="text-default text-muted">My Account</a>
-                <a href="" class="text-default text-muted">My Orders</a>
+                <p class="text-default">{% trans 'For users' %}</p>
+                <a href="" class="text-default text-muted">{% trans 'Login' %}</a>
+                <a href="" class="text-default text-muted">{% trans 'Register' %}</a>
+                <a href="" class="text-default text-muted">{% trans 'My Account' %}</a>
+                <a href="" class="text-default text-muted">{% trans 'My Orders' %}</a>
             </div>
             <div class="footer__right-item">
-                <p class="text-default">Shop</p>
-                <a href="{% url 'home' %}" class="text-default text-muted">Home</a>
-                <a href="{% url 'shop' %}" class="text-default text-muted">Shop</a>
-                <a href="{% url 'shop' %}" class="text-default text-muted">Categories</a>
-                <a href="{% url 'cart' %}" class="text-default text-muted">Cart</a>
+                <p class="text-default">{% trans 'Shop' %}</p>
+                <a href="{% url 'home' %}" class="text-default text-muted">{% trans 'Home' %}</a>
+                <a href="{% url 'shop' %}" class="text-default text-muted">{% trans 'Shop' %}</a>
+                <a href="{% url 'shop' %}" class="text-default text-muted">{% trans 'Categories' %}</a>
+                <a href="{% url 'cart' %}" class="text-default text-muted">{% trans 'Cart' %}</a>
             </div>
         </div>
     </div>
     <div class="bottom-wrapper">
         <div class="bottom container">
             <p class="text-default text-muted">© 2023 Ecommerce. </p>
-            <div class="bottom__select-wrapper">
-                <img src="/media/eng.png" alt="" id="lang_photo">
-                <select name="lang" id="lang" class="footer__select text-gray">
-                    <option value="eng" selected>English</option>
-                    <option value="rus">Russian</option>
-                </select>
-            </div>
         </div>
     </div>
 </footer>
-<script>
-    let select = document.getElementById("lang")
-    let img = document.getElementById("lang_photo")
-    select.addEventListener("change", function () {
-        img.src = `/media/${select.value}.png`;
-    })
-</script>

@@ -7,90 +7,91 @@
 
 
 {% block content %}
+{% load i18n %}
 <main>
     <form method="post">
         {% csrf_token %}
         <div class="checkout container">
             <div class="checkout__left card">
-                <h2>Contact</h2>
+                <h2>{% trans 'Contact' %}</h2>
                 <div class="checkout__left__form">
                     <div class="class__form__input-wrapper">
-                        <label for="first_name" class="text-gray">First name</label>
+                        <label for="first_name" class="text-gray">{% trans 'First name' %}</label>
                         <input required type="text" name="first_name" id="first_name" class="default-input text-default"
-                               placeholder="Type here">
+                               placeholder="{% trans 'Type here' %}">
                     </div>
                     <div class="class__form__input-wrapper">
-                        <label for="last_name" class="text-gray">Last name</label>
+                        <label for="last_name" class="text-gray">{% trans 'Last name' %}</label>
                         <input required type="text" name="last_name" id="last_name" class="default-input text-default"
-                               placeholder="Type here">
+                               placeholder="{% trans 'Type here' %}">
                     </div>
                     <div class="class__form__input-wrapper">
-                        <label for="phone" class="text-gray">Phone</label>
+                        <label for="phone" class="text-gray">{% trans 'Phone' %}</label>
                         <input value="+998" required type="text" name="phone" id="phone"
                                class="default-input text-default" placeholder="Type here">
                     </div>
                     <div class="class__form__input-wrapper">
-                        <label for="email" class="text-gray">Email</label>
+                        <label for="email" class="text-gray">{% trans 'Email' %}</label>
                         <input required type="email" name="email" id="email" class="default-input text-default"
-                               placeholder="Type here">
+                               placeholder="{% trans 'Type here' %}">
                     </div>
                 </div>
-                <h2>Receipt</h2>
+                <h2>{% trans 'Receipt' %}</h2>
                 <div class="checkout__left__form2">
                     <div class="class__form__input-wrapper-25">
-                        <label for="city" class="text-gray">City</label>
+                        <label for="city" class="text-gray">{% trans 'City' %}</label>
                         <select name="city" id="city" onchange="selectCity()" class="default-input text-default">
-                            <option value="Select your city">Select your city</option>
+                            <option value="Select your city">{% trans 'Select your city' %}</option>
                             {% for i in city %}
                             <option value="{{ i }}">{{ i }}</option>
                             {% endfor %}
                         </select>
                     </div>
                     <div class="class__form__input-wrapper-25">
-                        <label for="pick_up" class="text-gray">Pick-up point</label>
+                        <label for="pick_up" class="text-gray">{% trans 'Pick-up point' %}</label>
                         <select name="pick_up" id="pick_up" class="default-input text-default">
-                            <option value="Select pick up">Select pick up</option>
+                            <option value="Select pick up">{% trans 'Select pick up' %}</option>
                         </select>
                     </div>
                 </div>
-                <h2 class="checkout_payment_text">Payment</h2>
+                <h2 class="checkout_payment_text">{% trans 'Payment' %}</h2>
                 <div class="checkout__left__expresses">
                     <label onclick="select_express(this)" for="click" class="checkout__left__express-active card">
                         <input id="click" name="click" type="radio" checked>
-                        <p class="text-default">Click</p>
+                        <p class="text-default">{% trans 'Click' %}</p>
                     </label>
                     <label onclick="select_express(this)" for="payme" class="checkout__left__express card">
                         <input id="payme" name="payment" type="radio">
-                        <p class="text-default">Payme</p>
+                        <p class="text-default">{% trans 'Payme' %}</p>
                     </label>
                 </div>
                 <div class="checkout__left__btns">
                     <div class="cart__left__product__left__content__btns">
-                        <button class="cart__left__product__left__content__btn-red text-default">Cancel</button>
-                        <button type="submit" class="banner__right__btn text-default-white">Place order</button>
+                        <button class="cart__left__product__left__content__btn-red text-default">{% trans 'Cancel' %}</button>
+                        <button type="submit" class="banner__right__btn text-default-white">{% trans 'Place order' %}</button>
                     </div>
                 </div>
             </div>
             <div class="checkout__right">
-                <h2>Summary</h2>
+                <h2>{% trans 'Summary' %}</h2>
                 <div class="checkout__right__content">
-                    <p class="text-gray checkout__right__content-item">Subtotal:<span class="text-default"
+                    <p class="text-gray checkout__right__content-item">{% trans 'Subtotal' %}:<span class="text-default"
                                                                                       id="price_subtotal">${{ total }}</span>
                     </p>
-                    <p class="text-gray checkout__right__content-item">Cupon:<span class="text-default"
+                    <p class="text-gray checkout__right__content-item">{% trans 'Cupon' %}:<span class="text-default"
                                                                                    id="price_cupon">- $10.0</span>
                     </p>
-                    <p class="text-gray checkout__right__content-item">Discount:<span
+                    <p class="text-gray checkout__right__content-item">{% trans 'Discount' %}:<span
                             class="text-default" id="discount">- $10.0</span></p>
-                    <p class="text-gray checkout__right__content-item">Shipping:<span class="text-default"
+                    <p class="text-gray checkout__right__content-item">{% trans 'Shipping' %}:<span class="text-default"
                                                                                       id="price_shipping">+ ${{ shipping }}</span>
                     </p>
                 </div>
                 <hr>
-                <p class="text-gray checkout__right__content-item">Total:<span class="text-default" id="price_total"></span>
+                <p class="text-gray checkout__right__content-item">{% trans 'Total' %}:<span class="text-default" id="price_total"></span>
                 </p>
                 <hr>
-                <p class="text-gray">Items in cart</p>
+                <p class="text-gray">{% trans 'Items in cart' %}</p>
                 <div class="checkout__right__products">
                     {% for order, photo, total_price in orders %}
                     <a href="{% url 'product' order.product.slug %}" class="checkout__right__product">
@@ -98,7 +99,7 @@
                             <img src="{{ photo }}" alt="">
                         </div>
                         <p><span class="text-default">{{ order.quantity }}</span>x <span class="text-default-primary">{{ order.product.name }}</span><br>
-                            <span class="text-default text-muted">Total: ${{ total_price }}</span></p>
+                            <span class="text-default text-muted">{% trans 'Total' %}: ${{ total_price }}</span></p>
                     </a>
                     {% endfor %}
                 </div>

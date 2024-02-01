@@ -7,45 +7,46 @@
 
 
 {% block content %}
+{% load i18n %}
 <main>
     <div class="login-wrapper card">
-        <h2>Sign up</h2>
+        <h2>{% trans 'Sign up' %}</h2>
         <form method="post" class="class__form">
             {% csrf_token %}
             <div class="class__form__input-wrapper-100">
-                <label for="username" class="text-gray">Username</label>
-                <input value="{{ username }}" required type="text" name="username" id="username" class="default-input text-default" placeholder="Type username">
+                <label for="username" class="text-gray">{% trans 'Username' %}</label>
+                <input value="{{ username }}" required type="text" name="username" id="username" class="default-input text-default" placeholder="{% trans 'Type username' %}">
             </div>
             <div class="class__form__input-wrapper-100">
-                <label for="email" class="text-gray">Email</label>
-                <input value="{{ email }}" required type="email" name="email" id="email" class="default-input text-default" placeholder="Type email">
+                <label for="email" class="text-gray">{% trans 'Email' %}</label>
+                <input value="{{ email }}" required type="email" name="email" id="email" class="default-input text-default" placeholder="{% trans 'Type email' %}">
             </div>
             <div class="class__form__input-wrapper-100">
-                <label for="password" class="text-gray">Create password</label>
+                <label for="password" class="text-gray">{% trans 'Create password' %}</label>
                 <div class="class__form__input-wrapper-input">
-                    <input value="{{ password }}" required type="password" name="password" id="password" class="default-input text-default" placeholder="Create password">
+                    <input value="{{ password }}" required type="password" name="password" id="password" class="default-input text-default" placeholder="{% trans 'Create password' %}">
                     <button type="button" onclick="view_password(this)" class="class__form__input-eye">
                         <img src="/media/eye.svg" alt="" class="class__form__input-eye">
                     </button>
                 </div>
             </div>
             <div class="class__form__input-wrapper-100">
-                <label for="repeat_password" class="text-gray">Repeat password</label>
+                <label for="repeat_password" class="text-gray">{% trans 'Repeat password' %}</label>
                 <div class="class__form__input-wrapper-input">
-                    <input value="{{ repeat_password }}" required type="password" name="repeat_password" id="repeat_password" class="default-input text-default" placeholder="Repeat password">
+                    <input value="{{ repeat_password }}" required type="password" name="repeat_password" id="repeat_password" class="default-input text-default" placeholder="{% trans 'Repeat password' %}">
                     <button type="button" onclick="view_password(this)" class="class__form__input-eye">
                         <img src="/media/eye.svg" alt="" class="class__form__input-eye">
                     </button>
                 </div>
             </div>
             <p class="text-danger">{{ error }}</p>
-            <button type="submit" class="banner__right__btn text-default-white">Sign up</button>
+            <button type="submit" class="banner__right__btn text-default-white">{% trans 'Sign up' %}</button>
             <div class="login__terms">
                 <input type="checkbox" name="terms" id="terms">
-                <label for="terms" class="text-gray">I agree with Terms and Conditions</label>
+                <label for="terms" class="text-gray">{% trans 'I agree with Terms and Conditions' %}</label>
             </div>
         </form>
-        <p class="text-default login__bottom-text">Alreade have account? <a href="{% url 'login' %}" class="text-default-primary">Sign in</a></p>
+        <p class="text-default login__bottom-text">{% trans 'Alreade have account?' %} <a href="{% url 'login' %}" class="text-default-primary">{% trans 'Sign in' %}</a></p>
     </div>
 </main>
 <script>
