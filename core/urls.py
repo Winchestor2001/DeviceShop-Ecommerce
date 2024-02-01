@@ -11,6 +11,8 @@ urlpatterns = [
     path('', include("orders.urls")),
     
     re_path(r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}),
+    re_path(r'^ru/media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}),
+    re_path(r'^uz/media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}),
     re_path(r'^static/(?P<path>.*)$', serve, {'document_root': settings.STATIC_ROOT}),
 ]+i18n_patterns(
     path('i18n/', include('django.conf.urls.i18n')),
