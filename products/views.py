@@ -6,7 +6,7 @@ from datetime import datetime
 from django.utils.text import slugify
 import markdown
 
-from products.utils import filter_product_reviews
+from products.utils import filter_product_reviews, get_product_sale
 
 
 def product_page(request, slug):
@@ -52,18 +52,15 @@ def add_to_cart(request, slug):
     cart = CartProduct.objects.filter(profile=profile, product__slug=slug)
     product = Product.objects.get(slug=slug)
     if not cart:
-        CartProduct.objects.create(product=product, profile=profile, total_price=product.price)
+        if ProductSale.objects.filter(product=product).exists():
+            sale = get_product_sale(product)
+            CartProduct.objects.create(product=product, profile=profile, total_price=sale)
+        else:
+            CartProduct.objects.create(product=product, profile=profile, total_price=product.price)
     else:
         cart_product = cart[0]
         cart_product.quantity += 1
-        if ProductSale.objects.filter(product=product).exists():
-            sale = ProductSale.objects.get(product=product).sale
-            sale = sale / 100
-            sale = sale * product.price
-            sale = product.price - sale
-            cart_product.total_price = cart_product.quantity * sale
-        else:
-            cart_product.total_price = cart_product.quantity * product.price
+        cart_product.total_price *= cart_product.quantity
         cart_product.save()
     return redirect('cart')
 
@@ -168,10 +165,7 @@ def shop_page(request, category=None):
 
         sale = None
         if ProductSale.objects.filter(product=i).exists():
-            sale = ProductSale.objects.get(product=i).sale
-            sale = sale / 100
-            sale = sale * i.price
-            sale = i.price - sale
+            sale = get_product_sale(i)
 
         rating_list = Review.objects.filter(product=i)
         if rating_list:

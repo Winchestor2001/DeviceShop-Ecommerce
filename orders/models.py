@@ -14,7 +14,6 @@ class Order(models.Model):
     total_price = models.IntegerField()
     user = models.ForeignKey(Profile, on_delete=models.CASCADE)
     create_at = models.DateTimeField(auto_now_add=True, blank=True, null=True)
-    # orders = models.ForeignKey(OrderProduct, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.first_name
@@ -41,8 +40,8 @@ class CartProduct(models.Model):
 
 
 class Coupon(models.Model):
-    code = models.CharField(max_length=75)
-    price = models.FloatField()
+    code = models.CharField(max_length=75, unique=True)
+    price = models.FloatField(help_text="Enter in USA dollars($)")
 
 
 class City(models.Model):

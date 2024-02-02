@@ -212,7 +212,7 @@
                     if (data != "None") {
                         data = data.split('code": "')[1].split(', "price": ')
                         code = data[0].slice(0, -1);
-                        price = (parseFloat(data[1].slice(0, -3))).toFixed(2)
+                        price = (parseFloat(data[1].slice(0, -3))).toFixed(1)
                         let coupon = document.querySelector('.cart__right__coupon')
                         coupon.style.display = 'flex'
                         coupon.children[0].children[1].textContent = code

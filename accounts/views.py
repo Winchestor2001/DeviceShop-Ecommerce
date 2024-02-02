@@ -4,8 +4,9 @@ from django.contrib.auth.models import User
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth import authenticate, login, logout
 
-from orders.models import Order
-from products.models import ProductPhoto, Product, SavedProduct, Review
+from orders.models import OrderProduct
+from orders.utils import get_product_sale
+from products.models import ProductPhoto, Product, SavedProduct, Review, ProductSale
 from accounts.models import Profile, ResetPassword
 from .utils import send_gmail
 
@@ -15,8 +16,18 @@ def account_page(request, username):
     if not request.user.is_authenticated:
         return redirect('login')
     profile = Profile.objects.get(user__username=username)
-    order = Order.objects.filter(user=profile)
+    order = OrderProduct.objects.filter(user=profile)
     user_data = User.objects.get(profile=profile)
+    product_price = []
+    images = []
+    for order_item in order:
+        product = order_item.product
+        if ProductSale.objects.filter(product=product).exists():
+            sale = get_product_sale(product)
+            product_price.append(order_item.quantity * sale)
+        products = ProductPhoto.objects.filter(product=product)[0].photo
+        images.append(products)
+
     if request.method == "POST":
         email = request.POST.get('email')
         phone_number = request.POST.get('phone_number')
@@ -46,7 +57,10 @@ def account_page(request, username):
                 context['error'] = 'Password must be at least 8 characters!'
     profile.save()
     user_data.save()
+    products = zip(order, product_price, images)
     context['profile'] = profile
+    context['order'] = order
+    context['all_products'] = products
 
     return render(request, 'account.html', context=context)
 

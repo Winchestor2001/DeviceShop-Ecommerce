@@ -86,17 +86,18 @@
                 </div>
                 <h2>{% trans 'My recent orders' %}</h2>
                 <div class="user__orders">
+                    {% for orders in order %}
                     <div class="user__order">
                         <div class="user__order__top">
                             <div class="user__order__top__left">
                                 <div class="user__adress__links">
-                                    <p class="user__adress__links__id"><b>{% trans 'Order ID' %}: 8924</b></p>
+                                    <p class="user__adress__links__id"><b>{% trans 'Order ID' %}: {{ orders.id }}</b></p>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#9DA1A7" class="bi bi-dot" viewBox="0 0 16 16">
                                         <path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3"></path>
                                     </svg>
                                     <p class="user__adress__links__warning">Pending</p>
                                 </div>
-                                <p class="text-default text-muted">{% trans 'Date' %}: 16 December 2018</p>
+                                <p class="text-default text-muted">{% trans 'Date' %}: {{ orders.order.create_at }}</p>
                             </div>
                             <div class="user__order__top__right">
                                 <button class="cart__left__product__left__content__btn-red text-default">{% trans 'Cancel order' %}</button>
@@ -105,70 +106,55 @@
                         <div class="user__order__middle">
                             <div class="user__order__middle-item">
                                 <p class="text-default text-muted">{% trans 'Contact' %}</p>
-                                <p class="text-default">Mike Johnatan</p>
-                                <p class="text-default">{% trans 'Phone' %}: 371-295-9131</p>
-                                <p class="text-default">{% trans 'Email' %}: info@mywebsite.com</p>
+                                <p class="text-default">{{ orders.order.first_name }} {{ orders.order.last_name }}</p>
+                                <p class="text-default">{% trans 'Phone' %}: {{ orders.order.phone_number }}</p>
+                                <p class="text-default">{% trans 'Email' %}: {{ orders.order.email }}</p>
                             </div>
                             <div class="user__order__middle-item">
                                 <p class="text-default text-muted">{% trans 'Shipping address' %}</p>
-                                <p class="text-default">United States</p>
-                                <p class="text-default">3601 Old Capitol Trail, Unit A-7, Suite</p>
-                                <p class="text-default">170777, Wilmington, DE 19808</p>
+                                <p class="text-default">{{ orders.order.city }}</p>
+                                <p class="text-default">{{ orders.order.pick_up }}</p>
                             </div>
                             <div class="user__order__middle-item">
                                 <p class="text-default text-muted">{% trans 'Payment' %}</p>
-                                <p class="text-success">{% trans 'Visa' %} **** 4216</p>
+                                <p class="text-success">{{ orders.order.payment }}</p>
                                 <p class="text-default">{% trans 'Tax' %}: $15</p>
-                                <p class="text-default">{% trans 'Total paid' %}: $456</p>
+                                <p class="text-default">{% trans 'Total paid' %}: ${{ orders.order.total_price }}</p>
                             </div>
                         </div>
                         <hr>
                         <div class="user__order__bottom">
-                            <a href="" class="user__order__bottom-item">
+                            {% for product, price, image in all_products %}
+                            <a href="{% url 'product' product.product.slug %}" class="user__order__bottom-item">
                                 <div class="user__order__bottom__img card">
-                                    <img src="/media/products/product_1.png" alt="">
+                                    <img src="/media/{{ image }}" alt="">
                                 </div>
                                 <div class="user__order__bottom-item__text">
-                                    <p>Sofe for living room, New model A123</p>
-                                    <p><b>1x = $1,200.90</b></p>
+                                    <p>{{ product.product.name }}</p>
+                                    <p><b>{{ orders.quantity }}x = ${{ price }}</b></p>
                                 </div>
                             </a>
-                            <a href="" class="user__order__bottom-item">
-                                <div class="user__order__bottom__img card">
-                                    <img src="/media/products/product_1.png" alt="">
-                                </div>
-                                <div class="user__order__bottom-item__text">
-                                    <p>Sofe for living room, New model A123</p>
-                                    <p><b>1x = $1,200.90</b></p>
-                                </div>
-                            </a>
-                            <a href="" class="user__order__bottom-item">
-                                <div class="user__order__bottom__img card">
-                                    <img src="/media/products/product_1.png" alt="">
-                                </div>
-                                <div class="user__order__bottom-item__text">
-                                    <p>Sofe for living room, New model A123</p>
-                                    <p><b>1x = $1,200.90</b></p>
-                                </div>
-                            </a>
+                            {% endfor %}
                         </div>
                     </div>
+                    {% endfor %}
                 </div>
             </div>
             <div id="content_2" class="user__right card" style="display: none;">
                 <h2>{% trans 'My orders' %}</h2>
                 <div class="user__orders">
+                    {% for orders in order %}
                     <div class="user__order">
                         <div class="user__order__top">
                             <div class="user__order__top__left">
                                 <div class="user__adress__links">
-                                    <p class="user__adress__links__id"><b>{% trans 'Order ID' %}: 8924</b></p>
+                                    <p class="user__adress__links__id"><b>{% trans 'Order ID' %}: {{ orders.id }}</b></p>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#9DA1A7" class="bi bi-dot" viewBox="0 0 16 16">
                                         <path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3"></path>
                                     </svg>
                                     <p class="user__adress__links__warning">Pending</p>
                                 </div>
-                                <p class="text-default text-muted">{% trans 'Date' %}: 16 December 2018</p>
+                                <p class="text-default text-muted">{% trans 'Date' %}: {{ orders.order.create_at }}</p>
                             </div>
                             <div class="user__order__top__right">
                                 <button class="cart__left__product__left__content__btn-red text-default">{% trans 'Cancel order' %}</button>
@@ -177,54 +163,38 @@
                         <div class="user__order__middle">
                             <div class="user__order__middle-item">
                                 <p class="text-default text-muted">{% trans 'Contact' %}</p>
-                                <p class="text-default">Mike Johnatan</p>
-                                <p class="text-default">{% trans 'Phone' %}: 371-295-9131</p>
-                                <p class="text-default">{% trans 'Email' %}: info@mywebsite.com</p>
+                                <p class="text-default">{{ orders.order.first_name }} {{ orders.order.last_name }}</p>
+                                <p class="text-default">{% trans 'Phone' %}: {{ orders.order.phone_number }}</p>
+                                <p class="text-default">{% trans 'Email' %}: {{ orders.order.email }}</p>
                             </div>
                             <div class="user__order__middle-item">
                                 <p class="text-default text-muted">{% trans 'Shipping address' %}</p>
-                                <p class="text-default">United States</p>
-                                <p class="text-default">3601 Old Capitol Trail, Unit A-7, Suite</p>
-                                <p class="text-default">170777, Wilmington, DE 19808</p>
+                                <p class="text-default">{{ orders.order.city }}</p>
+                                <p class="text-default">{{ orders.order.pick_up }}</p>
                             </div>
                             <div class="user__order__middle-item">
                                 <p class="text-default text-muted">{% trans 'Payment' %}</p>
-                                <p class="text-success">{% trans 'Visa' %} **** 4216</p>
+                                <p class="text-success">{{ orders.order.payment }}</p>
                                 <p class="text-default">{% trans 'Tax' %}: $15</p>
-                                <p class="text-default">{% trans 'Total paid' %}: $456</p>
+                                <p class="text-default">{% trans 'Total paid' %}: ${{ orders.order.total_price }}</p>
                             </div>
                         </div>
                         <hr>
-                        <div class="user__order__bottom">
-                            <a href="" class="user__order__bottom-item">
+                         <div class="user__order__bottom">
+                            {% for product, price, image in all_products %}
+                            <a href="{% url 'product' product.product.slug %}" class="user__order__bottom-item">
                                 <div class="user__order__bottom__img card">
-                                    <img src="/media/products/product_1.png" alt="">
+                                    <img src="/media/{{ image }}" alt="">
                                 </div>
                                 <div class="user__order__bottom-item__text">
-                                    <p>Sofe for living room, New model A123</p>
-                                    <p><b>1x = $1,200.90</b></p>
+                                    <p>{{ product.product.name }}</p>
+                                    <p><b>{{ orders.quantity }}x = ${{ price }}</b></p>
                                 </div>
                             </a>
-                            <a href="" class="user__order__bottom-item">
-                                <div class="user__order__bottom__img card">
-                                    <img src="/media/products/product_1.png" alt="">
-                                </div>
-                                <div class="user__order__bottom-item__text">
-                                    <p>Sofe for living room, New model A123</p>
-                                    <p><b>1x = $1,200.90</b></p>
-                                </div>
-                            </a>
-                            <a href="" class="user__order__bottom-item">
-                                <div class="user__order__bottom__img card">
-                                    <img src="/media/products/product_1.png" alt="">
-                                </div>
-                                <div class="user__order__bottom-item__text">
-                                    <p>Sofe for living room, New model A123</p>
-                                    <p><b>1x = $1,200.90</b></p>
-                                </div>
-                            </a>
+                            {% endfor %}
                         </div>
                     </div>
+                    {% endfor %}
                 </div>
             </div>
         </div>

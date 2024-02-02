@@ -78,11 +78,8 @@
                     <p class="text-gray checkout__right__content-item">{% trans 'Subtotal' %}:<span class="text-default"
                                                                                       id="price_subtotal">${{ total }}</span>
                     </p>
-                    <p class="text-gray checkout__right__content-item">{% trans 'Cupon' %}:<span class="text-default"
-                                                                                   id="price_cupon">- $10.0</span>
-                    </p>
                     <p class="text-gray checkout__right__content-item">{% trans 'Discount' %}:<span
-                            class="text-default" id="discount">- $10.0</span></p>
+                            class="text-default" id="discount">- ${{ discount }}</span></p>
                     <p class="text-gray checkout__right__content-item">{% trans 'Shipping' %}:<span class="text-default"
                                                                                       id="price_shipping">+ ${{ shipping }}</span>
                     </p>
@@ -111,10 +108,9 @@
     function change_total() {
         let total = document.querySelector('#price_total');
         let price = parseFloat(document.querySelector('#price_subtotal').textContent.replace('$', ''));
-        let price_cupon = parseFloat(document.querySelector('#price_cupon').textContent.replace('- $', ''));
         let discount = parseFloat(document.querySelector('#discount').textContent.replace('- $', ''));
         let price_shipping = parseFloat(document.querySelector('#price_shipping').textContent.replace('+ $', ''));
-        total.textContent = (price - discount - price_cupon + price_shipping).toFixed(2);
+        total.textContent = (price - discount + price_shipping).toFixed(1);
     }
 
     change_total()
