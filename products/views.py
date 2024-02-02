@@ -56,7 +56,14 @@ def add_to_cart(request, slug):
     else:
         cart_product = cart[0]
         cart_product.quantity += 1
-        cart_product.total_price = cart_product.quantity * cart_product.product.price
+        if ProductSale.objects.filter(product=product).exists():
+            sale = ProductSale.objects.get(product=product).sale
+            sale = sale / 100
+            sale = sale * product.price
+            sale = product.price - sale
+            cart_product.total_price = cart_product.quantity * sale
+        else:
+            cart_product.total_price = cart_product.quantity * product.price
         cart_product.save()
     return redirect('cart')
 

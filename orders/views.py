@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import Coupon, CartProduct, City, PickUp, Order, OrderProduct
 from accounts.models import Profile
-from products.models import ProductPhoto, ProductCategory, Product
+from products.models import ProductPhoto, ProductCategory, Product, ProductSale
 from django.http import JsonResponse, HttpResponse
 from django.core.serializers import serialize
 
@@ -12,15 +12,25 @@ def cart_page(request):
     orders_in_cart = CartProduct.objects.filter(profile=profile)
     all_photo = []
     category = []
+    sales = []
     for product in orders_in_cart:
-        photo = ProductPhoto.objects.filter(product=product.product)
-        categories = ProductCategory.objects.filter(product=product.product)
+        one_product = product.product
+        photo = ProductPhoto.objects.filter(product=one_product)
+        categories = ProductCategory.objects.filter(product=one_product)
         for p in photo:
             all_photo.append(p)
         for c in categories:
             category.append(c)
         else:
             category.append('')
+
+        if ProductSale.objects.filter(product=one_product).exists():
+            sale = ProductSale.objects.get(product=one_product).sale
+            sale = sale / 100
+            sale = sale * one_product.price
+            sale = one_product.price - sale
+            sales.append(sale)
+
     final_order = zip(all_photo, orders_in_cart)
     context['len_cart'] = len(orders_in_cart)
     context['orders'] = final_order
@@ -66,12 +76,21 @@ def checkout_page(request):
     profile = Profile.objects.get(user=request.user)
     orders = CartProduct.objects.filter(profile=profile)
 
+    sales = []
     for product in orders:
-        photo = ProductPhoto.objects.get(product=product.product)
+        one_product = product.product
+        photo = ProductPhoto.objects.get(product=one_product)
         orders_photo.append(photo)
-        total_price = product.quantity*product.product.price
+        total_price = product.quantity*one_product.price
         total_order_price.append(total_price)
         total += total_price
+
+        if ProductSale.objects.filter(product=one_product).exists():
+            sale = ProductSale.objects.get(product=one_product).sale
+            sale = sale / 100
+            sale = sale * one_product.price
+            sale = one_product.price - sale
+            sales.append(sale)
 
     if request.GET:
         city = request.GET.get('city')
@@ -88,7 +107,7 @@ def checkout_page(request):
         pick_up = request.POST.get('pick_up')
 
         order = Order.objects.create(first_name=first_name, last_name=last_name, email=email, phone_number=phone,
-                             city='tashkent', pick_up='pick up N1', total_price=total, user=profile)
+                                     city='tashkent', pick_up='pick up N1', total_price=total, user=profile)
 
         for item in orders:
             OrderProduct.objects.create(
