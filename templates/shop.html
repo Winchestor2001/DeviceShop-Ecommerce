@@ -416,6 +416,11 @@
 </script>
 <script>
     let submit = document.querySelector('#btn_submit')
+
+    function submit_filters() {
+        submit.click()
+    }
+
     function make_active(btn) {
         let checbox = btn.children[0]
         if (event.target != btn.children[0]) {
