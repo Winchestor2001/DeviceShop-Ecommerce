@@ -107,6 +107,7 @@ def shop_page(request, category=None):
     showing_active_filters = []
     active_brands = []
     active_categories = []
+    active_search = ''
     if request.method == 'POST':
         star = 0
         if request.POST.get('star5'):
@@ -150,6 +151,11 @@ def shop_page(request, category=None):
         if categories_for_filter:
             products_list = products_list.filter(productcategory__category__in=categories_for_filter, productcategory__name__in=product_categories_for_filter).distinct()
         
+        search = request.POST.get('hidden_search')
+        if search:
+            products_list = products_list.filter(name__icontains=search)
+            active_search = search
+        
         layout = request.POST.get('layout')
         request.session['layout'] = int(layout)
 
@@ -191,6 +197,7 @@ def shop_page(request, category=None):
         'active_stars': active_stars,
         'active_brands': active_brands,
         'active_categories': active_categories,
+        'active_search': active_search,
         'showing_active_filters': showing_active_filters,
         'scroll': request.POST.get('scroll', 0)
     }
