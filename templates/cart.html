@@ -190,7 +190,7 @@
         document.querySelectorAll('.cart__left__product__right-price').forEach(function (i) {
             price += parseFloat(i.children[0].textContent.replace('$', ''));
         });
-        current_price.textContent = `$${(price).toFixed(2)}`;
+        current_price.textContent = `$${(price).toFixed(1)}`;
         let total = document.querySelector('#total');
         let discount = parseFloat(document.querySelector('#discount').textContent.replace('- $', ''));
         total.textContent = (parseFloat(price) - discount + 15.00).toFixed(2);
