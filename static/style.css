@@ -2075,6 +2075,15 @@ input[type="range"]::-webkit-slider-thumb {
     margin-bottom: 70px;
 }
 
+.empty_text_in_profile {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 15px;
+    margin-bottom: 40px;
+}
+
 .cart__left {
   width: 75%;
   display: flex;

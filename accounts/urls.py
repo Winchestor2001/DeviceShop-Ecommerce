@@ -10,4 +10,5 @@ urlpatterns = [
     path('logout/', logout_page, name='logout'),
     path('forgot_password/', forgot_password_page, name='forgot_password'),
     path('change_password/<str:id>', change_password_page, name='change_password'),
+    path('cancel_order/<int:order_id>/', cancel_order, name='cancel_order')
 ]

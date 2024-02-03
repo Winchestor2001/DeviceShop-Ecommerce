@@ -105,7 +105,10 @@ def checkout_page(request):
         email = request.POST.get('email')
         city = request.POST.get('city')
         pick_up = request.POST.get('pick_up')
-        total = total - shipping - discount
+        if discount:
+            total = total - shipping - discount
+        else:
+            total = total - shipping
         order = Order.objects.create(first_name=first_name, last_name=last_name, email=email, phone_number=phone,
                                      city='tashkent', pick_up='pick up N1', total_price=total, user=profile)
 

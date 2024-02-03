@@ -78,8 +78,10 @@
                     <p class="text-gray checkout__right__content-item">{% trans 'Subtotal' %}:<span class="text-default"
                                                                                       id="price_subtotal">${{ total }}</span>
                     </p>
+                    {% if discount %}
                     <p class="text-gray checkout__right__content-item">{% trans 'Discount' %}:<span
                             class="text-default" id="discount">- ${{ discount }}</span></p>
+                    {% endif %}
                     <p class="text-gray checkout__right__content-item">{% trans 'Shipping' %}:<span class="text-default"
                                                                                       id="price_shipping">+ ${{ shipping }}</span>
                     </p>
@@ -110,7 +112,12 @@
         let price = parseFloat(document.querySelector('#price_subtotal').textContent.replace('$', ''));
         let discount = parseFloat(document.querySelector('#discount').textContent.replace('- $', ''));
         let price_shipping = parseFloat(document.querySelector('#price_shipping').textContent.replace('+ $', ''));
-        total.textContent = (price - discount + price_shipping).toFixed(1);
+        if (discount) {
+            total.textContent = (price - discount + price_shipping).toFixed(1);
+        } else {
+            total.textContent = (price + price_shipping).toFixed(1);
+        }
+
     }
 
     change_total()
