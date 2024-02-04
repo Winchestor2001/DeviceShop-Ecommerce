@@ -146,13 +146,19 @@
                 'city': selectedCity
             },
             success: function(response) {
-                let data = response;
-                console.log(data)
-<!--                if (data.length > 0) {-->
-<!--                    for (let i = 0; i < data.length; i++) {-->
-<!--                    selector.options.add(new Option(data[i], data[i]));-->
-<!--                    }-->
-<!--                }-->
+                const parsedData = JSON.parse(response);
+                const selectElement = document.getElementById('pick_up');
+
+                selectElement.innerHTML = '';
+
+                parsedData.forEach(item => {
+                  const option = document.createElement('option');
+
+                  option.value = item.fields.name;
+                  option.text = item.fields.name;
+
+                  selectElement.add(option);
+                });
             },
             error: function(jqXHR, textStatus, errorThrown) {
                 console.error('AJAX Error:', textStatus, errorThrown);

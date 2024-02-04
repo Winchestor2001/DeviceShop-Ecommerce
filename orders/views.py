@@ -110,7 +110,7 @@ def checkout_page(request):
         else:
             total = total - shipping
         order = Order.objects.create(first_name=first_name, last_name=last_name, email=email, phone_number=phone,
-                                     city='tashkent', pick_up='pick up N1', total_price=total, user=profile)
+                                     city=city, pick_up=pick_up, total_price=total, user=profile)
 
         for item in orders:
             OrderProduct.objects.create(
