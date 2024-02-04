@@ -4,8 +4,9 @@ from django.contrib.auth.models import User
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth import authenticate, login, logout
 
-from orders.models import Order
-from products.models import ProductPhoto, Product, SavedProduct, Review
+from orders.models import OrderProduct, Order
+from orders.utils import get_product_sale
+from products.models import ProductPhoto, Product, SavedProduct, Review, ProductSale
 from accounts.models import Profile, ResetPassword
 from .utils import send_gmail
 
@@ -15,8 +16,20 @@ def account_page(request, username):
     if not request.user.is_authenticated:
         return redirect('login')
     profile = Profile.objects.get(user__username=username)
-    order = Order.objects.filter(user=profile)
+    order = OrderProduct.objects.filter(user=profile)
     user_data = User.objects.get(profile=profile)
+    product_price = []
+    images = []
+    for order_item in order:
+        product = order_item.product
+        if ProductSale.objects.filter(product=product).exists():
+            sale = get_product_sale(product)
+            product_price.append(order_item.quantity * sale)
+        else:
+            product_price.append(order_item.quantity * order_item.product.price)
+        products = ProductPhoto.objects.filter(product=product)[0].photo
+        images.append(products)
+
     if request.method == "POST":
         email = request.POST.get('email')
         phone_number = request.POST.get('phone_number')
@@ -38,7 +51,7 @@ def account_page(request, username):
             if len(phone_number) == 13 and phone_number.startswith('+998'):
                 profile.phone_number = phone_number
             else:
-                context['error'] = 'Please enter phone number with +998!'
+                context['error'] = 'Error phone number! Please write again.'
         if password:
             if len(password) >= 8:
                 user_data.password = make_password(password)
@@ -46,7 +59,11 @@ def account_page(request, username):
                 context['error'] = 'Password must be at least 8 characters!'
     profile.save()
     user_data.save()
+
+    products = zip(order, product_price, images)
     context['profile'] = profile
+    context['order'] = order
+    context['all_products'] = products
 
     return render(request, 'account.html', context=context)
 
@@ -55,6 +72,11 @@ def individual_profiles(request):
     user = User.objects.get(profile__user=request.user)
     context = {'user': user}
     return render(request, 'header.html', context=context)
+
+
+def cancel_order(request, order_id):
+    Order.objects.get(user__user=request.user, id=order_id).delete()
+    return redirect('account', username=request.user.username)
 
 
 def seller_profile_page(request, username):

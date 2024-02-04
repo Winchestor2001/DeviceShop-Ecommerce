@@ -11,15 +11,18 @@
 <main>
     <div class="user container">
         <div class="user__left">
-            <button onclick="profileContent_btn(this)" id="1" class="banner__left__btn-active">{% trans 'Our brands' %}</button>
-            <button onclick="profileContent_btn(this)" id="2" class="banner__left__btn">{% trans 'All orders' %}</button>
+            <button onclick="profileContent_btn(this)" id="1" class="banner__left__btn-active">{% trans 'Our brands' %}
+            </button>
+            <button onclick="profileContent_btn(this)" id="2" class="banner__left__btn">{% trans 'All orders' %}
+            </button>
             <a href="{% url 'logout' %}" class="banner__left__btn">{% trans 'Logout' %}</a>
         </div>
         <div class="user__right-wrapper">
             <div id="content_1" class="user__right card" style="display: block;">
                 <h2>{% trans 'Personal info' %}</h2>
                 <div class="user__right__info">
-                    <form id="avatar_form" action="" method="post" class="user__right__info__form" enctype="multipart/form-data">
+                    <form id="avatar_form" action="" method="post" class="user__right__info__form"
+                          enctype="multipart/form-data">
                         {% csrf_token %}
                         <div class="image-container6">
                             {% if profile.photo %}
@@ -28,11 +31,13 @@
                             <img src="/media/products/product_1.png" alt="" class="zoomable-image">
                             {% endif %}
                             <div class="overlay2"></div>
-                            <div class="eye3" style='background: url("/media/eye.png") no-repeat center center / cover;'></div>
+                            <div class="eye3"
+                                 style='background: url("/media/eye.png") no-repeat center center / cover;'></div>
                         </div>
                         <input onchange="clickInput()" id="input_file" type="file" name="photo" hidden>
                         <button type="button" id="photo_btn" class="user__right__info__btn">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" class="bi bi-image" viewBox="0 0 16 16">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white"
+                                 class="bi bi-image" viewBox="0 0 16 16">
                                 <path d="M6.002 5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0"/>
                                 <path d="M2.002 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2h-12zm12 1a1 1 0 0 1 1 1v6.5l-3.777-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12V3a1 1 0 0 1 1-1h12"/>
                             </svg>
@@ -45,10 +50,14 @@
                             <div class="user__right__info__text__form">
                                 <input type="text" name="email" id="email_input" class="card text-default" hidden>
                                 <p class="text-default" id="email">{% trans 'Email' %}:<span>{{ profile.user.email }}</span></p>
-                                <svg id="edit_email" onclick="change_email()" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#0d6efd" class="bi bi-pencil-fill" viewBox="0 0 16 16">
+                                <svg id="edit_email" onclick="change_email()" xmlns="http://www.w3.org/2000/svg"
+                                     width="16" height="16" fill="#0d6efd" class="bi bi-pencil-fill"
+                                     viewBox="0 0 16 16">
                                     <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
                                 </svg>
-                                <svg style="display: none;" id="save_email" onclick="change_email()" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#0d6efd" class="bi bi-floppy-fill" viewBox="0 0 16 16">
+                                <svg style="display: none;" id="save_email" onclick="change_email()"
+                                     xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#0d6efd"
+                                     class="bi bi-floppy-fill" viewBox="0 0 16 16">
                                     <path d="M0 1.5A1.5 1.5 0 0 1 1.5 0H3v5.5A1.5 1.5 0 0 0 4.5 7h7A1.5 1.5 0 0 0 13 5.5V0h.086a1.5 1.5 0 0 1 1.06.44l1.415 1.414A1.5 1.5 0 0 1 16 2.914V14.5a1.5 1.5 0 0 1-1.5 1.5H14v-5.5A1.5 1.5 0 0 0 12.5 9h-9A1.5 1.5 0 0 0 2 10.5V16h-.5A1.5 1.5 0 0 1 0 14.5z"/>
                                     <path d="M3 16h10v-5.5a.5.5 0 0 0-.5-.5h-9a.5.5 0 0 0-.5.5zm9-16H4v5.5a.5.5 0 0 0 .5.5h7a.5.5 0 0 0 .5-.5zM9 1h2v4H9z"/>
                                 </svg>
@@ -56,12 +65,18 @@
 
 
                             <div class="user__right__info__text__form">
-                                <input type="text" name="phone_number" id="phone_input" class="card text-default" hidden>
-                                <p class="text-default" id="phone">{% trans 'Phone Number' %}:<span>{{ profile.phone_number }}</span></p>
-                                <svg id="edit_phone" onclick="change_phone()" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#0d6efd" class="bi bi-pencil-fill" viewBox="0 0 16 16">
+                                <input type="text" name="phone_number" id="phone_input" class="card text-default"
+                                       hidden>
+                                <p class="text-default" id="phone">{% trans 'Phone Number' %}:<span>{{ profile.phone_number }}</span>
+                                </p>
+                                <svg id="edit_phone" onclick="change_phone()" xmlns="http://www.w3.org/2000/svg"
+                                     width="16" height="16" fill="#0d6efd" class="bi bi-pencil-fill"
+                                     viewBox="0 0 16 16">
                                     <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
                                 </svg>
-                                <svg style="display: none;" id="save_phone" onclick="change_phone()" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#0d6efd" class="bi bi-floppy-fill" viewBox="0 0 16 16">
+                                <svg style="display: none;" id="save_phone" onclick="change_phone()"
+                                     xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#0d6efd"
+                                     class="bi bi-floppy-fill" viewBox="0 0 16 16">
                                     <path d="M0 1.5A1.5 1.5 0 0 1 1.5 0H3v5.5A1.5 1.5 0 0 0 4.5 7h7A1.5 1.5 0 0 0 13 5.5V0h.086a1.5 1.5 0 0 1 1.06.44l1.415 1.414A1.5 1.5 0 0 1 16 2.914V14.5a1.5 1.5 0 0 1-1.5 1.5H14v-5.5A1.5 1.5 0 0 0 12.5 9h-9A1.5 1.5 0 0 0 2 10.5V16h-.5A1.5 1.5 0 0 1 0 14.5z"/>
                                     <path d="M3 16h10v-5.5a.5.5 0 0 0-.5-.5h-9a.5.5 0 0 0-.5.5zm9-16H4v5.5a.5.5 0 0 0 .5.5h7a.5.5 0 0 0 .5-.5zM9 1h2v4H9z"/>
                                 </svg>
@@ -69,12 +84,17 @@
 
 
                             <div class="user__right__info__text__form">
-                                <input type="password" name="password" id="password_input" class="card text-default" hidden>
-                                <p class="text-default" id="password">{% trans 'Password' %}:<span>********</span></p>
-                                <svg id="edit_password" onclick="change_password()" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#0d6efd" class="bi bi-pencil-fill" viewBox="0 0 16 16">
+                                <input type="text" name="password" id="password_input" class="card text-default"
+                                       hidden>
+                                <p class="text-default" id="password">{% trans 'Password' %}:<span>edit password</span></p>
+                                <svg id="edit_password" onclick="change_password()" xmlns="http://www.w3.org/2000/svg"
+                                     width="16" height="16" fill="#0d6efd" class="bi bi-pencil-fill"
+                                     viewBox="0 0 16 16">
                                     <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
                                 </svg>
-                                <svg style="display: none;" id="save_password" onclick="change_password()" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#0d6efd" class="bi bi-floppy-fill" viewBox="0 0 16 16">
+                                <svg style="display: none;" id="save_password" onclick="change_password()"
+                                     xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#0d6efd"
+                                     class="bi bi-floppy-fill" viewBox="0 0 16 16">
                                     <path d="M0 1.5A1.5 1.5 0 0 1 1.5 0H3v5.5A1.5 1.5 0 0 0 4.5 7h7A1.5 1.5 0 0 0 13 5.5V0h.086a1.5 1.5 0 0 1 1.06.44l1.415 1.414A1.5 1.5 0 0 1 16 2.914V14.5a1.5 1.5 0 0 1-1.5 1.5H14v-5.5A1.5 1.5 0 0 0 12.5 9h-9A1.5 1.5 0 0 0 2 10.5V16h-.5A1.5 1.5 0 0 1 0 14.5z"/>
                                     <path d="M3 16h10v-5.5a.5.5 0 0 0-.5-.5h-9a.5.5 0 0 0-.5.5zm9-16H4v5.5a.5.5 0 0 0 .5.5h7a.5.5 0 0 0 .5-.5zM9 1h2v4H9z"/>
                                 </svg>
@@ -86,145 +106,133 @@
                 </div>
                 <h2>{% trans 'My recent orders' %}</h2>
                 <div class="user__orders">
+                    {% if order %}
+                    {% for orders in order %}
                     <div class="user__order">
                         <div class="user__order__top">
                             <div class="user__order__top__left">
                                 <div class="user__adress__links">
-                                    <p class="user__adress__links__id"><b>{% trans 'Order ID' %}: 8924</b></p>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#9DA1A7" class="bi bi-dot" viewBox="0 0 16 16">
+                                    <p class="user__adress__links__id"><b>{% trans 'Order ID' %}: {{ orders.id }}</b>
+                                    </p>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#9DA1A7"
+                                         class="bi bi-dot" viewBox="0 0 16 16">
                                         <path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3"></path>
                                     </svg>
                                     <p class="user__adress__links__warning">Pending</p>
                                 </div>
-                                <p class="text-default text-muted">{% trans 'Date' %}: 16 December 2018</p>
+                                <p class="text-default text-muted">{% trans 'Date' %}: {{ orders.order.create_at }}</p>
                             </div>
                             <div class="user__order__top__right">
-                                <button class="cart__left__product__left__content__btn-red text-default">{% trans 'Cancel order' %}</button>
+                                <a href="{% url 'cancel_order' orders.order.id %}"
+                                   class="cart__left__product__left__content__btn-red text-default">{% trans 'Cancel order' %}</a>
                             </div>
                         </div>
                         <div class="user__order__middle">
                             <div class="user__order__middle-item">
                                 <p class="text-default text-muted">{% trans 'Contact' %}</p>
-                                <p class="text-default">Mike Johnatan</p>
-                                <p class="text-default">{% trans 'Phone' %}: 371-295-9131</p>
-                                <p class="text-default">{% trans 'Email' %}: info@mywebsite.com</p>
+                                <p class="text-default">{{ orders.order.first_name }} {{ orders.order.last_name }}</p>
+                                <p class="text-default">{% trans 'Phone' %}: {{ orders.order.phone_number }}</p>
+                                <p class="text-default">{% trans 'Email' %}: {{ orders.order.email }}</p>
                             </div>
                             <div class="user__order__middle-item">
                                 <p class="text-default text-muted">{% trans 'Shipping address' %}</p>
-                                <p class="text-default">United States</p>
-                                <p class="text-default">3601 Old Capitol Trail, Unit A-7, Suite</p>
-                                <p class="text-default">170777, Wilmington, DE 19808</p>
+                                <p class="text-default">{{ orders.order.city }}</p>
+                                <p class="text-default">{{ orders.order.pick_up }}</p>
                             </div>
                             <div class="user__order__middle-item">
                                 <p class="text-default text-muted">{% trans 'Payment' %}</p>
-                                <p class="text-success">{% trans 'Visa' %} **** 4216</p>
+                                <p class="text-success">{{ orders.order.payment }}</p>
                                 <p class="text-default">{% trans 'Tax' %}: $15</p>
-                                <p class="text-default">{% trans 'Total paid' %}: $456</p>
+                                <p class="text-default">{% trans 'Total paid' %}: ${{ orders.order.total_price }}</p>
                             </div>
                         </div>
                         <hr>
                         <div class="user__order__bottom">
-                            <a href="" class="user__order__bottom-item">
+                            {% for product, price, image in all_products %}
+                            <a href="{% url 'product' product.product.slug %}" class="user__order__bottom-item">
                                 <div class="user__order__bottom__img card">
-                                    <img src="/media/products/product_1.png" alt="">
+                                    <img src="/media/{{ image }}" alt="">
                                 </div>
                                 <div class="user__order__bottom-item__text">
-                                    <p>Sofe for living room, New model A123</p>
-                                    <p><b>1x = $1,200.90</b></p>
+                                    <p>{{ product.product.name }}</p>
+                                    <p><b>{{ orders.quantity }}x = ${{ price }}</b></p>
                                 </div>
                             </a>
-                            <a href="" class="user__order__bottom-item">
-                                <div class="user__order__bottom__img card">
-                                    <img src="/media/products/product_1.png" alt="">
-                                </div>
-                                <div class="user__order__bottom-item__text">
-                                    <p>Sofe for living room, New model A123</p>
-                                    <p><b>1x = $1,200.90</b></p>
-                                </div>
-                            </a>
-                            <a href="" class="user__order__bottom-item">
-                                <div class="user__order__bottom__img card">
-                                    <img src="/media/products/product_1.png" alt="">
-                                </div>
-                                <div class="user__order__bottom-item__text">
-                                    <p>Sofe for living room, New model A123</p>
-                                    <p><b>1x = $1,200.90</b></p>
-                                </div>
-                            </a>
+                            {% endfor %}
                         </div>
                     </div>
+                    {% endfor %}
+                    {% else %}
+                    <div class="empty_text_in_profile">
+                        <a href="{% url 'shop' %}" class="text-default-primary" style="font-size: 24px;">{% trans 'Add product' %}</a>
+                    </div>
+                    {% endif %}
                 </div>
             </div>
             <div id="content_2" class="user__right card" style="display: none;">
                 <h2>{% trans 'My orders' %}</h2>
                 <div class="user__orders">
+                    {% if order %}
+                    {% for orders in order %}
                     <div class="user__order">
                         <div class="user__order__top">
                             <div class="user__order__top__left">
                                 <div class="user__adress__links">
-                                    <p class="user__adress__links__id"><b>{% trans 'Order ID' %}: 8924</b></p>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#9DA1A7" class="bi bi-dot" viewBox="0 0 16 16">
+                                    <p class="user__adress__links__id"><b>{% trans 'Order ID' %}: {{ orders.id }}</b>
+                                    </p>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#9DA1A7"
+                                         class="bi bi-dot" viewBox="0 0 16 16">
                                         <path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3"></path>
                                     </svg>
                                     <p class="user__adress__links__warning">Pending</p>
                                 </div>
-                                <p class="text-default text-muted">{% trans 'Date' %}: 16 December 2018</p>
+                                <p class="text-default text-muted">{% trans 'Date' %}: {{ orders.order.create_at }}</p>
                             </div>
                             <div class="user__order__top__right">
-                                <button class="cart__left__product__left__content__btn-red text-default">{% trans 'Cancel order' %}</button>
+                                <a href="{% url 'cancel_order' orders.order.id %}"
+                                   class="cart__left__product__left__content__btn-red text-default">{% trans 'Cancel order' %}</a>
                             </div>
                         </div>
                         <div class="user__order__middle">
                             <div class="user__order__middle-item">
                                 <p class="text-default text-muted">{% trans 'Contact' %}</p>
-                                <p class="text-default">Mike Johnatan</p>
-                                <p class="text-default">{% trans 'Phone' %}: 371-295-9131</p>
-                                <p class="text-default">{% trans 'Email' %}: info@mywebsite.com</p>
+                                <p class="text-default">{{ orders.order.first_name }} {{ orders.order.last_name }}</p>
+                                <p class="text-default">{% trans 'Phone' %}: {{ orders.order.phone_number }}</p>
+                                <p class="text-default">{% trans 'Email' %}: {{ orders.order.email }}</p>
                             </div>
                             <div class="user__order__middle-item">
                                 <p class="text-default text-muted">{% trans 'Shipping address' %}</p>
-                                <p class="text-default">United States</p>
-                                <p class="text-default">3601 Old Capitol Trail, Unit A-7, Suite</p>
-                                <p class="text-default">170777, Wilmington, DE 19808</p>
+                                <p class="text-default">{{ orders.order.city }}</p>
+                                <p class="text-default">{{ orders.order.pick_up }}</p>
                             </div>
                             <div class="user__order__middle-item">
                                 <p class="text-default text-muted">{% trans 'Payment' %}</p>
-                                <p class="text-success">{% trans 'Visa' %} **** 4216</p>
+                                <p class="text-success">{{ orders.order.payment }}</p>
                                 <p class="text-default">{% trans 'Tax' %}: $15</p>
-                                <p class="text-default">{% trans 'Total paid' %}: $456</p>
+                                <p class="text-default">{% trans 'Total paid' %}: ${{ orders.order.total_price }}</p>
                             </div>
                         </div>
                         <hr>
                         <div class="user__order__bottom">
-                            <a href="" class="user__order__bottom-item">
+                            {% for product, price, image in all_products %}
+                            <a href="{% url 'product' product.product.slug %}" class="user__order__bottom-item">
                                 <div class="user__order__bottom__img card">
-                                    <img src="/media/products/product_1.png" alt="">
+                                    <img src="/media/{{ image }}" alt="">
                                 </div>
                                 <div class="user__order__bottom-item__text">
-                                    <p>Sofe for living room, New model A123</p>
-                                    <p><b>1x = $1,200.90</b></p>
+                                    <p>{{ product.product.name }}</p>
+                                    <p><b>{{ orders.quantity }}x = ${{ price }}</b></p>
                                 </div>
                             </a>
-                            <a href="" class="user__order__bottom-item">
-                                <div class="user__order__bottom__img card">
-                                    <img src="/media/products/product_1.png" alt="">
-                                </div>
-                                <div class="user__order__bottom-item__text">
-                                    <p>Sofe for living room, New model A123</p>
-                                    <p><b>1x = $1,200.90</b></p>
-                                </div>
-                            </a>
-                            <a href="" class="user__order__bottom-item">
-                                <div class="user__order__bottom__img card">
-                                    <img src="/media/products/product_1.png" alt="">
-                                </div>
-                                <div class="user__order__bottom-item__text">
-                                    <p>Sofe for living room, New model A123</p>
-                                    <p><b>1x = $1,200.90</b></p>
-                                </div>
-                            </a>
+                            {% endfor %}
                         </div>
                     </div>
+                    {% endfor %}
+                    {% else %}
+                    <div class="empty_text_in_profile">
+                        <a href="{% url 'shop' %}" class="text-default-primary" style="font-size: 24px;">{% trans 'Add product' %}</a>
+                    </div>
+                    {% endif %}
                 </div>
             </div>
         </div>
@@ -357,5 +365,6 @@
     document.querySelector('.mobile-menu-wrapper').addEventListener('click', function() {
         document.querySelector('.mobile-menu-wrapper').hidden = true;
     })
+
 </script>
 {% endblock %}
