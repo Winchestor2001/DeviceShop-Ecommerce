@@ -11,11 +11,11 @@ app.config_from_object('django.conf:settings', namespace='CELERY')
 
 app.autodiscover_tasks()
 
-minute = 1
+minute = 10
 
 app.conf.beat_schedule = {
     f'check-meet-every-{minute}-minute': {
         'task': 'products.tasks.filter_product_sales_task',
-        'schedule': timedelta(minutes=minute),
+        'schedule': timedelta(seconds=minute),
     }
 }
