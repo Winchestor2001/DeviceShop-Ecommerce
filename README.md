@@ -3,7 +3,7 @@
 
 CELERY RUN
 ```bash
-celery -A core worker -l INFO
+celery -A core worker -l INFO -P eventlet
 ```
 
 CELERY BEAT RUN
