@@ -1,4 +1,4 @@
-from products.models import ReviewImage
+from products.models import ReviewImage, ProductSale
 
 
 def filter_product_reviews(reviews):
@@ -13,3 +13,12 @@ def filter_product_reviews(reviews):
             }
         )
     return review_data
+
+
+def get_product_sale(product):
+    sale = ProductSale.objects.get(product=product).sale
+    sale = sale / 100
+    sale = sale * product.price
+    sale = product.price - sale
+
+    return sale
