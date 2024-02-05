@@ -116,7 +116,11 @@
             <div class="product__middle__bottom">
                 <div class="product__middle__bottom-price">
                     <p class="text-default-18 text-muted" id="price">{% trans 'Price' %}:</p>
+                    {% if sale %}
+                    <p class="text-default-18 shop__products__right__middle-price" style="font-size: 20px;"><b>${{ sale }}</b><span class="text-gray">${{ product.price }}</span></p>
+                    {% else %}
                     <p class="text-default-18 shop__products__right__middle-price" style="font-size: 20px;"><b>${{ product.price }}</b></p>
+                    {% endif %}
                     {% if request.user == product.supplier.user %}
                     <input value="{{ product.price }}" type="number" name="price" id="price_input" class="card text-default" hidden>
                     <svg style="margin-left: 10px;" id="edit_email" onclick="change_data(this)" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#0d6efd" class="bi bi-pencil-fill" viewBox="0 0 16 16">
@@ -383,12 +387,18 @@
         let text = wrapper.children[1]
         let edit_svg = wrapper.children[3]
         let save_svg = wrapper.children[4]
+        let price
         if (input.hidden) {
             input.hidden = false
-            if (text.children[0].textContent[0] != "$") {
-                input.value = text.children[0].textContent
+            if (text.children[1]) {
+                price = text.children[1].textContent
             } else {
-                input.value = text.children[0].textContent.slice(1)
+                price = text.children[0].textContent
+            }
+            if (text.children[0].textContent[0] != "$") {
+                input.value = price
+            } else {
+                input.value = price.slice(1)
             }
             text.style.display = 'none'
             edit_svg.style.display = 'none'

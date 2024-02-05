@@ -34,6 +34,10 @@ def product_page(request, slug):
     all_photo = []
     for i in photo:
         all_photo.append(i)
+
+    sale = None
+    if ProductSale.objects.filter(product=product).exists():
+        sale = get_product_sale(product)
     
     markdown_to_html = markdown.markdown(product.description)
     context['markdown_to_html'] = markdown_to_html
@@ -44,6 +48,7 @@ def product_page(request, slug):
     context['categories'] = categories
     context['saved'] = saved
     context['range'] = for_range
+    context['sale'] = sale
     return render(request, 'product.html', context=context)
 
 
