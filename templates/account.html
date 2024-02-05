@@ -86,7 +86,8 @@
                             <div class="user__right__info__text__form">
                                 <input type="text" name="password" id="password_input" class="card text-default"
                                        hidden>
-                                <p class="text-default" id="password">{% trans 'Password' %}:<span>edit password</span></p>
+                                <p class="text-default" id="password">{% trans 'Password' %}:<span>edit password</span>
+                                </p>
                                 <svg id="edit_password" onclick="change_password()" xmlns="http://www.w3.org/2000/svg"
                                      width="16" height="16" fill="#0d6efd" class="bi bi-pencil-fill"
                                      viewBox="0 0 16 16">
@@ -106,13 +107,13 @@
                 </div>
                 <h2>{% trans 'My recent orders' %}</h2>
                 <div class="user__orders">
-                    {% if order %}
-                    {% for orders in order %}
+                    {% if len_orders != 0 %}
+                    {% for order, products, price, image in order_data %}
                     <div class="user__order">
                         <div class="user__order__top">
                             <div class="user__order__top__left">
                                 <div class="user__adress__links">
-                                    <p class="user__adress__links__id"><b>{% trans 'Order ID' %}: {{ orders.id }}</b>
+                                    <p class="user__adress__links__id"><b>{% trans 'Order ID' %}: {{ order.id }}</b>
                                     </p>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#9DA1A7"
                                          class="bi bi-dot" viewBox="0 0 16 16">
@@ -120,42 +121,42 @@
                                     </svg>
                                     <p class="user__adress__links__warning">Pending</p>
                                 </div>
-                                <p class="text-default text-muted">{% trans 'Date' %}: {{ orders.order.create_at }}</p>
+                                <p class="text-default text-muted">{% trans 'Date' %}: {{ order.create_at }}</p>
                             </div>
                             <div class="user__order__top__right">
-                                <a href="{% url 'cancel_order' orders.order.id %}"
+                                <a href="{% url 'cancel_order' order.id %}"
                                    class="cart__left__product__left__content__btn-red text-default">{% trans 'Cancel order' %}</a>
                             </div>
                         </div>
                         <div class="user__order__middle">
                             <div class="user__order__middle-item">
                                 <p class="text-default text-muted">{% trans 'Contact' %}</p>
-                                <p class="text-default">{{ orders.order.first_name }} {{ orders.order.last_name }}</p>
-                                <p class="text-default">{% trans 'Phone' %}: {{ orders.order.phone_number }}</p>
-                                <p class="text-default">{% trans 'Email' %}: {{ orders.order.email }}</p>
+                                <p class="text-default">{{ order.first_name }} {{ order.last_name }}</p>
+                                <p class="text-default">{% trans 'Phone' %}: {{ order.phone_number }}</p>
+                                <p class="text-default">{% trans 'Email' %}: {{ order.email }}</p>
                             </div>
                             <div class="user__order__middle-item">
                                 <p class="text-default text-muted">{% trans 'Shipping address' %}</p>
-                                <p class="text-default">{{ orders.order.city }}</p>
-                                <p class="text-default">{{ orders.order.pick_up }}</p>
+                                <p class="text-default">{{ order.city }}</p>
+                                <p class="text-default">{{ order.pick_up }}</p>
                             </div>
                             <div class="user__order__middle-item">
                                 <p class="text-default text-muted">{% trans 'Payment' %}</p>
-                                <p class="text-success">{{ orders.order.payment }}</p>
+                                <p class="text-success">{{ order.payment }}</p>
                                 <p class="text-default">{% trans 'Tax' %}: $15</p>
-                                <p class="text-default">{% trans 'Total paid' %}: ${{ orders.order.total_price }}</p>
+                                <p class="text-default">{% trans 'Total paid' %}: ${{ order.total_price }}</p>
                             </div>
                         </div>
                         <hr>
                         <div class="user__order__bottom">
-                            {% for product, price, image in all_products %}
+                            {% for product in products %}
                             <a href="{% url 'product' product.product.slug %}" class="user__order__bottom-item">
                                 <div class="user__order__bottom__img card">
                                     <img src="/media/{{ image }}" alt="">
                                 </div>
                                 <div class="user__order__bottom-item__text">
                                     <p>{{ product.product.name }}</p>
-                                    <p><b>{{ orders.quantity }}x = ${{ price }}</b></p>
+                                    <p><b>{{ product.quantity }}x = ${{ price }}</b></p>
                                 </div>
                             </a>
                             {% endfor %}
@@ -172,13 +173,13 @@
             <div id="content_2" class="user__right card" style="display: none;">
                 <h2>{% trans 'My orders' %}</h2>
                 <div class="user__orders">
-                    {% if order %}
-                    {% for orders in order %}
+                    {% if len_orders != 0 %}
+                    {% for order, products, price, image in order_data %}
                     <div class="user__order">
                         <div class="user__order__top">
                             <div class="user__order__top__left">
                                 <div class="user__adress__links">
-                                    <p class="user__adress__links__id"><b>{% trans 'Order ID' %}: {{ orders.id }}</b>
+                                    <p class="user__adress__links__id"><b>{% trans 'Order ID' %}: {{ order.id }}</b>
                                     </p>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#9DA1A7"
                                          class="bi bi-dot" viewBox="0 0 16 16">
@@ -186,42 +187,42 @@
                                     </svg>
                                     <p class="user__adress__links__warning">Pending</p>
                                 </div>
-                                <p class="text-default text-muted">{% trans 'Date' %}: {{ orders.order.create_at }}</p>
+                                <p class="text-default text-muted">{% trans 'Date' %}: {{ order.create_at }}</p>
                             </div>
                             <div class="user__order__top__right">
-                                <a href="{% url 'cancel_order' orders.order.id %}"
+                                <a href="{% url 'cancel_order' order.id %}"
                                    class="cart__left__product__left__content__btn-red text-default">{% trans 'Cancel order' %}</a>
                             </div>
                         </div>
                         <div class="user__order__middle">
                             <div class="user__order__middle-item">
                                 <p class="text-default text-muted">{% trans 'Contact' %}</p>
-                                <p class="text-default">{{ orders.order.first_name }} {{ orders.order.last_name }}</p>
-                                <p class="text-default">{% trans 'Phone' %}: {{ orders.order.phone_number }}</p>
-                                <p class="text-default">{% trans 'Email' %}: {{ orders.order.email }}</p>
+                                <p class="text-default">{{ order.first_name }} {{ order.last_name }}</p>
+                                <p class="text-default">{% trans 'Phone' %}: {{ order.phone_number }}</p>
+                                <p class="text-default">{% trans 'Email' %}: {{ order.email }}</p>
                             </div>
                             <div class="user__order__middle-item">
                                 <p class="text-default text-muted">{% trans 'Shipping address' %}</p>
-                                <p class="text-default">{{ orders.order.city }}</p>
-                                <p class="text-default">{{ orders.order.pick_up }}</p>
+                                <p class="text-default">{{ order.city }}</p>
+                                <p class="text-default">{{ order.pick_up }}</p>
                             </div>
                             <div class="user__order__middle-item">
                                 <p class="text-default text-muted">{% trans 'Payment' %}</p>
-                                <p class="text-success">{{ orders.order.payment }}</p>
+                                <p class="text-success">{{ order.payment }}</p>
                                 <p class="text-default">{% trans 'Tax' %}: $15</p>
-                                <p class="text-default">{% trans 'Total paid' %}: ${{ orders.order.total_price }}</p>
+                                <p class="text-default">{% trans 'Total paid' %}: ${{ order.total_price }}</p>
                             </div>
                         </div>
                         <hr>
                         <div class="user__order__bottom">
-                            {% for product, price, image in all_products %}
+                            {% for product in products %}
                             <a href="{% url 'product' product.product.slug %}" class="user__order__bottom-item">
                                 <div class="user__order__bottom__img card">
                                     <img src="/media/{{ image }}" alt="">
                                 </div>
                                 <div class="user__order__bottom-item__text">
                                     <p>{{ product.product.name }}</p>
-                                    <p><b>{{ orders.quantity }}x = ${{ price }}</b></p>
+                                    <p><b>{{ product.quantity }}x = ${{ price }}</b></p>
                                 </div>
                             </a>
                             {% endfor %}
@@ -365,6 +366,7 @@
     document.querySelector('.mobile-menu-wrapper').addEventListener('click', function() {
         document.querySelector('.mobile-menu-wrapper').hidden = true;
     })
+
 
 </script>
 {% endblock %}
