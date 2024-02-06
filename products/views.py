@@ -385,3 +385,9 @@ def add_product_photos(request, product_id):
     for photo in request.FILES.getlist('product_photos'):
         ProductPhoto.objects.create(photo=photo, product=product)
     return redirect('product', product.slug)
+
+
+def delete_product_sale(request, product_id):
+    product = Product.objects.get(id=product_id)
+    ProductSale.objects.get(product=product).delete()
+    return redirect('product', product.slug)
