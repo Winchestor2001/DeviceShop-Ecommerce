@@ -15,25 +15,35 @@ def account_page(request, username):
     context = {}
     if not request.user.is_authenticated:
         return redirect('login')
+
     profile = Profile.objects.get(user__username=username)
-    order = OrderProduct.objects.filter(user=profile)
     user_data = User.objects.get(profile=profile)
+    orders = Order.objects.filter(user=profile)
+
+    result_order = []
     product_price = []
     images = []
-    for order_item in order:
-        product = order_item.product
-        if ProductSale.objects.filter(product=product).exists():
-            sale = get_product_sale(product)
-            product_price.append(order_item.quantity * sale)
-        else:
-            product_price.append(order_item.quantity * order_item.product.price)
-        products = ProductPhoto.objects.filter(product=product)[0].photo
-        images.append(products)
+    for order in orders:
+        products_in_order = OrderProduct.objects.filter(order=order)
+        products = [item for item in products_in_order]
+        result_order.append(products)
+
+        for order_item in products_in_order:
+            product = order_item.product
+
+            if ProductSale.objects.filter(product=product).exists():
+                sale = get_product_sale(product)
+                product_price.append(order_item.quantity * sale)
+            else:
+                product_price.append(order_item.quantity * order_item.product.price)
+            product_photo = ProductPhoto.objects.filter(product=product)[0].photo
+            images.append(product_photo)
 
     if request.method == "POST":
         email = request.POST.get('email')
         phone_number = request.POST.get('phone_number')
         password = request.POST.get('password')
+
         if request.FILES:
             file_obj = request.FILES['photo']
             filename = f"profile/{username}_{file_obj}"
@@ -43,6 +53,7 @@ def account_page(request, username):
                 profile.photo = filename
             profile.save()
             return redirect('account', username=username)
+
         if email:
             if not email.endswith("@gmail.com"):
                 email = f"{email}@gmail.com"
@@ -60,10 +71,10 @@ def account_page(request, username):
     profile.save()
     user_data.save()
 
-    products = zip(order, product_price, images)
+    order_data = zip(orders, result_order, product_price, images)
     context['profile'] = profile
-    context['order'] = order
-    context['all_products'] = products
+    context['order_data'] = order_data
+    context['len_orders'] = len(orders)
 
     return render(request, 'account.html', context=context)
 
