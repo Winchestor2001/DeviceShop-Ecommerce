@@ -31,7 +31,7 @@
     <form action="{% url 'add_discount' product.id %}" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         <input required name="discount" type="number" class="default-input text-default" placeholder="{% trans 'Percent of sale' %}">
-        <input type="date" multiple name="date" class="default-input text-default" placeholder="{% trans 'Date of ending sale' %}">
+        <input required type="date" multiple name="date" class="default-input text-default" placeholder="{% trans 'Date of ending sale' %}">
         <button type="submit" class="banner__right__btn text-default-white">{% trans 'Add discount' %}</button>
     </form>
 </div>
@@ -181,7 +181,11 @@
                     <a href="{% url 'seller_profile' product.supplier.user.username %}" class="banner__right__btn text-default-white">{% trans "Seller's profile" %}</a>
                     {% else %}
                     <a href="{% url 'delete_product' product.id %}" class="banner__right__btn text-default-white">{% trans 'Delete product' %}</a>
+                    {% if sale %}
+                    <a href="{% url 'delete_product_sale' product.id %}" class="banner__right__btn text-default-white">{% trans 'Delete' %} {% trans 'discount' %}</a>
+                    {% else %}
                     <button id="add_discount" class="banner__right__btn text-default-white">{% trans 'Add discount' %}</button>
+                    {% endif %}
                     {% endif %}
                 </div>
             </div>
