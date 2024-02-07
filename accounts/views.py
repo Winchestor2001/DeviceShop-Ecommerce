@@ -18,11 +18,13 @@ def account_page(request, username):
 
     profile = Profile.objects.get(user__username=username)
     user_data = User.objects.get(profile=profile)
-    orders = Order.objects.filter(user=profile)
+    orders = Order.objects.filter(user=profile).order_by('-create_at')
 
     result_order = []
     product_price = []
     images = []
+    status = []
+
     for order in orders:
         products_in_order = OrderProduct.objects.filter(order=order)
         products = [item for item in products_in_order]
