@@ -105,70 +105,6 @@
                         </form>
                     </div>
                 </div>
-                <h2>{% trans 'My recent orders' %}</h2>
-                <div class="user__orders">
-                    {% if len_orders != 0 %}
-                    {% for order, products, price, image in order_data %}
-                    <div class="user__order">
-                        <div class="user__order__top">
-                            <div class="user__order__top__left">
-                                <div class="user__adress__links">
-                                    <p class="user__adress__links__id"><b>{% trans 'Order ID' %}: {{ order.id }}</b>
-                                    </p>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#9DA1A7"
-                                         class="bi bi-dot" viewBox="0 0 16 16">
-                                        <path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3"></path>
-                                    </svg>
-                                    <p class="user__adress__links__warning">Pending</p>
-                                </div>
-                                <p class="text-default text-muted">{% trans 'Date' %}: {{ order.create_at }}</p>
-                            </div>
-                            <div class="user__order__top__right">
-                                <a href="{% url 'cancel_order' order.id %}"
-                                   class="cart__left__product__left__content__btn-red text-default">{% trans 'Cancel order' %}</a>
-                            </div>
-                        </div>
-                        <div class="user__order__middle">
-                            <div class="user__order__middle-item">
-                                <p class="text-default text-muted">{% trans 'Contact' %}</p>
-                                <p class="text-default">{{ order.first_name }} {{ order.last_name }}</p>
-                                <p class="text-default">{% trans 'Phone' %}: {{ order.phone_number }}</p>
-                                <p class="text-default">{% trans 'Email' %}: {{ order.email }}</p>
-                            </div>
-                            <div class="user__order__middle-item">
-                                <p class="text-default text-muted">{% trans 'Shipping address' %}</p>
-                                <p class="text-default">{{ order.city }}</p>
-                                <p class="text-default">{{ order.pick_up }}</p>
-                            </div>
-                            <div class="user__order__middle-item">
-                                <p class="text-default text-muted">{% trans 'Payment' %}</p>
-                                <p class="text-success">{{ order.payment }}</p>
-                                <p class="text-default">{% trans 'Tax' %}: $15</p>
-                                <p class="text-default">{% trans 'Total paid' %}: ${{ order.total_price }}</p>
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="user__order__bottom">
-                            {% for product in products %}
-                            <a href="{% url 'product' product.product.slug %}" class="user__order__bottom-item">
-                                <div class="user__order__bottom__img card">
-                                    <img src="/media/{{ image }}" alt="">
-                                </div>
-                                <div class="user__order__bottom-item__text">
-                                    <p>{{ product.product.name }}</p>
-                                    <p><b>{{ product.quantity }}x = ${{ price }}</b></p>
-                                </div>
-                            </a>
-                            {% endfor %}
-                        </div>
-                    </div>
-                    {% endfor %}
-                    {% else %}
-                    <div class="empty_text_in_profile">
-                        <a href="{% url 'shop' %}" class="text-default-primary" style="font-size: 24px;">{% trans 'Add product' %}</a>
-                    </div>
-                    {% endif %}
-                </div>
             </div>
             <div id="content_2" class="user__right card" style="display: none;">
                 <h2>{% trans 'My orders' %}</h2>
@@ -185,14 +121,20 @@
                                          class="bi bi-dot" viewBox="0 0 16 16">
                                         <path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3"></path>
                                     </svg>
+                                    {% if not order.status %}
                                     <p class="user__adress__links__warning">Pending</p>
+                                    {% else %}
+                                    <p class="user__adress__links__success">Delivered</p>
+                                    {% endif %}
                                 </div>
                                 <p class="text-default text-muted">{% trans 'Date' %}: {{ order.create_at }}</p>
                             </div>
+                            {% if not order.status %}
                             <div class="user__order__top__right">
                                 <a href="{% url 'cancel_order' order.id %}"
                                    class="cart__left__product__left__content__btn-red text-default">{% trans 'Cancel order' %}</a>
                             </div>
+                            {% endif %}
                         </div>
                         <div class="user__order__middle">
                             <div class="user__order__middle-item">

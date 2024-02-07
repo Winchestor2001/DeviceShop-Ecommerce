@@ -11,6 +11,7 @@ class Order(models.Model):
     city = models.CharField(max_length=100)
     pick_up = models.CharField(max_length=200)
     payment = models.CharField(max_length=50, blank=True, null=True)
+    status = models.BooleanField(default=False)
     total_price = models.IntegerField()
     user = models.ForeignKey(Profile, on_delete=models.CASCADE)
     create_at = models.DateTimeField(auto_now_add=True, blank=True, null=True)
