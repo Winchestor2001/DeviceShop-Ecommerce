@@ -158,7 +158,7 @@
                         <hr>
                         <div class="user__order__bottom">
                             {% for product in products %}
-                            <a href="{% url 'product' product.product.slug %}" class="user__order__bottom-item">
+                            <a href="{% url 'product' product.product.id %}" class="user__order__bottom-item">
                                 <div class="user__order__bottom__img card">
                                     <img src="/media/{{ image }}" alt="">
                                 </div>

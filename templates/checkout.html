@@ -93,7 +93,7 @@
                 <p class="text-gray">{% trans 'Items in cart' %}</p>
                 <div class="checkout__right__products">
                     {% for order, photo, total_price in orders %}
-                    <a href="{% url 'product' order.product.slug %}" class="checkout__right__product">
+                    <a href="{% url 'product' order.product.id %}" class="checkout__right__product">
                         <div class="checkout__right__product__img card">
                             <img src="{{ photo }}" alt="">
                         </div>

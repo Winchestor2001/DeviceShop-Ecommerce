@@ -9,10 +9,10 @@ import markdown
 from products.utils import filter_product_reviews, get_product_sale
 
 
-def product_page(request, slug):
+def product_page(request, id):
     context = {}
     profile = Profile.objects.get(user=request.user)
-    product = Product.objects.get(slug=slug)
+    product = Product.objects.get(id=id)
     if request.method == 'POST':
         review = Review.objects.create(user=profile, stars=int(request.POST.get('stars')), text=request.POST.get('text'), product=product)
         for photo in request.FILES.getlist('images'):
@@ -269,7 +269,8 @@ def saved_page(request, category=None):
         'categories': categories,
         'max_price': max_price,
         'brands': brands,
-        'sort_by': sort_by
+        'sort_by': sort_by,
+        'range': range(1, 6)
     }
     return render(request, 'saved.html', context=context)
 
@@ -364,7 +365,7 @@ def change_product_data(request, product_id):
         product.price = price
         product.brand = brand
         product.save()
-    return redirect('product', product.slug)
+        return redirect('product', product.id)
 
 
 def delete_product(request, product_id):
@@ -377,17 +378,17 @@ def add_discount(request, product_id):
     sale = request.POST.get('discount')
     date = request.POST.get('date')
     ProductSale.objects.create(product=product, sale=sale, date=date)
-    return redirect('product', product.slug)
+    return redirect('product', product.id)
 
 
 def add_product_photos(request, product_id):
     product = Product.objects.get(id=product_id)
     for photo in request.FILES.getlist('product_photos'):
         ProductPhoto.objects.create(photo=photo, product=product)
-    return redirect('product', product.slug)
+    return redirect('product', product.id)
 
 
 def delete_product_sale(request, product_id):
     product = Product.objects.get(id=product_id)
     ProductSale.objects.get(product=product).delete()
-    return redirect('product', product.slug)
+    return redirect('product', product.id)

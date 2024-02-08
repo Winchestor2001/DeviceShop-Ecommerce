@@ -23,7 +23,6 @@ def account_page(request, username):
     result_order = []
     product_price = []
     images = []
-    status = []
 
     for order in orders:
         products_in_order = OrderProduct.objects.filter(order=order)

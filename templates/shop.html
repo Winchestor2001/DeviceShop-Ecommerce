@@ -216,7 +216,7 @@
             </div>
             <div class="shop__products">
                 {% for i in products %}
-                <a href="{% url 'product' i.0.slug %}" class="shop__product card">
+                <a href="{% url 'product' i.0.id %}" class="shop__product card">
                     <div class="image-container3">
                         <img src="/media/{{ i.1 }}" alt="" class="recommended__card__photo">
                         <div class="overlay"></div>
@@ -265,7 +265,11 @@
                     <div class="shop__products__right">
                         <p class="text-default"><b>{{ i.0.name }}</b></p>
                         <div class="shop__products__right__middle">
-                            <p class="text-default-18 shop__products__right__middle-price" style="font-size: 20px;"><b>${{ i.0.price }}</b><span class="text-gray"></span></p>
+                            {% if i.5 %}
+                            <p class="text-default-18 shop__products__right__middle-price"><b>${{ i.5 }}</b><span class="text-gray">${{ i.0.price }}</span></p>
+                            {% else %}
+                            <p class="text-default-18 shop__products__right__middle-price"><b>${{ i.0.price }}</b></p>
+                            {% endif %}
                             <div class="shop__products__right__middle__bottom">
                                 <div class="shop__product__top__left__stars">
                                     {% for n in range %}
@@ -285,7 +289,7 @@
                         </div>
                         <div class="shop__products__right__bottom">
                             <p class="text-default">{{ i.0.description }}</p>
-                            <a href="{% url 'product' i.0.slug %}" class="text-default-primary">{% trans 'View details' %}</a>
+                            <a href="{% url 'product' i.0.id %}" class="text-default-primary">{% trans 'View details' %}</a>
                         </div>
                     </div>
                     <button onclick="save_product(`{% url 'save_product' i.0.id %}`)" class="shop__product-layout2__save{% if i.4 %}-active{% endif %}">
