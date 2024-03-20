@@ -214,7 +214,9 @@
                 </div>
                 <div class="product__bottom__content" id="content_2" hidden>
                     <div class="product__bottom__reviews" style="position: relative; padding-top: 60px;">
+                        {% if request.user.is_authenticated %}
                         <button id="write_review" class="banner__right__btn text-default-white">{% trans 'Write review' %}</button>
+                        {% endif %}
                         {% for review in reviews %}
                         <div class="product__bottom__review card">
                             {% if review.images %}

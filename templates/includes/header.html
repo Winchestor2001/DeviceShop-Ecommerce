@@ -52,12 +52,10 @@
             <a href="{% url 'home' %}" class="header__logo">
                 <img src="/media/logo.png" alt="" class="">
             </a>
-            {% if request.path == '/shop/' %}
             <div class="header__input-wrapper">
                 <input value="{{ active_search }}" id="search" type="text" placeholder="{% trans 'Search' %}" name="search" class="header__input text-default">
                 <button type="button" onclick="submit_filters()" class="header__btn text-default-white">{% trans 'Search' %}</button>
             </div>
-            {% endif %}
             <div class="header__nav">
                 {% if request.user.is_authenticated %}
                 <a href="{% url 'shop' %}" class="header__nav-item">
